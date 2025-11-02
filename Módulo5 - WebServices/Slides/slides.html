@@ -544,65 +544,120 @@
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - HTTP Protocol</h2>
+            <p>Protocolo fundamental para comunicação web.</p>
+            <ul>
+            <li>Métodos: GET, POST, PUT, DELETE, PATCH</li>
+            <li>Status codes: 2xx (sucesso), 3xx (redirect), 4xx (cliente), 5xx (servidor)</li>
+            <li>Request: método, URL, headers, body</li>
+            <li>Response: status, headers, body</li>
+            <li>Stateless: cada requisição é independente</li>
+            </ul>
             <div class="slide-number">Slide 46 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - REST Architecture</h2>
+            <p>Representational State Transfer - arquitetura para APIs.</p>
+            <ul>
+            <li>Recursos identificados por URIs</li>
+            <li>Métodos HTTP mapeiam operações</li>
+            <li>Stateless: sem estado no servidor</li>
+            <li>Cacheable quando apropriado</li>
+            <li>Uniform interface</li>
+            </ul>
             <div class="slide-number">Slide 47 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - JSON</h2>
+            <p>JavaScript Object Notation - formato de dados.</p>
+            <ul>
+            <li>Serialização: objeto Python → JSON string</li>
+            <li>Desserialização: JSON string → objeto Python</li>
+            <li>Bibliotecas: json (nativo), marshmallow, pydantic</li>
+            <li>Validação de schema</li>
+            <li>Format padrão para APIs REST</li>
+            </ul>
             <div class="slide-number">Slide 48 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Frameworks Web</h2>
+            <p>Frameworks para criar APIs em Python.</p>
+            <ul>
+            <li><strong>Flask:</strong> minimalista, flexível</li>
+            <li><strong>FastAPI:</strong> moderno, rápido, async, documentação automática</li>
+            <li><strong>Django REST Framework:</strong> completo, baseado em Django</li>
+            <li>Escolher baseado em necessidades do projeto</li>
+            <li>Todos suportam REST e JSON</li>
+            </ul>
             <div class="slide-number">Slide 49 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Endpoints e Rotas</h2>
+            <p>Estrutura de URLs e mapeamento de rotas.</p>
+            <ul>
+            <li>URLs descritivas e hierárquicas</li>
+            <li>Parâmetros de rota e query string</li>
+            <li>Validação de entrada</li>
+            <li>Versionamento de API (/v1/, /v2/)</li>
+            <li>Nomes de recursos em plural (GET /users/)</li>
+            </ul>
             <div class="slide-number">Slide 50 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Autenticação</h2>
+            <p>Mecanismos para proteger APIs.</p>
+            <ul>
+            <li><strong>JWT:</strong> tokens stateless, seguro</li>
+            <li><strong>OAuth 2.0:</strong> autorização entre serviços</li>
+            <li><strong>Basic Auth:</strong> simples, menos seguro</li>
+            <li>Headers: Authorization Bearer token</li>
+            <li>Permissões e roles (RBAC)</li>
+            </ul>
             <div class="slide-number">Slide 51 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Tratamento de Erros</h2>
+            <p>Como lidar com erros em APIs.</p>
+            <ul>
+            <li>Códigos HTTP apropriados (400, 401, 404, 500)</li>
+            <li>Mensagens de erro claras e úteis</li>
+            <li>Estrutura consistente de respostas de erro</li>
+            <li>Logging adequado (sem expor informações sensíveis)</li>
+            <li>Tratamento de exceções centralizado</li>
+            </ul>
             <div class="slide-number">Slide 52 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Documentação</h2>
+            <p>Importância de documentar APIs.</p>
+            <ul>
+            <li>Swagger/OpenAPI: especificação padrão</li>
+            <li>Documentação automática (FastAPI, DRF)</li>
+            <li>Postman: coleções para testes</li>
+            <li>Exemplos de request/response</li>
+            <li>Manter documentação atualizada</li>
+            </ul>
             <div class="slide-number">Slide 53 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Resumo Final</h2>
+            <p>Principais conceitos do módulo de WebServices.</p>
+            <ul>
+            <li>Protocolo HTTP e métodos REST</li>
+            <li>JSON para serialização de dados</li>
+            <li>Frameworks: Flask, FastAPI, DRF</li>
+            <li>Autenticação e segurança (JWT, OAuth)</li>
+            <li>Tratamento de erros e documentação</li>
+            <li><strong>Próximo módulo:</strong> Django</li>
+            </ul>
             <div class="slide-number">Slide 54 de 54</div>
         </div>
 

@@ -443,142 +443,259 @@
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Bancos Relacionais</h2>
+            <p>Bancos de dados relacionais armazenam dados em tabelas com relacionamentos bem definidos.</p>
+            <ul>
+            <li>Estrutura de tabelas, linhas e colunas</li>
+            <li>Chaves primárias e estrangeiras</li>
+            <li>Integridade referencial</li>
+            <li>Operações CRUD (Create, Read, Update, Delete)</li>
+            </ul>
             <div class="slide-number">Slide 35 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - SQLite</h2>
+            <p>SQLite é um banco de dados leve e embutido, perfeito para desenvolvimento e aplicações pequenas.</p>
+            <ul>
+            <li>Zero-configuração: não requer servidor</li>
+            <li>Baseado em arquivo único</li>
+            <li>Biblioteca sqlite3 nativa do Python</li>
+            <li>Context managers para gerenciamento automático de conexões</li>
+            <li>Comandos PRAGMA para configuração</li>
+            </ul>
             <div class="slide-number">Slide 36 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - MySQL</h2>
+            <p>MySQL é um SGBD relacional robusto e amplamente usado em produção.</p>
+            <ul>
+            <li>Requer instalação e configuração de servidor</li>
+            <li>Bibliotecas: mysql.connector e pymysql</li>
+            <li>Credenciais via variáveis de ambiente</li>
+            <li>Prepared statements para segurança</li>
+            <li>Pools de conexão para performance</li>
+            </ul>
             <div class="slide-number">Slide 37 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - PostgreSQL</h2>
+            <p>PostgreSQL é um SGBD relacional open-source avançado e extensível.</p>
+            <ul>
+            <li>Instalação e configuração personalizável</li>
+            <li>Driver psycopg2 para Python</li>
+            <li>Gerenciamento avançado de esquemas</li>
+            <li>Backup e restore com pg_dump/pg_restore</li>
+            <li>Monitoramento de performance</li>
+            </ul>
             <div class="slide-number">Slide 38 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Segurança</h2>
+            <p>A segurança é fundamental ao trabalhar com bancos de dados.</p>
+            <ul>
+            <li>Variáveis de ambiente para credenciais</li>
+            <li>Prepared statements previnem SQL injection</li>
+            <li>Gestão segura de credenciais</li>
+            <li>Permissões e roles apropriados</li>
+            <li>Nunca hardcode senhas no código</li>
+            </ul>
             <div class="slide-number">Slide 39 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Operações Básicas</h2>
+            <p>Operações fundamentais para trabalhar com bancos de dados.</p>
+            <ul>
+            <li>Conexão: estabelecer e fechar conexões corretamente</li>
+            <li>Queries: SELECT, INSERT, UPDATE, DELETE</li>
+            <li>Gestão de recursos: sempre fechar conexões</li>
+            <li>Context managers garantem fechamento automático</li>
+            </ul>
             <div class="slide-number">Slide 40 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Transações ACID</h2>
+            <p>Transações garantem consistência dos dados.</p>
+            <ul>
+            <li><strong>Atomicidade:</strong> tudo ou nada</li>
+            <li><strong>Consistência:</strong> dados sempre válidos</li>
+            <li><strong>Isolamento:</strong> transações não interferem</li>
+            <li><strong>Durabilidade:</strong> mudanças persistem</li>
+            <li>Commit e Rollback para controle</li>
+            </ul>
             <div class="slide-number">Slide 41 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Gestão de Recursos</h2>
+            <p>Importante gerenciar recursos adequadamente para evitar vazamentos.</p>
+            <ul>
+            <li>Sempre fechar conexões (try/finally ou context manager)</li>
+            <li>Cursor.close() e Connection.close()</li>
+            <li>Pools de conexão para aplicações multithread</li>
+            <li>Context managers (with statement) são recomendados</li>
+            </ul>
             <div class="slide-number">Slide 42 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Otimização</h2>
+            <p>Boas práticas para melhorar performance de queries.</p>
+            <ul>
+            <li>Índices em colunas frequentemente consultadas</li>
+            <li>Evitar SELECT * (selecionar apenas colunas necessárias)</li>
+            <li>Usar WHERE apropriadamente</li>
+            <li>Limitar resultados quando possível</li>
+            <li>Analisar queries lentas (EXPLAIN)</li>
+            </ul>
             <div class="slide-number">Slide 43 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Escolhendo o Banco</h2>
+            <p>Critérios para escolher o banco de dados adequado.</p>
+            <ul>
+            <li><strong>SQLite:</strong> desenvolvimento, protótipos, apps simples</li>
+            <li><strong>MySQL:</strong> web apps, média escala, fácil setup</li>
+            <li><strong>PostgreSQL:</strong> apps complexos, dados críticos, extensibilidade</li>
+            <li>Considere: escala, features necessárias, suporte</li>
+            </ul>
             <div class="slide-number">Slide 44 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Bibliotecas Python</h2>
+            <p>Principais bibliotecas para trabalhar com bancos de dados em Python.</p>
+            <ul>
+            <li><strong>sqlite3:</strong> nativo, para SQLite</li>
+            <li><strong>mysql-connector-python:</strong> oficial MySQL</li>
+            <li><strong>pymysql:</strong> alternativa para MySQL</li>
+            <li><strong>psycopg2:</strong> driver PostgreSQL</li>
+            <li><strong>SQLAlchemy:</strong> ORM unificado (próximos módulos)</li>
+            </ul>
             <div class="slide-number">Slide 45 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Padrões de Código</h2>
+            <p>Padrões recomendados ao trabalhar com bancos de dados.</p>
+            <ul>
+            <li>Separar lógica de acesso a dados (DAO pattern)</li>
+            <li>Usar context managers para conexões</li>
+            <li>Prepared statements para todas as queries</li>
+            <li>Tratamento de exceções adequado</li>
+            <li>Código limpo e bem documentado</li>
+            </ul>
             <div class="slide-number">Slide 46 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Tratamento de Erros</h2>
+            <p>Como lidar adequadamente com erros em operações de banco.</p>
+            <ul>
+            <li>try/except para capturar exceções específicas</li>
+            <li>OperationalError: problemas de conexão</li>
+            <li>IntegrityError: violações de integridade</li>
+            <li>ProgrammingError: erros de sintaxe SQL</li>
+            <li>Sempre fazer rollback em caso de erro</li>
+            </ul>
             <div class="slide-number">Slide 47 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Migrations</h2>
+            <p>Gerenciamento de mudanças no esquema do banco.</p>
+            <ul>
+            <li>Versionar mudanças no esquema</li>
+            <li>Scripts SQL para migrações</li>
+            <li>Backup antes de migrar</li>
+            <li>Testar em ambiente de desenvolvimento primeiro</li>
+            <li>Documentar todas as mudanças</li>
+            </ul>
             <div class="slide-number">Slide 48 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Boas Práticas</h2>
+            <p>Princípios fundamentais para trabalhar com bancos de dados.</p>
+            <ul>
+            <li>Nunca confiar em dados de entrada (validar sempre)</li>
+            <li>Usar transações para operações relacionadas</li>
+            <li>Fazer backup regularmente</li>
+            <li>Monitorar performance</li>
+            <li>Documentar estrutura do banco</li>
+            </ul>
             <div class="slide-number">Slide 49 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Performance</h2>
+            <p>Estratégias para melhorar performance de aplicações com banco de dados.</p>
+            <ul>
+            <li>Índices em colunas de busca frequente</li>
+            <li>Evitar N+1 queries (usar JOIN)</li>
+            <li>Cache de queries frequentes</li>
+            <li>Paginação para grandes resultados</li>
+            <li>Connection pooling em produção</li>
+            </ul>
             <div class="slide-number">Slide 50 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Integração com Python</h2>
+            <p>Como integrar bancos de dados com código Python de forma eficiente.</p>
+            <ul>
+            <li>Classes de acesso a dados (DAO)</li>
+            <li>Encapsular lógica de banco</li>
+            <li>Reutilizar conexões quando possível</li>
+            <li>Separar configuração do código</li>
+            <li>Testes com bancos de dados de teste</li>
+            </ul>
             <div class="slide-number">Slide 51 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Ambiente de Desenvolvimento</h2>
+            <p>Configuração adequada para desenvolvimento.</p>
+            <ul>
+            <li>SQLite para desenvolvimento local</li>
+            <li>Variáveis de ambiente para configuração</li>
+            <li>Arquivos .env para credenciais</li>
+            <li>Ambientes separados: dev, test, prod</li>
+            <li>Ferramentas: DB Browser, pgAdmin, MySQL Workbench</li>
+            </ul>
             <div class="slide-number">Slide 52 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Próximos Passos</h2>
+            <p>O que aprender a seguir relacionado a bancos de dados.</p>
+            <ul>
+            <li>ORM (Object-Relational Mapping) - Django ORM, SQLAlchemy</li>
+            <li>Migrations automatizadas</li>
+            <li>Database design avançado</li>
+            <li>NoSQL databases (quando apropriado)</li>
+            <li>Cache strategies (Redis, Memcached)</li>
+            </ul>
             <div class="slide-number">Slide 53 de 54</div>
         </div>
 
         <div class="slide">
-            <h2>Recapitulação</h2>
-            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
-            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <h2>Recapitulação - Resumo Final</h2>
+            <p>Principais pontos deste módulo sobre Bancos de Dados.</p>
+            <ul>
+            <li>Conhecimento de SQLite, MySQL e PostgreSQL</li>
+            <li>Operações CRUD e transações ACID</li>
+            <li>Segurança com prepared statements</li>
+            <li>Gestão adequada de recursos</li>
+            <li>Boas práticas de desenvolvimento</li>
+            <li><strong>Próximo módulo:</strong> Programação Orientada a Objetos</li>
+            </ul>
             <div class="slide-number">Slide 54 de 54</div>
         </div>
 
