@@ -21,9 +21,9 @@ COMPOSIÇÃO:
   • Ciclo de vida compartilhado
 
 Características:
-  ✓ Componente criado dentro do composto
-  ✓ Componente não faz sentido sozinho
-  ✓ Quando composto é destruído, componente também é
+  ✓ Componente dependente é criado dentro do componente composto
+  ✓ Componente dependente não faz sentido sozinho
+  ✓ Quando o componente composto é destruído, o componente depend  ente também é
 """)
 
 
