@@ -1,0 +1,6 @@
+a = int(input("Digite o 1º número: "))
+b = int(input("Digite o 2º número: "))
+c = int(input("Digite o 3º número: "))
+if a < b < c: print("Crescente")
+elif a > b > c: print("Decrescente")
+else: print("Fora de ordem")

@@ -1,0 +1,6 @@
+nome = input("Digite o nome: ")
+idade = int(input("Digite a idade: "))
+if 0 <= idade <= 12: print(nome, "é Criança")
+elif 13 <= idade <= 18: print(nome, "é Adolescente")
+elif 18 < idade < 60: print(nome, "é Adulto")
+else: print(nome, "é Idoso")

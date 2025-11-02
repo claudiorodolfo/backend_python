@@ -1,0 +1,10 @@
+a = float(input("Digite o 1º número: "))
+b = float(input("Digite o 2º número: "))
+op = input("Digite a operação (+,-,*,/): ")
+if op == "+": print("Resultado:", a+b)
+elif op == "-": print("Resultado:", a-b)
+elif op == "*": print("Resultado:", a*b)
+elif op == "/": 
+    if b != 0: print("Resultado:", a/b)
+    else: print("Divisão por zero!")
+else: print("Operação inválida")

@@ -1,0 +1,6 @@
+sigla = input("Digite a sigla do estado: ").upper()
+nome = input("Digite o nome da pessoa: ")
+if sigla == "RJ": print(nome, "é carioca")
+elif sigla == "SP": print(nome, "é paulista")
+elif sigla == "MG": print(nome, "é mineiro")
+else: print(nome, "é de outro estado")

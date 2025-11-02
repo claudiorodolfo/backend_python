@@ -1,0 +1,5 @@
+cod = int(input("Digite o código do produto: "))
+if 1 <= cod <= 10: print("Alimentação")
+elif 11 <= cod <= 20: print("Limpeza")
+elif 21 <= cod <= 30: print("Eletrônicos")
+else: print("Código inválido")

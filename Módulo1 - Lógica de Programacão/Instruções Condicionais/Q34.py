@@ -1,0 +1,6 @@
+salario = float(input("Digite o salário: "))
+if salario <= 1903.98: print("Isento")
+elif salario <= 2826.65: print("IRPF:", salario*0.075)
+elif salario <= 3751.05: print("IRPF:", salario*0.15)
+elif salario <= 4464.68: print("IRPF:", salario*0.225)
+else: print("IRPF:", salario*0.275)
