@@ -1,5 +1,0 @@
-# Instalar dependências globalmente:
-# pip3 install psycopg2-binary python-dotenv
-
-psycopg2-binary==2.9.11
-python-dotenv==1.1.1
