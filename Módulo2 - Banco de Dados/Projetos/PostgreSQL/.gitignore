@@ -1,0 +1,10 @@
+# Arquivos de configuração com credenciais sensíveis
+config.env
+.env
+*.env
+
+# Arquivos do sistema
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
