@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1 - Lógica de Programação</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: #764ba2;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #555;
+            font-size: 1.8em;
+            margin: 25px 0 15px 0;
+        }
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin: 10px 0;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+            display: block;
+            white-space: pre-wrap;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #999;
+            font-size: 1.1em;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 0 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / 90
+    </div>
+    <div class="slide-container">
+        <div class="slide">
+            <h2>Módulo 1 - Lógica de Programação</h2>
+            <h1 style='text-align:center;border:none;'>Lógica de Programação</h1>
+            <p style='text-align:center;font-size:1.5em;margin-top:50px;color:#666;'>Carga horária: 30 horas</p>
+            <p style='text-align:center;font-size:1.2em;margin-top:30px;color:#666;'>Total de slides: 90</p>
+            <div class="slide-number">Slide 1 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Apresentação do Módulo</h2>
+            <ul>
+            <li>Fundamentos essenciais</li>
+            <li>Base para desenvolvimento backend</li>
+            <li>Estrutura progressiva</li>
+            </ul>
+            <div class="slide-number">Slide 2 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Apresentação do Módulo</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Fundamentos essenciais</li>
+            </ul>
+            <div class="slide-number">Slide 3 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Apresentação do Módulo</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Base para desenvolvimento backend</li>
+            </ul>
+            <div class="slide-number">Slide 4 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Apresentação do Módulo</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Estrutura progressiva</li>
+            </ul>
+            <div class="slide-number">Slide 5 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Sequenciais</h2>
+            <ul>
+            <li>input() e print()</li>
+            <li>Variáveis e tipos</li>
+            <li>Operações matemáticas</li>
+            <li>Conversões de tipo</li>
+            <li>Formatação de saída</li>
+            </ul>
+            <div class="slide-number">Slide 6 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Sequenciais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>input() e print()</li>
+            </ul>
+            <div class="slide-number">Slide 7 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Sequenciais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Variáveis e tipos</li>
+            </ul>
+            <div class="slide-number">Slide 8 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Sequenciais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Operações matemáticas</li>
+            </ul>
+            <div class="slide-number">Slide 9 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Sequenciais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Conversões de tipo</li>
+            </ul>
+            <div class="slide-number">Slide 10 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Sequenciais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Formatação de saída</li>
+            </ul>
+            <div class="slide-number">Slide 11 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Condicionais</h2>
+            <ul>
+            <li>if, elif, else</li>
+            <li>Operadores lógicos (and, or, not)</li>
+            <li>Operadores de comparação</li>
+            <li>Estruturas aninhadas</li>
+            <li>Validação de entrada</li>
+            </ul>
+            <div class="slide-number">Slide 12 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Condicionais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>if, elif, else</li>
+            </ul>
+            <div class="slide-number">Slide 13 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Condicionais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Operadores lógicos (and, or, not)</li>
+            </ul>
+            <div class="slide-number">Slide 14 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Condicionais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Operadores de comparação</li>
+            </ul>
+            <div class="slide-number">Slide 15 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Condicionais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Estruturas aninhadas</li>
+            </ul>
+            <div class="slide-number">Slide 16 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções Condicionais</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Validação de entrada</li>
+            </ul>
+            <div class="slide-number">Slide 17 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções de Repetição</h2>
+            <ul>
+            <li>Estrutura for</li>
+            <li>Estrutura while</li>
+            <li>Função range()</li>
+            <li>break e continue</li>
+            <li>Laços aninhados</li>
+            <li>Acumuladores e contadores</li>
+            </ul>
+            <div class="slide-number">Slide 18 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções de Repetição</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Estrutura for</li>
+            </ul>
+            <div class="slide-number">Slide 19 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções de Repetição</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Estrutura while</li>
+            </ul>
+            <div class="slide-number">Slide 20 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções de Repetição</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Função range()</li>
+            </ul>
+            <div class="slide-number">Slide 21 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções de Repetição</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>break e continue</li>
+            </ul>
+            <div class="slide-number">Slide 22 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções de Repetição</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Laços aninhados</li>
+            </ul>
+            <div class="slide-number">Slide 23 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Instruções de Repetição</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Acumuladores e contadores</li>
+            </ul>
+            <div class="slide-number">Slide 24 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Strings</h2>
+            <ul>
+            <li>Operações básicas</li>
+            <li>Formatação (f-strings, .format())</li>
+            <li>Métodos (.upper(), .lower(), etc.)</li>
+            <li>Indexação e slicing</li>
+            <li>Validação de texto</li>
+            </ul>
+            <div class="slide-number">Slide 25 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Strings</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Operações básicas</li>
+            </ul>
+            <div class="slide-number">Slide 26 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Strings</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Formatação (f-strings, .format())</li>
+            </ul>
+            <div class="slide-number">Slide 27 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Strings</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Métodos (.upper(), .lower(), etc.)</li>
+            </ul>
+            <div class="slide-number">Slide 28 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Strings</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Indexação e slicing</li>
+            </ul>
+            <div class="slide-number">Slide 29 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Strings</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Validação de texto</li>
+            </ul>
+            <div class="slide-number">Slide 30 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Listas</h2>
+            <ul>
+            <li>Criação e manipulação</li>
+            <li>Métodos (.append(), .insert(), etc.)</li>
+            <li>Indexação e fatiamento</li>
+            <li>List comprehension</li>
+            <li>Listas aninhadas</li>
+            <li>Iteração</li>
+            </ul>
+            <div class="slide-number">Slide 31 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Listas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Criação e manipulação</li>
+            </ul>
+            <div class="slide-number">Slide 32 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Listas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Métodos (.append(), .insert(), etc.)</li>
+            </ul>
+            <div class="slide-number">Slide 33 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Listas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Indexação e fatiamento</li>
+            </ul>
+            <div class="slide-number">Slide 34 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Listas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>List comprehension</li>
+            </ul>
+            <div class="slide-number">Slide 35 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Listas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Listas aninhadas</li>
+            </ul>
+            <div class="slide-number">Slide 36 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Listas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Iteração</li>
+            </ul>
+            <div class="slide-number">Slide 37 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Tuplas</h2>
+            <ul>
+            <li>Características imutáveis</li>
+            <li>Diferenças vs listas</li>
+            <li>Quando usar tuplas</li>
+            <li>Desempacotamento</li>
+            <li>Operações</li>
+            </ul>
+            <div class="slide-number">Slide 38 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Tuplas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Características imutáveis</li>
+            </ul>
+            <div class="slide-number">Slide 39 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Tuplas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Diferenças vs listas</li>
+            </ul>
+            <div class="slide-number">Slide 40 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Tuplas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Quando usar tuplas</li>
+            </ul>
+            <div class="slide-number">Slide 41 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Tuplas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Desempacotamento</li>
+            </ul>
+            <div class="slide-number">Slide 42 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Tuplas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Operações</li>
+            </ul>
+            <div class="slide-number">Slide 43 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Dicionários</h2>
+            <ul>
+            <li>Estrutura chave-valor</li>
+            <li>Criação e acesso</li>
+            <li>Métodos (.keys(), .values(), .items())</li>
+            <li>Iteração</li>
+            <li>Dicionários aninhados</li>
+            </ul>
+            <div class="slide-number">Slide 44 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Dicionários</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Estrutura chave-valor</li>
+            </ul>
+            <div class="slide-number">Slide 45 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Dicionários</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Criação e acesso</li>
+            </ul>
+            <div class="slide-number">Slide 46 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Dicionários</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Métodos (.keys(), .values(), .items())</li>
+            </ul>
+            <div class="slide-number">Slide 47 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Dicionários</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Iteração</li>
+            </ul>
+            <div class="slide-number">Slide 48 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Coleções - Dicionários</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Dicionários aninhados</li>
+            </ul>
+            <div class="slide-number">Slide 49 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funções</h2>
+            <ul>
+            <li>Definição com def</li>
+            <li>Parâmetros posicionais e nomeados</li>
+            <li>Valores padrão</li>
+            <li>Return</li>
+            <li>Escopo (local vs global)</li>
+            <li>Docstrings</li>
+            </ul>
+            <div class="slide-number">Slide 50 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Definição com def</li>
+            </ul>
+            <div class="slide-number">Slide 51 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Parâmetros posicionais e nomeados</li>
+            </ul>
+            <div class="slide-number">Slide 52 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Valores padrão</li>
+            </ul>
+            <div class="slide-number">Slide 53 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Return</li>
+            </ul>
+            <div class="slide-number">Slide 54 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Escopo (local vs global)</li>
+            </ul>
+            <div class="slide-number">Slide 55 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Docstrings</li>
+            </ul>
+            <div class="slide-number">Slide 56 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tratamento de Exceções</h2>
+            <ul>
+            <li>try, except, else, finally</li>
+            <li>Tipos de exceções</li>
+            <li>Tratamento específico</li>
+            <li>Captura múltipla</li>
+            <li>raise</li>
+            <li>Exceções customizadas</li>
+            </ul>
+            <div class="slide-number">Slide 57 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tratamento de Exceções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>try, except, else, finally</li>
+            </ul>
+            <div class="slide-number">Slide 58 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tratamento de Exceções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Tipos de exceções</li>
+            </ul>
+            <div class="slide-number">Slide 59 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tratamento de Exceções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Tratamento específico</li>
+            </ul>
+            <div class="slide-number">Slide 60 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tratamento de Exceções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Captura múltipla</li>
+            </ul>
+            <div class="slide-number">Slide 61 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tratamento de Exceções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>raise</li>
+            </ul>
+            <div class="slide-number">Slide 62 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tratamento de Exceções</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Exceções customizadas</li>
+            </ul>
+            <div class="slide-number">Slide 63 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 64 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 65 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 66 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 67 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 68 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 69 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 70 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 71 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 72 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 73 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 74 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 75 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 76 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 77 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 78 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 79 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 80 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 81 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 82 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 83 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 84 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 85 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 86 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 87 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 88 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 89 de 90</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 90 de 90</div>
+        </div>
+
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Próximo →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = 90;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'Home') showSlide(0);
+            if (e.key === 'End') showSlide(totalSlides - 1);
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6 - Django</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: #764ba2;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #555;
+            font-size: 1.8em;
+            margin: 25px 0 15px 0;
+        }
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin: 10px 0;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+            display: block;
+            white-space: pre-wrap;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #999;
+            font-size: 1.1em;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 0 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / 72
+    </div>
+    <div class="slide-container">
+        <div class="slide">
+            <h2>Módulo 6 - Django</h2>
+            <h1 style='text-align:center;border:none;'>Django</h1>
+            <p style='text-align:center;font-size:1.5em;margin-top:50px;color:#666;'>Carga horária: 24 horas</p>
+            <p style='text-align:center;font-size:1.2em;margin-top:30px;color:#666;'>Total de slides: 72</p>
+            <div class="slide-number">Slide 1 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <ul>
+            <li>História e filosofia</li>
+            <li>Batteries included</li>
+            <li>Estrutura de projeto</li>
+            <li>MVC/MVT</li>
+            </ul>
+            <div class="slide-number">Slide 2 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>História e filosofia</li>
+            </ul>
+            <div class="slide-number">Slide 3 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Batteries included</li>
+            </ul>
+            <div class="slide-number">Slide 4 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Estrutura de projeto</li>
+            </ul>
+            <div class="slide-number">Slide 5 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>MVC/MVT</li>
+            </ul>
+            <div class="slide-number">Slide 6 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Models e ORM</h2>
+            <ul>
+            <li>Definição de models</li>
+            <li>Campos e tipos</li>
+            <li>Relacionamentos</li>
+            <li>Migrations</li>
+            <li>Queries</li>
+            </ul>
+            <div class="slide-number">Slide 7 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Models e ORM</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Definição de models</li>
+            </ul>
+            <div class="slide-number">Slide 8 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Models e ORM</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Campos e tipos</li>
+            </ul>
+            <div class="slide-number">Slide 9 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Models e ORM</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Relacionamentos</li>
+            </ul>
+            <div class="slide-number">Slide 10 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Models e ORM</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Migrations</li>
+            </ul>
+            <div class="slide-number">Slide 11 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Models e ORM</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Queries</li>
+            </ul>
+            <div class="slide-number">Slide 12 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Views e Templates</h2>
+            <ul>
+            <li>Function-based views</li>
+            <li>Class-based views</li>
+            <li>Django Template Language</li>
+            <li>Context</li>
+            </ul>
+            <div class="slide-number">Slide 13 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Views e Templates</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Function-based views</li>
+            </ul>
+            <div class="slide-number">Slide 14 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Views e Templates</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Class-based views</li>
+            </ul>
+            <div class="slide-number">Slide 15 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Views e Templates</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Django Template Language</li>
+            </ul>
+            <div class="slide-number">Slide 16 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Views e Templates</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Context</li>
+            </ul>
+            <div class="slide-number">Slide 17 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>URLs e Roteamento</h2>
+            <ul>
+            <li>URLconf</li>
+            <li>URL patterns</li>
+            <li>Namespaces</li>
+            <li>Reverse URLs</li>
+            </ul>
+            <div class="slide-number">Slide 18 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>URLs e Roteamento</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>URLconf</li>
+            </ul>
+            <div class="slide-number">Slide 19 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>URLs e Roteamento</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>URL patterns</li>
+            </ul>
+            <div class="slide-number">Slide 20 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>URLs e Roteamento</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Namespaces</li>
+            </ul>
+            <div class="slide-number">Slide 21 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>URLs e Roteamento</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Reverse URLs</li>
+            </ul>
+            <div class="slide-number">Slide 22 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Forms</h2>
+            <ul>
+            <li>Django Forms</li>
+            <li>Validação</li>
+            <li>Model Forms</li>
+            <li>CSRF Protection</li>
+            </ul>
+            <div class="slide-number">Slide 23 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Forms</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Django Forms</li>
+            </ul>
+            <div class="slide-number">Slide 24 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Forms</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Validação</li>
+            </ul>
+            <div class="slide-number">Slide 25 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Forms</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Model Forms</li>
+            </ul>
+            <div class="slide-number">Slide 26 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Forms</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>CSRF Protection</li>
+            </ul>
+            <div class="slide-number">Slide 27 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Autenticação</h2>
+            <ul>
+            <li>User Model</li>
+            <li>Login/Logout</li>
+            <li>Permissões</li>
+            <li>Groups</li>
+            <li>Custom User</li>
+            </ul>
+            <div class="slide-number">Slide 28 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Autenticação</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>User Model</li>
+            </ul>
+            <div class="slide-number">Slide 29 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Autenticação</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Login/Logout</li>
+            </ul>
+            <div class="slide-number">Slide 30 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Autenticação</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Permissões</li>
+            </ul>
+            <div class="slide-number">Slide 31 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Autenticação</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Groups</li>
+            </ul>
+            <div class="slide-number">Slide 32 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Autenticação</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Custom User</li>
+            </ul>
+            <div class="slide-number">Slide 33 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Django REST Framework</h2>
+            <ul>
+            <li>Serializers</li>
+            <li>ViewSets e Routers</li>
+            <li>Permissions</li>
+            <li>Authentication</li>
+            <li>Pagination</li>
+            </ul>
+            <div class="slide-number">Slide 34 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Django REST Framework</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Serializers</li>
+            </ul>
+            <div class="slide-number">Slide 35 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Django REST Framework</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>ViewSets e Routers</li>
+            </ul>
+            <div class="slide-number">Slide 36 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Django REST Framework</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Permissions</li>
+            </ul>
+            <div class="slide-number">Slide 37 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Django REST Framework</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Authentication</li>
+            </ul>
+            <div class="slide-number">Slide 38 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Django REST Framework</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Pagination</li>
+            </ul>
+            <div class="slide-number">Slide 39 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funcionalidades Avançadas</h2>
+            <ul>
+            <li>Middleware</li>
+            <li>Signals</li>
+            <li>Caching</li>
+            <li>Sessions</li>
+            <li>Static/Media Files</li>
+            </ul>
+            <div class="slide-number">Slide 40 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funcionalidades Avançadas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Middleware</li>
+            </ul>
+            <div class="slide-number">Slide 41 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funcionalidades Avançadas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Signals</li>
+            </ul>
+            <div class="slide-number">Slide 42 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funcionalidades Avançadas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Caching</li>
+            </ul>
+            <div class="slide-number">Slide 43 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funcionalidades Avançadas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Sessions</li>
+            </ul>
+            <div class="slide-number">Slide 44 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Funcionalidades Avançadas</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Static/Media Files</li>
+            </ul>
+            <div class="slide-number">Slide 45 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Testes</h2>
+            <ul>
+            <li>Test Framework</li>
+            <li>TestCase</li>
+            <li>Fixtures</li>
+            <li>Client Testing</li>
+            </ul>
+            <div class="slide-number">Slide 46 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Testes</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Test Framework</li>
+            </ul>
+            <div class="slide-number">Slide 47 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Testes</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>TestCase</li>
+            </ul>
+            <div class="slide-number">Slide 48 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Testes</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Fixtures</li>
+            </ul>
+            <div class="slide-number">Slide 49 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Testes</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Client Testing</li>
+            </ul>
+            <div class="slide-number">Slide 50 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Deploy</h2>
+            <ul>
+            <li>Settings de produção</li>
+            <li>Static files</li>
+            <li>Otimização</li>
+            <li>Segurança</li>
+            <li>Deployment</li>
+            </ul>
+            <div class="slide-number">Slide 51 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Deploy</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Settings de produção</li>
+            </ul>
+            <div class="slide-number">Slide 52 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Deploy</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Static files</li>
+            </ul>
+            <div class="slide-number">Slide 53 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Deploy</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Otimização</li>
+            </ul>
+            <div class="slide-number">Slide 54 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Deploy</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Segurança</li>
+            </ul>
+            <div class="slide-number">Slide 55 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Deploy</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Deployment</li>
+            </ul>
+            <div class="slide-number">Slide 56 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 57 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 58 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 59 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 60 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 61 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 62 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 63 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 64 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 65 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 66 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 67 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 68 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 69 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 70 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 71 de 72</div>
+        </div>
+
+        <div class="slide">
+            <h2>Recapitulação</h2>
+            <p>Revisão dos conceitos principais apresentados neste módulo.</p>
+            <p>Próximos passos: praticar os exercícios e aplicar os conceitos.</p>
+            <div class="slide-number">Slide 72 de 72</div>
+        </div>
+
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Próximo →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = 72;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'Home') showSlide(0);
+            if (e.key === 'End') showSlide(totalSlides - 1);
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>

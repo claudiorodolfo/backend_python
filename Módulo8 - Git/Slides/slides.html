@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 8 - Git</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: #764ba2;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #555;
+            font-size: 1.8em;
+            margin: 25px 0 15px 0;
+        }
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin: 10px 0;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+            display: block;
+            white-space: pre-wrap;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #999;
+            font-size: 1.1em;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 0 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / 27
+    </div>
+    <div class="slide-container">
+        <div class="slide">
+            <h2>Módulo 8 - Git</h2>
+            <h1 style='text-align:center;border:none;'>Git</h1>
+            <p style='text-align:center;font-size:1.5em;margin-top:50px;color:#666;'>Carga horária: 9 horas</p>
+            <p style='text-align:center;font-size:1.2em;margin-top:30px;color:#666;'>Total de slides: 27</p>
+            <div class="slide-number">Slide 1 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <ul>
+            <li>O que é Git</li>
+            <li>Por que usar</li>
+            <li>Instalação</li>
+            <li>Conceitos fundamentais</li>
+            <li>Estados do Git</li>
+            </ul>
+            <div class="slide-number">Slide 2 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>O que é Git</li>
+            <li>Por que usar</li>
+            </ul>
+            <div class="slide-number">Slide 3 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Instalação</li>
+            <li>Conceitos fundamentais</li>
+            </ul>
+            <div class="slide-number">Slide 4 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Fundamentos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>Estados do Git</li>
+            </ul>
+            <div class="slide-number">Slide 5 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Comandos Básicos</h2>
+            <ul>
+            <li>git init</li>
+            <li>git clone</li>
+            <li>git add</li>
+            <li>git commit</li>
+            <li>git status</li>
+            <li>git log</li>
+            </ul>
+            <div class="slide-number">Slide 6 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Comandos Básicos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git init</li>
+            <li>git clone</li>
+            <li>git add</li>
+            </ul>
+            <div class="slide-number">Slide 7 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Comandos Básicos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git commit</li>
+            <li>git status</li>
+            <li>git log</li>
+            </ul>
+            <div class="slide-number">Slide 8 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Comandos Básicos</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git diff</li>
+            </ul>
+            <div class="slide-number">Slide 9 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Branches</h2>
+            <ul>
+            <li>git branch</li>
+            <li>git checkout</li>
+            <li>git switch</li>
+            <li>git merge</li>
+            <li>Estratégias</li>
+            <li>Resolução de conflitos</li>
+            </ul>
+            <div class="slide-number">Slide 10 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Branches</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git branch</li>
+            <li>git checkout</li>
+            <li>git switch</li>
+            </ul>
+            <div class="slide-number">Slide 11 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Branches</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git merge</li>
+            <li>Estratégias</li>
+            <li>Resolução de conflitos</li>
+            </ul>
+            <div class="slide-number">Slide 12 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Trabalho Colaborativo</h2>
+            <ul>
+            <li>git remote</li>
+            <li>git push</li>
+            <li>git pull</li>
+            <li>git fetch</li>
+            <li>Pull Requests</li>
+            <li>Code Reviews</li>
+            </ul>
+            <div class="slide-number">Slide 13 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Trabalho Colaborativo</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git remote</li>
+            <li>git push</li>
+            <li>git pull</li>
+            </ul>
+            <div class="slide-number">Slide 14 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Trabalho Colaborativo</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git fetch</li>
+            <li>Pull Requests</li>
+            <li>Code Reviews</li>
+            </ul>
+            <div class="slide-number">Slide 15 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Histórico</h2>
+            <ul>
+            <li>git log avançado</li>
+            <li>git show</li>
+            <li>git grep</li>
+            <li>git blame</li>
+            <li>git bisect</li>
+            </ul>
+            <div class="slide-number">Slide 16 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Histórico</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git log avançado</li>
+            <li>git show</li>
+            </ul>
+            <div class="slide-number">Slide 17 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Histórico</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git grep</li>
+            <li>git blame</li>
+            </ul>
+            <div class="slide-number">Slide 18 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Histórico</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git bisect</li>
+            </ul>
+            <div class="slide-number">Slide 19 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Desfazendo Mudanças</h2>
+            <ul>
+            <li>git reset</li>
+            <li>git revert</li>
+            <li>git checkout</li>
+            <li>git restore</li>
+            <li>git clean</li>
+            </ul>
+            <div class="slide-number">Slide 20 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Desfazendo Mudanças</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git reset</li>
+            <li>git revert</li>
+            </ul>
+            <div class="slide-number">Slide 21 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Desfazendo Mudanças</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git checkout</li>
+            <li>git restore</li>
+            </ul>
+            <div class="slide-number">Slide 22 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Desfazendo Mudanças</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git clean</li>
+            </ul>
+            <div class="slide-number">Slide 23 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Stashing</h2>
+            <ul>
+            <li>git stash</li>
+            <li>Casos de uso</li>
+            <li>git stash pop</li>
+            <li>git stash list</li>
+            </ul>
+            <div class="slide-number">Slide 24 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Stashing</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git stash</li>
+            <li>Casos de uso</li>
+            <li>git stash pop</li>
+            <li>git stash list</li>
+            </ul>
+            <div class="slide-number">Slide 25 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tags e Releases</h2>
+            <ul>
+            <li>git tag</li>
+            <li>Versionamento semântico</li>
+            <li>Releases</li>
+            </ul>
+            <div class="slide-number">Slide 26 de 27</div>
+        </div>
+
+        <div class="slide">
+            <h2>Tags e Releases</h2>
+            <h3>Conceitos</h3>
+            <ul>
+            <li>git tag</li>
+            <li>Versionamento semântico</li>
+            <li>Releases</li>
+            </ul>
+            <div class="slide-number">Slide 27 de 27</div>
+        </div>
+
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Próximo →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = 27;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'Home') showSlide(0);
+            if (e.key === 'End') showSlide(totalSlides - 1);
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
