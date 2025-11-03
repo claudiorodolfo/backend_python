@@ -43,9 +43,9 @@ class ValorInvalidoError(Exception):
 class ContaBancaria:
     """Classe que usa exceção customizada."""
     
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         self.titular = titular
-        self.saldo = saldo_inicial
+        self.saldo = saldoInicial
     
     def depositar(self, valor):
         """Deposita dinheiro na conta."""
@@ -264,13 +264,13 @@ class ProdutoNaoEncontradoError(Exception):
 class EstoqueInsuficienteError(Exception):
     """Exceção para estoque insuficiente."""
     
-    def __init__(self, produto, estoque_atual, quantidade_solicitada):
+    def __init__(self, produto, estoqueAtual, quantidadeSolicitada):
         self.produto = produto
-        self.estoqueAtual = estoque_atual
-        self.quantidadeSolicitada = quantidade_solicitada
+        self.estoqueAtual = estoqueAtual
+        self.quantidadeSolicitada = quantidadeSolicitada
         super().__init__(
             f"Estoque insuficiente de {produto}. "
-            f"Disponível: {estoque_atual}, Solicitado: {quantidade_solicitada}"
+            f"Disponível: {estoqueAtual}, Solicitado: {quantidadeSolicitada}"
         )
 
 

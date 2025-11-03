@@ -65,7 +65,7 @@ class Livro:
         self.autor = autor.strip()
         self.isbn = isbn.strip()
         self.emprestado = False
-        self.leitor_atual = None
+        self.leitorAtual = None
     
     def __str__(self):
         return f"{self.titulo} - {self.autor}"
@@ -79,11 +79,11 @@ class Livro:
         """
         if self.emprestado:
             raise LivroJaEmprestadoError(
-                f"'{self.titulo}' já está emprestado para {self.leitor_atual.nome}"
+                f"'{self.titulo}' já está emprestado para {self.leitorAtual.nome}"
             )
         
         self.emprestado = True
-        self.leitor_atual = pessoa
+        self.leitorAtual = pessoa
     
     def devolver(self):
         """
@@ -95,15 +95,15 @@ class Livro:
         if not self.emprestado:
             raise LivroNaoEmprestadoError(f"'{self.titulo}' não está emprestado")
         
-        leitor = self.leitor_atual.nome
+        leitor = self.leitorAtual.nome
         self.emprestado = False
-        self.leitor_atual = None
+        self.leitorAtual = None
         return leitor
     
     def exibirInfo(self):
         """Exibe informações do livro."""
         status = "Emprestado" if self.emprestado else "Disponível"
-        leitor = f" ({self.leitor_atual.nome})" if self.emprestado else ""
+        leitor = f" ({self.leitorAtual.nome})" if self.emprestado else ""
         
         print(f"""
         {'=' * 50}
@@ -221,7 +221,7 @@ class Biblioteca:
             print(f"✗ Erro ao adicionar livro: {e}")
             raise
     
-    def registrar_visitante(self, pessoa):
+    def registrarVisitante(self, pessoa):
         """
         Registra visitante na biblioteca (associação).
         
@@ -241,7 +241,7 @@ class Biblioteca:
             print(f"✗ Erro ao registrar visitante: {e}")
             raise
     
-    def buscar_livro(self, isbn):
+    def buscarLivro(self, isbn):
         """
         Busca livro por ISBN.
         
@@ -253,7 +253,7 @@ class Biblioteca:
         
         return self.livros[isbn]
     
-    def buscar_pessoa(self, cpf):
+    def buscarPessoa(self, cpf):
         """
         Busca pessoa por CPF.
         
@@ -265,7 +265,7 @@ class Biblioteca:
         
         return self.visitantes[cpf]
     
-    def emprestar_livro(self, isbn, cpf):
+    def emprestarLivro(self, isbn, cpf):
         """
         Empresta livro para pessoa.
         
@@ -278,10 +278,10 @@ class Biblioteca:
         """
         try:
             # Busca livro (composição)
-            livro = self.buscar_livro(isbn)
+            livro = self.buscarLivro(isbn)
             
             # Busca pessoa (associação)
-            pessoa = self.buscar_pessoa(cpf)
+            pessoa = self.buscarPessoa(cpf)
             
             # Empresta
             livro.emprestarPara(pessoa)
@@ -293,7 +293,7 @@ class Biblioteca:
             print(f"✗ Erro ao emprestar: {e}")
             raise
     
-    def devolver_livro(self, isbn):
+    def devolverLivro(self, isbn):
         """
         Devolve livro à biblioteca.
         
@@ -302,9 +302,9 @@ class Biblioteca:
             LivroNaoEmprestadoError: Se livro não estiver emprestado
         """
         try:
-            livro = self.buscar_livro(isbn)
+            livro = self.buscarLivro(isbn)
             leitor = livro.devolver()
-            pessoa = self.buscar_pessoa_by_livro(livro)
+            pessoa = self.buscarPessoaByLivro(livro)
             
             if pessoa:
                 pessoa.removerLivro(livro)
@@ -315,7 +315,7 @@ class Biblioteca:
             print(f"✗ Erro ao devolver: {e}")
             raise
     
-    def buscar_pessoa_by_livro(self, livro):
+    def buscarPessoaByLivro(self, livro):
         """Busca pessoa que tem o livro emprestado."""
         for pessoa in self.visitantes.values():
             if livro in pessoa.livrosEmprestados:
@@ -333,7 +333,7 @@ class Biblioteca:
         else:
             print("  Nenhum livro disponível")
     
-    def exibir_relatorio(self):
+    def exibirRelatorio(self):
         """Exibe relatório completo da biblioteca."""
         print(f"""
         {'=' * 60}
@@ -377,23 +377,23 @@ def main():
         pessoa1 = Pessoa("Maria Silva", "12345678901")
         pessoa2 = Pessoa("João Santos", "98765432100")
         
-        biblioteca.registrar_visitante(pessoa1)
-        biblioteca.registrar_visitante(pessoa2)
+        biblioteca.registrarVisitante(pessoa1)
+        biblioteca.registrarVisitante(pessoa2)
     except ValueError as e:
         print(f"Erro: {e}")
     
     # Emprestando livros
     print("\nEmprestando livros:")
     try:
-        biblioteca.emprestar_livro("978-0451524935", "12345678901")
-        biblioteca.emprestar_livro("978-8535902779", "98765432100")
+        biblioteca.emprestarLivro("978-0451524935", "12345678901")
+        biblioteca.emprestarLivro("978-8535902779", "98765432100")
     except (LivroNaoEncontradoError, PessoaNaoEncontradaError, LivroJaEmprestadoError) as e:
         print(f"Erro: {e}")
     
     # Tentando emprestar livro já emprestado
     print("\nTentando emprestar livro já emprestado:")
     try:
-        biblioteca.emprestar_livro("978-0451524935", "98765432100")
+        biblioteca.emprestarLivro("978-0451524935", "98765432100")
     except LivroJaEmprestadoError as e:
         print(f"Erro esperado: {e}")
     
@@ -403,19 +403,19 @@ def main():
     # Devolvendo livros
     print("\nDevolvendo livros:")
     try:
-        biblioteca.devolver_livro("978-0451524935")
+        biblioteca.devolverLivro("978-0451524935")
     except (LivroNaoEncontradoError, LivroNaoEmprestadoError) as e:
         print(f"Erro: {e}")
     
     # Relatório final
-    biblioteca.exibir_relatorio()
+    biblioteca.exibirRelatorio()
     
     # Exibindo informações de objetos
     print("\nInformações dos objetos:")
-    livro = biblioteca.buscar_livro("978-8535902779")
+    livro = biblioteca.buscarLivro("978-8535902779")
     livro.exibirInfo()
     
-    pessoa = biblioteca.buscar_pessoa("12345678901")
+    pessoa = biblioteca.buscarPessoa("12345678901")
     pessoa.exibirInfo()
 
 

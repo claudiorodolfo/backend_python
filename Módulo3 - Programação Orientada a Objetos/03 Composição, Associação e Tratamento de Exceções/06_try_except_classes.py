@@ -34,11 +34,11 @@ print("=" * 60)
 class ContaBancaria:
     """Conta bancária com tratamento de exceções."""
     
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         self.titular = titular
         self.saldo = 0
-        if saldo_inicial > 0:
-            self.depositar(saldo_inicial)
+        if saldoInicial > 0:
+            self.depositar(saldoInicial)
     
     def depositar(self, valor):
         """
@@ -300,13 +300,13 @@ class Sistema:
 # Testando
 print("\nProcessando dados válidos:")
 dados_validos = {"nome": "Ana", "idade": "25", "cidade": "São Paulo"}
-resultado = Sistema().processar_dados(dados_validos)
+resultado = Sistema().processarDados(dados_validos)
 print(f"Registros: {resultado}")
 
 print("\nProcessando dados inválidos (rollback automático):")
 dados_invalidos = {"nome": "Bruno", "idade": "", "cidade": "Rio"}
 try:
-    Sistema().processar_dados(dados_invalidos)
+    Sistema().processarDados(dados_invalidos)
 except ValueError:
     print("Erro tratado e transação revertida")
 

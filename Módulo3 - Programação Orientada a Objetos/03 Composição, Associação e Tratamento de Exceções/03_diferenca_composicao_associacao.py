@@ -113,16 +113,16 @@ print("=" * 60)
 
 print("""
 ┌──────────────────────────────────────────────────────────┐
-│ COMPOSIÇÃO                        │ ASSOCIAÇÃO            │
+│ COMPOSIÇÃO                        │ ASSOCIAÇÃO           │
 ├──────────────────────────────────────────────────────────┤
-│ Relacionamento FORTE             │ Relacionamento FRACO   │
-│ "TEM-UM" obrigatório             │ "TEM-UM" opcional       │
+│ Relacionamento FORTE             │ Relacionamento FRACO  │
+│ "TEM-UM" obrigatório             │ "TEM-UM" opcional     │
 │ Componente criado DENTRO         │ Objeto referenciado   │
-│ Componente não existe sozinho    │ Objeto existe sozinho  │
-│ Ciclo de vida compartilhado       │ Ciclo de vida separado│
-│ Carro TEM Motor                  │ Pessoa USA Biblioteca  │
-│ Computador TEM CPU                │ Professor TEM Alunos   │
-│ Pessoa TEM Endereço               │ Departamento TEM Func  │
+│ Componente não existe sozinho    │ Objeto existe sozinho │
+│ Ciclo de vida compartilhado      │ Ciclo de vida separado│
+│ Carro TEM Motor                  │ Pessoa USA Biblioteca │
+│ Computador TEM CPU               │ Professor TEM Alunos  │
+│ Pessoa TEM Endereço              │ Departamento TEM Func │
 └──────────────────────────────────────────────────────────┘
 """)
 
