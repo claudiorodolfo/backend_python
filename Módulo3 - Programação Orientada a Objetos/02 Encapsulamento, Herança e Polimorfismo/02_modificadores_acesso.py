@@ -45,7 +45,7 @@ class PessoaPublic:
         """Método público."""
         print(f"Sou {self.nome} e tenho {self.idade} anos")
     
-    def fazer_aniversario(self):  # Método público
+    def fazerAniversario(self):  # Método público
         """Método público."""
         self.idade += 1
 
@@ -77,7 +77,7 @@ class PessoaProtected:
         self._nome = nome      # Protegido (convenção)
         self._idade = idade    # Protegido (convenção)
     
-    def _validar_idade(self, idade):
+    def _validarIdade(self, idade):
         """
         Método protegido.
         
@@ -85,22 +85,22 @@ class PessoaProtected:
         """
         return 0 <= idade <= 150
     
-    def set_idade(self, idade):
+    def setIdade(self, idade):
         """Método público que usa método protegido."""
-        if self._validar_idade(idade):
+        if self._validarIdade(idade):
             self._idade = idade
         else:
             raise ValueError("Idade inválida")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Método público."""
         print(f"{self._nome} tem {self._idade} anos")
 
 
 # Uso
 pessoa_prot = PessoaProtected("Ana", 30)
-pessoa_prot.set_idade(35)
-pessoa_prot.exibir_info()
+pessoa_prot.setIdade(35)
+pessoa_prot.exibirInfo()
 
 # ⚠️ ATENÇÃO: Ainda é possível acessar diretamente
 # Mas por CONVENÇÃO não devemos fazer isso
@@ -129,41 +129,41 @@ class PessoaPrivate:
         self.__idade = idade    # Privado
         self.publico = "Acessível"  # Público (para comparação)
     
-    def __metodo_privado(self):
+    def __metodoPrivado(self):
         """Método privado."""
         print("Este é um método privado")
     
-    def get_nome(self):
+    def getNome(self):
         """Getter público para acessar nome privado."""
         return self.__nome
     
-    def set_idade(self, idade):
+    def setIdade(self, idade):
         """Setter público com validação."""
         if 0 <= idade <= 150:
             self.__idade = idade
         else:
             raise ValueError("Idade inválida")
     
-    def get_idade(self):
+    def getIdade(self):
         """Getter público para acessar idade privada."""
         return self.__idade
     
-    def usar_metodo_privado(self):
+    def usarMetodoPrivado(self):
         """Método público que usa método privado."""
         self.__metodo_privado()
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Método público."""
         print(f"{self.__nome} tem {self.__idade} anos")
 
 
 # Uso
 pessoa_priv = PessoaPrivate("Carla", 28)
-pessoa_priv.exibir_info()
+pessoa_priv.exibirInfo()
 
 # Acesso através de métodos públicos
-print(f"\nNome via getter: {pessoa_priv.get_nome()}")
-print(f"Idade via getter: {pessoa_priv.get_idade()}")
+print(f"\nNome via getter: {pessoa_priv.getNome()}")
+print(f"Idade via getter: {pessoa_priv.getIdade()}")
 
 # Tentando acessar diretamente (não funciona normalmente)
 try:
@@ -284,29 +284,29 @@ print("=" * 60)
 
 print("""
 ┌─────────────────────────────────────────────────────┐
-│ PÚBLICO (sem prefixo)                              │
+│ PÚBLICO (sem prefixo)                               │
 ├─────────────────────────────────────────────────────┤
 │ • Acessível de qualquer lugar                       │
 │ • Interface da classe                               │
-│ • Exemplo: self.nome, self.idade                   │
+│ • Exemplo: self.nome, self.idade                    │
 └─────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────┐
 │ PROTEGIDO (_ um underscore)                         │
 ├─────────────────────────────────────────────────────┤
 │ • Convenção: use na classe e subclasses             │
-│ • Python não impede acesso                         │
+│ • Python não impede acesso                          │
 │ • Para uso interno                                  │
-│ • Exemplo: self._nome, self._validar()             │
+│ • Exemplo: self._nome, self._validar()              │
 └─────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────┐
-│ PRIVADO (__ dois underscores)                      │
+│ PRIVADO (__ dois underscores)                       │
 ├─────────────────────────────────────────────────────┤
 │ • Python faz name mangling                          │
-│ • Dificulta acesso externo                         │
-│ • Para detalhes de implementação                   │
-│ • Exemplo: self.__nome, self.__calcular()          │
+│ • Dificulta acesso externo                          │
+│ • Para detalhes de implementação                    │
+│ • Exemplo: self.__nome, self.__calcular()           │
 └─────────────────────────────────────────────────────┘
 
 DICA: Em Python, a convenção é mais importante que

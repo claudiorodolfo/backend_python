@@ -35,19 +35,19 @@ class Pessoa:
     def __init__(self, nome, idade):
         self._nome = nome  # Atributo protegido
         self._idade = None
-        self.set_idade(idade)  # Usa setter para validar
+        self.setIdade(idade)  # Usa setter para validar
     
     # GETTERS
-    def get_nome(self):
+    def getNome(self):
         """Getter para nome."""
         return self._nome
     
-    def get_idade(self):
+    def getIdade(self):
         """Getter para idade."""
         return self._idade
     
     # SETTERS
-    def set_nome(self, nome):
+    def setNome(self, nome):
         """
         Setter para nome com validação.
         
@@ -61,7 +61,7 @@ class Pessoa:
             raise ValueError("Nome não pode ser vazio")
         self._nome = nome.strip()
     
-    def set_idade(self, idade):
+    def setIdade(self, idade):
         """
         Setter para idade com validação.
         
@@ -80,33 +80,33 @@ class Pessoa:
             raise ValueError("Idade não pode ser maior que 150")
         self._idade = idade
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações usando getters."""
-        print(f"{self.get_nome()} tem {self.get_idade()} anos")
+        print(f"{self.getNome()} tem {self.getIdade()} anos")
 
 
 # Uso
 print("\nCriando pessoa:")
 pessoa = Pessoa("Maria", 25)
-pessoa.exibir_info()
+pessoa.exibirInfo()
 
 print("\nUsando getters:")
-print(f"Nome: {pessoa.get_nome()}")
-print(f"Idade: {pessoa.get_idade()}")
+print(f"Nome: {pessoa.getNome()}")
+print(f"Idade: {pessoa.getIdade()}")
 
 print("\nUsando setters:")
-pessoa.set_nome("João Silva")
-pessoa.set_idade(30)
-pessoa.exibir_info()
+pessoa.setNome("João Silva")
+pessoa.setIdade(30)
+pessoa.exibirInfo()
 
 print("\nTestando validação:")
 try:
-    pessoa.set_idade(-5)
+    pessoa.setIdade(-5)
 except ValueError as e:
     print(f"Erro capturado: {e}")
 
 try:
-    pessoa.set_nome("")
+    pessoa.setNome("")
 except ValueError as e:
     print(f"Erro capturado: {e}")
 
@@ -130,22 +130,22 @@ class Produto:
         self._nome = nome
         self._preco = None
         self._desconto = 0
-        self.set_preco(preco)  # Usa setter para validar
+        self.setPreco(preco)  # Usa setter para validar
     
     # GETTERS
-    def get_nome(self):
+    def getNome(self):
         """Retorna o nome do produto."""
         return self._nome
     
-    def get_preco(self):
+    def getPreco(self):
         """Retorna o preço original."""
         return self._preco
     
-    def get_desconto(self):
+    def getDesconto(self):
         """Retorna o percentual de desconto."""
         return self._desconto
     
-    def get_preco_final(self):
+    def getPrecoFinal(self):
         """
         Calcula o preço final com desconto.
         
@@ -155,13 +155,13 @@ class Produto:
         return self._preco * (1 - self._desconto / 100)
     
     # SETTERS
-    def set_nome(self, nome):
+    def setNome(self, nome):
         """Define o nome do produto."""
         if not nome:
             raise ValueError("Nome não pode ser vazio")
         self._nome = nome
     
-    def set_preco(self, preco):
+    def setPreco(self, preco):
         """
         Define o preço do produto.
         
@@ -175,7 +175,7 @@ class Produto:
             raise ValueError("Preço não pode ser negativo")
         self._preco = preco
     
-    def set_desconto(self, desconto):
+    def setDesconto(self, desconto):
         """
         Define o desconto (percentual).
         
@@ -189,29 +189,29 @@ class Produto:
             raise ValueError("Desconto deve estar entre 0 e 100")
         self._desconto = desconto
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do produto."""
-        preco_final = self.get_preco_final()
+        precoFinal = self.getPrecoFinal()
         print(f"""
         Produto: {self._nome}
         Preço Original: R${self._preco:.2f}
         Desconto: {self._desconto}%
-        Preço Final: R${preco_final:.2f}
+        Preço Final: R${precoFinal:.2f}
         """)
 
 
 # Testando
 print("\nCriando produto:")
 produto = Produto("Notebook", 2500.00)
-produto.exibir_info()
+produto.exibirInfo()
 
 print("\nAplicando desconto:")
-produto.set_desconto(15)
-produto.exibir_info()
+produto.setDesconto(15)
+produto.exibirInfo()
 
 print("\nAlterando preço:")
-produto.set_preco(2000.00)
-produto.exibir_info()
+produto.setPreco(2000.00)
+produto.exibirInfo()
 
 
 # ==========================================
@@ -229,12 +229,12 @@ class ContaSegura:
     Demonstra uso de getters/setters para logging.
     """
     
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         self._titular = titular
-        self._saldo = saldo_inicial
-        self._historico_acessos = []
+        self._saldo = saldoInicial
+        self._historicoAcessos = []
     
-    def get_saldo(self):
+    def getSaldo(self):
         """
         Getter que registra o acesso.
         
@@ -242,12 +242,12 @@ class ContaSegura:
             Saldo atual
         """
         import datetime
-        self._historico_acessos.append(
+        self._historicoAcessos.append(
             f"{datetime.datetime.now()}: Consulta de saldo"
         )
         return self._saldo
     
-    def set_saldo(self, valor):
+    def setSaldo(self, valor):
         """
         Setter que registra a modificação.
         
@@ -261,37 +261,37 @@ class ContaSegura:
         if valor < 0:
             raise ValueError("Saldo não pode ser negativo")
         
-        valor_antigo = self._saldo
+        valorAntigo = self._saldo
         self._saldo = valor
         
-        self._historico_acessos.append(
-            f"{datetime.datetime.now()}: Saldo alterado de R${valor_antigo:.2f} para R${valor:.2f}"
+        self._historicoAcessos.append(
+            f"{datetime.datetime.now()}: Saldo alterado de R${valorAntigo:.2f} para R${valor:.2f}"
         )
     
-    def get_historico(self):
+    def getHistorico(self):
         """Retorna o histórico de acessos."""
-        return self._historico_acessos
+        return self._historicoAcessos
     
-    def exibir_extrato(self):
+    def exibirExtrato(self):
         """Exibe saldo e histórico."""
         print(f"\nTitular: {self._titular}")
-        print(f"Saldo: R${self.get_saldo():.2f}")
+        print(f"Saldo: R${self.getSaldo():.2f}")
         print("\nHistórico de acessos:")
-        for registro in self._historico_acessos:
+        for registro in self._historicoAcessos:
             print(f"  {registro}")
 
 
 # Testando
 print("\nCriando conta segura:")
 conta = ContaSegura("Ana", 1000)
-conta.exibir_extrato()
+conta.exibirExtrato()
 
 print("\nConsultando saldo várias vezes:")
-saldo1 = conta.get_saldo()
-saldo2 = conta.get_saldo()
-conta.set_saldo(1500)
+saldo1 = conta.getSaldo()
+saldo2 = conta.getSaldo()
+conta.setSaldo(1500)
 
-conta.exibir_extrato()
+conta.exibirExtrato()
 
 
 # ==========================================

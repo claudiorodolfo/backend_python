@@ -235,22 +235,22 @@ print("""
 CONVENÇÕES EM PYTHON:
 
 Classes:
-  ✓ PascalCase (primeira letra de cada palavra em maiúscula)
+  ✓ CamelCase (primeira letra de cada palavra em maiúscula)
   ✓ Substantivos
   ✓ Exemplos: Pessoa, ContaBancaria, ProdutoLoja
 
 Métodos e Atributos:
-  ✓ snake_case (todas minúsculas, palavras separadas por _)
-  ✓ Métodos: verbos (calcular_area, depositar_dinheiro)
+  ✓ camelCase (primeira letra da primeira palavra em minúscula)
+  ✓ Métodos: verbos (calcularArea, depositarDinheiro)
   ✓ Atributos: substantivos/adjetivos (nome, idade, ativo)
 
 Exemplos:
-  class ContaBancaria:        # Classe: PascalCase
+  class ContaBancaria:        # Classe: CamelCase
       def __init__(self):
-          self.titular = ""    # Atributo: snake_case
+          self.titular = ""    # Atributo: camelCase
           self.saldo = 0
     
-      def depositar_dinheiro(self):  # Método: snake_case, verbo
+      def depositarDinheiro(self):  # Método: camelCase, verbo
           pass
 """)
 
@@ -277,7 +277,7 @@ class Funcionario:
     
     Example:
         >>> func = Funcionario("João Silva", "Desenvolvedor", 5000.00)
-        >>> func.exibir_info()
+        >>> func.exibirInfo()
     """
     
     def __init__(self, nome, cargo, salario):
@@ -333,7 +333,7 @@ print("""
 ✓ SEMPRE documente com docstrings
 ✓ Use __init__ para inicializar atributos
 ✓ Agrupe métodos relacionados
-✓ Siga convenções de nomenclatura (PascalCase para classes)
+✓ Siga convenções de nomenclatura (CamelCase para classes)
 ✓ Mantenha classes focadas em uma única responsabilidade
 ✓ Use valores padrão quando apropriado
 """)

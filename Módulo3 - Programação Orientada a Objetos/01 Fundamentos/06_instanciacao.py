@@ -99,9 +99,9 @@ print("=" * 60)
 class ContaBancaria:
     """Representa uma conta bancária."""
     
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         self.titular = titular
-        self.saldo = saldo_inicial
+        self.saldo = saldoInicial
     
     def depositar(self, valor):
         self.saldo += valor
@@ -248,16 +248,16 @@ class Data:
 class Funcionario:
     """Representa um funcionário."""
     
-    def __init__(self, nome, data_contratacao):
+    def __init__(self, nome, dataContratacao):
         """
         Cria funcionário com data de contratação.
         
         Args:
             nome: Nome do funcionário
-            data_contratacao: Objeto Data
+            dataContratacao: Objeto Data
         """
         self.nome = nome
-        self.dataContratacao = data_contratacao
+        self.dataContratacao = dataContratacao
     
     def exibirInfo(self):
         print(f"{self.nome} contratado em {self.dataContratacao}")

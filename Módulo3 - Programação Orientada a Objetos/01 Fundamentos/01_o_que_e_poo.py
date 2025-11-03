@@ -9,12 +9,12 @@ com uma abordagem sem classes.
 # ABORDAGEM SEM POO (Procedural)
 # ==========================================
 
-def criarPessoa(nome, idade):
+def criar_pessoa(nome, idade):
     """Cria um dicionário representando uma pessoa."""
     return {"nome": nome, "idade": idade}
 
 
-def fazerAniversario(pessoa):
+def fazer_aniversario(pessoa):
     """Aumenta a idade da pessoa em 1."""
     pessoa["idade"] += 1
     return pessoa
@@ -30,9 +30,9 @@ print("=" * 50)
 print("ABORDAGEM PROCEDURAL")
 print("=" * 50)
 
-pessoa1 = criarPessoa("Maria", 25)
+pessoa1 = criar_pessoa("Maria", 25)
 apresentar(pessoa1)
-fazerAniversario(pessoa1)
+fazer_aniversario(pessoa1)
 apresentar(pessoa1)
 
 

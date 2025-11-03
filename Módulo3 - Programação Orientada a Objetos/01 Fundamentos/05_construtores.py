@@ -153,21 +153,21 @@ class ContaBancaria:
     Demonstra __init__ que pode fazer cálculos e validações.
     """
     
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         """
         Construtor com validação e inicialização.
         
         Args:
             titular: Nome do titular
-            saldo_inicial: Saldo inicial (padrão: 0)
+            saldoInicial: Saldo inicial (padrão: 0)
         """
         self.titular = titular
         # Validação: não permite saldo negativo
-        if saldo_inicial < 0:
+        if saldoInicial < 0:
             print("Aviso: Saldo inicial negativo convertido para 0")
             self.saldo = 0
         else:
-            self.saldo = saldo_inicial
+            self.saldo = saldoInicial
         
         self.numeroTransacoes = 0
         self.ativa = True
@@ -208,7 +208,7 @@ class Estudante:
     Demonstra inicialização de vários atributos.
     """
     
-    def __init__(self, nome, matricula, curso, ano_ingresso):
+    def __init__(self, nome, matricula, curso, anoIngresso):
         """
         Construtor com múltiplos atributos.
         
@@ -216,13 +216,13 @@ class Estudante:
             nome: Nome do estudante
             matricula: Número de matrícula
             curso: Curso que está fazendo
-            ano_ingresso: Ano de ingresso
+            anoIngresso: Ano de ingresso
         """
         # Atributos básicos
         self.nome = nome
         self.matricula = matricula
         self.curso = curso
-        self.anoIngresso = ano_ingresso
+        self.anoIngresso = anoIngresso
         
         # Atributos calculados/inicializados
         self.notas = []  # Lista de notas

@@ -117,14 +117,14 @@ Eles definem comportamentos ou ações que o objeto pode realizar.
 
 Diferença entre função e método:
   • Função: função_qualquer(pessoa, dados)
-  • Método: pessoa.fazer_algo(dados)
+  • Método: pessoa.fazerAlgo(dados)
 """)
 
 class ContaBancaria:
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         # ATRIBUTOS
         self.titular = titular
-        self.saldo = saldo_inicial
+        self.saldo = saldoInicial
     
     # MÉTODOS - comportamentos do objeto
     def depositar(self, valor):
@@ -167,7 +167,7 @@ print("=" * 60)
 print("""
 ┌─────────────────────────────────────────────────┐
 │ CLASSE                                          │
-│ ─────────────────────────────────────────────  │
+│ ─────────────────────────────────────────────── │
 │ • Molde/template                                │
 │ • Define atributos e métodos                    │
 │ • Exemplo: class Carro:                         │
@@ -177,21 +177,21 @@ print("""
                     ▼
 ┌─────────────────────────────────────────────────┐
 │ OBJETO (INSTÂNCIA)                              │
-│ ─────────────────────────────────────────────  │
-│ • Instância específica da classe               │
+│ ─────────────────────────────────────────────── │
+│ • Instância específica da classe                │
 │ • Exemplo: meu_carro = Carro()                  │
 └─────────────────────────────────────────────────┘
                     │
         ┌───────────┴───────────┐
         ▼                       ▼
-┌───────────────┐      ┌───────────────┐
-│ ATRIBUTOS     │      │ MÉTODOS       │
-│ ────────────  │      │ ────────────  │
-│ • Características │  │ • Comportamentos │
-│ • Dados       │      │ • Ações       │
-│ • self.nome   │      │ • def fazer() │
-│ • self.idade  │      │ • def calcular() │
-└───────────────┘      └───────────────┘
+┌───────────────────┐      ┌──────────────────┐
+│ ATRIBUTOS         │      │ MÉTODOS          │
+│ ────────────      │      │ ────────────     │
+│ • Características │      │ • Comportamentos │
+│ • Dados           │      │ • Ações          │
+│ • self.nome       │      │ • def fazer()    │
+│ • self.idade      │      │ • def calcular() │
+└───────────────────┘      └──────────────────┘
 """)
 
 

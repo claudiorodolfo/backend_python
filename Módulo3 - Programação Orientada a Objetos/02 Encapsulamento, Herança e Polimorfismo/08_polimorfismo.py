@@ -258,7 +258,7 @@ print("\n" + "=" * 60)
 print("EXEMPLO 4: Função Genérica com Polimorfismo")
 print("=" * 60)
 
-def processar_formas(lista_formas):
+def processarFormas(listaFormas):
     """
     Função genérica que funciona com qualquer forma.
     
@@ -268,20 +268,20 @@ def processar_formas(lista_formas):
     Args:
         lista_formas: Lista de objetos Forma
     """
-    total_area = 0
+    totalArea = 0
     print("\nProcessando formas:")
-    for forma in lista_formas:
+    for forma in listaFormas:
         area = forma.calcularArea()
-        total_area += area
+        totalArea += area
         print(f"  {forma.__class__.__name__}: {area:.2f}")
     
-    print(f"\nTotal de área: {total_area:.2f}")
-    return total_area
+    print(f"\nTotal de área: {totalArea:.2f}")
+    return totalArea
 
 
 # A função funciona com qualquer tipo de forma!
 print("\nProcessando formas diferentes:")
-formas_misturadas = [
+formasMisturadas = [
     Retangulo(4, 5),
     Circulo(3),
     Triangulo(6, 4),
@@ -289,7 +289,7 @@ formas_misturadas = [
     Circulo(5)
 ]
 
-processar_formas(formas_misturadas)
+processarFormas(formasMisturadas)
 
 
 # ==========================================

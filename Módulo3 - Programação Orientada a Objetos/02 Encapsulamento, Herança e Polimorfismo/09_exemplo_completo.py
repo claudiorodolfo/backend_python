@@ -20,7 +20,7 @@ class Funcionario:
     Demonstra encapsulamento com atributos protegidos.
     """
     
-    def __init__(self, nome, cpf, salario_base):
+    def __init__(self, nome, cpf, salarioBase):
         """
         Construtor da classe base.
         
@@ -31,7 +31,7 @@ class Funcionario:
         """
         self._nome = nome
         self._cpf = cpf
-        self._salarioBase = salario_base
+        self._salarioBase = salarioBase
     
     # PROPRIEDADES COM @property (Encapsulamento)
     @property
@@ -101,18 +101,18 @@ class Vendedor(Funcionario):
     Demonstra herança e sobrescrita de métodos.
     """
     
-    def __init__(self, nome, cpf, salario_base, vendas_mes):
+    def __init__(self, nome, cpf, salarioBase, vendasMes):
         """
         Construtor de Vendedor.
         
         Args:
             nome: Nome do vendedor
             cpf: CPF
-            salario_base: Salário base
-            vendas_mes: Total de vendas do mês
+            salarioBase: Salário base
+            vendasMes: Total de vendas do mês
         """
-        super().__init__(nome, cpf, salario_base)
-        self._vendas_mes = vendas_mes
+        super().__init__(nome, cpf, salarioBase)
+        self._vendasMes = vendasMes
     
     @property
     def vendasMes(self):
@@ -150,7 +150,7 @@ class Gerente(Funcionario):
     Demonstra herança e sobrescrita com bônus fixo.
     """
     
-    def __init__(self, nome, cpf, salario_base, bonus):
+    def __init__(self, nome, cpf, salarioBase, bonus):
         """
         Construtor de Gerente.
         
@@ -160,7 +160,7 @@ class Gerente(Funcionario):
             salario_base: Salário base
             bonus: Bônus fixo mensal
         """
-        super().__init__(nome, cpf, salario_base)
+        super().__init__(nome, cpf, salarioBase)
         self._bonus = bonus
         self._departamento = None
     
@@ -244,7 +244,7 @@ class Desenvolvedor(Funcionario):
 # FUNÇÃO POLIMÓRFICA
 # ==========================================
 
-def calcular_folha_pagamento(lista_funcionarios):
+def calcularFolhaPagamento(listaFuncionarios):
     """
     Calcula a folha de pagamento total.
     
@@ -262,8 +262,8 @@ def calcular_folha_pagamento(lista_funcionarios):
     print("FOLHA DE PAGAMENTO")
     print("=" * 60)
     
-    for func in lista_funcionarios:
-        pagamento = func.calcular_pagamento()
+    for func in listaFuncionarios:
+        pagamento = func.calcularPagamento()
         total += pagamento
         tipo = func.__class__.__name__
         print(f"  {func.nome} ({tipo}): R${pagamento:.2f}")
@@ -331,13 +331,13 @@ def main():
     
     print("\nInformações individuais:")
     for func in equipe:
-        func.exibir_info()  # Cada um calcula pagamento diferente
+        func.exibirInfo()  # Cada um calcula pagamento diferente
     
     # ==========================================
     # 4. FUNÇÃO POLIMÓRFICA
     # ==========================================
     
-    calcular_folha_pagamento(equipe)
+    calcularFolhaPagamento(equipe)
     
     # ==========================================
     # 5. MODIFICANDO VALORES (ENCAPSULAMENTO)
@@ -348,12 +348,12 @@ def main():
     print("=" * 60)
     
     print("\nAumentando vendas do vendedor:")
-    print(f"Vendas anteriores: R${vendedor1.vendas_mes:.2f}")
-    vendedor1.vendas_mes = 15000  # Usa setter (validação)
-    print(f"Novas vendas: R${vendedor1.vendas_mes:.2f}")
+    print(f"Vendas anteriores: R${vendedor1.vendasMes:.2f}")
+    vendedor1.vendasMes = 15000  # Usa setter (validação)
+    print(f"Novas vendas: R${vendedor1.vendasMes:.2f}")
     
     print("\nRecalculando pagamento:")
-    vendedor1.exibir_info()
+    vendedor1.exibirInfo()
     
     # ==========================================
     # RESUMO DOS CONCEITOS
@@ -368,7 +368,7 @@ def main():
     ✓ @property: Getters/setters elegantes
     ✓ HERANÇA: Vendedor, Gerente, Desenvolvedor herdam de Funcionario
     ✓ SOBRESCRITA: calcular_pagamento() e trabalhar() sobrescritos
-    ✓ POLIMORFISMO: calcular_folha_pagamento() funciona com qualquer funcionário
+    ✓ POLIMORFISMO: calcularFolhaPagamento() funciona com qualquer funcionário
     ✓ VALIDAÇÃO: Setters validam dados antes de atribuir
     ✓ CÓDIGO LIMPO: Separação de responsabilidades
     """)

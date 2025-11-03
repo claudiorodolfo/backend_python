@@ -157,11 +157,11 @@ class ContaBancaria:
     Demonstra proteção de dados críticos (saldo).
     """
     
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         self._titular = titular
         self._saldo = 0  # Inicializa como 0
-        if saldo_inicial > 0:
-            self.depositar(saldo_inicial)  # Usa método para validar
+        if saldoInicial > 0:
+            self.depositar(saldoInicial)  # Usa método para validar
     
     def getTitular(self):
         """Retorna o titular da conta."""

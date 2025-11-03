@@ -65,10 +65,10 @@ class Carro:
     Sem motor, não há carro.
     """
     
-    def __init__(self, modelo, potencia_motor):
+    def __init__(self, modelo, potenciaMotor):
         self.modelo = modelo
         # COMPOSIÇÃO: Motor é criado dentro de Carro
-        self.motor = Motor(potencia_motor)  # Motor não existe sem Carro
+        self.motor = Motor(potenciaMotor)  # Motor não existe sem Carro
     
     def ligar(self):
         """Liga o carro (que liga o motor)."""

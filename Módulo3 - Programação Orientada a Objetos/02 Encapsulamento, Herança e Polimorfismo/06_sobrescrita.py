@@ -298,40 +298,40 @@ class Produto:
 class ProdutoComImposto(Produto):
     """Produto que adiciona imposto ao preço."""
     
-    def __init__(self, nome, preco_base, percentual_imposto):
+    def __init__(self, nome, preco_base, percentualImposto):
         super().__init__(nome, preco_base)
-        self.percentual_imposto = percentual_imposto
+        self.percentualImposto = percentualImposto
     
     def calcularPreco(self):
         """Sobrescreve adicionando imposto."""
-        imposto = self._preco_base * (self.percentual_imposto / 100)
+        imposto = self._preco_base * (self.percentualImposto / 100)
         return self._preco_base + imposto
 
 
 class ProdutoPromocional(Produto):
     """Produto com desconto automático."""
     
-    def __init__(self, nome, preco_base, desconto_promocional):
+    def __init__(self, nome, preco_base, descontoPromocional):
         super().__init__(nome, preco_base)
-        if not (0 <= desconto_promocional <= 100):
+        if not (0 <= descontoPromocional <= 100):
             raise ValueError("Desconto promocional inválido")
-        self.desconto_promocional = desconto_promocional
+        self.descontoPromocional = descontoPromocional
     
     def calcularPreco(self):
         """Sobrescreve aplicando desconto promocional."""
-        return self._preco_base * (1 - self.desconto_promocional / 100)
+        return self._preco_base * (1 - self.descontoPromocional / 100)
 
 
 # Testando
 print("\nCriando produtos:")
-produto_normal = Produto("Livro", 50.00)
-produto_imposto = ProdutoComImposto("Eletrônico", 100.00, 20)  # 20% imposto
-produto_promo = ProdutoPromocional("Roupa", 80.00, 15)  # 15% desconto
+produtoNormal = Produto("Livro", 50.00)
+produtoImposto = ProdutoComImposto("Eletrônico", 100.00, 20)  # 20% imposto
+produtoPromo = ProdutoPromocional("Roupa", 80.00, 15)  # 15% desconto
 
 print("\nPreços calculados:")
-print(f"{produto_normal.nome}: R${produto_normal.calcularPreco():.2f}")
-print(f"{produto_imposto.nome}: R${produto_imposto.calcularPreco():.2f}")
-print(f"{produto_promo.nome}: R${produto_promo.calcularPreco():.2f}")
+print(f"{produtoNormal.nome}: R${produtoNormal.calcularPreco():.2f}")
+print(f"{produtoImposto.nome}: R${produtoImposto.calcularPreco():.2f}")
+print(f"{produtoPromo.nome}: R${produtoPromo.calcularPreco():.2f}")
 
 
 # ==========================================

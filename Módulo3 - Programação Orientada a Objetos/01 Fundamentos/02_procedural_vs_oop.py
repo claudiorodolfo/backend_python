@@ -106,17 +106,17 @@ class Carro:
         self.quilometragem += km
         print(f"{self.modelo} rodou {km} km. Total: {self.quilometragem} km")
     
-    def calcularIdade(self, ano_atual):
+    def calcularIdade(self, anoAtual):
         """
         Calcula a idade do carro.
         
         Args:
-            ano_atual: Ano atual para cálculo
+            anoAtual: Ano atual para cálculo
         
         Returns:
             Idade do carro em anos
         """
-        idade = ano_atual - self.ano
+        idade = anoAtual - self.ano
         print(f"{self.modelo} tem {idade} anos")
         return idade
     
@@ -152,7 +152,7 @@ print("""
 │ • Dados e funções separados                     │
 │ • Precisa passar dados como parâmetros          │
 │ • Dificulta organização em projetos grandes     │
-│ • Exemplo:                                       │
+│ • Exemplo:                                      │
 │   dirigir_carro(carro1, 100)                    │
 └─────────────────────────────────────────────────┘
 
@@ -162,7 +162,7 @@ print("""
 │ • Dados e métodos agrupados na classe           │
 │ • Dados já estão no objeto (self)               │
 │ • Melhor organização e escalabilidade           │
-│ • Exemplo:                                       │
+│ • Exemplo:                                      │
 │   carro1.dirigir(100)                           │
 └─────────────────────────────────────────────────┘
 """)

@@ -20,7 +20,7 @@ class Livro:
     Esta classe demonstra todos os conceitos fundamentais de POO.
     """
     
-    def __init__(self, titulo, autor, isbn, ano_publicacao):
+    def __init__(self, titulo, autor, isbn, anoPublicacao):
         """
         Construtor: inicializa um livro.
         
@@ -28,33 +28,33 @@ class Livro:
             titulo: Título do livro
             autor: Autor do livro
             isbn: Código ISBN único
-            ano_publicacao: Ano de publicação
+            anoPublicacao: Ano de publicação
         """
         # ATRIBUTOS: características do livro
         self.titulo = titulo
         self.autor = autor
         self.isbn = isbn
-        self.anoPublicacao = ano_publicacao
+        self.anoPublicacao = anoPublicacao
         
         # Atributos de estado
         self.emprestado = False
         self.leitorAtual = None
     
     # MÉTODOS: comportamentos do livro
-    def emprestar(self, nome_leitor):
+    def emprestar(self, nomeLeitor):
         """
         Empresta o livro para um leitor.
         
         Args:
-            nome_leitor: Nome de quem está pegando o livro
+            nomeLeitor: Nome de quem está pegando o livro
         
         Returns:
             True se emprestou com sucesso, False caso contrário
         """
         if not self.emprestado:
             self.emprestado = True
-            self.leitorAtual = nome_leitor
-            print(f"✓ '{self.titulo}' foi emprestado para {nome_leitor}")
+            self.leitorAtual = nomeLeitor
+            print(f"✓ '{self.titulo}' foi emprestado para {nomeLeitor}")
             return True
         else:
             print(f"✗ '{self.titulo}' já está emprestado para {self.leitorAtual}")
@@ -79,7 +79,7 @@ class Livro:
     def exibirInfo(self):
         """Exibe todas as informações do livro."""
         status = "Emprestado" if self.emprestado else "Disponível"
-        leitor_info = f" (para {self.leitorAtual})" if self.emprestado else ""
+        leitorInfo = f" (para {self.leitorAtual})" if self.emprestado else ""
         
         print(f"""
         {'=' * 50}
@@ -87,7 +87,7 @@ class Livro:
         Autor: {self.autor}
         ISBN: {self.isbn}
         Ano: {self.anoPublicacao}
-        Status: {status}{leitor_info}
+        Status: {status}{leitorInfo}
         {'=' * 50}
         """)
 

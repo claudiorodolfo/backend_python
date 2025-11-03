@@ -68,7 +68,7 @@ class Pessoa:
             raise ValueError("Idade deve estar entre 0 e 150")
         self._idade = valor
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações."""
         print(f"{self.nome} tem {self.idade} anos")  # Usa como atributo
 
@@ -76,7 +76,7 @@ class Pessoa:
 # Uso - sintaxe natural!
 print("\nCriando pessoa:")
 pessoa = Pessoa("Maria", 25)
-pessoa.exibir_info()
+pessoa.exibirInfo()
 
 print("\nUsando como atributo normal:")
 print(f"Nome: {pessoa.nome}")  # Chama o getter automaticamente
@@ -85,7 +85,7 @@ print(f"Idade: {pessoa.idade}")  # Chama o getter automaticamente
 print("\nModificando como atributo normal:")
 pessoa.nome = "João Silva"  # Chama o setter automaticamente
 pessoa.idade = 30  # Chama o setter automaticamente
-pessoa.exibir_info()
+pessoa.exibirInfo()
 
 print("\nTestando validação:")
 try:
@@ -109,10 +109,10 @@ class Produto:
         self._nome = nome
         self._preco = preco
         self._quantidade = quantidade
-        self._data_criacao = None
-        self._inicializar_data()
+        self._dataCriacao = None
+        self._inicializarData()
     
-    def _inicializar_data(self):
+    def _inicializarData(self):
         """Inicializa data de criação (simulação)."""
         import datetime
         self._data_criacao = datetime.datetime.now()
@@ -148,7 +148,7 @@ class Produto:
         self._quantidade = valor
     
     @property
-    def valor_total(self):
+    def valorTotal(self):
         """
         Propriedade calculada (read-only).
         
@@ -157,33 +157,33 @@ class Produto:
         return self._preco * self._quantidade
     
     @property
-    def data_criacao(self):
+    def dataCriacao(self):
         """
         Propriedade read-only.
         
         Sem setter, não pode ser modificada.
         """
-        return self._data_criacao
+        return self._dataCriacao
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do produto."""
         print(f"""
         Produto: {self.nome}
         Preço Unitário: R${self.preco:.2f}
         Quantidade: {self.quantidade}
-        Valor Total: R${self.valor_total:.2f}
-        Data Criação: {self.data_criacao}
+        Valor Total: R${self.valorTotal:.2f}
+        Data Criação: {self.dataCriacao}
         """)
 
 
 # Testando
 print("\nCriando produto:")
 produto = Produto("Notebook", 2500.00, 2)
-produto.exibir_info()
+produto.exibirInfo()
 
 print("\nModificando preço:")
 produto.preco = 2300.00
-produto.exibir_info()
+produto.exibirInfo()
 
 print("\nTentando modificar propriedade read-only:")
 try:
@@ -208,12 +208,12 @@ print("=" * 60)
 class ContaBancaria:
     """Conta bancária com validações complexas."""
     
-    def __init__(self, titular, saldo_inicial=0):
+    def __init__(self, titular, saldoInicial=0):
         self._titular = None
         self.titular = titular  # Usa setter
         self._saldo = 0
-        if saldo_inicial > 0:
-            self.depositar(saldo_inicial)
+        if saldoInicial > 0:
+            self.depositar(saldoInicial)
     
     @property
     def titular(self):
@@ -264,7 +264,7 @@ class ContaBancaria:
         self._saldo -= valor
         print(f"Saque de R${valor:.2f} realizado")
     
-    def exibir_extrato(self):
+    def exibirExtrato(self):
         """Exibe informações da conta."""
         print(f"""
         Titular: {self.titular}
@@ -275,7 +275,7 @@ class ContaBancaria:
 # Testando
 print("\nCriando conta:")
 conta = ContaBancaria("maria silva", 1000)
-conta.exibir_extrato()
+conta.exibirExtrato()
 
 print("\nTentando definir titular inválido:")
 try:
@@ -285,7 +285,7 @@ except ValueError as e:
 
 print("\nDefinindo titular válido:")
 conta.titular = "joão santos oliveira"
-conta.exibir_extrato()
+conta.exibirExtrato()
 
 print("\nNote: saldo não pode ser modificado diretamente")
 print(f"Saldo: {conta.saldo}")
@@ -316,7 +316,7 @@ class Aluno:
         """Retorna cópia da lista de notas (proteção)."""
         return self._notas.copy()
     
-    def adicionar_nota(self, nota):
+    def adicionarNota(self, nota):
         """Adiciona uma nota."""
         if not (0 <= nota <= 10):
             raise ValueError("Nota deve estar entre 0 e 10")
@@ -345,7 +345,7 @@ class Aluno:
         else:
             return "Reprovado"
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do aluno."""
         print(f"""
         Aluno: {self.nome}
@@ -358,15 +358,15 @@ class Aluno:
 # Testando
 print("\nCriando aluno:")
 aluno = Aluno("Maria")
-aluno.adicionar_nota(8.5)
-aluno.adicionar_nota(9.0)
-aluno.adicionar_nota(7.5)
+aluno.adicionarNota(8.5)
+aluno.adicionarNota(9.0)
+aluno.adicionarNota(7.5)
 
-aluno.exibir_info()
+aluno.exibirInfo()
 
 print("\nPropriedades calculadas se atualizam automaticamente:")
-aluno.adicionar_nota(6.0)
-aluno.exibir_info()
+aluno.adicionarNota(6.0)
+aluno.exibirInfo()
 
 
 # ==========================================
