@@ -123,7 +123,7 @@ class Carro:
         self.cor = cor
         self.quilometragem = quilometragem
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do carro."""
         print(f"{self.modelo} {self.ano} - Cor: {self.cor} - KM: {self.quilometragem}")
 
@@ -133,9 +133,9 @@ carro1 = Carro("Fusca", 1975)  # Usa valores padrão para cor e km
 carro2 = Carro("Gol", 2020, "Vermelho")  # Especifica cor
 carro3 = Carro("Civic", 2018, "Preto", 50000)  # Especifica tudo
 
-carro1.exibir_info()
-carro2.exibir_info()
-carro3.exibir_info()
+carro1.exibirInfo()
+carro2.exibirInfo()
+carro3.exibirInfo()
 
 
 # ==========================================
@@ -169,16 +169,16 @@ class ContaBancaria:
         else:
             self.saldo = saldo_inicial
         
-        self.numero_transacoes = 0
+        self.numeroTransacoes = 0
         self.ativa = True
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações da conta."""
         status = "Ativa" if self.ativa else "Inativa"
         print(f"""
         Titular: {self.titular}
         Saldo: R${self.saldo:.2f}
-        Transações: {self.numero_transacoes}
+        Transações: {self.numeroTransacoes}
         Status: {status}
         """)
 
@@ -188,9 +188,9 @@ conta1 = ContaBancaria("Ana", 1000)
 conta2 = ContaBancaria("Bruno", -500)  # Será convertido para 0
 conta3 = ContaBancaria("Carla")  # Usa valor padrão 0
 
-conta1.exibir_info()
-conta2.exibir_info()
-conta3.exibir_info()
+conta1.exibirInfo()
+conta2.exibirInfo()
+conta3.exibirInfo()
 
 
 # ==========================================
@@ -222,30 +222,30 @@ class Estudante:
         self.nome = nome
         self.matricula = matricula
         self.curso = curso
-        self.ano_ingresso = ano_ingresso
+        self.anoIngresso = ano_ingresso
         
         # Atributos calculados/inicializados
         self.notas = []  # Lista de notas
         self.ativo = True  # Status do estudante
     
-    def adicionar_nota(self, nota):
+    def adicionarNota(self, nota):
         """Adiciona uma nota."""
         self.notas.append(nota)
     
-    def calcular_media(self):
+    def calcularMedia(self):
         """Calcula a média das notas."""
         if len(self.notas) == 0:
             return 0
         return sum(self.notas) / len(self.notas)
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do estudante."""
-        media = self.calcular_media()
+        media = self.calcularMedia()
         print(f"""
         Nome: {self.nome}
         Matrícula: {self.matricula}
         Curso: {self.curso}
-        Ano de Ingresso: {self.ano_ingresso}
+        Ano de Ingresso: {self.anoIngresso}
         Notas: {self.notas}
         Média: {media:.2f}
         """)
@@ -253,10 +253,10 @@ class Estudante:
 
 # Testando
 estudante = Estudante("Maria", "2024001", "Ciência da Computação", 2024)
-estudante.adicionar_nota(8.5)
-estudante.adicionar_nota(9.0)
-estudante.adicionar_nota(7.5)
-estudante.exibir_info()
+estudante.adicionarNota(8.5)
+estudante.adicionarNota(9.0)
+estudante.adicionarNota(7.5)
+estudante.exibirInfo()
 
 
 # ==========================================

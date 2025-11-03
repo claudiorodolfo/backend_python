@@ -114,7 +114,7 @@ class ContaBancaria:
         else:
             print(f"{self.titular}: Saldo insuficiente!")
     
-    def exibir_saldo(self):
+    def exibirSaldo(self):
         print(f"{self.titular}: Saldo atual = R${self.saldo:.2f}")
 
 
@@ -130,9 +130,9 @@ conta2.sacar(100)
 conta3.depositar(300)
 
 print("\nSaldo final de cada conta:")
-conta1.exibir_saldo()
-conta2.exibir_saldo()
-conta3.exibir_saldo()
+conta1.exibirSaldo()
+conta2.exibirSaldo()
+conta3.exibirSaldo()
 
 
 # ==========================================
@@ -150,7 +150,7 @@ class Aluno:
         self.nome = nome
         self.nota = nota
     
-    def exibir_info(self):
+    def exibirInfo(self):
         status = "Aprovado" if self.nota >= 7 else "Reprovado"
         print(f"{self.nome}: {self.nota:.1f} - {status}")
 
@@ -173,7 +173,7 @@ for nome, nota in alunos_dados:
 
 print("\nLista de alunos:")
 for aluno in alunos:
-    aluno.exibir_info()
+    aluno.exibirInfo()
 
 
 # ==========================================
@@ -210,7 +210,7 @@ class PessoaValidada:
         self.idade = idade
         print(f"Pessoa {self.nome} criada com sucesso!")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         print(f"{self.nome} tem {self.idade} anos")
 
 
@@ -257,10 +257,10 @@ class Funcionario:
             data_contratacao: Objeto Data
         """
         self.nome = nome
-        self.data_contratacao = data_contratacao
+        self.dataContratacao = data_contratacao
     
-    def exibir_info(self):
-        print(f"{self.nome} contratado em {self.data_contratacao}")
+    def exibirInfo(self):
+        print(f"{self.nome} contratado em {self.dataContratacao}")
 
 
 # Criando objeto Data
@@ -268,11 +268,11 @@ data1 = Data(15, 3, 2024)
 
 # Passando objeto como parâmetro
 func1 = Funcionario("Ana", data1)
-func1.exibir_info()
+func1.exibirInfo()
 
 # Ou criando diretamente
 func2 = Funcionario("Bruno", Data(20, 5, 2023))
-func2.exibir_info()
+func2.exibirInfo()
 
 
 # ==========================================

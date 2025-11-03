@@ -53,23 +53,23 @@ class PessoaComEncapsulamento:
     def __init__(self, nome, idade):
         self._nome = nome  # Protegido (convenção _)
         self._idade = None  # Vamos usar setter para definir
-        self.set_idade(idade)  # Usa o método setter para validar
+        self.setIdade(idade)  # Usa o método setter para validar
     
-    def get_nome(self):
+    def getNome(self):
         """Getter: retorna o nome."""
         return self._nome
     
-    def set_nome(self, nome):
+    def setNome(self, nome):
         """Setter: define o nome com validação."""
         if not nome or len(nome.strip()) == 0:
             raise ValueError("Nome não pode ser vazio")
         self._nome = nome
     
-    def get_idade(self):
+    def getIdade(self):
         """Getter: retorna a idade."""
         return self._idade
     
-    def set_idade(self, idade):
+    def setIdade(self, idade):
         """
         Setter: define a idade com validação.
         
@@ -87,7 +87,7 @@ class PessoaComEncapsulamento:
             raise ValueError("Idade não pode ser maior que 150")
         self._idade = idade
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações da pessoa."""
         print(f"{self._nome} tem {self._idade} anos")
 
@@ -95,24 +95,24 @@ class PessoaComEncapsulamento:
 # Uso com encapsulamento
 print("\nCriando pessoa com encapsulamento:")
 pessoa2 = PessoaComEncapsulamento("João", 30)
-pessoa2.exibir_info()
+pessoa2.exibirInfo()
 
 # ✅ Tentativa de atribuir idade inválida é bloqueada
 print("\nTentando atribuir idade inválida:")
 try:
-    pessoa2.set_idade(-5)  # Isso vai gerar erro!
+    pessoa2.setIdade(-5)  # Isso vai gerar erro!
 except ValueError as e:
     print(f"Erro capturado: {e}")
 
 try:
-    pessoa2.set_idade(200)  # Isso também vai gerar erro!
+    pessoa2.setIdade(200)  # Isso também vai gerar erro!
 except ValueError as e:
     print(f"Erro capturado: {e}")
 
 # ✅ Valores válidos funcionam
 print("\nAtribuindo valores válidos:")
-pessoa2.set_idade(35)
-pessoa2.exibir_info()
+pessoa2.setIdade(35)
+pessoa2.exibirInfo()
 
 
 # ==========================================
@@ -163,11 +163,11 @@ class ContaBancaria:
         if saldo_inicial > 0:
             self.depositar(saldo_inicial)  # Usa método para validar
     
-    def get_titular(self):
+    def getTitular(self):
         """Retorna o titular da conta."""
         return self._titular
     
-    def get_saldo(self):
+    def getSaldo(self):
         """Retorna o saldo atual."""
         return self._saldo
     
@@ -204,7 +204,7 @@ class ContaBancaria:
         self._saldo -= valor
         print(f"Saque de R${valor:.2f} realizado. Saldo: R${self._saldo:.2f}")
     
-    def exibir_extrato(self):
+    def exibirExtrato(self):
         """Exibe informações da conta."""
         print(f"""
         Titular: {self._titular}
@@ -236,7 +236,7 @@ try:
 except ValueError as e:
     print(f"Erro: {e}")
 
-conta.exibir_extrato()
+conta.exibirExtrato()
 
 
 # ==========================================

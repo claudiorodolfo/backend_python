@@ -9,12 +9,12 @@ com uma abordagem sem classes.
 # ABORDAGEM SEM POO (Procedural)
 # ==========================================
 
-def criar_pessoa(nome, idade):
+def criarPessoa(nome, idade):
     """Cria um dicionário representando uma pessoa."""
     return {"nome": nome, "idade": idade}
 
 
-def fazer_aniversario(pessoa):
+def fazerAniversario(pessoa):
     """Aumenta a idade da pessoa em 1."""
     pessoa["idade"] += 1
     return pessoa
@@ -30,9 +30,9 @@ print("=" * 50)
 print("ABORDAGEM PROCEDURAL")
 print("=" * 50)
 
-pessoa1 = criar_pessoa("Maria", 25)
+pessoa1 = criarPessoa("Maria", 25)
 apresentar(pessoa1)
-fazer_aniversario(pessoa1)
+fazerAniversario(pessoa1)
 apresentar(pessoa1)
 
 
@@ -58,7 +58,7 @@ class Pessoa:
         self.nome = nome    # Atributo: característica do objeto
         self.idade = idade  # Atributo: característica do objeto
     
-    def fazer_aniversario(self):
+    def fazerAniversario(self):
         """
         Método: comportamento do objeto.
         
@@ -81,7 +81,7 @@ print("=" * 50)
 # Criando um objeto (instância) da classe Pessoa
 pessoa2 = Pessoa("João", 30)
 pessoa2.apresentar()
-pessoa2.fazer_aniversario()
+pessoa2.fazerAniversario()
 
 
 # ==========================================
@@ -130,6 +130,6 @@ aluno2.apresentar()
 aluno3.apresentar()
 
 print("\nCada objeto é independente:")
-aluno1.fazer_aniversario()  # Só afeta aluno1
+aluno1.fazerAniversario()  # Só afeta aluno1
 aluno2.apresentar()         # aluno2 não mudou
 

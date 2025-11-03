@@ -98,7 +98,7 @@ class Funcionario:
         """Método que será estendido."""
         print(f"{self.nome} está trabalhando")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Método que será estendido."""
         print(f"Nome: {self.nome}")
         print(f"Salário: R${self.salario:.2f}")
@@ -116,9 +116,9 @@ class Gerente(Funcionario):
         super().trabalhar()  # Chama implementação do pai
         print(f"{self.nome} está gerenciando o departamento {self.departamento}")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Estende o método exibir_info() usando super()."""
-        super().exibir_info()  # Chama implementação do pai
+        super().exibirInfo()  # Chama implementação do pai
         print(f"Departamento: {self.departamento}")
         print(f"Cargo: Gerente")
 
@@ -128,13 +128,13 @@ print("\nCriando funcionário:")
 funcionario = Funcionario("Ana", 3000)
 funcionario.trabalhar()
 print()
-funcionario.exibir_info()
+funcionario.exibirInfo()
 
 print("\nCriando gerente:")
 gerente = Gerente("Bruno", 5000, "TI")
 gerente.trabalhar()
 print()
-gerente.exibir_info()
+gerente.exibirInfo()
 
 
 # ==========================================
@@ -176,11 +176,11 @@ class Carro(Veiculo):
     def __init__(self, marca, modelo, combustivel):
         super().__init__(marca, modelo)
         self.combustivel = combustivel
-        self.nivel_combustivel = 100
+        self.nivelCombustivel = 100
     
     def ligar(self):
         """Estende ligar() com verificação de combustível."""
-        if self.nivel_combustivel <= 0:
+        if self.nivelCombustivel <= 0:
             print(f"{self.marca} {self.modelo} sem combustível!")
             return
         
@@ -193,8 +193,8 @@ class Carro(Veiculo):
             print("Desligue o carro antes de abastecer!")
             return
         
-        self.nivel_combustivel = min(100, self.nivel_combustivel + litros)
-        print(f"Abastecido. Nível: {self.nivel_combustivel}%")
+        self.nivelCombustivel = min(100, self.nivelCombustivel + litros)
+        print(f"Abastecido. Nível: {self.nivelCombustivel}%")
 
 
 # Testando
@@ -278,14 +278,14 @@ class ClasseA:
 
 
 class ClasseB(ClasseA):
-    def metodo_com_super(self):
+    def metodoComSuper(self):
         """Usa super() - mais flexível."""
         super().metodo()
         print("Extensão em B")
 
 
 class ClasseC(ClasseA):
-    def metodo_com_chamada_direta(self):
+    def metodoComChamadaDireta(self):
         """Chama diretamente - menos flexível."""
         ClasseA.metodo(self)
         print("Extensão em C")
@@ -294,11 +294,11 @@ class ClasseC(ClasseA):
 # Ambos funcionam, mas super() é preferível
 print("\nUsando super():")
 obj_b = ClasseB()
-obj_b.metodo_com_super()
+obj_b.metodoComSuper()
 
 print("\nUsando chamada direta:")
 obj_c = ClasseC()
-obj_c.metodo_com_chamada_direta()
+obj_c.metodoComChamadaDireta()
 
 print("""
 VANTAGENS DO super():

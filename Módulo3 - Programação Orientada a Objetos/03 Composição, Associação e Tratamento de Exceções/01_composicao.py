@@ -80,7 +80,7 @@ class Carro:
         print(f"{self.modelo}:")
         self.motor.desligar()
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do carro."""
         print(f"""
         Modelo: {self.modelo}
@@ -92,7 +92,7 @@ class Carro:
 # Testando composição
 print("\nCriando carro (com motor):")
 carro = Carro("Fusca", 40)
-carro.exibir_info()
+carro.exibirInfo()
 
 print("\nLigando carro (liga o motor):")
 carro.ligar()
@@ -157,14 +157,14 @@ class Computador:
         self.memoria = Memoria(capacidade_memoria)
         self.disco = Disco(capacidade_disco)
     
-    def executar_tarefa(self):
+    def executarTarefa(self):
         """Usa os componentes para executar tarefa."""
         print(f"\n{self.modelo} executando tarefa:")
         self.cpu.processar()
         self.memoria.armazenar("dados")
         self.disco.salvar("arquivo.txt")
     
-    def exibir_especificacoes(self):
+    def exibirEspecificacoes(self):
         """Exibe especificações do computador."""
         print(f"""
         {'=' * 50}
@@ -179,8 +179,8 @@ class Computador:
 # Testando
 print("\nCriando computador (com componentes):")
 pc = Computador("Intel i7", 3.5, 16, 500)
-pc.exibir_especificacoes()
-pc.executar_tarefa()
+pc.exibirEspecificacoes()
+pc.executarTarefa()
 
 
 # ==========================================
@@ -227,7 +227,7 @@ class Pessoa:
         self.endereco = Endereco(rua, numero, cidade)
         self.contato = Contato(telefone, email)
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações da pessoa."""
         print(f"""
         {'=' * 50}
@@ -248,7 +248,7 @@ pessoa = Pessoa(
     "(11) 99999-9999",
     "maria@email.com"
 )
-pessoa.exibir_info()
+pessoa.exibirInfo()
 
 
 # ==========================================
@@ -283,19 +283,19 @@ class Biblioteca:
         # COMPOSIÇÃO: Lista de componentes
         self.livros = []
     
-    def adicionar_livro(self, titulo, autor):
+    def adicionarLivro(self, titulo, autor):
         """Adiciona livro à biblioteca (cria o componente)."""
         livro = Livro(titulo, autor)  # Criado dentro da biblioteca
         self.livros.append(livro)
         print(f"✓ '{titulo}' adicionado à biblioteca")
     
-    def listar_livros(self):
+    def listarLivros(self):
         """Lista todos os livros."""
         print(f"\nLivros na {self.nome}:")
         for i, livro in enumerate(self.livros, 1):
             print(f"  {i}. {livro}")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações da biblioteca."""
         print(f"""
         {'=' * 50}
@@ -310,12 +310,12 @@ print("\nCriando biblioteca:")
 biblioteca = Biblioteca("Biblioteca Central")
 
 print("\nAdicionando livros (composição):")
-biblioteca.adicionar_livro("1984", "George Orwell")
-biblioteca.adicionar_livro("Dom Casmurro", "Machado de Assis")
-biblioteca.adicionar_livro("O Senhor dos Anéis", "J.R.R. Tolkien")
+biblioteca.adicionarLivro("1984", "George Orwell")
+biblioteca.adicionarLivro("Dom Casmurro", "Machado de Assis")
+biblioteca.adicionarLivro("O Senhor dos Anéis", "J.R.R. Tolkien")
 
-biblioteca.exibir_info()
-biblioteca.listar_livros()
+biblioteca.exibirInfo()
+biblioteca.listarLivros()
 
 
 # ==========================================

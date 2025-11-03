@@ -71,7 +71,7 @@ class Pessoa:
         self.idade = idade
         print(f"✓ Pessoa {self.nome} criada com sucesso")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações da pessoa."""
         print(f"{self.nome} ({self.idade} anos) - {self.email}")
 
@@ -166,7 +166,7 @@ class Produto:
         
         self._estoque = valor
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do produto."""
         print(f"{self.nome} - R${self.preco:.2f} - Estoque: {self.estoque}")
 
@@ -240,7 +240,7 @@ class Cliente:
         # Formata CPF (XXX.XXX.XXX-XX)
         self._cpf = f"{cpf_limpo[:3]}.{cpf_limpo[3:6]}.{cpf_limpo[6:9]}-{cpf_limpo[9:]}"
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do cliente."""
         print(f"{self.nome} - CPF: {self.cpf}")
 
@@ -293,9 +293,9 @@ class Usuario:
     def __init__(self, nome, senha):
         self.nome = nome
         self._senha = None
-        self.definir_senha(senha)
+        self.definirSenha(senha)
     
-    def definir_senha(self, senha):
+    def definirSenha(self, senha):
         """
         Define senha com múltiplas validações.
         
@@ -337,7 +337,7 @@ class Usuario:
         self._senha = senha
         print(f"✓ Senha definida para {self.nome}")
     
-    def verificar_senha(self, senha):
+    def verificarSenha(self, senha):
         """Verifica se a senha está correta."""
         return senha == self._senha
 

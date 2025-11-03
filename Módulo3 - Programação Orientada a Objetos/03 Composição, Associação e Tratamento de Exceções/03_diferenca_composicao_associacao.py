@@ -78,7 +78,7 @@ class Biblioteca:
         self.visitantes = []  # ASSOCIAÇÃO: lista de pessoas
         print(f"Biblioteca {nome} criada (independente)")
     
-    def registrar_visitante(self, pessoa):
+    def registrarVisitante(self, pessoa):
         """Associação: Biblioteca referencia Pessoa."""
         if pessoa not in self.visitantes:
             self.visitantes.append(pessoa)
@@ -99,8 +99,8 @@ print("\n✅ Biblioteca existe sem pessoas:")
 print(f"   {biblioteca.nome} existe")
 
 print("\nAssociação: Registrando pessoas na biblioteca")
-biblioteca.registrar_visitante(pessoa1)
-biblioteca.registrar_visitante(pessoa2)
+biblioteca.registrarVisitante(pessoa1)
+biblioteca.registrarVisitante(pessoa2)
 
 
 # ==========================================
@@ -169,13 +169,13 @@ class PessoaComEndereco:
         # COMPOSIÇÃO: Endereço criado dentro
         self.endereco = Endereco(rua, cidade)
     
-    def exibir_info(self):
+    def exibirInfo(self):
         print(f"{self.nome} mora em {self.endereco.rua}, {self.endereco.cidade}")
 
 
 print("\nCriando pessoa com endereço (composição):")
 pessoa_end = PessoaComEndereco("Ana", "Rua A", "São Paulo")
-pessoa_end.exibir_info()
+pessoa_end.exibirInfo()
 
 
 # Pergunta: Funcionário e Empresa - Composição ou Associação?
@@ -212,23 +212,23 @@ class Funcionario:
         self.cargo = cargo
         self.empresa = None  # Pode ser None (associação)
     
-    def contratar_empresa(self, empresa):
+    def contratarEmpresa(self, empresa):
         """Associação: Funcionário referencia Empresa."""
         self.empresa = empresa
         empresa.funcionarios.append(self)
     
-    def exibir_info(self):
+    def exibirInfo(self):
         emp_nome = self.empresa.nome if self.empresa else "Desempregado"
         print(f"{self.nome} ({self.cargo}) - Empresa: {emp_nome}")
 
 
 print("\nCriando funcionário sem empresa (associação):")
 func = Funcionario("Bruno", "Desenvolvedor")
-func.exibir_info()
+func.exibirInfo()
 
 empresa = Empresa("Tech Corp")
-func.contratar_empresa(empresa)
-func.exibir_info()
+func.contratarEmpresa(empresa)
+func.exibirInfo()
 
 
 # ==========================================

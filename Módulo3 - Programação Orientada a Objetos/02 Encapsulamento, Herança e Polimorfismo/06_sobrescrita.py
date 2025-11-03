@@ -37,7 +37,7 @@ print("=" * 60)
 class Animal:
     """Classe pai."""
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Método que será sobrescrito."""
         print("Algum som genérico")
     
@@ -49,7 +49,7 @@ class Animal:
 class Cachorro(Animal):
     """Subclasse que sobrescreve fazer_som()."""
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Sobrescreve o método da classe pai."""
         print("Au au!")
 
@@ -57,7 +57,7 @@ class Cachorro(Animal):
 class Gato(Animal):
     """Outra subclasse que sobrescreve fazer_som()."""
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Sobrescreve o método da classe pai."""
         print("Miau!")
 
@@ -65,7 +65,7 @@ class Gato(Animal):
 class Pato(Animal):
     """Subclasse que mantém comportamento padrão para mover()."""
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Sobrescreve fazer_som()."""
         print("Quack quack!")
     
@@ -81,11 +81,11 @@ cachorro = Cachorro()
 gato = Gato()
 pato = Pato()
 
-print("\nMétodo fazer_som() - cada um tem implementação própria:")
-animal.fazer_som()      # Implementação da classe pai
-cachorro.fazer_som()    # Sobrescrito em Cachorro
-gato.fazer_som()        # Sobrescrito em Gato
-pato.fazer_som()        # Sobrescrito em Pato
+print("\nMétodo fazerSom() - cada um tem implementação própria:")
+animal.fazerSom()      # Implementação da classe pai
+cachorro.fazerSom()    # Sobrescrito em Cachorro
+gato.fazerSom()        # Sobrescrito em Gato
+pato.fazerSom()        # Sobrescrito em Pato
 
 print("\nMétodo mover() - alguns sobrescrevem, outros não:")
 animal.mover()          # Implementação da classe pai
@@ -105,18 +105,18 @@ print("=" * 60)
 class Forma:
     """Classe base para formas geométricas."""
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Método genérico que será sobrescrito."""
         return 0
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Método genérico que será sobrescrito."""
         return 0
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Método que usa métodos sobrescritos."""
-        area = self.calcular_area()
-        perimetro = self.calcular_perimetro()
+        area = self.calcularArea()
+        perimetro = self.calcularPerimetro()
         print(f"Área: {area:.2f}, Perímetro: {perimetro:.2f}")
 
 
@@ -127,11 +127,11 @@ class Retangulo(Forma):
         self.largura = largura
         self.altura = altura
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Sobrescreve com cálculo específico de retângulo."""
         return self.largura * self.altura
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Sobrescreve com cálculo específico de retângulo."""
         return 2 * (self.largura + self.altura)
 
@@ -142,11 +142,11 @@ class Circulo(Forma):
     def __init__(self, raio):
         self.raio = raio
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Sobrescreve com cálculo específico de círculo."""
         return 3.14159 * self.raio ** 2
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Sobrescreve com cálculo específico de círculo."""
         return 2 * 3.14159 * self.raio
 
@@ -159,7 +159,7 @@ class Triangulo(Forma):
         self.lado2 = lado2
         self.lado3 = lado3
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Sobrescreve com cálculo específico de triângulo."""
         return self.lado1 + self.lado2 + self.lado3
     
@@ -175,13 +175,13 @@ triangulo = Triangulo(3, 4, 5)
 
 print("\nInformações das formas:")
 print("Retângulo:")
-retangulo.exibir_info()  # Usa métodos sobrescritos
+retangulo.exibirInfo()  # Usa métodos sobrescritos
 
 print("\nCírculo:")
-circulo.exibir_info()    # Usa métodos sobrescritos
+circulo.exibirInfo()    # Usa métodos sobrescritos
 
 print("\nTriângulo:")
-triangulo.exibir_info()  # Perímetro sobrescrito, área não
+triangulo.exibirInfo()  # Perímetro sobrescrito, área não
 
 
 # ==========================================
@@ -199,7 +199,7 @@ class Funcionario:
         self.nome = nome
         self.salario_base = salario_base
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Método base que será sobrescrito."""
         return self.salario_base
     
@@ -207,9 +207,9 @@ class Funcionario:
         """Método genérico."""
         print(f"{self.nome} está trabalhando")
     
-    def exibir_info(self):
-        """Método que usa calcular_salario() (que pode ser sobrescrito)."""
-        salario = self.calcular_salario()
+    def exibirInfo(self):
+        """Método que usa calcularSalario() (que pode ser sobrescrito)."""
+        salario = self.calcularSalario()
         print(f"{self.nome} - Salário: R${salario:.2f}")
 
 
@@ -220,7 +220,7 @@ class Vendedor(Funcionario):
         super().__init__(nome, salario_base)
         self.vendas_mes = vendas_mes
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Sobrescreve adicionando comissão."""
         comissao = self.vendas_mes * 0.1  # 10% das vendas
         return self.salario_base + comissao
@@ -233,7 +233,7 @@ class Gerente(Funcionario):
         super().__init__(nome, salario_base)
         self.bonus = bonus
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Sobrescreve adicionando bônus."""
         return self.salario_base + self.bonus
 
@@ -259,10 +259,10 @@ gerente = Gerente("Carla", 5000, 1000)    # R$1000 de bônus
 estagiario = Estagiario("Daniel", 1500)
 
 print("\nSalários calculados:")
-funcionario.exibir_info()   # Salário base
-vendedor.exibir_info()      # Salário + comissão (sobrescrito)
-gerente.exibir_info()       # Salário + bônus (sobrescrito)
-estagiario.exibir_info()    # Salário base (não sobrescrito)
+funcionario.exibirInfo()   # Salário base
+vendedor.exibirInfo()      # Salário + comissão (sobrescrito)
+gerente.exibirInfo()       # Salário + bônus (sobrescrito)
+estagiario.exibirInfo()    # Salário base (não sobrescrito)
 
 print("\nComportamentos:")
 vendedor.trabalhar()        # Método herdado
@@ -284,11 +284,11 @@ class Produto:
         self.nome = nome
         self._preco_base = preco_base
     
-    def calcular_preco(self):
+    def calcularPreco(self):
         """Método que será sobrescrito."""
         return self._preco_base
     
-    def aplicar_desconto(self, percentual):
+    def aplicarDesconto(self, percentual):
         """Método genérico."""
         if not (0 <= percentual <= 100):
             raise ValueError("Desconto deve estar entre 0 e 100")
@@ -302,7 +302,7 @@ class ProdutoComImposto(Produto):
         super().__init__(nome, preco_base)
         self.percentual_imposto = percentual_imposto
     
-    def calcular_preco(self):
+    def calcularPreco(self):
         """Sobrescreve adicionando imposto."""
         imposto = self._preco_base * (self.percentual_imposto / 100)
         return self._preco_base + imposto
@@ -317,7 +317,7 @@ class ProdutoPromocional(Produto):
             raise ValueError("Desconto promocional inválido")
         self.desconto_promocional = desconto_promocional
     
-    def calcular_preco(self):
+    def calcularPreco(self):
         """Sobrescreve aplicando desconto promocional."""
         return self._preco_base * (1 - self.desconto_promocional / 100)
 
@@ -329,9 +329,9 @@ produto_imposto = ProdutoComImposto("Eletrônico", 100.00, 20)  # 20% imposto
 produto_promo = ProdutoPromocional("Roupa", 80.00, 15)  # 15% desconto
 
 print("\nPreços calculados:")
-print(f"{produto_normal.nome}: R${produto_normal.calcular_preco():.2f}")
-print(f"{produto_imposto.nome}: R${produto_imposto.calcular_preco():.2f}")
-print(f"{produto_promo.nome}: R${produto_promo.calcular_preco():.2f}")
+print(f"{produto_normal.nome}: R${produto_normal.calcularPreco():.2f}")
+print(f"{produto_imposto.nome}: R${produto_imposto.calcularPreco():.2f}")
+print(f"{produto_promo.nome}: R${produto_promo.calcularPreco():.2f}")
 
 
 # ==========================================

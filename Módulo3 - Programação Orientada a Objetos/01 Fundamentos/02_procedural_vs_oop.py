@@ -106,7 +106,7 @@ class Carro:
         self.quilometragem += km
         print(f"{self.modelo} rodou {km} km. Total: {self.quilometragem} km")
     
-    def calcular_idade(self, ano_atual):
+    def calcularIdade(self, ano_atual):
         """
         Calcula a idade do carro.
         
@@ -120,7 +120,7 @@ class Carro:
         print(f"{self.modelo} tem {idade} anos")
         return idade
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe todas as informações do carro."""
         print(f"""
     Modelo: {self.modelo}
@@ -133,8 +133,8 @@ class Carro:
 # Uso da abordagem orientada a objetos
 carro1_oop = Carro("Fusca", 1975, "Azul")
 carro1_oop.dirigir(100)
-carro1_oop.calcular_idade(2024)
-carro1_oop.exibir_info()
+carro1_oop.calcularIdade(2024)
+carro1_oop.exibirInfo()
 
 
 # ==========================================
@@ -181,16 +181,16 @@ carro2 = Carro("Gol", 2020, "Vermelho")
 carro3 = Carro("Civic", 2018, "Preto", 50000)
 
 print("\nFrota de carros:")
-carro2.exibir_info()
-carro3.exibir_info()
+carro2.exibirInfo()
+carro3.exibirInfo()
 
 print("\nCada carro pode realizar ações independentes:")
 carro2.dirigir(50)
 carro3.dirigir(200)
 
 print("\nEstado atual:")
-carro2.exibir_info()
-carro3.exibir_info()
+carro2.exibirInfo()
+carro3.exibirInfo()
 
 
 # ==========================================

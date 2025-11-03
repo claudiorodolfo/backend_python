@@ -41,7 +41,7 @@ class Pessoa:
     def __init__(self, nome):
         self.nome = nome
     
-    def visitar_biblioteca(self, biblioteca):
+    def visitarBiblioteca(self, biblioteca):
         """Associação: Pessoa usa Biblioteca."""
         print(f"{self.nome} está visitando {biblioteca.nome}")
 
@@ -54,13 +54,13 @@ class Biblioteca:
         # ASSOCIAÇÃO: Lista de pessoas que visitam
         self.visitantes = []
     
-    def registrar_visitante(self, pessoa):
+    def registrarVisitante(self, pessoa):
         """Associação: Biblioteca referencia Pessoa."""
         if pessoa not in self.visitantes:
             self.visitantes.append(pessoa)
             print(f"✓ {pessoa.nome} registrado(a) como visitante")
     
-    def listar_visitantes(self):
+    def listarVisitantes(self):
         """Lista visitantes."""
         print(f"\nVisitantes da {self.nome}:")
         for visitante in self.visitantes:
@@ -74,10 +74,10 @@ pessoa2 = Pessoa("João")
 biblioteca = Biblioteca("Biblioteca Central")
 
 print("\nAssociação: Registrando visitantes")
-biblioteca.registrar_visitante(pessoa1)
-biblioteca.registrar_visitante(pessoa2)
+biblioteca.registrarVisitante(pessoa1)
+biblioteca.registrarVisitante(pessoa2)
 
-biblioteca.listar_visitantes()
+biblioteca.listarVisitantes()
 
 print("\nPessoas podem existir sem biblioteca:")
 print(f"{pessoa1.nome} existe independentemente")
@@ -100,11 +100,11 @@ class Aluno:
         self.matricula = matricula
         self.professor = None  # Associação: um aluno tem um professor
     
-    def definir_professor(self, professor):
+    def definirProfessor(self, professor):
         """Associação: Aluno referencia Professor."""
         self.professor = professor
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do aluno."""
         prof_nome = self.professor.nome if self.professor else "Nenhum"
         print(f"{self.nome} (Mat: {self.matricula}) - Professor: {prof_nome}")
@@ -118,14 +118,14 @@ class Professor:
         # ASSOCIAÇÃO: Um professor tem muitos alunos
         self.alunos = []
     
-    def adicionar_aluno(self, aluno):
+    def adicionarAluno(self, aluno):
         """Associação: Professor referencia lista de Alunos."""
         if aluno not in self.alunos:
             self.alunos.append(aluno)
-            aluno.definir_professor(self)  # Bidirecional
+            aluno.definirProfessor(self)  # Bidirecional
             print(f"✓ {aluno.nome} adicionado à turma do Prof. {self.nome}")
     
-    def listar_alunos(self):
+    def listarAlunos(self):
         """Lista alunos do professor."""
         print(f"\nAlunos do Prof. {self.nome}:")
         for aluno in self.alunos:
@@ -140,15 +140,15 @@ aluno2 = Aluno("Carla", "2024002")
 aluno3 = Aluno("Daniel", "2024003")
 
 print("\nAssociação: Vinculando professor e alunos")
-professor.adicionar_aluno(aluno1)
-professor.adicionar_aluno(aluno2)
-professor.adicionar_aluno(aluno3)
+professor.adicionarAluno(aluno1)
+professor.adicionarAluno(aluno2)
+professor.adicionarAluno(aluno3)
 
-professor.listar_alunos()
+professor.listarAlunos()
 
 print("\nVerificando associação bidirecional:")
-aluno1.exibir_info()
-aluno2.exibir_info()
+aluno1.exibirInfo()
+aluno2.exibirInfo()
 
 
 # ==========================================
@@ -168,14 +168,14 @@ class Estudante:
         # ASSOCIAÇÃO: Um estudante tem muitos cursos
         self.cursos = []
     
-    def matricular_curso(self, curso):
+    def matricularCurso(self, curso):
         """Associação: Estudante referencia Curso."""
         if curso not in self.cursos:
             self.cursos.append(curso)
-            curso.adicionar_estudante(self)  # Bidirecional
+            curso.adicionarEstudante(self)  # Bidirecional
             print(f"✓ {self.nome} matriculado em {curso.nome}")
     
-    def listar_cursos(self):
+    def listarCursos(self):
         """Lista cursos do estudante."""
         print(f"\nCursos de {self.nome}:")
         for curso in self.cursos:
@@ -191,12 +191,12 @@ class Curso:
         # ASSOCIAÇÃO: Um curso tem muitos estudantes
         self.estudantes = []
     
-    def adicionar_estudante(self, estudante):
+    def adicionarEstudante(self, estudante):
         """Associação: Curso referencia Estudante."""
         if estudante not in self.estudantes:
             self.estudantes.append(estudante)
     
-    def listar_estudantes(self):
+    def listarEstudantes(self):
         """Lista estudantes do curso."""
         print(f"\nEstudantes de {self.nome}:")
         for estudante in self.estudantes:
@@ -213,17 +213,17 @@ curso2 = Curso("Java", "JAV201")
 curso3 = Curso("JavaScript", "JS301")
 
 print("\nAssociação: Matriculando estudantes em cursos")
-estudante1.matricular_curso(curso1)
-estudante1.matricular_curso(curso2)
-estudante2.matricular_curso(curso1)
-estudante2.matricular_curso(curso3)
+estudante1.matricularCurso(curso1)
+estudante1.matricularCurso(curso2)
+estudante2.matricularCurso(curso1)
+estudante2.matricularCurso(curso3)
 
 print("\nVisualizando associações:")
-estudante1.listar_cursos()
-estudante2.listar_cursos()
+estudante1.listarCursos()
+estudante2.listarCursos()
 
-curso1.listar_estudantes()
-curso2.listar_estudantes()
+curso1.listarEstudantes()
+curso2.listarEstudantes()
 
 
 # ==========================================
@@ -269,7 +269,7 @@ class Departamento:
             self.funcionarios.remove(funcionario)
             print(f"✓ {funcionario.nome} removido de {self.nome}")
     
-    def listar_funcionarios(self):
+    def listarFuncionarios(self):
         """Lista funcionários do departamento."""
         print(f"\nFuncionários do {self.nome}:")
         for func in self.funcionarios:
@@ -290,7 +290,7 @@ dept.contratar(func1)
 dept.contratar(func2)
 dept.contratar(func3)
 
-dept.listar_funcionarios()
+dept.listarFuncionarios()
 
 print("\nFuncionários ainda existem mesmo fora do departamento:")
 print(f"{func1.nome} existe independentemente")
@@ -298,7 +298,7 @@ print(f"{func2.nome} existe independentemente")
 
 print("\nDemitindo funcionário:")
 dept.demitir(func2)
-dept.listar_funcionarios()
+dept.listarFuncionarios()
 
 print(f"\n{func2.nome} ainda existe: {func2}")
 

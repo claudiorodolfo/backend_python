@@ -122,9 +122,9 @@ class Pessoa:
     def __init__(self, nome, idade):
         self.nome = nome
         self._idade = None
-        self.set_idade(idade)
+        self.setIdade(idade)
     
-    def set_idade(self, idade):
+    def setIdade(self, idade):
         """Define idade com validação."""
         if not isinstance(idade, int):
             raise IdadeInvalidaError("Idade deve ser um número inteiro", idade)
@@ -137,7 +137,7 @@ class Pessoa:
         
         self._idade = idade
     
-    def get_idade(self):
+    def getIdade(self):
         """Retorna idade."""
         return self._idade
 
@@ -145,17 +145,17 @@ class Pessoa:
 # Testando exceção com atributos
 print("\nCriando pessoa com idade válida:")
 pessoa = Pessoa("Maria", 25)
-print(f"Idade definida: {pessoa.get_idade()}")
+print(f"Idade definida: {pessoa.getIdade()}")
 
 print("\nTestando idades inválidas:")
 try:
-    pessoa.set_idade(-5)
+    pessoa.setIdade(-5)
 except IdadeInvalidaError as e:
     print(f"Erro capturado: {e}")
     print(f"Valor inválido: {e.valor}")
 
 try:
-    pessoa.set_idade(200)
+    pessoa.setIdade(200)
 except IdadeInvalidaError as e:
     print(f"Erro capturado: {e}")
     print(f"Valor inválido: {e.valor}")
@@ -195,7 +195,7 @@ class SistemaBancario:
     def __init__(self):
         self.contas = {}
     
-    def criar_conta(self, numero, saldo_inicial=0):
+    def criarConta(self, numero, saldo_inicial=0):
         """Cria uma nova conta."""
         if numero in self.contas:
             raise OperacaoInvalidaError(f"Conta {numero} já existe")
@@ -228,7 +228,7 @@ class SistemaBancario:
 # Testando hierarquia
 print("\nCriando sistema bancário:")
 banco = SistemaBancario()
-banco.criar_conta("001", 1000)
+banco.criarConta("001", 1000)
 
 print("\nTestando diferentes erros:")
 try:
@@ -266,8 +266,8 @@ class EstoqueInsuficienteError(Exception):
     
     def __init__(self, produto, estoque_atual, quantidade_solicitada):
         self.produto = produto
-        self.estoque_atual = estoque_atual
-        self.quantidade_solicitada = quantidade_solicitada
+        self.estoqueAtual = estoque_atual
+        self.quantidadeSolicitada = quantidade_solicitada
         super().__init__(
             f"Estoque insuficiente de {produto}. "
             f"Disponível: {estoque_atual}, Solicitado: {quantidade_solicitada}"
@@ -285,7 +285,7 @@ class Loja:
     def __init__(self):
         self.produtos = {}
     
-    def cadastrar_produto(self, nome, preco, estoque):
+    def cadastrarProduto(self, nome, preco, estoque):
         """Cadastra um produto."""
         if preco <= 0:
             raise PrecoInvalidoError(f"Preço deve ser positivo. Recebido: {preco}")
@@ -299,7 +299,7 @@ class Loja:
         }
         print(f"✓ Produto {nome} cadastrado")
     
-    def buscar_produto(self, nome):
+    def buscarProduto(self, nome):
         """Busca um produto."""
         if nome not in self.produtos:
             raise ProdutoNaoEncontradoError(f"Produto '{nome}' não encontrado")
@@ -307,7 +307,7 @@ class Loja:
     
     def vender(self, nome, quantidade):
         """Vende um produto."""
-        produto = self.buscar_produto(nome)  # Pode lançar ProdutoNaoEncontradoError
+        produto = self.buscarProduto(nome)  # Pode lançar ProdutoNaoEncontradoError
         
         if produto["estoque"] < quantidade:
             raise EstoqueInsuficienteError(
@@ -324,12 +324,12 @@ class Loja:
 # Testando
 print("\nCriando loja:")
 loja = Loja()
-loja.cadastrar_produto("Notebook", 2500.00, 5)
-loja.cadastrar_produto("Mouse", 50.00, 10)
+loja.cadastrarProduto("Notebook", 2500.00, 5)
+loja.cadastrarProduto("Mouse", 50.00, 10)
 
 print("\nTestando exceções do domínio:")
 try:
-    loja.buscar_produto("Teclado")  # Não existe
+    loja.buscarProduto("Teclado")  # Não existe
 except ProdutoNaoEncontradoError as e:
     print(f"Erro: {e}")
 
@@ -338,11 +338,11 @@ try:
 except EstoqueInsuficienteError as e:
     print(f"Erro: {e}")
     print(f"  Produto: {e.produto}")
-    print(f"  Estoque atual: {e.estoque_atual}")
-    print(f"  Solicitado: {e.quantidade_solicitada}")
+    print(f"  Estoque atual: {e.estoqueAtual}")
+    print(f"  Solicitado: {e.quantidadeSolicitada}")
 
 try:
-    loja.cadastrar_produto("Produto Inválido", -10, 5)
+    loja.cadastrarProduto("Produto Inválido", -10, 5)
 except PrecoInvalidoError as e:
     print(f"Erro: {e}")
 

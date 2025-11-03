@@ -31,7 +31,7 @@ class Funcionario:
         """
         self._nome = nome
         self._cpf = cpf
-        self._salario_base = salario_base
+        self._salarioBase = salario_base
     
     # PROPRIEDADES COM @property (Encapsulamento)
     @property
@@ -52,19 +52,19 @@ class Funcionario:
         return self._cpf
     
     @property
-    def salario_base(self):
+    def salarioBase(self):
         """Getter para salário base."""
-        return self._salario_base
+        return self._salarioBase
     
-    @salario_base.setter
-    def salario_base(self, valor):
+    @salarioBase.setter
+    def salarioBase(self, valor):
         """Setter com validação."""
         if valor < 0:
             raise ValueError("Salário base não pode ser negativo")
-        self._salario_base = valor
+        self._salarioBase = valor
     
     # MÉTODO POLIMÓRFICO (será sobrescrito)
-    def calcular_pagamento(self):
+    def calcularPagamento(self):
         """
         Calcula o pagamento do funcionário.
         
@@ -74,21 +74,21 @@ class Funcionario:
         Returns:
             Valor do pagamento
         """
-        return self._salario_base
+        return self._salarioBase
     
     def trabalhar(self):
         """Método genérico de trabalho."""
         print(f"{self._nome} está trabalhando")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do funcionário."""
-        pagamento = self.calcular_pagamento()
+        pagamento = self.calcularPagamento()
         print(f"""
         {'=' * 50}
         Funcionário: {self._nome}
         CPF: {self._cpf}
         Cargo: {self.__class__.__name__}
-        Salário Base: R${self._salario_base:.2f}
+        Salário Base: R${self._salarioBase:.2f}
         Pagamento Total: R${pagamento:.2f}
         {'=' * 50}
         """)
@@ -115,18 +115,18 @@ class Vendedor(Funcionario):
         self._vendas_mes = vendas_mes
     
     @property
-    def vendas_mes(self):
+    def vendasMes(self):
         """Getter para vendas do mês."""
-        return self._vendas_mes
+        return self._vendasMes
     
-    @vendas_mes.setter
-    def vendas_mes(self, valor):
+    @vendasMes.setter
+    def vendasMes(self, valor):
         """Setter com validação."""
         if valor < 0:
             raise ValueError("Vendas não podem ser negativas")
-        self._vendas_mes = valor
+        self._vendasMes = valor
     
-    def calcular_pagamento(self):
+    def calcularPagamento(self):
         """
         Sobrescreve calcular_pagamento() para incluir comissão.
         
@@ -135,8 +135,8 @@ class Vendedor(Funcionario):
         Returns:
             Salário base + comissão
         """
-        comissao = self._vendas_mes * 0.1
-        return self._salario_base + comissao
+        comissao = self._vendasMes * 0.1
+        return self._salarioBase + comissao
     
     def trabalhar(self):
         """Sobrescreve trabalhar() com comportamento específico."""
@@ -186,14 +186,14 @@ class Gerente(Funcionario):
         """Setter para departamento."""
         self._departamento = valor
     
-    def calcular_pagamento(self):
+    def calcularPagamento(self):
         """
-        Sobrescreve calcular_pagamento() para incluir bônus.
+        Sobrescreve calcularPagamento() para incluir bônus.
         
         Returns:
             Salário base + bônus
         """
-        return self._salario_base + self._bonus
+        return self._salarioBase + self._bonus
     
     def trabalhar(self):
         """Sobrescreve trabalhar() com comportamento específico."""

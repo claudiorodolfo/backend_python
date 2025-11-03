@@ -140,7 +140,7 @@ class ContaBancaria:
         else:
             print("Saldo insuficiente!")
     
-    def exibir_saldo(self):
+    def exibirSaldo(self):
         """Método para exibir o saldo."""
         print(f"Saldo: R${self.saldo:.2f}")
 
@@ -151,9 +151,9 @@ conta = ContaBancaria("Ana", 1000)
 
 print("\nUsando os métodos:")
 conta.depositar(500)      # Chama o método depositar
-conta.exibir_saldo()      # Chama o método exibir_saldo
+conta.exibirSaldo()      # Chama o método exibir_saldo
 conta.sacar(200)          # Chama o método sacar
-conta.exibir_saldo()
+conta.exibirSaldo()
 
 
 # ==========================================
@@ -215,19 +215,19 @@ class Aluno:
         self.nota2 = nota2
     
     # MÉTODOS: definem comportamentos
-    def calcular_media(self):
+    def calcularMedia(self):
         """Calcula a média do aluno."""
         return (self.nota1 + self.nota2) / 2
     
-    def verificar_aprovacao(self):
+    def verificarAprovacao(self):
         """Verifica se o aluno foi aprovado."""
-        media = self.calcular_media()
+        media = self.calcularMedia()
         return media >= 7.0
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do aluno."""
-        media = self.calcular_media()
-        status = "Aprovado" if self.verificar_aprovacao() else "Reprovado"
+        media = self.calcularMedia()
+        status = "Aprovado" if self.verificarAprovacao() else "Reprovado"
         
         print(f"""
         Aluno: {self.nome}
@@ -246,7 +246,7 @@ aluno2 = Aluno("João", "2024002", 6.0, 5.5)
 aluno3 = Aluno("Ana", "2024003", 7.5, 8.0)
 
 # Usando os métodos dos objetos
-aluno1.exibir_info()
-aluno2.exibir_info()
-aluno3.exibir_info()
+aluno1.exibirInfo()
+aluno2.exibirInfo()
+aluno3.exibirInfo()
 

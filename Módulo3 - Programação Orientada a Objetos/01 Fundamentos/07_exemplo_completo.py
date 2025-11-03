@@ -34,11 +34,11 @@ class Livro:
         self.titulo = titulo
         self.autor = autor
         self.isbn = isbn
-        self.ano_publicacao = ano_publicacao
+        self.anoPublicacao = ano_publicacao
         
         # Atributos de estado
         self.emprestado = False
-        self.leitor_atual = None
+        self.leitorAtual = None
     
     # MÉTODOS: comportamentos do livro
     def emprestar(self, nome_leitor):
@@ -53,40 +53,40 @@ class Livro:
         """
         if not self.emprestado:
             self.emprestado = True
-            self.leitor_atual = nome_leitor
+            self.leitorAtual = nome_leitor
             print(f"✓ '{self.titulo}' foi emprestado para {nome_leitor}")
             return True
         else:
-            print(f"✗ '{self.titulo}' já está emprestado para {self.leitor_atual}")
+            print(f"✗ '{self.titulo}' já está emprestado para {self.leitorAtual}")
             return False
     
     def devolver(self):
         """Devolve o livro à biblioteca."""
         if self.emprestado:
-            leitor = self.leitor_atual
+            leitor = self.leitorAtual
             self.emprestado = False
-            self.leitor_atual = None
+            self.leitorAtual = None
             print(f"✓ '{self.titulo}' foi devolvido por {leitor}")
             return True
         else:
             print(f"✗ '{self.titulo}' não estava emprestado")
             return False
     
-    def esta_disponivel(self):
+    def estaDisponivel(self):
         """Verifica se o livro está disponível."""
         return not self.emprestado
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe todas as informações do livro."""
         status = "Emprestado" if self.emprestado else "Disponível"
-        leitor_info = f" (para {self.leitor_atual})" if self.emprestado else ""
+        leitor_info = f" (para {self.leitorAtual})" if self.emprestado else ""
         
         print(f"""
         {'=' * 50}
         Livro: {self.titulo}
         Autor: {self.autor}
         ISBN: {self.isbn}
-        Ano: {self.ano_publicacao}
+        Ano: {self.anoPublicacao}
         Status: {status}{leitor_info}
         {'=' * 50}
         """)
@@ -109,7 +109,7 @@ class Biblioteca:
         self.nome = nome
         self.livros = []  # Lista para armazenar objetos Livro
     
-    def adicionar_livro(self, livro):
+    def adicionarLivro(self, livro):
         """
         Adiciona um livro à biblioteca.
         
@@ -119,7 +119,7 @@ class Biblioteca:
         self.livros.append(livro)
         print(f"✓ Livro '{livro.titulo}' adicionado à biblioteca")
     
-    def buscar_livro(self, titulo):
+    def buscarLivro(self, titulo):
         """
         Busca um livro pelo título.
         
@@ -134,9 +134,9 @@ class Biblioteca:
                 return livro
         return None
     
-    def listar_livros_disponiveis(self):
+    def listarLivrosDisponiveis(self):
         """Lista todos os livros disponíveis."""
-        disponiveis = [livro for livro in self.livros if livro.esta_disponivel()]
+        disponiveis = [livro for livro in self.livros if livro.estaDisponivel()]
         
         if disponiveis:
             print(f"\n📚 Livros disponíveis na {self.nome}:")
@@ -147,11 +147,11 @@ class Biblioteca:
         
         return disponiveis
     
-    def listar_todos_livros(self):
+    def listarTodosLivros(self):
         """Lista todos os livros da biblioteca."""
         print(f"\n📚 Todos os livros na {self.nome}:")
         for livro in self.livros:
-            status = "✓ Disponível" if livro.esta_disponivel() else f"✗ Emprestado ({livro.leitor_atual})"
+            status = "✓ Disponível" if livro.estaDisponivel() else f"✗ Emprestado ({livro.leitorAtual})"
             print(f"  • {livro.titulo} - {livro.autor} [{status}]")
 
 
@@ -193,10 +193,10 @@ def main():
     print("2. ADICIONANDO LIVROS")
     print("=" * 60)
     
-    biblioteca.adicionar_livro(livro1)
-    biblioteca.adicionar_livro(livro2)
-    biblioteca.adicionar_livro(livro3)
-    biblioteca.adicionar_livro(livro4)
+    biblioteca.adicionarLivro(livro1)
+    biblioteca.adicionarLivro(livro2)
+    biblioteca.adicionarLivro(livro3)
+    biblioteca.adicionarLivro(livro4)
     
     # ==========================================
     # 3. EXIBINDO INFORMAÇÕES
@@ -206,8 +206,8 @@ def main():
     print("3. EXIBINDO INFORMAÇÕES DOS OBJETOS")
     print("=" * 60)
     
-    livro1.exibir_info()
-    livro2.exibir_info()
+    livro1.exibirInfo()
+    livro2.exibirInfo()
     
     # ==========================================
     # 4. USANDO MÉTODOS DOS OBJETOS
@@ -232,10 +232,10 @@ def main():
     print("5. VERIFICANDO DISPONIBILIDADE")
     print("=" * 60)
     
-    print(f"\n'{livro1.titulo}' disponível? {livro1.esta_disponivel()}")
-    print(f"'{livro4.titulo}' disponível? {livro4.esta_disponivel()}")
+    print(f"\n'{livro1.titulo}' disponível? {livro1.estaDisponivel()}")
+    print(f"'{livro4.titulo}' disponível? {livro4.estaDisponivel()}")
     
-    biblioteca.listar_livros_disponiveis()
+    biblioteca.listarLivrosDisponiveis()
     
     # ==========================================
     # 6. DEVOLVENDO LIVROS
@@ -256,9 +256,9 @@ def main():
     print("7. BUSCANDO LIVROS")
     print("=" * 60)
     
-    livro_encontrado = biblioteca.buscar_livro("dom casmurro")
+    livro_encontrado = biblioteca.buscarLivro("dom casmurro")
     if livro_encontrado:
-        livro_encontrado.exibir_info()
+        livro_encontrado.exibirInfo()
     
     # ==========================================
     # 8. ESTADO FINAL
@@ -268,7 +268,7 @@ def main():
     print("8. ESTADO FINAL DA BIBLIOTECA")
     print("=" * 60)
     
-    biblioteca.listar_todos_livros()
+    biblioteca.listarTodosLivros()
     
     # ==========================================
     # RESUMO DOS CONCEITOS APLICADOS

@@ -42,11 +42,11 @@ class Retangulo:
     com atributos e métodos simples.
     """
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Calcula a área do retângulo."""
         return self.largura * self.altura
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Calcula o perímetro do retângulo."""
         return 2 * (self.largura + self.altura)
 
@@ -56,8 +56,8 @@ class Retangulo:
 ret = Retangulo()
 ret.largura = 5
 ret.altura = 3
-print(f"Área: {ret.calcular_area()}")
-print(f"Perímetro: {ret.calcular_perimetro()}")
+print(f"Área: {ret.calcularArea()}")
+print(f"Perímetro: {ret.calcularPerimetro()}")
 
 
 # ==========================================
@@ -85,11 +85,11 @@ class Circulo:
         """
         self.raio = raio
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Calcula a área do círculo."""
         return 3.14159 * self.raio ** 2
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Calcula o perímetro (circunferência) do círculo."""
         return 2 * 3.14159 * self.raio
 
@@ -97,8 +97,8 @@ class Circulo:
 # Uso mais limpo com construtor
 circulo = Circulo(5)
 print(f"Raio: {circulo.raio}")
-print(f"Área: {circulo.calcular_area():.2f}")
-print(f"Perímetro: {circulo.calcular_perimetro():.2f}")
+print(f"Área: {circulo.calcularArea():.2f}")
+print(f"Perímetro: {circulo.calcularPerimetro():.2f}")
 
 
 # ==========================================
@@ -140,7 +140,7 @@ class Livro:
         else:
             print(f"'{self.titulo}' não estava emprestado.")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do livro."""
         status = "Emprestado" if self.emprestado else "Disponível"
         print(f"""
@@ -153,9 +153,9 @@ class Livro:
 
 # Testando a classe Livro
 livro1 = Livro("1984", "George Orwell", 328)
-livro1.exibir_info()
+livro1.exibirInfo()
 livro1.emprestar()
-livro1.exibir_info()
+livro1.exibirInfo()
 livro1.devolver()
 
 
@@ -190,18 +190,18 @@ class Produto:
         self.estoque = estoque
         self.desconto = desconto
     
-    def aplicar_desconto(self):
+    def aplicarDesconto(self):
         """Calcula o preço com desconto."""
         return self.preco * (1 - self.desconto / 100)
     
-    def verificar_disponibilidade(self):
+    def verificarDisponibilidade(self):
         """Verifica se o produto está disponível."""
         return self.estoque > 0
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do produto."""
-        preco_final = self.aplicar_desconto()
-        disponivel = "Sim" if self.verificar_disponibilidade() else "Não"
+        preco_final = self.aplicarDesconto()
+        disponivel = "Sim" if self.verificarDisponibilidade() else "Não"
         
         print(f"""
         Produto: {self.nome}
@@ -218,9 +218,9 @@ produto1 = Produto("Notebook", 2500.00)  # Só nome e preço
 produto2 = Produto("Mouse", 50.00, estoque=10)  # Com estoque
 produto3 = Produto("Teclado", 150.00, estoque=5, desconto=10)  # Tudo
 
-produto1.exibir_info()
-produto2.exibir_info()
-produto3.exibir_info()
+produto1.exibirInfo()
+produto2.exibirInfo()
+produto3.exibirInfo()
 
 
 # ==========================================
@@ -293,7 +293,7 @@ class Funcionario:
         self.cargo = cargo
         self.salario = salario
     
-    def aumentar_salario(self, percentual):
+    def aumentarSalario(self, percentual):
         """
         Aumenta o salário do funcionário.
         
@@ -307,17 +307,17 @@ class Funcionario:
         self.salario += aumento
         return self.salario
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do funcionário."""
         print(f"{self.nome} - {self.cargo} - R${self.salario:.2f}")
 
 
 # Testando
 func = Funcionario("Maria Santos", "Analista", 4000.00)
-func.exibir_info()
-func.aumentar_salario(15)
+func.exibirInfo()
+func.aumentarSalario(15)
 print("Após aumento de 15%:")
-func.exibir_info()
+func.exibirInfo()
 
 
 # ==========================================

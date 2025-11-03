@@ -156,7 +156,7 @@ class CarrinhoCompras:
         self.itens = {}  # {produto: quantidade}
         self.total = 0.0
     
-    def adicionar_item(self, produto, quantidade, preco_unitario):
+    def adicionarItem(self, produto, quantidade, preco_unitario):
         """
         Adiciona item ao carrinho.
         
@@ -187,7 +187,7 @@ class CarrinhoCompras:
             # Estado permanece consistente (não foi modificado)
             raise
     
-    def remover_item(self, produto, quantidade):
+    def removerItem(self, produto, quantidade):
         """Remove item do carrinho com validação."""
         try:
             if produto not in self.itens:
@@ -213,12 +213,12 @@ print("\nCriando carrinho:")
 carrinho = CarrinhoCompras()
 
 print("\nAdicionando itens:")
-carrinho.adicionar_item("Notebook", 1, 2500.00)
-carrinho.adicionar_item("Mouse", 2, 50.00)
+carrinho.adicionarItem("Notebook", 1, 2500.00)
+carrinho.adicionarItem("Mouse", 2, 50.00)
 
 print("\nTentando adicionar item inválido (estado mantém-se consistente):")
 try:
-    carrinho.adicionar_item("Teclado", -1, 100.00)
+    carrinho.adicionarItem("Teclado", -1, 100.00)
 except ValueError:
     print("Estado do carrinho permaneceu consistente")
     print(f"Itens: {carrinho.itens}")
@@ -239,7 +239,7 @@ class BancoDadosSimulado:
         self.registros = {}
         self._backup = None
     
-    def iniciar_transacao(self):
+    def iniciarTransacao(self):
         """Inicia transação (faz backup)."""
         self._backup = self.registros.copy()
         print("Transação iniciada")
@@ -265,7 +265,7 @@ class BancoDadosSimulado:
 class Sistema:
     """Sistema que usa transações."""
     
-    def processar_dados(self, dados):
+    def processarDados(self, dados):
         """
         Processa dados com tratamento de exceções e rollback.
         
@@ -274,7 +274,7 @@ class Sistema:
         db = BancoDadosSimulado()
         
         try:
-            db.iniciar_transacao()
+            db.iniciarTransacao()
             
             # Processa múltiplos dados
             for chave, valor in dados.items():
@@ -325,19 +325,19 @@ class SistemaLogging:
     def __init__(self):
         self.log = []
     
-    def registrar_log(self, mensagem):
+    def registrarLog(self, mensagem):
         """Registra log."""
         self.log.append(mensagem)
         print(f"LOG: {mensagem}")
     
-    def processar_operacao(self, operacao, dados):
+    def processarOperacao(self, operacao, dados):
         """
         Processa operação com tratamento completo.
         
         Registra sucessos e falhas.
         """
         try:
-            self.registrar_log(f"Iniciando operação: {operacao}")
+            self.registrarLog(f"Iniciando operação: {operacao}")
             
             # Validação
             if not dados:
@@ -346,17 +346,17 @@ class SistemaLogging:
             # Processamento
             resultado = f"Processado: {operacao} com {len(dados)} itens"
             
-            self.registrar_log(f"Operação {operacao} concluída com sucesso")
+            self.registrarLog(f"Operação {operacao} concluída com sucesso")
             return resultado
             
         except ValueError as e:
-            self.registrar_log(f"Erro na operação {operacao}: {e}")
+            self.registrarLog(f"Erro na operação {operacao}: {e}")
             raise
         except Exception as e:
-            self.registrar_log(f"Erro inesperado em {operacao}: {e}")
+            self.registrarLog(f"Erro inesperado em {operacao}: {e}")
             raise
         finally:
-            self.registrar_log(f"Finalizando operação: {operacao}")
+            self.registrarLog(f"Finalizando operação: {operacao}")
 
 
 # Testando
@@ -364,12 +364,12 @@ print("\nCriando sistema com logging:")
 sistema = SistemaLogging()
 
 print("\nProcessando operação válida:")
-resultado = sistema.processar_operacao("importar", {"a": 1, "b": 2})
+resultado = sistema.processarOperacao("importar", {"a": 1, "b": 2})
 print(f"Resultado: {resultado}")
 
 print("\nProcessando operação inválida:")
 try:
-    sistema.processar_operacao("importar", {})
+    sistema.processarOperacao("importar", {})
 except ValueError:
     print("Erro tratado e logado")
 

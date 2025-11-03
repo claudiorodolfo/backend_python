@@ -70,7 +70,7 @@ class Livro:
     def __str__(self):
         return f"{self.titulo} - {self.autor}"
     
-    def emprestar_para(self, pessoa):
+    def emprestarPara(self, pessoa):
         """
         Empresta livro para uma pessoa.
         
@@ -100,7 +100,7 @@ class Livro:
         self.leitor_atual = None
         return leitor
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do livro."""
         status = "Emprestado" if self.emprestado else "Disponível"
         leitor = f" ({self.leitor_atual.nome})" if self.emprestado else ""
@@ -143,28 +143,28 @@ class Pessoa:
         
         self.nome = nome.strip()
         self.cpf = cpf
-        self.livros_emprestados = []  # Associação: pessoa tem lista de livros
+        self.livrosEmprestados = []  # Associação: pessoa tem lista de livros
     
     def __str__(self):
         return self.nome
     
-    def adicionar_livro(self, livro):
+    def adicionarLivro(self, livro):
         """Adiciona livro à lista de empréstimos."""
-        if livro not in self.livros_emprestados:
-            self.livros_emprestados.append(livro)
+        if livro not in self.livrosEmprestados:
+            self.livrosEmprestados.append(livro)
     
-    def remover_livro(self, livro):
+    def removerLivro(self, livro):
         """Remove livro da lista de empréstimos."""
-        if livro in self.livros_emprestados:
-            self.livros_emprestados.remove(livro)
+        if livro in self.livrosEmprestados:
+            self.livrosEmprestados.remove(livro)
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações da pessoa."""
         print(f"""
         {'=' * 50}
         Nome: {self.nome}
         CPF: {self.cpf}
-        Livros Emprestados: {len(self.livros_emprestados)}
+        Livros Emprestados: {len(self.livrosEmprestados)}
         {'=' * 50}
         """)
 
@@ -199,7 +199,7 @@ class Biblioteca:
         # ASSOCIAÇÃO: Lista de pessoas (visitantes)
         self.visitantes = {}
     
-    def adicionar_livro(self, titulo, autor, isbn):
+    def adicionarLivro(self, titulo, autor, isbn):
         """
         Adiciona livro à biblioteca (composição).
         
@@ -284,8 +284,8 @@ class Biblioteca:
             pessoa = self.buscar_pessoa(cpf)
             
             # Empresta
-            livro.emprestar_para(pessoa)
-            pessoa.adicionar_livro(livro)
+            livro.emprestarPara(pessoa)
+            pessoa.adicionarLivro(livro)
             
             print(f"✓ '{livro.titulo}' emprestado para {pessoa.nome}")
             
@@ -307,7 +307,7 @@ class Biblioteca:
             pessoa = self.buscar_pessoa_by_livro(livro)
             
             if pessoa:
-                pessoa.remover_livro(livro)
+                pessoa.removerLivro(livro)
             
             print(f"✓ '{livro.titulo}' devolvido por {leitor}")
             
@@ -318,11 +318,11 @@ class Biblioteca:
     def buscar_pessoa_by_livro(self, livro):
         """Busca pessoa que tem o livro emprestado."""
         for pessoa in self.visitantes.values():
-            if livro in pessoa.livros_emprestados:
+            if livro in pessoa.livrosEmprestados:
                 return pessoa
         return None
     
-    def listar_livros_disponiveis(self):
+    def listarLivrosDisponiveis(self):
         """Lista livros disponíveis."""
         disponiveis = [livro for livro in self.livros.values() if not livro.emprestado]
         
@@ -365,9 +365,9 @@ def main():
     # Adicionando livros (COMPOSIÇÃO)
     print("\nAdicionando livros (COMPOSIÇÃO):")
     try:
-        biblioteca.adicionar_livro("1984", "George Orwell", "978-0451524935")
-        biblioteca.adicionar_livro("Dom Casmurro", "Machado de Assis", "978-8535902779")
-        biblioteca.adicionar_livro("O Senhor dos Anéis", "J.R.R. Tolkien", "978-0544003415")
+        biblioteca.adicionarLivro("1984", "George Orwell", "978-0451524935")
+        biblioteca.adicionarLivro("Dom Casmurro", "Machado de Assis", "978-8535902779")
+        biblioteca.adicionarLivro("O Senhor dos Anéis", "J.R.R. Tolkien", "978-0544003415")
     except ValueError as e:
         print(f"Erro: {e}")
     
@@ -398,7 +398,7 @@ def main():
         print(f"Erro esperado: {e}")
     
     # Listando livros disponíveis
-    biblioteca.listar_livros_disponiveis()
+    biblioteca.listarLivrosDisponiveis()
     
     # Devolvendo livros
     print("\nDevolvendo livros:")
@@ -413,10 +413,10 @@ def main():
     # Exibindo informações de objetos
     print("\nInformações dos objetos:")
     livro = biblioteca.buscar_livro("978-8535902779")
-    livro.exibir_info()
+    livro.exibirInfo()
     
     pessoa = biblioteca.buscar_pessoa("12345678901")
-    pessoa.exibir_info()
+    pessoa.exibirInfo()
 
 
 if __name__ == "__main__":

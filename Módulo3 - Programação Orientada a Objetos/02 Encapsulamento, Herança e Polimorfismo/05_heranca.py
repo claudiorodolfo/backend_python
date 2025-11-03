@@ -47,7 +47,7 @@ class Animal:
         self.nome = nome
         self.especie = especie
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Comportamento genérico."""
         print("Algum som")
     
@@ -55,7 +55,7 @@ class Animal:
         """Comportamento genérico."""
         print(f"{self.nome} está se movendo")
     
-    def exibir_info(self):
+    def exibirInfo(self):
         """Exibe informações do animal."""
         print(f"{self.nome} é um(a) {self.especie}")
 
@@ -72,7 +72,7 @@ class Cachorro(Animal):
         super().__init__(nome, "Cachorro")
         self.raca = raca
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Sobrescreve o método da classe pai."""
         print(f"{self.nome} faz: Au au!")
 
@@ -84,7 +84,7 @@ class Gato(Animal):
         super().__init__(nome, "Gato")
         self.cor = cor
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Sobrescreve o método da classe pai."""
         print(f"{self.nome} faz: Miau!")
 
@@ -96,9 +96,9 @@ cachorro = Cachorro("Rex", "Golden Retriever")
 gato = Gato("Felix", "Branco")
 
 print("\nAnimais fazem som:")
-animal_generico.fazer_som()
-cachorro.fazer_som()  # Comportamento especializado
-gato.fazer_som()      # Comportamento especializado
+animal_generico.fazerSom()
+cachorro.fazerSom()  # Comportamento especializado
+gato.fazerSom()      # Comportamento especializado
 
 print("\nMétodos herdados:")
 animal_generico.mover()
@@ -106,9 +106,9 @@ cachorro.mover()  # Método herdado da classe Animal
 gato.mover()      # Método herdado da classe Animal
 
 print("\nInformações:")
-cachorro.exibir_info()  # Método herdado
+cachorro.exibirInfo()  # Método herdado
 print(f"  Raça: {cachorro.raca}")  # Atributo próprio
-gato.exibir_info()
+gato.exibirInfo()
 print(f"  Cor: {gato.cor}")  # Atributo próprio
 
 
@@ -139,7 +139,7 @@ class VeiculoTerrestre(Veiculo):
     
     def __init__(self, marca, modelo, num_rodas):
         super().__init__(marca, modelo)
-        self.num_rodas = num_rodas
+        self.numRodas = num_rodas
     
     def andar(self):
         print(f"{self.marca} {self.modelo} está andando")
@@ -199,11 +199,11 @@ class Funcionario:
     def trabalhar(self):
         print(f"{self.nome} está trabalhando")
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         return self._salario
     
-    def exibir_info(self):
-        print(f"{self.nome} - Salário: R${self.calcular_salario():.2f}")
+    def exibirInfo(self):
+        print(f"{self.nome} - Salário: R${self.calcularSalario():.2f}")
 
 
 class Gerente(Funcionario):
@@ -213,7 +213,7 @@ class Gerente(Funcionario):
         super().__init__(nome, salario)
         self.bonus = bonus
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Sobrescreve para incluir bônus."""
         return self._salario + self.bonus
 
@@ -242,9 +242,9 @@ gerente.trabalhar()
 dev.trabalhar()
 
 print("\nSalários:")
-func1.exibir_info()
-gerente.exibir_info()  # Inclui bônus
-dev.exibir_info()
+func1.exibirInfo()
+gerente.exibirInfo()  # Inclui bônus
+dev.exibirInfo()
 
 print("\nMétodos específicos:")
 dev.programar()
@@ -285,14 +285,14 @@ print("=" * 60)
 class Volante:
     """Classe para coisas que têm volante."""
     
-    def girar_volante(self):
+    def girarVolante(self):
         print("Girando o volante")
 
 
 class Motor:
     """Classe para coisas que têm motor."""
     
-    def ligar_motor(self):
+    def ligarMotor(self):
         print("Ligando o motor")
 
 
@@ -304,8 +304,8 @@ class CarroCompleto(Volante, Motor):
     
     def dirigir(self):
         print(f"{self.modelo}:")
-        self.ligar_motor()
-        self.girar_volante()
+        self.ligarMotor()
+        self.girarVolante()
         print("Carro em movimento!")
 
 

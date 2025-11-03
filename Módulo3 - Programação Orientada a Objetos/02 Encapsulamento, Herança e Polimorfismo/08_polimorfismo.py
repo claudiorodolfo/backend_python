@@ -43,25 +43,25 @@ print("=" * 60)
 class Animal:
     """Classe base que define a interface."""
     
-    def fazer_som(self):
+    def fazerSom(self):
         """Método que será polimórfico."""
         pass
 
 
 class Cachorro(Animal):
-    def fazer_som(self):
+    def fazerSom(self):
         """Implementação específica para cachorro."""
         return "Au au!"
 
 
 class Gato(Animal):
-    def fazer_som(self):
+    def fazerSom(self):
         """Implementação específica para gato."""
         return "Miau!"
 
 
 class Pato(Animal):
-    def fazer_som(self):
+    def fazerSom(self):
         """Implementação específica para pato."""
         return "Quack quack!"
 
@@ -77,7 +77,7 @@ animais = [
 
 print("\nCada animal faz um som diferente (polimorfismo):")
 for animal in animais:
-    print(f"  {animal.__class__.__name__}: {animal.fazer_som()}")
+    print(f"  {animal.__class__.__name__}: {animal.fazerSom()}")
 
 
 # ==========================================
@@ -91,11 +91,11 @@ print("=" * 60)
 class Forma:
     """Classe base para formas geométricas."""
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Método polimórfico."""
         pass
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Método polimórfico."""
         pass
 
@@ -107,11 +107,11 @@ class Retangulo(Forma):
         self.largura = largura
         self.altura = altura
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Cálculo específico para retângulo."""
         return self.largura * self.altura
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Cálculo específico para retângulo."""
         return 2 * (self.largura + self.altura)
 
@@ -122,11 +122,11 @@ class Circulo(Forma):
     def __init__(self, raio):
         self.raio = raio
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Cálculo específico para círculo."""
         return 3.14159 * self.raio ** 2
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Cálculo específico para círculo."""
         return 2 * 3.14159 * self.raio
 
@@ -138,11 +138,11 @@ class Triangulo(Forma):
         self.base = base
         self.altura = altura
     
-    def calcular_area(self):
+    def calcularArea(self):
         """Cálculo específico para triângulo."""
         return (self.base * self.altura) / 2
     
-    def calcular_perimetro(self):
+    def calcularPerimetro(self):
         """Cálculo aproximado (para simplificar)."""
         # Triângulo precisa de 3 lados, mas vamos usar base + altura
         return self.base + self.altura + (self.base ** 2 + self.altura ** 2) ** 0.5
@@ -159,8 +159,8 @@ formas = [
 
 print("\nCalculando área de cada forma (polimorfismo):")
 for forma in formas:
-    area = forma.calcular_area()
-    perimetro = forma.calcular_perimetro()
+    area = forma.calcularArea()
+    perimetro = forma.calcularPerimetro()
     tipo = forma.__class__.__name__
     print(f"  {tipo}: Área = {area:.2f}, Perímetro = {perimetro:.2f}")
 
@@ -178,11 +178,11 @@ class Funcionario:
     
     def __init__(self, nome, salario_base):
         self.nome = nome
-        self.salario_base = salario_base
+        self.salarioBase = salario_base
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Método polimórfico."""
-        return self.salario_base
+        return self.salarioBase
     
     def trabalhar(self):
         """Método polimórfico."""
@@ -194,12 +194,12 @@ class Vendedor(Funcionario):
     
     def __init__(self, nome, salario_base, vendas_mes):
         super().__init__(nome, salario_base)
-        self.vendas_mes = vendas_mes
+        self.vendasMes = vendas_mes
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Implementação específica: salário + comissão."""
-        comissao = self.vendas_mes * 0.1
-        return self.salario_base + comissao
+        comissao = self.vendasMes * 0.1
+        return self.salarioBase + comissao
     
     def trabalhar(self):
         """Implementação específica."""
@@ -213,9 +213,9 @@ class Gerente(Funcionario):
         super().__init__(nome, salario_base)
         self.bonus = bonus
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Implementação específica: salário + bônus."""
-        return self.salario_base + self.bonus
+        return self.salarioBase + self.bonus
     
     def trabalhar(self):
         """Implementação específica."""
@@ -245,7 +245,7 @@ for funcionario in equipe:
 
 print("\nSalários calculados (polimorfismo):")
 for funcionario in equipe:
-    salario = funcionario.calcular_salario()
+    salario = funcionario.calcularSalario()
     tipo = funcionario.__class__.__name__
     print(f"  {funcionario.nome} ({tipo}): R${salario:.2f}")
 
@@ -263,7 +263,7 @@ def processar_formas(lista_formas):
     Função genérica que funciona com qualquer forma.
     
     Esta função demonstra o poder do polimorfismo:
-    funciona com qualquer objeto que tenha calcular_area().
+    funciona com qualquer objeto que tenha calcularArea().
     
     Args:
         lista_formas: Lista de objetos Forma
@@ -271,7 +271,7 @@ def processar_formas(lista_formas):
     total_area = 0
     print("\nProcessando formas:")
     for forma in lista_formas:
-        area = forma.calcular_area()
+        area = forma.calcularArea()
         total_area += area
         print(f"  {forma.__class__.__name__}: {area:.2f}")
     
@@ -312,12 +312,12 @@ class Arquiteto:
     
     def __init__(self, nome, salario_base, projetos):
         self.nome = nome
-        self.salario_base = salario_base
+        self.salarioBase = salario_base
         self.projetos = projetos
     
-    def calcular_salario(self):
+    def calcularSalario(self):
         """Tem o método, então funciona com polimorfismo!"""
-        return self.salario_base + (self.projetos * 500)
+        return self.salarioBase + (self.projetos * 500)
 
 
 # Duck Typing: se tem calcular_salario(), funciona!
@@ -326,7 +326,7 @@ equipe_extendida = equipe + [Arquiteto("Eduarda", 4500, 3)]
 
 print("\nCalculando salários (funciona mesmo sem herança):")
 for pessoa in equipe_extendida:
-    salario = pessoa.calcular_salario()  # Funciona se tiver o método!
+    salario = pessoa.calcularSalario()  # Funciona se tiver o método!
     print(f"  {pessoa.nome}: R${salario:.2f}")
 
 
