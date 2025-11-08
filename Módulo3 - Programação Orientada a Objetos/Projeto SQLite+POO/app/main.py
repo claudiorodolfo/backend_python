@@ -1,6 +1,6 @@
 """
 Sistema principal de gerenciamento com menu unificado
-Permite ao usuário escolher entre gerenciar Categorias ou Pessoas
+Permite ao usuário escolher entre gerenciar Categorias, Usuários (com Pessoa) ou Disciplinas
 """
 import sys
 import os
@@ -12,7 +12,6 @@ from bd.database import DatabaseConnection
 
 # Importar serviços
 from categoria_service import CategoriaService
-from pessoa_service import PessoaService
 from usuario_service import UsuarioService
 from disciplina_service import DisciplinaService
 
@@ -22,7 +21,6 @@ class SistemaPrincipal:
     def __init__(self, db: DatabaseConnection):
         self.__db = db
         self.__categoriaService = CategoriaService(db)
-        self.__pessoaService = PessoaService(db)
         self.__usuarioService = UsuarioService(db)
         self.__disciplinaService = DisciplinaService(db)
     
@@ -32,10 +30,11 @@ class SistemaPrincipal:
         print("     SISTEMA DE GERENCIAMENTO")
         print("="*50)
         print("1. Gerenciar Categorias")
-        print("2. Gerenciar Pessoas")
-        print("3. Gerenciar Usuários (1:1 com Pessoa)")
-        print("4. Gerenciar Disciplinas (N:N com Pessoa)")
+        print("2. Gerenciar Usuários + Pessoa")
+        print("3. Gerenciar Disciplinas")
         print("0. Sair")
+        print("="*50)
+        print("ℹ️  Nota: Ao criar um Usuário, a Pessoa é criada automaticamente!")
         print("="*50)
     
     def executar(self):
@@ -55,15 +54,10 @@ class SistemaPrincipal:
                     self.__categoriaService.executar()
                 elif opcao == '2':
                     print("\n" + "="*50)
-                    print("  ENTRANDO NO GERENCIAMENTO DE PESSOAS")
-                    print("="*50)
-                    self.__pessoaService.executar()
-                elif opcao == '3':
-                    print("\n" + "="*50)
                     print("  ENTRANDO NO GERENCIAMENTO DE USUÁRIOS")
                     print("="*50)
                     self.__usuarioService.executar()
-                elif opcao == '4':
+                elif opcao == '3':
                     print("\n" + "="*50)
                     print("  ENTRANDO NO GERENCIAMENTO DE DISCIPLINAS")
                     print("="*50)

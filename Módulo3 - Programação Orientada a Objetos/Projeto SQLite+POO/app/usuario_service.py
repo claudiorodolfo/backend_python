@@ -116,18 +116,17 @@ class UsuarioService:
             return None
     
     def criarUsuario(self):
-        """Solicita todos os dados (pessoa + usuário) de uma vez e cria ambos"""
-        print("\n--- CRIAR USUÁRIO (com dados de pessoa) ---")
-        print("Preencha os dados da pessoa e do usuário:")
+        """Solicita todos os dados de uma vez e cria pessoa e usuário de forma transparente"""
+        print("\n--- CADASTRAR USUÁRIO ---")
+        print("Preencha todos os dados:")
         
-        # Dados da Pessoa
-        print("\n📋 DADOS DA PESSOA:")
-        nome = input("Digite o nome: ").strip()
+        # Dados básicos
+        nome = input("Nome: ").strip()
         if not nome:
             print("❌ Erro: O nome não pode ser vazio!")
             return
         
-        email = input("Digite o email: ").strip()
+        email = input("Email: ").strip()
         if not email:
             print("❌ Erro: O email não pode ser vazio!")
             return
@@ -144,25 +143,24 @@ class UsuarioService:
         if not categoria:
             return
         
-        # Campos opcionais da pessoa
-        alturaStr = input("Digite a altura em metros (ex: 1.75, ou Enter para pular): ").strip()
+        # Campos opcionais
+        alturaStr = input("Altura em metros (ex: 1.75, ou Enter para pular): ").strip()
         altura = float(alturaStr) if alturaStr else None
         
-        pesoStr = input("Digite o peso em kg (ex: 75.5, ou Enter para pular): ").strip()
+        pesoStr = input("Peso em kg (ex: 75.5, ou Enter para pular): ").strip()
         peso = float(pesoStr) if pesoStr else None
         
-        dataNascimento = input("Digite a data de nascimento (AAAA-MM-DD, ou Enter para pular): ").strip()
+        dataNascimento = input("Data de nascimento (AAAA-MM-DD, ou Enter para pular): ").strip()
         dataNascimento = dataNascimento if dataNascimento else None
         
-        telefone = input("Digite o telefone (ou Enter para pular): ").strip()
+        telefone = input("Telefone (ou Enter para pular): ").strip()
         telefone = telefone if telefone else None
         
         ativoStr = input("Pessoa está ativa? (S/n): ").strip().lower()
         ativo = ativoStr != 'n'
         
-        # Dados do Usuário
-        print("\n👤 DADOS DO USUÁRIO:")
-        login = input("Digite o login: ").strip()
+        # Dados de acesso do usuário
+        login = input("Login: ").strip()
         if not login:
             print("❌ Erro: O login não pode ser vazio!")
             return
@@ -173,19 +171,19 @@ class UsuarioService:
             print(f"❌ Erro: Já existe um usuário com o login '{login}' (ID: {usuarioExistente.id})")
             return
         
-        senha = input("Digite a senha: ").strip()
+        senha = input("Senha: ").strip()
         if not senha:
             print("❌ Erro: A senha não pode ser vazia!")
             return
         
         print("Tipos disponíveis: admin, professor, aluno, visitante")
-        tipo = input("Digite o tipo: ").strip().lower()
+        tipo = input("Tipo: ").strip().lower()
         if not tipo:
             print("❌ Erro: O tipo não pode ser vazio!")
             return
         
         try:
-            # Criar a pessoa primeiro
+            # Criar a pessoa primeiro (transparente para o usuário)
             pessoa = Pessoa(
                 id=None,
                 nome=nome,
@@ -199,9 +197,8 @@ class UsuarioService:
             )
             
             pessoaId = self.__pessoaDao.salvar(pessoa)
-            print(f"\n✅ Pessoa criada com sucesso! (ID: {pessoaId})")
             
-            # Agora criar o usuário vinculado à pessoa
+            # Criar o usuário vinculado à pessoa (transparente para o usuário)
             usuario = Usuario(
                 id=None,
                 login=login,
@@ -211,8 +208,7 @@ class UsuarioService:
             )
             
             usuarioId = self.__usuarioDao.salvar(usuario)
-            print(f"✅ Usuário criado com sucesso! (ID: {usuarioId})")
-            print(f"\n✅ Cadastro completo realizado com sucesso!")
+            print(f"\n✅ Usuário cadastrado com sucesso! (ID: {usuarioId})")
             self.exibirDetalhesUsuario(usuario)
         
         except ValueError as e:
