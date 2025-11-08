@@ -57,12 +57,12 @@ class DatabaseConnection:
         # Tabela usuario (relacionamento 1:1 com pessoa)
         cur.execute("""
         CREATE TABLE IF NOT EXISTS usuario (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER NOT NULL UNIQUE,
             login TEXT NOT NULL UNIQUE,
             senha TEXT NOT NULL,
             tipo TEXT NOT NULL,
-            pessoa_id INTEGER NOT NULL UNIQUE,
-            FOREIGN KEY (pessoa_id) REFERENCES pessoa(id) ON DELETE CASCADE
+            PRIMARY KEY (id),
+            FOREIGN KEY (id) REFERENCES pessoa(id) ON DELETE
         );
         """)
         # Tabela disciplina
