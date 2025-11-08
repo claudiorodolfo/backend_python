@@ -6,10 +6,10 @@ from model.categoria import Categoria
 
 class CategoriaDAO:
     def __init__(self, db: DatabaseConnection):
-        self.db = db
+        self.__db = db
     
     def salvar(self, categoria: Categoria):
-        cur = self.db.cursor()
+        cur = self.__db.cursor()
         
         if categoria.id is None:
             # INSERT
@@ -22,7 +22,7 @@ class CategoriaDAO:
         return categoria.id
     
     def buscarPorId(self, id: int):
-        cur = self.db.cursor()
+        cur = self.__db.cursor()
         cur.execute("SELECT * FROM categoria WHERE id = ?;", (id,))
         row = cur.fetchone()
         
@@ -31,7 +31,7 @@ class CategoriaDAO:
         return None
     
     def buscarPorNome(self, nome: str):
-        cur = self.db.cursor()
+        cur = self.__db.cursor()
         cur.execute("SELECT * FROM categoria WHERE nome = ?;", (nome,))
         row = cur.fetchone()
         
@@ -40,7 +40,7 @@ class CategoriaDAO:
         return None
     
     def listarTodas(self):
-        cur = self.db.cursor()
+        cur = self.__db.cursor()
         cur.execute("SELECT * FROM categoria ORDER BY nome;")
         rows = cur.fetchall()
         
@@ -59,7 +59,7 @@ class CategoriaDAO:
         if categoria.id is None:
             return False
         
-        cur = self.db.cursor()
+        cur = self.__db.cursor()
         cur.execute("DELETE FROM categoria WHERE id = ?;", (categoria.id,))
 
         return cur.rowcount > 0

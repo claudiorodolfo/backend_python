@@ -5,25 +5,94 @@ from model.categoria import Categoria
 
 class Pessoa:
     def __init__(self, id: int, nome: str, categoria: Categoria, email: str,
-                 idade: int | None = None, altura: float | None = None,
+                 altura: float | None = None,
                  peso: float | None = None, data_nascimento: str | None = None,
-                 ativo: bool = True, observacoes: str | None = None,
-                 telefone: str | None = None, momento_cadastro: str | None = None):
-        self.id = id
-        self.nome = nome
-        self.email = email
-        self.idade = idade
-        self.altura = altura
-        self.peso = peso
-        self.data_nascimento = data_nascimento
-        self.ativo = ativo
-        self.observacoes = observacoes
-        self.telefone = telefone
-        self.momento_cadastro = momento_cadastro
-        self.categoria = categoria
+                 ativo: bool = True,
+                 telefone: str | None = None):
+        self.__id = id
+        self.__nome = nome
+        self.__email = email
+        self.__altura = altura
+        self.__peso = peso
+        self.__data_nascimento = data_nascimento
+        self.__ativo = ativo
+        self.__telefone = telefone
+        self.__categoria = categoria
+    
+    @property
+    def id(self):
+        return self.__id
+    
+    @id.setter
+    def id(self, value):
+        self.__id = value
+    
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, value):
+        self.__nome = value
+    
+    @property
+    def email(self):
+        return self.__email
+    
+    @email.setter
+    def email(self, value):
+        self.__email = value
+    
+    @property
+    def altura(self):
+        return self.__altura
+    
+    @altura.setter
+    def altura(self, value):
+        self.__altura = value
+    
+    @property
+    def peso(self):
+        return self.__peso
+    
+    @peso.setter
+    def peso(self, value):
+        self.__peso = value
+    
+    @property
+    def data_nascimento(self):
+        return self.__data_nascimento
+    
+    @data_nascimento.setter
+    def data_nascimento(self, value):
+        self.__data_nascimento = value
+    
+    @property
+    def ativo(self):
+        return self.__ativo
+    
+    @ativo.setter
+    def ativo(self, value):
+        self.__ativo = value
+    
+    @property
+    def telefone(self):
+        return self.__telefone
+    
+    @telefone.setter
+    def telefone(self, value):
+        self.__telefone = value
+    
+    @property
+    def categoria(self):
+        return self.__categoria
+    
+    @categoria.setter
+    def categoria(self, value):
+        self.__categoria = value
     
     def __str__(self):
-        return (f"Pessoa(id={self.id}, nome='{self.nome}', "
-                f"email='{self.email}', idade={self.idade}, "
-                f"categoria_id={self.categoria.id})")
+        return (f"Pessoa(id={self.__id}, nome='{self.__nome}', "
+                f"email='{self.__email}', "
+                f"categoria_id={self.__categoria.id})")
 

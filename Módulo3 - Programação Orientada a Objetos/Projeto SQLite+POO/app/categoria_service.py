@@ -15,8 +15,8 @@ from model.categoria import Categoria
 class CategoriaService:
     
     def __init__(self, db: DatabaseConnection):
-        self.db = db
-        self.categoriaDao = CategoriaDAO(db)
+        self.__db = db
+        self.__categoriaDao = CategoriaDAO(db)
     
     def exibirMenu(self):
         """Exibe o menu principal de opções"""
@@ -43,14 +43,14 @@ class CategoriaService:
         
         try:
             # Verificar se já existe uma categoria com esse nome
-            categoriaExistente = self.categoriaDao.buscarPorNome(nome)
+            categoriaExistente = self.__categoriaDao.buscarPorNome(nome)
             if categoriaExistente:
                 print(f"❌ Erro: Já existe uma categoria com o nome '{nome}' (ID: {categoriaExistente.id})")
                 return
             
             # Criar nova categoria
             categoria = Categoria(id=None, nome=nome)
-            categoriaId = self.categoriaDao.salvar(categoria)
+            categoriaId = self.__categoriaDao.salvar(categoria)
             print(f"✅ Categoria criada com sucesso!")
             print(f"   ID: {categoriaId}")
             print(f"   Nome: {categoria.nome}")
@@ -63,7 +63,7 @@ class CategoriaService:
         print("\n--- LISTAR TODAS AS CATEGORIAS ---")
         
         try:
-            categorias = self.categoriaDao.listarTodas()
+            categorias = self.__categoriaDao.listarTodas()
             
             if not categorias:
                 print("⚠️  Nenhuma categoria cadastrada.")
@@ -90,7 +90,7 @@ class CategoriaService:
             idStr = input("Digite o ID da categoria: ").strip()
             categoriaId = int(idStr)
             
-            categoria = self.categoriaDao.buscarPorId(categoriaId)
+            categoria = self.__categoriaDao.buscarPorId(categoriaId)
             
             if categoria:
                 print("\n✅ Categoria encontrada:")
@@ -115,7 +115,7 @@ class CategoriaService:
             return
         
         try:
-            categoria = self.categoriaDao.buscarPorNome(nome)
+            categoria = self.__categoriaDao.buscarPorNome(nome)
             
             if categoria:
                 print("\n✅ Categoria encontrada:")
@@ -136,7 +136,7 @@ class CategoriaService:
             categoriaId = int(idStr)
             
             # Buscar a categoria existente
-            categoria = self.categoriaDao.buscarPorId(categoriaId)
+            categoria = self.__categoriaDao.buscarPorId(categoriaId)
             
             if not categoria:
                 print(f"⚠️  Categoria com ID {categoriaId} não encontrada.")
@@ -153,14 +153,14 @@ class CategoriaService:
                 return
             
             # Verificar se já existe outra categoria com esse nome
-            categoriaExistente = self.categoriaDao.buscarPorNome(novoNome)
+            categoriaExistente = self.__categoriaDao.buscarPorNome(novoNome)
             if categoriaExistente and categoriaExistente.id != categoriaId:
                 print(f"❌ Erro: Já existe outra categoria com o nome '{novoNome}' (ID: {categoriaExistente.id})")
                 return
             
             # Atualizar categoria
             categoria.nome = novoNome
-            self.categoriaDao.salvar(categoria)
+            self.__categoriaDao.salvar(categoria)
             print(f"\n✅ Categoria atualizada com sucesso!")
             print(f"   ID: {categoria.id}")
             print(f"   Nome: {categoria.nome}")
@@ -179,7 +179,7 @@ class CategoriaService:
             categoriaId = int(idStr)
             
             # Buscar a categoria existente
-            categoria = self.categoriaDao.buscarPorId(categoriaId)
+            categoria = self.__categoriaDao.buscarPorId(categoriaId)
             
             if not categoria:
                 print(f"⚠️  Categoria com ID {categoriaId} não encontrada.")
@@ -195,7 +195,7 @@ class CategoriaService:
                 print("❌ Operação cancelada.")
                 return
             
-            sucesso = self.categoriaDao.deletar(categoria)
+            sucesso = self.__categoriaDao.deletar(categoria)
             
             if sucesso:
                 print(f"\n✅ Categoria deletada com sucesso!")

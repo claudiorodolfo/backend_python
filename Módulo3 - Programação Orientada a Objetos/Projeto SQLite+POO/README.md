@@ -207,15 +207,12 @@ O projeto segue uma arquitetura em camadas seguindo o padrão **DAO (Data Access
 | id | INTEGER | Chave primária (auto-increment) |
 | nome | TEXT | Nome da pessoa (NOT NULL) |
 | email | TEXT | Email único (UNIQUE, NOT NULL) |
-| idade | INTEGER | Idade (0-120) |
 | altura | REAL | Altura em metros |
 | peso | REAL | Peso em kg |
 | data_nascimento | TEXT | Data no formato AAAA-MM-DD |
 | ativo | INTEGER | Status ativo/inativo (1/0) |
-| observacoes | TEXT | Observações sobre a pessoa |
 | telefone | TEXT | Número de telefone |
 | categoria_id | INTEGER | Foreign Key para categoria (NOT NULL) |
-| momento_cadastro | TEXT | Timestamp de criação (DEFAULT CURRENT_TIMESTAMP) |
 
 ### Relacionamentos
 
@@ -250,7 +247,6 @@ pessoa = Pessoa(
     nome="João Silva",
     email="joao@example.com",
     categoria=categoria,
-    idade=28,
     altura=1.75,
     peso=75.0,
     ativo=True
@@ -285,7 +281,7 @@ categoria.nome = "Desenvolvedor Senior"
 categoriaDao.salvar(categoria)
 
 # Atualizar pessoa
-pessoa.idade = 29
+pessoa.altura = 1.76
 pessoa.ativo = False
 pessoaDao.salvar(pessoa)
 ```
@@ -339,7 +335,6 @@ pessoa = Pessoa(
     nome="Maria Santos",
     email="maria@example.com",
     categoria=cat,
-    idade=25,
     altura=1.65
 )
 pessoaDao.salvar(pessoa)
@@ -506,7 +501,6 @@ O projeto utiliza as seguintes configurações:
 - **Foreign Keys**: Ativado automaticamente (`PRAGMA foreign_keys = ON`)
 - **Row Factory**: `sqlite3.Row` para retornar objetos similares a dicionários
 - **Auto Commit**: `isolation_level=None` para autocommit automático
-- **Timestamps**: Uso de `CURRENT_TIMESTAMP` para `momento_cadastro`
 
 ## 🔐 Segurança
 

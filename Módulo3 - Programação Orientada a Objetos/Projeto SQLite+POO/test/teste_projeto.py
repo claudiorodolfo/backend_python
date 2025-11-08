@@ -119,12 +119,10 @@ def testarPessoaDao(db):
             nome="João Developer",
             email="joao@example.com",
             categoria=categoria,
-            idade=28,
             altura=1.75,
             peso=75.0,
             data_nascimento="1995-05-15",
             ativo=True,
-            observacoes="Desenvolvedor Python",
             telefone="11999999999"
         )
         pessoaDao.salvar(pessoa1)
@@ -142,12 +140,10 @@ def testarPessoaDao(db):
             nome="Maria Designer",
             email="maria@example.com",
             categoria=categoria2,
-            idade=25,
             altura=1.65,
             peso=60.0,
             data_nascimento="1998-03-20",
             ativo=True,
-            observacoes="Designer UX/UI",
             telefone="11888888888"
         )
         pessoaDao.salvar(pessoa2)
@@ -191,12 +187,12 @@ def testarPessoaDao(db):
         
         # UPDATE
         print("\n✓ UPDATE - Atualizando pessoa...")
-        pessoa1.idade = 29
-        pessoa1.observacoes = "Desenvolvedor Python Senior"
+        pessoa1.altura = 1.76
+        pessoa1.peso = 76.0
         pessoaDao.salvar(pessoa1)
         pessoaAtualizada = pessoaDao.buscarPorId(pessoa1.id)
-        assert pessoaAtualizada.idade == 29, "Idade não foi atualizada"
-        assert pessoaAtualizada.observacoes == "Desenvolvedor Python Senior", "Observações não foram atualizadas"
+        assert pessoaAtualizada.altura == 1.76, "Altura não foi atualizada"
+        assert pessoaAtualizada.peso == 76.0, "Peso não foi atualizado"
         print(f"  ✓ Pessoa atualizada: {pessoaAtualizada}")
         
         # UPDATE - Desativar pessoa
@@ -244,8 +240,7 @@ def testarIntegridadeReferencial(db):
             id=None,
             nome="Teste Duplicado",
             email="joao@example.com",  # Email já existe
-            categoria=categoria,
-            idade=30
+            categoria=categoria
         )
         
         try:
@@ -263,8 +258,7 @@ def testarIntegridadeReferencial(db):
             id=None,
             nome="Teste FK",
             email="teste_fk@example.com",
-            categoria=Categoria(id=99999, nome="Inexistente"),  # Categoria que não existe
-            idade=30
+            categoria=Categoria(id=99999, nome="Inexistente")  # Categoria que não existe
         )
         
         try:

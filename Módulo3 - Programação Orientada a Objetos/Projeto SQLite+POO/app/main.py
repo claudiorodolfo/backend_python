@@ -13,14 +13,18 @@ from bd.database import DatabaseConnection
 # Importar serviços
 from categoria_service import CategoriaService
 from pessoa_service import PessoaService
+from usuario_service import UsuarioService
+from disciplina_service import DisciplinaService
 
 
 class SistemaPrincipal:
     
     def __init__(self, db: DatabaseConnection):
-        self.db = db
-        self.categoriaService = CategoriaService(db)
-        self.pessoaService = PessoaService(db)
+        self.__db = db
+        self.__categoriaService = CategoriaService(db)
+        self.__pessoaService = PessoaService(db)
+        self.__usuarioService = UsuarioService(db)
+        self.__disciplinaService = DisciplinaService(db)
     
     def exibirMenuPrincipal(self):
         """Exibe o menu principal de opções"""
@@ -29,6 +33,8 @@ class SistemaPrincipal:
         print("="*50)
         print("1. Gerenciar Categorias")
         print("2. Gerenciar Pessoas")
+        print("3. Gerenciar Usuários (1:1 com Pessoa)")
+        print("4. Gerenciar Disciplinas (N:N com Pessoa)")
         print("0. Sair")
         print("="*50)
     
@@ -46,12 +52,22 @@ class SistemaPrincipal:
                     print("\n" + "="*50)
                     print("  ENTRANDO NO GERENCIAMENTO DE CATEGORIAS")
                     print("="*50)
-                    self.categoriaService.executar()
+                    self.__categoriaService.executar()
                 elif opcao == '2':
                     print("\n" + "="*50)
                     print("  ENTRANDO NO GERENCIAMENTO DE PESSOAS")
                     print("="*50)
-                    self.pessoaService.executar()
+                    self.__pessoaService.executar()
+                elif opcao == '3':
+                    print("\n" + "="*50)
+                    print("  ENTRANDO NO GERENCIAMENTO DE USUÁRIOS")
+                    print("="*50)
+                    self.__usuarioService.executar()
+                elif opcao == '4':
+                    print("\n" + "="*50)
+                    print("  ENTRANDO NO GERENCIAMENTO DE DISCIPLINAS")
+                    print("="*50)
+                    self.__disciplinaService.executar()
                 else:
                     print("❌ Opção inválida! Tente novamente.")
         

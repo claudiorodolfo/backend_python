@@ -60,12 +60,10 @@ def exemploCrudCompleto():   # Criar conexão
                 nome="João Developer",
                 email="joao@example.com",
                 categoria=cat1,
-                idade=28,
                 altura=1.75,
                 peso=75.0,
                 data_nascimento="1995-05-15",
                 ativo=True,
-                observacoes="Desenvolvedor Python",
                 telefone="11999999999"
             )
             pessoaDao.salvar(pessoa1)
@@ -81,12 +79,10 @@ def exemploCrudCompleto():   # Criar conexão
                 nome="Maria Designer",
                 email="maria@example.com",
                 categoria=cat2,
-                idade=25,
                 altura=1.65,
                 peso=60.0,
                 data_nascimento="1998-03-20",
                 ativo=True,
-                observacoes="Designer UX/UI",
                 telefone="11888888888"
             )
             pessoaDao.salvar(pessoa2)
@@ -138,8 +134,8 @@ def exemploCrudCompleto():   # Criar conexão
         print(f"Categoria: {cat1}")
         
         # Atualizar pessoa
-        pessoa1.idade = 29
-        pessoa1.observacoes = "Desenvolvedor Python Senior"
+        pessoa1.altura = 1.76
+        pessoa1.peso = 76.0
         pessoaDao.salvar(pessoa1)
         print(f"Pessoa atualizada: {pessoa1}")
         
