@@ -2,6 +2,10 @@
 *.db
 *.sqlite
 *.sqlite3
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+exemplo_bd.db
 
 # Arquivos de backup
 *.db.backup

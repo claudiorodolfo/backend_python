@@ -10,7 +10,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from bd.database import DatabaseConnection
 from dao.usuario_dao import UsuarioDAO
 from dao.pessoa_dao import PessoaDAO
+from dao.categoria_dao import CategoriaDAO
 from model.usuario import Usuario
+from model.pessoa import Pessoa
 
 
 class UsuarioService:
@@ -19,6 +21,7 @@ class UsuarioService:
         self.__db = db
         self.__usuarioDao = UsuarioDAO(db)
         self.__pessoaDao = PessoaDAO(db)
+        self.__categoriaDao = CategoriaDAO(db)
     
     def exibirMenu(self):
         """Exibe o menu principal de opções"""
@@ -78,15 +81,87 @@ class UsuarioService:
             print("❌ Erro: ID deve ser um número inteiro!")
             return None
     
-    def criarUsuario(self):
-        """Solicita dados do usuário e cria um novo usuário"""
-        print("\n--- CRIAR USUÁRIO ---")
+    def listarCategoriasDisponiveis(self):
+        """Lista todas as categorias disponíveis para seleção"""
+        categorias = self.__categoriaDao.listarTodas()
+        if not categorias:
+            print("⚠️  Nenhuma categoria cadastrada. Cadastre uma categoria primeiro!")
+            return None
         
-        # Selecionar pessoa
-        pessoa = self.selecionarPessoa()
-        if not pessoa:
+        print("\nCategorias disponíveis:")
+        print("-"*30)
+        for cat in categorias:
+            print(f"  {cat.id}. {cat.nome}")
+        print("-"*30)
+        return categorias
+    
+    def selecionarCategoria(self):
+        """Solicita ao usuário que selecione uma categoria"""
+        categorias = self.listarCategoriasDisponiveis()
+        if not categorias:
+            return None
+        
+        try:
+            categoriaIdStr = input("Digite o ID da categoria: ").strip()
+            categoriaId = int(categoriaIdStr)
+            
+            categoria = self.__categoriaDao.buscarPorId(categoriaId)
+            if not categoria:
+                print(f"❌ Erro: Categoria com ID {categoriaId} não encontrada!")
+                return None
+            
+            return categoria
+        except ValueError:
+            print("❌ Erro: ID deve ser um número inteiro!")
+            return None
+    
+    def criarUsuario(self):
+        """Solicita todos os dados (pessoa + usuário) de uma vez e cria ambos"""
+        print("\n--- CRIAR USUÁRIO (com dados de pessoa) ---")
+        print("Preencha os dados da pessoa e do usuário:")
+        
+        # Dados da Pessoa
+        print("\n📋 DADOS DA PESSOA:")
+        nome = input("Digite o nome: ").strip()
+        if not nome:
+            print("❌ Erro: O nome não pode ser vazio!")
             return
         
+        email = input("Digite o email: ").strip()
+        if not email:
+            print("❌ Erro: O email não pode ser vazio!")
+            return
+        
+        # Verificar se já existe uma pessoa com esse email
+        todasPessoas = self.__pessoaDao.listarTodas()
+        for p in todasPessoas:
+            if p.email.lower() == email.lower():
+                print(f"❌ Erro: Já existe uma pessoa com o email '{email}' (ID: {p.id})")
+                return
+        
+        # Selecionar categoria
+        categoria = self.selecionarCategoria()
+        if not categoria:
+            return
+        
+        # Campos opcionais da pessoa
+        alturaStr = input("Digite a altura em metros (ex: 1.75, ou Enter para pular): ").strip()
+        altura = float(alturaStr) if alturaStr else None
+        
+        pesoStr = input("Digite o peso em kg (ex: 75.5, ou Enter para pular): ").strip()
+        peso = float(pesoStr) if pesoStr else None
+        
+        dataNascimento = input("Digite a data de nascimento (AAAA-MM-DD, ou Enter para pular): ").strip()
+        dataNascimento = dataNascimento if dataNascimento else None
+        
+        telefone = input("Digite o telefone (ou Enter para pular): ").strip()
+        telefone = telefone if telefone else None
+        
+        ativoStr = input("Pessoa está ativa? (S/n): ").strip().lower()
+        ativo = ativoStr != 'n'
+        
+        # Dados do Usuário
+        print("\n👤 DADOS DO USUÁRIO:")
         login = input("Digite o login: ").strip()
         if not login:
             print("❌ Erro: O login não pode ser vazio!")
@@ -110,6 +185,23 @@ class UsuarioService:
             return
         
         try:
+            # Criar a pessoa primeiro
+            pessoa = Pessoa(
+                id=None,
+                nome=nome,
+                email=email,
+                categoria=categoria,
+                altura=altura,
+                peso=peso,
+                dataNascimento=dataNascimento,
+                ativo=ativo,
+                telefone=telefone
+            )
+            
+            pessoaId = self.__pessoaDao.salvar(pessoa)
+            print(f"\n✅ Pessoa criada com sucesso! (ID: {pessoaId})")
+            
+            # Agora criar o usuário vinculado à pessoa
             usuario = Usuario(
                 id=None,
                 login=login,
@@ -119,18 +211,37 @@ class UsuarioService:
             )
             
             usuarioId = self.__usuarioDao.salvar(usuario)
-            print(f"\n✅ Usuário criado com sucesso!")
+            print(f"✅ Usuário criado com sucesso! (ID: {usuarioId})")
+            print(f"\n✅ Cadastro completo realizado com sucesso!")
             self.exibirDetalhesUsuario(usuario)
         
+        except ValueError as e:
+            print(f"❌ Erro de validação: {e}")
         except Exception as e:
             print(f"❌ Erro ao criar usuário: {e}")
+            import traceback
+            traceback.print_exc()
     
     def exibirDetalhesUsuario(self, usuario: Usuario):
-        """Exibe os detalhes completos de um usuário"""
-        print(f"\n   ID: {usuario.id}")
+        """Exibe os detalhes completos de um usuário e da pessoa associada"""
+        print(f"\n📋 DADOS DO USUÁRIO:")
+        print(f"   ID: {usuario.id}")
         print(f"   Login: {usuario.login}")
         print(f"   Tipo: {usuario.tipo}")
-        print(f"   Pessoa: {usuario.pessoa.nome} (ID: {usuario.pessoa.id}, Email: {usuario.pessoa.email})")
+        print(f"\n👤 DADOS DA PESSOA:")
+        print(f"   ID: {usuario.pessoa.id}")
+        print(f"   Nome: {usuario.pessoa.nome}")
+        print(f"   Email: {usuario.pessoa.email}")
+        print(f"   Categoria: {usuario.pessoa.categoria.nome} (ID: {usuario.pessoa.categoria.id})")
+        if usuario.pessoa.altura is not None:
+            print(f"   Altura: {usuario.pessoa.altura}m")
+        if usuario.pessoa.peso is not None:
+            print(f"   Peso: {usuario.pessoa.peso}kg")
+        if usuario.pessoa.dataNascimento:
+            print(f"   Data de nascimento: {usuario.pessoa.dataNascimento}")
+        if usuario.pessoa.telefone:
+            print(f"   Telefone: {usuario.pessoa.telefone}")
+        print(f"   Status: {'✅ Ativa' if usuario.pessoa.ativo else '❌ Inativa'}")
     
     def listarUsuarios(self):
         """Lista todos os usuários cadastrados"""

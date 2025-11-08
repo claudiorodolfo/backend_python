@@ -16,19 +16,19 @@ class UsuarioDAO:
         pessoaId = usuario.pessoa.id
         
         if usuario.id is None:
-            # INSERT
+            # INSERT - o id do usuário é o mesmo id da pessoa (relacionamento 1:1)
             cur.execute("""
-                INSERT INTO usuario (login, senha, tipo, pessoa_id)
+                INSERT INTO usuario (id, login, senha, tipo)
                 VALUES (?, ?, ?, ?);
-            """, (usuario.login, usuario.senha, usuario.tipo, pessoaId))
+            """, (pessoaId, usuario.login, usuario.senha, usuario.tipo))
             
-            usuario.id = cur.lastrowid
+            usuario.id = pessoaId
         else:
             # UPDATE
             cur.execute("""
-                UPDATE usuario SET login = ?, senha = ?, tipo = ?, pessoa_id = ?
+                UPDATE usuario SET login = ?, senha = ?, tipo = ?
                 WHERE id = ?;
-            """, (usuario.login, usuario.senha, usuario.tipo, pessoaId, usuario.id))
+            """, (usuario.login, usuario.senha, usuario.tipo, usuario.id))
         
         return usuario.id
     
@@ -52,7 +52,8 @@ class UsuarioDAO:
     
     def buscarPorPessoaId(self, pessoaId: int):
         cur = self.__db.cursor()
-        cur.execute("SELECT * FROM usuario WHERE pessoa_id = ?;", (pessoaId,))
+        # O id do usuário é o mesmo id da pessoa (relacionamento 1:1)
+        cur.execute("SELECT * FROM usuario WHERE id = ?;", (pessoaId,))
         row = cur.fetchone()
         
         if row:
@@ -71,8 +72,9 @@ class UsuarioDAO:
     
     def criarDeRow(self, row):
         # Buscar a pessoa usando o PessoaDAO
+        # O id do usuário é o mesmo id da pessoa (relacionamento 1:1)
         pessoaDao = PessoaDAO(self.__db)
-        pessoa = pessoaDao.buscarPorId(row['pessoa_id'])
+        pessoa = pessoaDao.buscarPorId(row['id'])
         
         return Usuario(
             id=row['id'],
