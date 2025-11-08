@@ -6,7 +6,7 @@ from model.categoria import Categoria
 class Pessoa:
     def __init__(self, id: int, nome: str, categoria: Categoria, email: str,
                  altura: float | None = None,
-                 peso: float | None = None, data_nascimento: str | None = None,
+                 peso: float | None = None, dataNascimento: str | None = None,
                  ativo: bool = True,
                  telefone: str | None = None):
         self.__id = id
@@ -14,7 +14,7 @@ class Pessoa:
         self.__email = email
         self.__altura = altura
         self.__peso = peso
-        self.__data_nascimento = data_nascimento
+        self.__dataNascimento = dataNascimento
         self.__ativo = ativo
         self.__telefone = telefone
         self.__categoria = categoria
@@ -60,12 +60,12 @@ class Pessoa:
         self.__peso = value
     
     @property
-    def data_nascimento(self):
-        return self.__data_nascimento
+    def dataNascimento(self):
+        return self.__dataNascimento
     
-    @data_nascimento.setter
-    def data_nascimento(self, value):
-        self.__data_nascimento = value
+    @dataNascimento.setter
+    def dataNascimento(self, value):
+        self.__dataNascimento = value
     
     @property
     def ativo(self):

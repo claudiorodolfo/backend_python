@@ -22,7 +22,7 @@ def limparBanco(db):
     print("✓ Banco limpo!\n")
 
 
-def testarCategoria_dao(db):
+def testarCategoriaDao(db):
     """Testa operações CRUD de Categoria"""
     print("=" * 60)
     print("TESTE 1: Operações CRUD - Categoria")
@@ -121,7 +121,7 @@ def testarPessoaDao(db):
             categoria=categoria,
             altura=1.75,
             peso=75.0,
-            data_nascimento="1995-05-15",
+            dataNascimento="1995-05-15",
             ativo=True,
             telefone="11999999999"
         )
@@ -142,7 +142,7 @@ def testarPessoaDao(db):
             categoria=categoria2,
             altura=1.65,
             peso=60.0,
-            data_nascimento="1998-03-20",
+            dataNascimento="1998-03-20",
             ativo=True,
             telefone="11888888888"
         )
@@ -307,7 +307,7 @@ def executarTestes():
         limparBanco(db)
         
         # Executar testes
-        resultados.append(("Categoria CRUD", testarCategoria_dao(db)))
+        resultados.append(("Categoria CRUD", testarCategoriaDao(db)))
         resultados.append(("Pessoa CRUD", testarPessoaDao(db)))
         resultados.append(("Integridade Referencial", testarIntegridadeReferencial(db)))
         

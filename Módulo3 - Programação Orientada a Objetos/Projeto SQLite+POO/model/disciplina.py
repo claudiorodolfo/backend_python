@@ -3,11 +3,11 @@ Classe modelo para a tabela disciplina
 """
 
 class Disciplina:
-    def __init__(self, id: int, nome: str, carga_horaria: int | None = None,
+    def __init__(self, id: int, nome: str, cargaHoraria: int | None = None,
                  descricao: str | None = None):
         self.__id = id
         self.__nome = nome
-        self.__carga_horaria = carga_horaria
+        self.__cargaHoraria = cargaHoraria
         self.__descricao = descricao
     
     @property
@@ -27,12 +27,12 @@ class Disciplina:
         self.__nome = value
     
     @property
-    def carga_horaria(self):
-        return self.__carga_horaria
+    def cargaHoraria(self):
+        return self.__cargaHoraria
     
-    @carga_horaria.setter
-    def carga_horaria(self, value):
-        self.__carga_horaria = value
+    @cargaHoraria.setter
+    def cargaHoraria(self, value):
+        self.__cargaHoraria = value
     
     @property
     def descricao(self):
@@ -44,5 +44,5 @@ class Disciplina:
     
     def __str__(self):
         return (f"Disciplina(id={self.__id}, nome='{self.__nome}', "
-                f"carga_horaria={self.__carga_horaria})")
+                f"cargaHoraria={self.__cargaHoraria})")
 

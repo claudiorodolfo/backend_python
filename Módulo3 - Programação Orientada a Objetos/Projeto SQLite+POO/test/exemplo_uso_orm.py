@@ -62,7 +62,7 @@ def exemploCrudCompleto():   # Criar conexão
                 categoria=cat1,
                 altura=1.75,
                 peso=75.0,
-                data_nascimento="1995-05-15",
+                dataNascimento="1995-05-15",
                 ativo=True,
                 telefone="11999999999"
             )
@@ -81,7 +81,7 @@ def exemploCrudCompleto():   # Criar conexão
                 categoria=cat2,
                 altura=1.65,
                 peso=60.0,
-                data_nascimento="1998-03-20",
+                dataNascimento="1998-03-20",
                 ativo=True,
                 telefone="11888888888"
             )

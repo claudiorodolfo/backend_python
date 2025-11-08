@@ -20,7 +20,7 @@ class DisciplinaDAO:
             cur.execute("""
                 INSERT INTO disciplina (nome, carga_horaria, descricao)
                 VALUES (?, ?, ?);
-            """, (disciplina.nome, disciplina.carga_horaria, disciplina.descricao))
+            """, (disciplina.nome, disciplina.cargaHoraria, disciplina.descricao))
             
             disciplina.id = cur.lastrowid
         else:
@@ -28,7 +28,7 @@ class DisciplinaDAO:
             cur.execute("""
                 UPDATE disciplina SET nome = ?, carga_horaria = ?, descricao = ?
                 WHERE id = ?;
-            """, (disciplina.nome, disciplina.carga_horaria, disciplina.descricao, disciplina.id))
+            """, (disciplina.nome, disciplina.cargaHoraria, disciplina.descricao, disciplina.id))
         
         return disciplina.id
     
@@ -65,7 +65,7 @@ class DisciplinaDAO:
         return Disciplina(
             id=row['id'],
             nome=row['nome'],
-            carga_horaria=row['carga_horaria'],
+            cargaHoraria=row['carga_horaria'],
             descricao=row['descricao']
         )
     

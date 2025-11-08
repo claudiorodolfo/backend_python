@@ -25,7 +25,7 @@ class PessoaDAO:
                                  ativo, telefone, categoria_id)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?);
             """, (pessoa.nome, pessoa.email, pessoa.altura, pessoa.peso,
-                  pessoa.data_nascimento, ativoInt, pessoa.telefone,
+                  pessoa.dataNascimento, ativoInt, pessoa.telefone,
                   categoriaId))
 
             pessoa.id = cur.lastrowid
@@ -37,7 +37,7 @@ class PessoaDAO:
                                telefone = ?, categoria_id = ?
                 WHERE id = ?;
             """, (pessoa.nome, pessoa.email, pessoa.altura, pessoa.peso,
-                  pessoa.data_nascimento, ativoInt, pessoa.telefone,
+                  pessoa.dataNascimento, ativoInt, pessoa.telefone,
                   categoriaId, pessoa.id))
         
         return pessoa.id
@@ -101,7 +101,7 @@ class PessoaDAO:
             email=row['email'],
             altura=row['altura'],
             peso=row['peso'],
-            data_nascimento=row['data_nascimento'],
+            dataNascimento=row['data_nascimento'],
             ativo=bool(row['ativo']),
             telefone=row['telefone'],
             categoria=categoria

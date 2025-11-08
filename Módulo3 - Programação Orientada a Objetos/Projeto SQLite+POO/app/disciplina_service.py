@@ -65,7 +65,7 @@ class DisciplinaService:
             disciplina = Disciplina(
                 id=None,
                 nome=nome,
-                carga_horaria=cargaHoraria,
+                cargaHoraria=cargaHoraria,
                 descricao=descricao
             )
             
@@ -82,8 +82,8 @@ class DisciplinaService:
         """Exibe os detalhes completos de uma disciplina"""
         print(f"\n   ID: {disciplina.id}")
         print(f"   Nome: {disciplina.nome}")
-        if disciplina.carga_horaria is not None:
-            print(f"   Carga horária: {disciplina.carga_horaria} horas")
+        if disciplina.cargaHoraria is not None:
+            print(f"   Carga horária: {disciplina.cargaHoraria} horas")
         if disciplina.descricao:
             print(f"   Descrição: {disciplina.descricao}")
     
@@ -104,7 +104,7 @@ class DisciplinaService:
             print("-"*80)
             
             for disciplina in disciplinas:
-                cargaHoraria = f"{disciplina.carga_horaria}h" if disciplina.carga_horaria else "N/A"
+                cargaHoraria = f"{disciplina.cargaHoraria}h" if disciplina.cargaHoraria else "N/A"
                 print(f"{disciplina.id:<5} | {disciplina.nome[:39]:<40} | {cargaHoraria:<15}")
             
             print("-"*80)
@@ -150,7 +150,7 @@ class DisciplinaService:
                 print(f"\n✅ {len(disciplinas)} disciplina(s) encontrada(s):")
                 print("\n" + "-"*80)
                 for disciplina in disciplinas:
-                    cargaHoraria = f"{disciplina.carga_horaria}h" if disciplina.carga_horaria else "N/A"
+                    cargaHoraria = f"{disciplina.cargaHoraria}h" if disciplina.cargaHoraria else "N/A"
                     print(f"ID: {disciplina.id} | {disciplina.nome} | Carga: {cargaHoraria}")
                 print("-"*80)
             else:
@@ -190,9 +190,9 @@ class DisciplinaService:
                 disciplina.nome = novoNome
             
             # Carga horária
-            cargaStr = input(f"Carga horária [{disciplina.carga_horaria or 'N/A'}] (ou Enter para manter): ").strip()
+            cargaStr = input(f"Carga horária [{disciplina.cargaHoraria or 'N/A'}] (ou Enter para manter): ").strip()
             if cargaStr:
-                disciplina.carga_horaria = int(cargaStr) if cargaStr else None
+                disciplina.cargaHoraria = int(cargaStr) if cargaStr else None
             
             # Descrição
             descStr = input(f"Descrição [{disciplina.descricao or 'N/A'}] (ou Enter para manter): ").strip()
@@ -422,7 +422,7 @@ class DisciplinaService:
                 print(f"\n✅ {len(disciplinas)} disciplina(s) vinculada(s) à pessoa '{pessoa.nome}':")
                 print("\n" + "-"*80)
                 for disciplina in disciplinas:
-                    cargaHoraria = f"{disciplina.carga_horaria}h" if disciplina.carga_horaria else "N/A"
+                    cargaHoraria = f"{disciplina.cargaHoraria}h" if disciplina.cargaHoraria else "N/A"
                     print(f"ID: {disciplina.id} | {disciplina.nome} | Carga: {cargaHoraria}")
                 print("-"*80)
             else:

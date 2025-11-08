@@ -120,7 +120,7 @@ class PessoaService:
                 categoria=categoria,
                 altura=altura,
                 peso=peso,
-                data_nascimento=dataNascimento,
+                dataNascimento=dataNascimento,
                 ativo=ativo,
                 telefone=telefone
             )
@@ -144,8 +144,8 @@ class PessoaService:
             print(f"   Altura: {pessoa.altura}m")
         if pessoa.peso is not None:
             print(f"   Peso: {pessoa.peso}kg")
-        if pessoa.data_nascimento:
-            print(f"   Data de nascimento: {pessoa.data_nascimento}")
+        if pessoa.dataNascimento:
+            print(f"   Data de nascimento: {pessoa.dataNascimento}")
         if pessoa.telefone:
             print(f"   Telefone: {pessoa.telefone}")
         print(f"   Status: {'✅ Ativa' if pessoa.ativo else '❌ Inativa'}")
@@ -311,9 +311,9 @@ class PessoaService:
                 pessoa.peso = float(pesoStr) if pesoStr else None
             
             # Data de nascimento
-            dataStr = input(f"Data de nascimento [{pessoa.data_nascimento or 'N/A'}] (ou Enter para manter): ").strip()
+            dataStr = input(f"Data de nascimento [{pessoa.dataNascimento or 'N/A'}] (ou Enter para manter): ").strip()
             if dataStr:
-                pessoa.data_nascimento = dataStr if dataStr else None
+                pessoa.dataNascimento = dataStr if dataStr else None
             
             # Telefone
             telefoneStr = input(f"Telefone [{pessoa.telefone or 'N/A'}] (ou Enter para manter): ").strip()
