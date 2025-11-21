@@ -1,24 +1,24 @@
 import random
 
-class ConectorBD:
-    _instancia = None
+# BDManager Singleton
+class BDManager:
+    _instancia = None  # atributo de classe: armazena a instância única
 
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls):
+        # __new__ é chamado **antes** de __init__, quando Python vai “criar” um objeto
         if cls._instancia is None:
+            # Se ainda não existe uma instância, cria uma nova
             cls._instancia = super().__new__(cls)
-        return cls._instancia
+            # Inicializa atributos “singleton” (só uma vez)
+            cls._instancia._path = None
+        return cls._instancia  # retorna a instância única
 
-    def __init__(self, valor=None):
+    def getInstancia(self, path):
+        # Aqui self já é a instância única
+        self._path = path
         # Inicializa só uma vez
         if not hasattr(self, "inicializado"):
             self._id = random.randint(1, 1000000)
-            print(f"ID da conexão: {self._id}")
-            self.inicializado = True
-
-    @classmethod
-    def getInstancia(cls, valor=None):
-        """Retorna a instância única do Singleton."""
-        if cls._instancia is None:
-            cls._instancia = cls(valor)
-        return cls._instancia
+           # self.inicializado = True
+        return self
 

@@ -2,7 +2,7 @@ import copy
 
 class Prototype:
     def clone(self):
-        # usa cópia profunda
+        # usa cópia profunda, mas poderia ser feita campo a campo se necessário
         return copy.deepcopy(self)
 
 class Pessoa(Prototype):
@@ -17,6 +17,8 @@ class Pessoa(Prototype):
 if __name__ == "__main__":
     original = Pessoa("Alice", 30, {"cidade": "Salvador", "cep": "40000"})
     pessoaClone = original.clone()
+    print(f"Mesmo objeto na memória? {id(original) == id(pessoaClone)}")
+
     pessoaClone._nome = "Bob"
     pessoaClone._endereco["cidade"] = "Vitória"
     print(original)       # Pessoa(nome=Alice, idade=30, endereco={'cidade': 'Salvador', …})

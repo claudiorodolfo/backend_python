@@ -10,7 +10,7 @@ O padrão Singleton consiste em:
 
 - **Singleton (Singleton)**: Classe que garante a existência de apenas uma instância
 - **Método `__new__`**: Controla a criação de instâncias, retornando sempre a mesma instância
-- **Método `getInstancia`**: Fornece acesso controlado à instância única
+- **Método `getInstancia`**: Fornece acesso controlado à instância única e permite configurá-la
 - **Atributo de classe `_instancia`**: Armazena a referência à única instância criada
 
 ## Vantagens
@@ -23,46 +23,71 @@ O padrão Singleton consiste em:
 
 ## Exemplo de Uso
 
-Neste exemplo, a classe `ConectorBD` implementa o padrão Singleton para garantir que exista apenas uma conexão com o banco de dados em toda a aplicação.
+Neste exemplo, a classe `BDManager` implementa o padrão Singleton para garantir que exista apenas uma conexão com o banco de dados em toda a aplicação.
 
 ### Código
 
 ```python
 import random
 
-class ConectorBD:
-    _instancia = None
+class BDManager:
+    _instancia = None  # atributo de classe: armazena a instância única
 
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls):
+        # __new__ é chamado **antes** de __init__, quando Python vai "criar" um objeto
         if cls._instancia is None:
+            # Se ainda não existe uma instância, cria uma nova
             cls._instancia = super().__new__(cls)
-        return cls._instancia
+            # Inicializa atributos "singleton" (só uma vez)
+            cls._instancia._path = None
+        return cls._instancia  # retorna a instância única
 
-    def __init__(self, valor=None):
+    def getInstancia(self, path):
+        # Aqui self já é a instância única
+        self._path = path
         # Inicializa só uma vez
         if not hasattr(self, "inicializado"):
             self._id = random.randint(1, 1000000)
-            print(f"ID da conexão: {self._id}")
-            self.inicializado = True
-
-    @classmethod
-    def getInstancia(cls, valor=None):
-        """Retorna a instância única do Singleton."""
-        if cls._instancia is None:
-            cls._instancia = cls(valor)
-        return cls._instancia
+            # self.inicializado = True
+        return self
 ```
 
 ### Execução
 
 ```python
-from singleton import ConectorBD
+from singleton import BDManager
 
-conector1 = ConectorBD.getInstancia()
-conector2 = ConectorBD.getInstancia()
+print("=== Teste do Padrão Singleton ===\n")
 
-# Ambas as variáveis referenciam a mesma instância
-print(conector1 is conector2)  # True
+# Obtém duas "instâncias"
+print("1. Criando primeira instância:")
+bd1 = BDManager()
+conector1 = bd1.getInstancia("Conexão Principal")
+print(f"   Path da conexão 1: {conector1._path}")
+print(f"   ID da conexão 1: {conector1._id}")
+
+print("\n2. Criando segunda instância:")
+bd2 = BDManager()
+conector2 = bd2.getInstancia("Conexão Secundária")
+print(f"   Path da conexão 2: {conector2._path}")
+print(f"   ID da conexão 2: {conector2._id}")
+
+# Verificações
+print("\n=== Verificações ===")
+print(f"3. São a mesma instância? {conector1 is conector2}")
+print(f"4. Paths são iguais? {conector1._path == conector2._path}")
+print(f"5. Mesmo objeto na memória? {id(conector1) == id(conector2)}")
+
+# Teste adicional: modificação em uma reflete na outra
+print("\n6. Teste de modificação:")
+conector1._path = "Conexão Terciária"
+print(f"   conector1._path = '{conector1._path}'")
+print(f"   conector1._id = '{conector1._id}'")
+print(f"   conector2._path = '{conector2._path}'")
+print(f"   conector2._id = '{conector2._id}'")
+print(f"   Modificação refletiu? {conector1._path == conector2._path}")
+
+print("\n✅ Singleton está funcionando corretamente!")
 ```
 
 ## Observações Importantes
@@ -71,18 +96,23 @@ print(conector1 is conector2)  # True
   - É chamado antes de `__init__` e controla a criação do objeto
   - Verifica se já existe uma instância antes de criar uma nova
   - Retorna sempre a mesma instância
+  - Inicializa atributos básicos da instância única
 
-- **Flag `inicializado`**: 
-  - Previne que `__init__` seja executado múltiplas vezes
-  - Garante que a inicialização aconteça apenas na primeira criação
+- **Método `getInstancia`**: 
+  - É um método de instância (não mais um método de classe)
+  - Recebe um parâmetro `path` para configurar a conexão
+  - Permite configurar a instância única após sua criação
+  - Garante que atributos como `_id` sejam inicializados apenas uma vez (usando `hasattr` para verificar)
+  - Retorna `self` (a própria instância única)
+
+- **Comportamento do Singleton**: 
+  - Todas as chamadas a `BDManager()` retornam a mesma instância
+  - Modificações em qualquer referência refletem em todas as outras
+  - O último `path` configurado via `getInstancia` será o valor atual
 
 - **Thread Safety**: 
   - A implementação atual não é thread-safe
   - Para uso em ambientes multi-thread, é necessário adicionar locks
-
-- **Método `getInstancia`**: 
-  - Fornece uma interface clara para obter a instância
-  - Permite lazy initialization (criação sob demanda)
 
 ## Quando Usar
 
