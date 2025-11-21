@@ -1,0 +1,13 @@
+{
+  "usuarios": {
+    "1": {
+      "nome": "Carlos Oliveira Jr",
+      "email": "carlos.oliveira@email.com"
+    },
+    "2": {
+      "nome": "Julia Ferreira",
+      "email": "julia@email.com"
+    }
+  },
+  "nextId": 3
+}
