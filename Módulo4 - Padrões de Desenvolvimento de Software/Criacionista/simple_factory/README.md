@@ -57,48 +57,24 @@ class Gato(Animal):
         return "Miau!"
 ```
 
-### 3. Creator Abstrato - AnimalFactory
+### 3. Factory - AnimalFactory
 
-A classe abstrata que define o Factory Method:
-
-```python
-from abc import ABC, abstractmethod
-from animal import Animal
-
-class AnimalFactory(ABC):
-    
-    @abstractmethod
-    def criarAnimal(self) -> Animal:
-        """Factory Method: cada subclasse implementa sua própria lógica de criação"""
-        pass
-```
-
-### 4. Concrete Creators - CaoFactory e GatoFactory
-
-Subclasses concretas que implementam o Factory Method:
+A classe factory que contém o método factory para criar objetos:
 
 ```python
-# cao_factory.py
-from animal_factory import AnimalFactory
 from animal import Animal
 from cao import Cao
-
-class CaoFactory(AnimalFactory):
-    
-    def criarAnimal(self) -> Animal:
-        """Factory Method: cria uma instância de Cao"""
-        return Cao()
-
-# gato_factory.py
-from animal_factory import AnimalFactory
-from animal import Animal
 from gato import Gato
 
-class GatoFactory(AnimalFactory):
-    
-    def criarAnimal(self) -> Animal:
-        """Factory Method: cria uma instância de Gato"""
-        return Gato()
+class AnimalFactory:
+    @staticmethod
+    def criarAnimal(animalType: str) -> Animal:
+        if animalType == "cao":
+            return Cao()
+        elif animalType == "gato":
+            return Gato()
+        else:
+            raise ValueError(f"Tipo de animal não conhecido: {animalType}")
 ```
 
 ## Exemplo de Uso
@@ -106,17 +82,26 @@ class GatoFactory(AnimalFactory):
 ### Uso Básico
 
 ```python
-from cao_factory import CaoFactory
-from gato_factory import GatoFactory
+from animal_factory import AnimalFactory
 
-# Cada factory concreta cria seu próprio tipo de animal
-cao_factory = CaoFactory()
-animal1 = cao_factory.criarAnimal()
+# Criar um cão
+animal1 = AnimalFactory.criarAnimal("cao")
 print(animal1.fazSom())  # Saída: Au au!
 
-gato_factory = GatoFactory()
-animal2 = gato_factory.criarAnimal()
+# Criar um gato
+animal2 = AnimalFactory.criarAnimal("gato")
 print(animal2.fazSom())  # Saída: Miau!
+```
+
+### Tratamento de Erros
+
+```python
+from animal_factory import AnimalFactory
+
+try:
+    animal = AnimalFactory.criarAnimal("passaro")
+except ValueError as e:
+    print(e)  # Saída: Tipo de animal não conhecido: passaro
 ```
 
 ## Executando o Exemplo
@@ -134,9 +119,13 @@ O script demonstra:
 
 ## Características Importantes
 
-### Creator Abstrato
+### Método Estático
 
-A classe `AnimalFactory` é abstrata e define o contrato (Factory Method) que todas as factories concretas devem implementar. Isso garante que cada factory concreta tenha seu próprio método de criação.
+O método `criarAnimal` é estático, permitindo chamá-lo diretamente na classe sem instanciar a factory:
+
+```python
+animal = AnimalFactory.criarAnimal("cao")
+```
 
 ### Type Safety
 
@@ -153,14 +142,11 @@ class Passaro(Animal):
         return "Piu piu!"
 ```
 
-2. Criar uma nova factory concreta que estende `AnimalFactory`:
+2. Adicionar o caso na factory:
 ```python
-class PassaroFactory(AnimalFactory):
-    def criarAnimal(self) -> Animal:
-        return Passaro()
+elif animalType == "passaro":
+    return Passaro()
 ```
-
-**Vantagem**: Não precisa modificar código existente, apenas adicionar novas classes (princípio Aberto/Fechado).
 
 ## Quando Usar
 
@@ -179,13 +165,19 @@ class PassaroFactory(AnimalFactory):
 
 ## Variações do Padrão
 
-### Factory Method Clássico (Implementação Atual)
+### Simple Factory (Factory Simples)
 
-A implementação atual usa o Factory Method verdadeiro, onde:
+A implementação atual usa uma Simple Factory, onde um único método estático cria objetos baseado em um parâmetro:
 
-- Uma classe abstrata `AnimalFactory` define o Factory Method abstrato
-- Subclasses concretas (`CaoFactory`, `GatoFactory`) implementam o método
-- Cada factory concreta cria apenas um tipo de produto
+```python
+@staticmethod
+def criarAnimal(animalType: str) -> Animal:
+    # lógica de criação
+```
+
+### Factory Method Clássico
+
+Uma variação mais complexa envolve classes abstratas de factory:
 
 ```python
 class AnimalFactory(ABC):
@@ -197,22 +189,6 @@ class CaoFactory(AnimalFactory):
     def criarAnimal(self) -> Animal:
         return Cao()
 ```
-
-### Simple Factory (Factory Simples)
-
-Uma variação mais simples usa um único método estático que cria objetos baseado em um parâmetro:
-
-```python
-class AnimalFactory:
-    @staticmethod
-    def criarAnimal(animalType: str) -> Animal:
-        if animalType == "cao":
-            return Cao()
-        elif animalType == "gato":
-            return Gato()
-```
-
-**Diferença**: Simple Factory usa parâmetros para decidir qual objeto criar, enquanto Factory Method usa subclasses diferentes.
 
 ### Abstract Factory
 
@@ -233,8 +209,8 @@ class AnimalFactory(ABC):
 
 ### Factory Method vs Simple Factory
 
-- **Simple Factory**: Um único método cria objetos baseado em parâmetros (usa if/elif)
-- **Factory Method**: Cada subclasse implementa seu próprio método de criação (implementação atual)
+- **Simple Factory**: Um único método cria objetos baseado em parâmetros (implementação atual)
+- **Factory Method**: Cada subclasse implementa seu próprio método de criação
 
 ### Factory Method vs Abstract Factory
 
@@ -268,26 +244,17 @@ class AnimalFactory(ABC):
 └───────┘ └───────┘
 
 ┌─────────────────┐
-│ AnimalFactory   │ (Creator - Abstract)
-│   (abstract)    │
+│ AnimalFactory   │ (Creator)
 ├─────────────────┤
-│ + criarAnimal() │ (Factory Method - abstract)
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    │         │
-┌───▼──────┐ ┌──▼──────────┐
-│CaoFactory│ │GatoFactory  │ (Concrete Creators)
-├──────────┤ ├─────────────┤
-│+criar... │ │+criar...    │
-└──────────┘ └─────────────┘
+│ + criarAnimal() │ (Factory Method)
+└─────────────────┘
 ```
 
 ## Fluxo de Execução
 
-1. Cliente instancia uma factory concreta (ex: `CaoFactory()`)
-2. Cliente chama `criarAnimal()` na factory concreta
-3. Factory concreta instancia a classe de produto correspondente (`Cao`)
+1. Cliente chama `AnimalFactory.criarAnimal("cao")`
+2. Factory verifica o tipo solicitado
+3. Factory instancia a classe concreta apropriada (`Cao`)
 4. Factory retorna a instância como tipo `Animal`
 5. Cliente usa a instância através da interface `Animal`
 
@@ -304,4 +271,3 @@ class AnimalFactory(ABC):
 - [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns) - Gang of Four
 - [Refactoring Guru - Factory Method Pattern](https://refactoring.guru/design-patterns/factory-method)
 - [Source Making - Factory Method](https://sourcemaking.com/design_patterns/factory_method)
-
