@@ -10,7 +10,7 @@ class AuthManager:
         return classe._instance
         
     def getInstance(self):
-        # __new__ já implementa o Singleton, então este método apenas cria/retorna a instância
+        # __new__ já implementa o Singleton, então este método apenas retorna a instância
         return self._instance
     
     def registrar(self, login: str, senha: str, tipo: str):
