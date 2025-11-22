@@ -1,4 +1,4 @@
-# Abstract Factory Pattern - Exemplo 2
+# Abstract Factory Pattern
 
 Este projeto demonstra a implementação do padrão **Abstract Factory** (Fábrica Abstrata) em Python, utilizando um exemplo prático de um sistema de delivery que cria famílias de produtos relacionados (comidas e bebidas).
 
