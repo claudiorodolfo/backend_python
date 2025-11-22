@@ -31,14 +31,14 @@ if __name__ == "__main__":
     print("-"*30) 
     # Tentar autenticar com Helena
     sucesso_helena = auth2.login("helena", "helena")
-    print("Helena logou com sucesso?", sucesso_helena)  # True
+    print("Helena logou com sucesso?", sucesso_helena)  # False
     print("-"*30)
 
      # Verificar usuários autenticados
     print("Usuários logados antes do logout:", auth1.todosUsuariosAutenticados())
     print("-"*30)
 
-    # Logout (remove o usuário do dicionário)
+    # Logout (remove o usuário da lista)
     auth2.logout("alice")
     print("Usuário alice removido após logout")
     print("-"*30)
