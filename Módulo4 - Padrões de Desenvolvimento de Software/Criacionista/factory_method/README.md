@@ -263,7 +263,7 @@ class AnimalFactory(ABC):
          │
     ┌────┴────┐
     │         │
-┌───▼───┐ ┌──▼────┐
+┌───▼───┐ ┌───▼───┐
 │  Cao  │ │ Gato  │ (Concrete Products)
 └───────┘ └───────┘
 
@@ -274,8 +274,8 @@ class AnimalFactory(ABC):
 │ + criarAnimal() │ (Factory Method - abstract)
 └────────┬────────┘
          │
-    ┌────┴────┐
-    │         │
+    ┌────┴──────┐
+    │           │
 ┌───▼──────┐ ┌──▼──────────┐
 │CaoFactory│ │GatoFactory  │ (Concrete Creators)
 ├──────────┤ ├─────────────┤

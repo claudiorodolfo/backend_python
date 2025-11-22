@@ -1,26 +1,35 @@
-# Padrão Factory Method (Factory Method Pattern)
+# Padrão Simple Factory (Simple Factory Pattern)
 
 ## Descrição
 
-O padrão **Factory Method** é um padrão de projeto criacional que fornece uma interface para criar objetos em uma superclasse, mas permite que as subclasses alterem o tipo de objetos que serão criados. Este padrão resolve o problema de criar objetos sem especificar a classe exata do objeto que será criado, delegando a responsabilidade de criação para subclasses ou métodos especializados.
+O padrão **Simple Factory** (também conhecido como **Static Factory Method**) é um padrão de projeto criacional simplificado que centraliza a lógica de criação de objetos em uma única classe. Diferente do Factory Method, o Simple Factory usa um único método estático que recebe um parâmetro para determinar qual tipo de objeto criar, utilizando estruturas condicionais (if/elif) para decidir qual classe instanciar.
+
+Este padrão resolve o problema de criar objetos sem especificar a classe exata do objeto que será criado, mas de forma mais simples que o Factory Method, ideal para cenários onde não há necessidade de múltiplas factories ou hierarquias complexas.
 
 ## Estrutura
 
-O padrão Factory Method consiste em:
+O padrão Simple Factory consiste em:
 
 - **Product (Animal)**: Interface abstrata que define o contrato para os objetos que serão criados
 - **ConcreteProduct (Cao, Gato)**: Implementações concretas do produto
-- **Creator (AnimalFactory)**: Classe que contém o método factory para criar objetos
-- **Factory Method (criarAnimal)**: Método que encapsula a lógica de criação de objetos
+- **SimpleFactory (AnimalFactory)**: Classe concreta (não abstrata) que contém um método estático para criar objetos
+- **Factory Method (criarAnimal)**: Método estático que encapsula a lógica de criação de objetos usando parâmetros
 
 ## Vantagens
 
-1. **Desacoplamento**: Separa o código que usa objetos do código que os cria
-2. **Extensibilidade**: Facilita a adição de novos tipos de produtos sem modificar o código existente
-3. **Princípio Aberto/Fechado**: Aberto para extensão, fechado para modificação
-4. **Responsabilidade única**: Centraliza a lógica de criação em um único lugar
+1. **Simplicidade**: Implementação mais simples que Factory Method, sem necessidade de hierarquias de classes
+2. **Desacoplamento**: Separa o código que usa objetos do código que os cria
+3. **Responsabilidade única**: Centraliza a lógica de criação em um único lugar
+4. **Facilidade de uso**: Método estático permite uso direto sem necessidade de instanciar a factory
 5. **Flexibilidade**: Permite criar diferentes implementações do mesmo tipo de objeto
 6. **Testabilidade**: Facilita testes unitários através de mocks e stubs
+
+## Desvantagens
+
+1. **Violação do Princípio Aberto/Fechado**: Adicionar novos tipos requer modificar o método factory (adicionar novos if/elif)
+2. **Complexidade crescente**: Com muitos tipos, o método factory pode ficar grande e difícil de manter
+3. **Acoplamento**: A factory conhece todas as classes concretas de produtos
+4. **Menos flexível**: Não permite diferentes estratégias de criação através de subclasses
 
 ## Estrutura do Código
 
@@ -57,9 +66,9 @@ class Gato(Animal):
         return "Miau!"
 ```
 
-### 3. Factory - AnimalFactory
+### 3. Simple Factory - AnimalFactory
 
-A classe factory que contém o método factory para criar objetos:
+A classe factory concreta que contém o método estático para criar objetos:
 
 ```python
 from animal import Animal
@@ -106,7 +115,7 @@ except ValueError as e:
 
 ## Executando o Exemplo
 
-Para executar a demonstração completa do padrão Factory Method:
+Para executar a demonstração completa do padrão Simple Factory:
 
 ```bash
 python3 main.py
@@ -142,43 +151,73 @@ class Passaro(Animal):
         return "Piu piu!"
 ```
 
-2. Adicionar o caso na factory:
+2. **Modificar** o método factory adicionando um novo caso:
 ```python
 elif animalType == "passaro":
     return Passaro()
 ```
 
+**Nota**: Diferente do Factory Method, o Simple Factory requer modificação do código existente para adicionar novos tipos, violando o princípio Aberto/Fechado. Isso é aceitável quando o número de tipos é limitado e não muda frequentemente.
+
 ## Quando Usar
 
-- Quando você não sabe antecipadamente os tipos exatos e dependências dos objetos que seu código deve trabalhar
-- Quando você quer fornecer uma biblioteca de produtos e revelar apenas suas interfaces, não suas implementações
-- Quando você quer permitir que os usuários estendam sua biblioteca ou framework com novos tipos de produtos
-- Quando você quer economizar recursos do sistema reutilizando objetos existentes em vez de reconstruí-los
-- Quando a criação de objetos envolve lógica complexa que deve ser centralizada
+- Quando você tem um número limitado e estável de tipos de produtos
+- Quando a lógica de criação é simples e não requer hierarquias complexas
+- Quando você quer centralizar a criação de objetos sem a complexidade do Factory Method
+- Quando você não precisa de diferentes estratégias de criação (diferentes factories)
+- Quando a simplicidade é mais importante que a extensibilidade sem modificação
+- Quando você quer esconder a lógica de criação do cliente
 
 ## Quando NÃO Usar
 
-- Quando o código que cria objetos é simples e não muda frequentemente
-- Quando você tem apenas um tipo de produto e não planeja adicionar mais
-- Quando a complexidade adicional do padrão não traz benefícios claros
+- Quando você precisa adicionar novos tipos frequentemente (prefira Factory Method)
+- Quando você tem muitos tipos de produtos (o método factory ficaria muito grande)
+- Quando você precisa de diferentes estratégias de criação (prefira Factory Method)
+- Quando você quer seguir estritamente o princípio Aberto/Fechado (prefira Factory Method)
 - Quando a criação de objetos é direta e não requer lógica especial
 
-## Variações do Padrão
+## Comparativo: Simple Factory vs Factory Method
 
-### Simple Factory (Factory Simples)
+### Simple Factory (Implementação Atual)
 
-A implementação atual usa uma Simple Factory, onde um único método estático cria objetos baseado em um parâmetro:
+**Características:**
+- Uma única classe concreta (`AnimalFactory`)
+- Método estático que recebe parâmetro para decidir qual objeto criar
+- Usa estruturas condicionais (if/elif) para determinar a classe a instanciar
+- Não requer hierarquia de classes
 
+**Exemplo:**
 ```python
-@staticmethod
-def criarAnimal(animalType: str) -> Animal:
-    # lógica de criação
+class AnimalFactory:
+    @staticmethod
+    def criarAnimal(animalType: str) -> Animal:
+        if animalType == "cao":
+            return Cao()
+        elif animalType == "gato":
+            return Gato()
+        else:
+            raise ValueError(f"Tipo não conhecido: {animalType}")
 ```
 
-### Factory Method Clássico
+**Vantagens:**
+- ✅ Simples de implementar e entender
+- ✅ Não requer múltiplas classes
+- ✅ Fácil de usar (método estático)
 
-Uma variação mais complexa envolve classes abstratas de factory:
+**Desvantagens:**
+- ❌ Viola princípio Aberto/Fechado (precisa modificar para adicionar tipos)
+- ❌ Método pode ficar grande com muitos tipos
+- ❌ Acoplamento com todas as classes concretas
 
+### Factory Method
+
+**Características:**
+- Classe abstrata (`AnimalFactory`) define o Factory Method
+- Subclasses concretas (`CaoFactory`, `GatoFactory`) implementam o método
+- Cada factory cria apenas um tipo de produto
+- Não usa parâmetros, usa diferentes factories
+
+**Exemplo:**
 ```python
 class AnimalFactory(ABC):
     @abstractmethod
@@ -188,50 +227,70 @@ class AnimalFactory(ABC):
 class CaoFactory(AnimalFactory):
     def criarAnimal(self) -> Animal:
         return Cao()
-```
 
-### Abstract Factory
-
-Quando você precisa criar famílias de objetos relacionados:
-
-```python
-class AnimalFactory(ABC):
-    @abstractmethod
+class GatoFactory(AnimalFactory):
     def criarAnimal(self) -> Animal:
-        pass
-    
-    @abstractmethod
-    def criarHabitat(self) -> Habitat:
-        pass
+        return Gato()
 ```
+
+**Vantagens:**
+- ✅ Segue princípio Aberto/Fechado (extensão sem modificação)
+- ✅ Cada factory tem responsabilidade única
+- ✅ Mais flexível para diferentes estratégias de criação
+
+**Desvantagens:**
+- ❌ Mais complexo (requer múltiplas classes)
+- ❌ Mais verboso (uma factory por tipo)
+- ❌ Pode ser excessivo para casos simples
+
+### Tabela Comparativa
+
+| Aspecto | Simple Factory | Factory Method |
+|--------|----------------|----------------|
+| **Complexidade** | Baixa | Média/Alta |
+| **Número de Classes** | 1 factory | 1 abstrata + N concretas |
+| **Extensibilidade** | Requer modificação | Extensão sem modificação |
+| **Princípio OCP** | Viola | Respeita |
+| **Uso de Parâmetros** | Sim (if/elif) | Não (subclasses) |
+| **Quando Usar** | Poucos tipos, estável | Muitos tipos, extensível |
+| **Manutenibilidade** | Pior com muitos tipos | Melhor com muitos tipos |
+
+### Quando Escolher Cada Um?
+
+**Escolha Simple Factory quando:**
+- Você tem poucos tipos de produtos (2-5 tipos)
+- Os tipos não mudam frequentemente
+- Você prioriza simplicidade sobre extensibilidade
+- A lógica de criação é simples
+
+**Escolha Factory Method quando:**
+- Você tem muitos tipos ou planeja adicionar muitos
+- Você precisa de extensibilidade sem modificar código existente
+- Você precisa de diferentes estratégias de criação
+- Você quer seguir estritamente princípios SOLID
 
 ## Diferenças de Outros Padrões
 
-### Factory Method vs Simple Factory
+### Simple Factory vs Abstract Factory
 
-- **Simple Factory**: Um único método cria objetos baseado em parâmetros (implementação atual)
-- **Factory Method**: Cada subclasse implementa seu próprio método de criação
+- **Simple Factory**: Cria um tipo de produto usando parâmetros
+- **Abstract Factory**: Cria famílias de produtos relacionados através de interfaces
 
-### Factory Method vs Abstract Factory
+### Simple Factory vs Builder
 
-- **Factory Method**: Cria um tipo de produto
-- **Abstract Factory**: Cria famílias de produtos relacionados
-
-### Factory Method vs Builder
-
-- **Factory Method**: Foca em criar objetos de diferentes tipos
+- **Simple Factory**: Foca em criar objetos de diferentes tipos
 - **Builder**: Foca em construir objetos complexos passo a passo
 
-### Factory Method vs Prototype
+### Simple Factory vs Prototype
 
-- **Factory Method**: Cria objetos do zero usando construtores
+- **Simple Factory**: Cria objetos do zero usando construtores
 - **Prototype**: Cria objetos clonando uma instância existente
 
 ## Diagrama de Classes
 
 ```
 ┌─────────────────┐
-│     Animal      │ (Product)
+│     Animal      │ (Product - Abstract)
 │  (interface)    │
 ├─────────────────┤
 │ + fazSom(): str │
@@ -244,11 +303,20 @@ class AnimalFactory(ABC):
 └───────┘ └───────┘
 
 ┌─────────────────┐
-│ AnimalFactory   │ (Creator)
+│ AnimalFactory   │ (Simple Factory - Concrete)
 ├─────────────────┤
-│ + criarAnimal() │ (Factory Method)
+│ + criarAnimal() │ (Static Factory Method)
+│   (type: str)   │
 └─────────────────┘
+         │
+         │ usa if/elif para decidir
+         ▼
+    ┌────────┐
+    │  Cao() │ ou │ Gato() │
+    └────────┘
 ```
+
+**Nota**: A seta indica que `AnimalFactory` usa estruturas condicionais para decidir qual classe concreta instanciar.
 
 ## Fluxo de Execução
 
@@ -264,10 +332,13 @@ class AnimalFactory(ABC):
 2. **Tratamento de erros**: Sempre valide parâmetros e lance exceções apropriadas
 3. **Documentação**: Documente quais tipos de objetos podem ser criados
 4. **Consistência**: Mantenha uma interface consistente para todos os produtos
-5. **Extensibilidade**: Projete a factory pensando em futuras extensões
+5. **Limite de tipos**: Mantenha o número de tipos gerenciáveis (considere Factory Method se exceder 5-7 tipos)
+6. **Método estático**: Use `@staticmethod` para permitir uso sem instanciar a factory
+7. **Validação de entrada**: Valide sempre os parâmetros antes de criar objetos
 
 ## Referências
 
 - [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns) - Gang of Four
 - [Refactoring Guru - Factory Method Pattern](https://refactoring.guru/design-patterns/factory-method)
 - [Source Making - Factory Method](https://sourcemaking.com/design_patterns/factory_method)
+- [Baeldung - Simple Factory Pattern](https://www.baeldung.com/java-simple-factory-pattern)
