@@ -1,17 +1,7 @@
-from abc import ABC, abstractmethod
 from interfaces import Botao, CaixaSelecao
 from light_theme import BotaoClaro, CaixaSelecaoClara
 from dark_theme import BotaoEscuro, CaixaSelecaoEscura
-
-# Fábrica abstrata
-class FabricaGUI(ABC):
-    @abstractmethod
-    def criarBotao(self) -> Botao:
-        pass
-
-    @abstractmethod
-    def criarCaixaSelecao(self) -> CaixaSelecao:
-        pass
+from abstract_factory import FabricaGUI
 
 # Fábricas concretas
 class FabricaClara(FabricaGUI):
