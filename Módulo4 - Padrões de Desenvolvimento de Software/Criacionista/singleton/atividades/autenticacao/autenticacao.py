@@ -6,7 +6,7 @@ class AuthManager:
             classe._instance = super().__new__(classe)
             # inicializa estado único
             classe._instance._usuariosRegistrados = {}  # dicionário com dados de registro dos usuários
-            classe._instance._loginUsuariosAutenticados = []  # lista com ids dos usuários autenticados
+            classe._instance._loginUsuariosAutenticados = []  # lista com logins dos usuários autenticados
         return classe._instance
         
     def getInstance(self):
