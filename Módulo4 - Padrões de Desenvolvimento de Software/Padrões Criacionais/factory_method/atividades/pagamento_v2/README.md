@@ -1,6 +1,6 @@
 # Sistema de Pagamento - Padrão de Projeto Factory Method 
 
-Este projeto demonstra a implementação do padrão **Factory Method** (Método Fábrica) para gerenciar diferentes tipos de pagamento em um sistema, com fábricas especializadas para contextos online e offline.
+Este projeto demonstra a implementação do padrão **Factory Method** para gerenciar diferentes tipos de pagamento em um sistema, com fábricas especializadas para contextos online e offline.
 
 ## 📋 Sobre o Projeto
 

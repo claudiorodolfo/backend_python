@@ -1,6 +1,6 @@
-# Sistema de Pagamento - Padrões de Projet Simple Factory e Factory Method
+# Sistema de Pagamento - Padrões de Projeto Simple Factory e Factory Method
 
-Este projeto demonstra a implementação do padrão **Factory Method** para um sistema de processamento de pagamentos, permitindo criar diferentes tipos de pagamento (PIX, Cartão, Boleto) através de fábricas especializadas (Online e Offline).
+Este projeto demonstra a implementação dos padrões **Simple Factory** e **Factory Method** para um sistema de processamento de pagamentos, permitindo criar diferentes tipos de pagamento (PIX, Cartão, Boleto) através de fábricas especializadas (Online e Offline).
 
 ## 📋 Sobre o Projeto
 
