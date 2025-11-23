@@ -1,24 +1,11 @@
 """
-Padrão DAO (Data Access Object) - Exemplo de uso
-=================================================
-
-Este arquivo demonstra o uso do padrão DAO.
-As classes foram separadas em módulos distintos:
-- model.py: Classe Usuario
-- dao_interface.py: Interface UsuarioDAO
-- dao_sqlite.py: Implementação SQLiteUsuarioDAO
-- dao_dicionario.py: Implementação DicionarioUsuarioDAO
-- dao_arquivo.py: Implementação ArquivoUsuarioDAO
-- service.py: Classe UsuarioService
+Exemplo de uso do padrão DAO
 """
-
-from .model import Usuario
-from .dao_interface import UsuarioDAO
-from .dao_sqlite import SQLiteUsuarioDAO
 from .dao_dicionario import DicionarioUsuarioDAO
+from .dao_sqlite import SQLiteUsuarioDAO
 from .dao_arquivo import ArquivoUsuarioDAO
 from .service import UsuarioService
-
+from .model import Usuario
 
 if __name__ == "__main__":
     print("=" * 60)
@@ -87,4 +74,3 @@ if __name__ == "__main__":
     # Atualizar
     serviceArquivo.atualizarUsuario(usuario5.id, "Carlos Oliveira Jr", "carlos.oliveira@email.com")
     print(f"\nApós atualização: {serviceArquivo.obterUsuario(usuario5.id)}")
-
