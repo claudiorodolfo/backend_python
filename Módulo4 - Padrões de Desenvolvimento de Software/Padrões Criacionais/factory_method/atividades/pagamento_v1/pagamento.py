@@ -6,14 +6,22 @@ class Pagamento(ABC):
     def pagar(self, valor: float) -> None:
         pass
 
-class PagamentoCartao(Pagamento):
+class PagamentoOnlineCartao(Pagamento):
     def pagar(self, valor: float) -> None:
+        print(f"Pagamento online.",end=" ")
         print(f"Pagando R$ {valor:.2f} com cartão.")
 
-class PagamentoBoleto(Pagamento):
+class PagamentoOnlinePix(Pagamento):
     def pagar(self, valor: float) -> None:
-        print(f"Gerando boleto para R$ {valor:.2f}.")
-
-class PagamentoPix(Pagamento):
-    def pagar(self, valor: float) -> None:
+        print(f"Pagamento online.",end=" ")
         print(f"Enviando PIX para valor de R$ {valor:.2f}.")
+
+class PagamentoOfflineCartao(Pagamento):
+    def pagar(self, valor: float) -> None:
+        print(f"Pagamento offline.",end=" ")
+        print(f"Pagando R$ {valor:.2f} com cartão.")
+
+class PagamentoOfflineBoleto(Pagamento):
+    def pagar(self, valor: float) -> None:
+        print(f"Pagamento offline.",end=" ")
+        print(f"Gerando boleto para R$ {valor:.2f}.")

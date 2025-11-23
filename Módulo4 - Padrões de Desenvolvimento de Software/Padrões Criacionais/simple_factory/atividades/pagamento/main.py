@@ -1,8 +1,8 @@
 from factory import PagamentoFactory
 
-def realizar_pagamento(canal: str, tipo: str, valor: float):
+def realizar_pagamento(tipo: str, forma: str, valor: float):
     factory = PagamentoFactory()
-    pagamento = factory.criarPagamento(canal, tipo)
+    pagamento = factory.criarPagamento(tipo, forma)
     pagamento.pagar(valor)
 
 

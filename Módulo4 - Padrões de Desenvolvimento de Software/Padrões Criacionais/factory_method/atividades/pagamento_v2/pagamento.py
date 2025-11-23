@@ -10,10 +10,10 @@ class PagamentoCartao(Pagamento):
     def pagar(self, valor: float) -> None:
         print(f"Pagando R$ {valor:.2f} com cartão.")
 
-class PagamentoBoleto(Pagamento):
-    def pagar(self, valor: float) -> None:
-        print(f"Gerando boleto para R$ {valor:.2f}.")
-
 class PagamentoPix(Pagamento):
     def pagar(self, valor: float) -> None:
         print(f"Enviando PIX para valor de R$ {valor:.2f}.")
+
+class PagamentoBoleto(Pagamento):
+    def pagar(self, valor: float) -> None:
+        print(f"Gerando boleto para R$ {valor:.2f}.")

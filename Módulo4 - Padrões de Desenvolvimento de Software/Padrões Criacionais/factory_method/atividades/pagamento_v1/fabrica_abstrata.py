@@ -4,10 +4,10 @@ from pagamento import Pagamento
 # Fábrica abstrata
 class PagamentoFactory(ABC):
     @abstractmethod
-    def criarPagamento(self, tipo: str) -> Pagamento:
+    def criarPagamento(self, forma: str) -> Pagamento:
         pass
 
     # opcional: método template, por exemplo, para realizar pagamento
-    def realizarPagamento(self, tipo: str, valor: float) -> None:
-        pagamento = self.criarPagamento(tipo)
+    def realizarPagamento(self, forma: str, valor: float) -> None:
+        pagamento = self.criarPagamento(forma)
         pagamento.pagar(valor)
