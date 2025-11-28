@@ -2,7 +2,7 @@ from sujeito import Sujeito
 from observador import Observador
 
 class SujeitoPassaro(Sujeito):
-    def __init__(self, nome: str):
+    def __init__(self, nome):
         self.nome = nome
         self.observadores = []
         
@@ -12,7 +12,7 @@ class SujeitoPassaro(Sujeito):
     def removerObservador(self, observador: Observador):
         self.observadores.remove(observador)
 
-    def notificarObservadores(self, mensagem: str):
+    def notificarObservadores(self, mensagem):
         for observador in self.observadores:
             observador.atualizar(mensagem)
 

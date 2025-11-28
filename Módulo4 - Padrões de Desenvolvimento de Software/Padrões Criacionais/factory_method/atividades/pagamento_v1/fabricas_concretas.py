@@ -12,13 +12,13 @@ class FactoryPagamentoOnline(PagamentoFactory):
     def criarPagamento(self, forma: str) -> Pagamento:
         forma = forma.lower()
         # boleto não é permitido online
-        if forma == "pix":
-            return PagamentoOnlinePix()
-        elif forma == "cartao":
-            return PagamentoOnlineCartao()
-        else:
-            # para boleto, ou outras formas de pagamento online não suportadas
-            raise ValueError(f"Pagamento online não suporta forma: {forma}")
+        match forma:
+            case "pix":
+                return PagamentoOnlinePix()
+            case "cartao":
+                return PagamentoOnlineCartao()
+            case _:
+                raise ValueError(f"Pagamento online não suporta forma: {forma}")
 
 """ 
 Poderia ser uma classe abstrata e as subclasses implementariam
@@ -30,10 +30,10 @@ class FactoryPagamentoOffline(PagamentoFactory):
     def criarPagamento(self, forma: str) -> Pagamento:
         forma = forma.lower()
         # pix não é permitido offline
-        if forma == "boleto":
-            return PagamentoOfflineBoleto()
-        elif forma == "cartao":
-            return PagamentoOfflineCartao()
-        else:
-            # para pix, ou outras formas de pagamento offline não suportadas
-            raise ValueError(f"Pagamento offline não suporta forma: {forma}")
+        match forma:
+            case "boleto":
+                return PagamentoOfflineBoleto()
+            case "cartao":
+                return PagamentoOfflineCartao()
+            case _:
+                raise ValueError(f"Pagamento offline não suporta forma: {forma}")

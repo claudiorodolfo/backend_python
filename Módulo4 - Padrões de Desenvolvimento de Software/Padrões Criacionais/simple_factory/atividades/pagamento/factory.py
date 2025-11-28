@@ -7,21 +7,22 @@ class PagamentoFactory:
         tipo = tipo.lower()
         forma = forma.lower()
 
-        if tipo == "online":
-            # pagamento online: suporta cartão e PIX, por exemplo
-            if forma == "pix":
-                return PagamentoOnlinePix()
-            elif forma == "cartao":
-                return PagamentoOnlineCartao()
-            else:
-                raise ValueError(f"'Forma de pagamento online, não suportada: {forma}'")
-        elif tipo == "offline":
-            # pagamento offline: cartão e boleto, por exemplo
-            if forma == "boleto":
-                return PagamentoOfflineBoleto()
-            elif forma == "cartao":
-                return PagamentoOfflineCartao()
-            else:
-                raise ValueError(f"'Forma de pagamento offline, não suportada: {forma}'")
-        else:
-            raise ValueError(f"Tipo de pagamento desconhecido: '{tipo}'")
+        match tipo:
+            case "online":
+                # pagamento online: suporta cartão e PIX, por exemplo
+                match forma:
+                    case "pix":
+                        return PagamentoOnlinePix()
+                    case "cartao":
+                        return PagamentoOnlineCartao()
+                    case _:
+                        raise ValueError(f"'Forma de pagamento online, não suportada: {forma}'")
+            case "offline":
+                # pagamento offline: cartão e boleto, por exemplo
+                match forma:
+                    case "boleto":
+                        return PagamentoOfflineBoleto()
+                    case "cartao":
+                        return PagamentoOfflineCartao()
+                    case _:
+                        raise ValueError(f"'Forma de pagamento offline, não suportada: {forma}'")

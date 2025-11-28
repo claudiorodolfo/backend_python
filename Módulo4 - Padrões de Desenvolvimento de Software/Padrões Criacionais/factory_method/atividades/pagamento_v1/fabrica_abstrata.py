@@ -8,6 +8,6 @@ class PagamentoFactory(ABC):
         pass
 
     # opcional: método template, por exemplo, para realizar pagamento
-    def realizarPagamento(self, forma: str, valor: float) -> None:
+    def realizarPagamento(self, forma: str, valor: float):
         pagamento = self.criarPagamento(forma)
         pagamento.pagar(valor)

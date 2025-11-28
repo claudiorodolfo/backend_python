@@ -1,8 +1,8 @@
 from fabricas_concretas import FactoryPagamentoOnline, FactoryPagamentoOffline
 from fabrica_abstrata import PagamentoFactory
 
-def cliente_pagamento(factory: PagamentoFactory, tipo: str, valor: float):
-    factory.realizarPagamento(tipo, valor)
+def cliente_pagamento(factory: PagamentoFactory, forma: str, valor: float):
+    factory.realizarPagamento(forma, valor)
 
 if __name__ == "__main__":
     # fábrica online
