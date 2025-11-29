@@ -1,5 +1,4 @@
 from bebida_decorator import BebidaDecorator
-from bebiba import Bebida
 
 class Chocolate(BebidaDecorator):
     def getDescription(self) -> str:

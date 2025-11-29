@@ -1,5 +1,5 @@
 from bebiba import Bebida
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
 class BebidaDecorator(Bebida):
     def __init__(self, bebida: Bebida):

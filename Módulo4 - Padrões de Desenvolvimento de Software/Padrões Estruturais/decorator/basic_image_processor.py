@@ -1,11 +1,11 @@
-from image_processor_interface import ImageProcessorInterface
+from image_processor import ImageProcessor
 
-class BasicImageProcessor(ImageProcessorInterface):
+class BasicImageProcessor(ImageProcessor):
     """Processador de imagem básico"""
-        
+
     def process(self, imagePath: str) -> str:
-        newImagePath = "/uploads/file_processed.jpg"  
-        #TODO: Implement the basic image processing logic
+        print("Implementação do processamento de imagem básico.")
+        newImagePath = "/uploads/file_processed.jpg"    
         print(f"Processa a imagem de {imagePath} para {newImagePath}")
-        
+
         return newImagePath
