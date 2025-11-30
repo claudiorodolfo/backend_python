@@ -1,16 +1,34 @@
-from main.constructor.introduction_process import introduction_process
-from main.constructor.people_finder_constructor import people_finder_constructor
-from main.constructor.people_register_constructor import people_register_constructor
+from views.index_view import IndexView
+from models.repository.repositorio_pessoa import RepositorioPessoas
+from controllers.pessoa_controller import PessoaController
+from routes.pessoa_routes import PessoaRoutes
 
-def start():
-    while True:
-        command = introduction_process()
-        match command:
-            case '1': 
-                people_register_constructor()
-            case '2': 
-                people_finder_constructor()
-            case '5': 
-                exit()
-            case _: 
-                print('\n Comando nao encontrado!! \n\n')
+
+class ProcessHandle:
+    """
+    Application Handler - Ponto de entrada da aplicação
+    Configura as dependências e inicializa o roteador
+    Similar ao que frameworks fazem com app.run() ou main()
+    """
+    def __init__(self):
+        self.repository = RepositorioPessoas()
+        self.pessoaController = PessoaController(self.repository)
+        self.pessoaRoutes = PessoaRoutes(self.pessoaController)
+        self.indexView = IndexView()
+
+    def start(self):
+        """Inicia o loop principal da aplicação"""
+        while True:
+            comando = self.indexView.show()
+            
+            match int(comando["comando"]):
+                case 0:
+                    print('\nSaindo do sistema...')
+                    exit()
+                case 1:
+                    self.pessoaRoutes.cadastrarPessoa()
+                case 2:
+                    self.pessoaRoutes.buscarPessoa()
+                case _:
+                    print('\nComando não encontrado!!\n\n')
+                    input('Pressione Enter para continuar...')

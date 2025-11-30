@@ -1,4 +1,5 @@
-from main.process_handle import start
+from main.process_handle import ProcessHandle
 
 if __name__ == "__main__":
-    start()
+    gerenciador = ProcessHandle()
+    gerenciador.start()
