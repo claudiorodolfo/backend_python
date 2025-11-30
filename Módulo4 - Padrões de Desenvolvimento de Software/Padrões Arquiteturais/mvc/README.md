@@ -1,6 +1,6 @@
 # Sistema Cadastral - Padrão MVC
 
-Este projeto é uma implementação didática do padrão arquitetural **MVC (Model-View-Controller)** em Python, demonstrando a separação de responsabilidades entre as camadas de apresentação, lógica de negócio e acesso a dados.
+Este projeto é uma implementação didática do Padrão de Projeto Arquitetural **MVC (Model-View-Controller)** em Python, demonstrando a separação de responsabilidades entre as camadas de apresentação, lógica de negócio e acesso a dados.
 
 ## 📋 Sobre o Projeto
 
@@ -65,7 +65,7 @@ mvc/
 
 ### Pré-requisitos
 
-- Python 3.10 ou superior (para suporte ao `match/case`)
+- Python 3.10 ou superior
 
 ### Executando o Projeto
 
@@ -159,8 +159,6 @@ Informações:
 
 - Padrão Arquitetural MVC
 - Separação de Responsabilidades
-- Injeção de Dependências
-- Repository Pattern
 - Encapsulamento
 - Validação de Dados
 - Tratamento de Exceções
