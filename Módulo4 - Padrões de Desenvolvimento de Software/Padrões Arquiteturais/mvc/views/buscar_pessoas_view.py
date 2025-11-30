@@ -21,15 +21,18 @@ class BuscarPessoasView:
         """Exibe os dados da pessoa encontrada"""
         os.system('cls||clear')
 
+        cabecalho = dados["head"]
+        corpo = dados["body"]
+        
         mensagem = f'''
-            Usuário encontrado com sucesso!
+            Usuário cadastrado com sucesso!
 
-            Tipo: {dados["head"]["type"]}
-            Registros: {dados["head"]["count"]}
+            Tipo: {cabecalho["type"]}
+            Registros: {cabecalho["count"]}
             Informações:
-                Nome: {dados["body"]["nome"]}
-                Idade: {dados["body"]["idade"]}
-                Altura: {dados["body"]["altura"]}
+                Nome: {corpo["nome"]}
+                Idade: {corpo["idade"]}
+                Altura: {corpo["altura"]}
         '''
         print(mensagem)
         input('\nPressione Enter para continuar...')
