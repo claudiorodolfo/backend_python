@@ -16,9 +16,11 @@ class RepositorioPessoas:
         return pessoa
 
     def findByNome(self, nome: str) -> Pessoa:
-        """Busca uma pessoa pelo nome"""
+        """Busca uma pessoa por parte do nome"""
+        nome_busca = nome.lower().strip()
         for pessoa in self.__pessoas:
-            if pessoa.nome == nome:
+            # Verifica se o termo buscado está contido no nome da pessoa
+            if nome_busca in pessoa.nome.lower():
                 return pessoa
         return None
 

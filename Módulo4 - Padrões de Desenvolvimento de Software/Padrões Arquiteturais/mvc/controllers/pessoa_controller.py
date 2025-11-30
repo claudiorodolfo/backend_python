@@ -84,9 +84,17 @@ class PessoaController:
                 "data": dados
             }
         except Exception as excecao:
+            dados = {
+                "head": {
+                    "code": 0,
+                },
+                "body": {
+                    "error": str(excecao)
+                }
+            }
             return {
                 "success": False,
-                "error": str(excecao)
+                "error": dados
             }
 
     def buscarPorNome(self, nome: str) -> Dict:
@@ -110,7 +118,16 @@ class PessoaController:
                 "data": dados
             }
         except Exception as excecao:
+            dados = {
+                "head": {
+                    "code": 0,
+                },
+                "body": {
+                    "error": str(excecao)
+                }
+            }
             return {
                 "success": False,
-                "error": str(excecao)
+                "error": dados
             }
+

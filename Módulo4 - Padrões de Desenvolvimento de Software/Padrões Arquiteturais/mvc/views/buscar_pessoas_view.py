@@ -37,14 +37,17 @@ class BuscarPessoasView:
         print(mensagem)
         input('\nPressione Enter para continuar...')
 
-    def showFailure(self, erro: str):
+    def showFailure(self, erro: Dict):
         """Exibe mensagem de erro"""
         os.system('cls||clear')
+
+        cabecalho = erro["head"]
+        corpo = erro["body"]
 
         mensagem = f'''
             Falha ao encontrar usuário!
 
-            Erro: {erro}
+            Erro: {corpo["error"]}
         '''
         print(mensagem)
         input('\nPressione Enter para continuar...')
