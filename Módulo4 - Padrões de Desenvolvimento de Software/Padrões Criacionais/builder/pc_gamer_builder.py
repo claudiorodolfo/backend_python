@@ -1,10 +1,8 @@
-"""
-Builder concreto para construção de PCs Gamer
-"""
 from computador import Computador
 from computador_builder import ComputadorBuilder
 
 class PCGamerBuilder(ComputadorBuilder):
+    
     def __init__(self):
         self.computador = Computador()
 
@@ -29,12 +27,14 @@ class PCGamerBuilder(ComputadorBuilder):
         return self
 
     def getResultado(self) -> Computador:
-        # Validação: PC Gamer deve ter GPU dedicada
         if not self.computador.gpu:
             raise ValueError("PC Gamer deve ter uma GPU dedicada!")
+        
+        if "integrada" in self.computador.gpu.lower():
+            raise ValueError("PC Gamer deve ter uma GPU DEDICADA, não integrada!")
+        
         return self.computador
     
     def construir(self) -> Computador:
-        """Método de conveniência que chama getResultado()"""
         return self.getResultado()
 

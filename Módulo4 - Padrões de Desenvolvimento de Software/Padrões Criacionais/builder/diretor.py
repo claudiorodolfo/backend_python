@@ -1,6 +1,3 @@
-"""
-Diretor que orquestra a construção usando um builder
-"""
 from computador_builder import ComputadorBuilder
 from enum import Enum
 
@@ -10,10 +7,14 @@ class TipoComputador(Enum):
     NOTEBOOK = "notebook"
 
 class Diretor:
+    
     def __init__(self, builder: ComputadorBuilder):
         self.builder = builder
 
     def construir(self, tipo: TipoComputador = None):
+        if tipo is None:
+            return self.builder
+        
         match tipo:
             case TipoComputador.PC_GAMER:
                 self.builder.setCpu("Intel i9-13900K")
@@ -22,6 +23,7 @@ class Diretor:
                 self.builder.setGpu("RTX 4080")
                 self.builder.setMonitor("27\" 4K 144Hz")
                 return self.builder.construir()
+                
             case TipoComputador.ESCRITORIO:
                 self.builder.setCpu("Intel i5-12400")
                 self.builder.setRam("16GB DDR4")
@@ -29,19 +31,21 @@ class Diretor:
                 self.builder.setGpu("GPU Integrada")
                 self.builder.setMonitor("24\" Full HD")
                 return self.builder.construir()
+                
             case TipoComputador.NOTEBOOK:
                 self.builder.setCpu("AMD Ryzen 7 5800H")
                 self.builder.setRam("16GB DDR4")
                 self.builder.setArmazenamento("1TB SSD")
                 self.builder.setGpu("RTX 3060")
                 self.builder.setMonitor("15.6\" Full HD")
-                # Verifica se o builder suporta métodos específicos de notebook
+                
                 if hasattr(self.builder, 'setBateria'):
                     self.builder.setBateria("80Wh")
                 if hasattr(self.builder, 'setPeso'):
                     self.builder.setPeso("2.1kg")
+                
                 return self.builder.construir()
+                
             case _:
-                # Se nenhum tipo for especificado, retorna o builder para construção customizada
                 return self.builder
 
