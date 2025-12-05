@@ -29,6 +29,10 @@ class ProcessHandle:
                     self.pessoaRoutes.cadastrarPessoa()
                 case 2:
                     self.pessoaRoutes.buscarPessoa()
+                case 3:
+                    self.pessoaRoutes.atualizarPessoa()
+                case 4:
+                    self.pessoaRoutes.apagarPessoa()
                 case _:
                     print('\nComando não encontrado!!\n\n')
                     input('Pressione Enter para continuar...')

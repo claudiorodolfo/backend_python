@@ -1,8 +1,13 @@
 class Pessoa:
-    def __init__(self, nome: str, idade: int = None, altura: float = None):
+    def __init__(self, email: str, nome: str = None, idade: int = None, altura: float = None):
+        self.__email = email
         self.__nome = nome
         self.__idade = idade
         self.__altura = altura
+
+    @property
+    def email(self):
+        return self.__email
 
     @property
     def nome(self):

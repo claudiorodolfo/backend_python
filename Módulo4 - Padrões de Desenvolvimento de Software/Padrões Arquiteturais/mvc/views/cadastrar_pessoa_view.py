@@ -1,35 +1,42 @@
 import os
 from typing import Dict
 
-class BuscarPessoasView:
+class CadastrarPessoaView:
     """
     View Layer - Camada de apresentação
     Responsável apenas por entrada e saída de dados (I/O)
     """
     def show(self) -> Dict:
-        """Solicita o nome da pessoa para busca"""
+        """Solicita dados do usuário para cadastro"""
         os.system('cls||clear')
 
-        print('Buscar Pessoa \n\n')
-        nome = input('Informe o nome da pessoa para busca: ')
+        print('Cadastrar Nova Pessoa \n\n')
+        email = input('Informe o e-mail : ')
+        nome = input('Informe o nome: ')
+        idade = input('Informe a idade: ')
+        altura = input('Informe a altura: ')
 
         return {
-            "nome": nome
+            "email": email,
+            "nome": nome,
+            "idade": idade,
+            "altura": altura
         }
 
     def showSuccess(self, dados: Dict):
-        """Exibe os dados da pessoa encontrada"""
+        """Exibe mensagem de sucesso com os dados cadastrados"""
         os.system('cls||clear')
 
         cabecalho = dados["head"]
         corpo = dados["body"]
-        
+
         mensagem = f'''
             Usuário cadastrado com sucesso!
 
             Tipo: {cabecalho["type"]}
             Registros: {cabecalho["count"]}
             Informações:
+                Email: {corpo["email"]}
                 Nome: {corpo["nome"]}
                 Idade: {corpo["idade"]}
                 Altura: {corpo["altura"]}
@@ -45,7 +52,7 @@ class BuscarPessoasView:
         corpo = erro["body"]
 
         mensagem = f'''
-            Falha ao encontrar usuário!
+            Falha ao cadastrar usuário!
 
             Erro: {corpo["error"]}
         '''
