@@ -8,7 +8,7 @@ Este projeto contém um web service que valida CPF e clientes em Python, Java, J
 WS1/
 ├── ws provider/
 │   ├── provider.py          # Servidor HTTP (web service)
-│   └── matar_servidor.py    # Script utilitário para encerrar processos na porta 8000
+│   └── matar_servidor.py    # Script utilitário para encerrar processos em uma porta específica
 └── ws client/
     ├── client.py            # Cliente Python
     ├── client.js            # Cliente JavaScript (Node.js)
@@ -61,7 +61,7 @@ curl http://localhost:8000/cpf?numero=11144477735
 **Se a porta 8000 estiver em uso:**
 Use o script `matar_servidor.py` para encerrar processos na porta 8000:
 ```bash
-python3 matar_servidor.py
+python3 matar_servidor.py 8000
 ```
 
 ---
@@ -362,7 +362,7 @@ Valida CPF via JSON no body:
 - Use o script utilitário `matar_servidor.py`:
   ```bash
   cd "ws provider"
-  python3 matar_servidor.py
+  python3 matar_servidor.py 8000
   ```
 - Ou manualmente:
   - Verifique processos usando a porta: `lsof -ti:8000`
@@ -429,16 +429,22 @@ curl -X POST "http://localhost:8000/cpf" \
 
 ### matar_servidor.py
 
-Script utilitário para encerrar processos que estão usando a porta 8000. Útil quando o servidor não pode ser iniciado porque a porta já está em uso.
+Script utilitário para encerrar processos que estão usando uma porta específica. Útil quando o servidor não pode ser iniciado porque a porta já está em uso.
 
 **Como usar:**
 ```bash
 cd "ws provider"
-python3 matar_servidor.py
+python3 matar_servidor.py <porta>
+```
+
+**Exemplo:**
+```bash
+python3 matar_servidor.py 8000
 ```
 
 **O que o script faz:**
-- Encontra todos os processos escutando na porta 8000
+- Recebe a porta como parâmetro na linha de comando
+- Encontra todos os processos escutando na porta especificada
 - Encerra esses processos usando `kill -9`
 - Exibe mensagens informativas sobre o processo
 
@@ -464,7 +470,7 @@ python3 provider.py
 ### Liberar Porta 8000 (se necessário)
 ```bash
 cd "ws provider"
-python3 matar_servidor.py
+python3 matar_servidor.py 8000
 ```
 
 ### Executar Clientes (em outro terminal)

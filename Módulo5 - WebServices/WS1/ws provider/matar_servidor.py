@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 def kill_process_on_port(port):
     try:
@@ -22,5 +23,14 @@ def kill_process_on_port(port):
     except Exception as e:
         print(f"Ocorreu um erro: {e}")
 
-# Chama a função para a porta 8000
-kill_process_on_port(8000)
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Uso: python matar_servidor.py <porta>")
+        sys.exit(1)
+    
+    try:
+        port = int(sys.argv[1])
+        kill_process_on_port(port)
+    except ValueError:
+        print("Erro: A porta deve ser um número inteiro.")
+        sys.exit(1)
