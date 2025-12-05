@@ -177,6 +177,31 @@ node --version
 - PHP 7.0 ou superior
 - Extensão `php-json` (geralmente já incluída)
 
+**Instalação do PHP:**
+
+**No macOS:**
+O PHP não vem pré-instalado no macOS. Instale via Homebrew:
+```bash
+brew install php
+```
+
+**No Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get install php
+```
+
+**No Linux (CentOS/RHEL):**
+```bash
+sudo yum install php
+```
+
+**Verificar instalação do PHP:**
+```bash
+php --version
+```
+
+Se o comando retornar "command not found", o PHP não está instalado. Siga as instruções de instalação acima.
+
 **Passo a passo:**
 
 1. Navegue até a pasta do cliente:
@@ -193,16 +218,6 @@ node --version
 - Usa `file_get_contents()` para fazer requisições HTTP
 - Executa GET e POST sequencialmente
 - Exibe as respostas JSON brutas
-
-**Verificar instalação do PHP:**
-```bash
-php --version
-```
-
-**Nota:** No macOS, o PHP pode precisar ser instalado via Homebrew:
-```bash
-brew install php
-```
 
 ---
 
@@ -392,9 +407,11 @@ Valida CPF via JSON no body:
 - Erro de módulo: Este cliente não usa npm, apenas APIs nativas
 
 **PHP:**
-- `php: command not found`: 
-  - macOS: `brew install php`
-  - Linux: `sudo apt-get install php` ou `sudo yum install php`
+- `php: command not found`: O PHP não vem pré-instalado no macOS
+  - **macOS:** Instale via Homebrew: `brew install php`
+  - **Linux (Ubuntu/Debian):** `sudo apt-get install php`
+  - **Linux (CentOS/RHEL):** `sudo yum install php`
+  - Após instalar, verifique com: `php --version`
 - Erro de extensão JSON: Geralmente já incluída, mas pode precisar habilitar no `php.ini`
 
 **C++:**
