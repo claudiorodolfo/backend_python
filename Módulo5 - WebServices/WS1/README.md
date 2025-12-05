@@ -7,14 +7,14 @@ Este projeto contém um web service que valida CPF e clientes em Python, Java, J
 ```
 WS1/
 ├── ws provider/
-│   └── provider.py          # Servidor HTTP (web service)
+│   ├── provider.py          # Servidor HTTP (web service)
+│   └── matar_servidor.py    # Script utilitário para encerrar processos na porta 8000
 └── ws client/
     ├── client.py            # Cliente Python
     ├── client.js            # Cliente JavaScript (Node.js)
     ├── Client.java          # Cliente Java
     ├── client.php           # Cliente PHP
-    ├── client.cpp           # Cliente C++
-    └── Client.class         # Bytecode Java (gerado após compilação)
+    └── client.cpp           # Cliente C++
 ```
 
 ## 📋 Pré-requisitos
@@ -56,6 +56,12 @@ O servidor é um web service HTTP que valida CPF através de endpoints GET e POS
 **Verificar se o servidor está rodando:**
 ```bash
 curl http://localhost:8000/cpf?numero=11144477735
+```
+
+**Se a porta 8000 estiver em uso:**
+Use o script `matar_servidor.py` para encerrar processos na porta 8000:
+```bash
+python3 matar_servidor.py
 ```
 
 ---
@@ -353,8 +359,14 @@ Valida CPF via JSON no body:
 - Teste com: `curl http://localhost:8000/cpf?numero=11144477735`
 
 **Porta 8000 em uso:**
-- Verifique processos usando a porta: `lsof -ti:8000`
-- Encerre o processo: `kill -9 $(lsof -ti:8000)`
+- Use o script utilitário `matar_servidor.py`:
+  ```bash
+  cd "ws provider"
+  python3 matar_servidor.py
+  ```
+- Ou manualmente:
+  - Verifique processos usando a porta: `lsof -ti:8000`
+  - Encerre o processo: `kill -9 $(lsof -ti:8000)`
 - Ou altere a porta no `provider.py` (linha 77) e atualize os clientes
 
 **Comportamento inesperado:**
@@ -413,12 +425,46 @@ curl -X POST "http://localhost:8000/cpf" \
 
 ---
 
+## 🛠️ Utilitários
+
+### matar_servidor.py
+
+Script utilitário para encerrar processos que estão usando a porta 8000. Útil quando o servidor não pode ser iniciado porque a porta já está em uso.
+
+**Como usar:**
+```bash
+cd "ws provider"
+python3 matar_servidor.py
+```
+
+**O que o script faz:**
+- Encontra todos os processos escutando na porta 8000
+- Encerra esses processos usando `kill -9`
+- Exibe mensagens informativas sobre o processo
+
+**Exemplo de saída:**
+```
+Processos encontrados na porta 8000: 12345
+Processo 12345 encerrado com sucesso.
+Porta 8000 liberada.
+```
+
+**Nota:** Este script funciona no macOS e Linux. No Windows, pode ser necessário usar comandos diferentes.
+
+---
+
 ## ⚡ Resumo Rápido
 
 ### Iniciar Servidor
 ```bash
 cd "ws provider"
 python3 provider.py
+```
+
+### Liberar Porta 8000 (se necessário)
+```bash
+cd "ws provider"
+python3 matar_servidor.py
 ```
 
 ### Executar Clientes (em outro terminal)
