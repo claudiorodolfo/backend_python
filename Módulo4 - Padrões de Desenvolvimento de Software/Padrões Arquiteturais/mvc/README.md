@@ -109,7 +109,7 @@ python run.py
 - Exibe os dados completos da pessoa encontrada
 - Retorna erro se a pessoa não for encontrada
 
-### Buscar Todas as Pessoas
+### Listar Todas as Pessoas
 - Lista todas as pessoas cadastradas no sistema
 - Exibe o total de registros encontrados
 - Retorna erro se não houver pessoas cadastradas
@@ -164,7 +164,7 @@ Sistema Cadastral
 * 0 - Sair
 * 1 - Cadastrar Pessoa
 * 2 - Buscar Pessoa Por E-mail
-* 3 - Buscar Todas as Pessoas
+* 3 - Listar Todas as Pessoas
 * 4 - Atualizar Pessoa
 * 5 - Apagar Pessoa
 
