@@ -2,7 +2,7 @@ import os
 from controllers.pessoa_controller import PessoaController
 from views.cadastrar_pessoa_view import CadastrarPessoaView
 from views.buscar_pessoa_view import BuscarPessoaView
-from views.buscar_todas_pessoas_view import BuscarTodasPessoasView
+from views.listar_todas_pessoas_view import BuscarTodasPessoasView
 from views.atualizar_pessoa import AtualizarPessoaView
 from views.apagar_pessoa import ApagarPessoaView
 

@@ -13,7 +13,7 @@ O projeto está organizado seguindo o padrão MVC com as seguintes camadas:
 ### **Model (Modelo)**
 Responsável pela representação dos dados e lógica de persistência.
 
-- **`models/entities/pessoa.py`**: Entidade `Pessoa` com propriedades encapsuladas (email, nome, idade, altura). O e-mail é o identificador único da entidade.
+- **`models/entities/pessoa.py`**: Entidade `Pessoa` com propriedades encapsuladas (e-mail, nome, idade, altura). O e-mail é o identificador único da entidade.
 - **`models/repository/repositorio_pessoa.py`**: Repositório que gerencia o acesso aos dados (CRUD completo: criar, buscar, listar, atualizar e apagar)
 
 ### **View (Visão)**
@@ -22,7 +22,7 @@ Responsável apenas pela entrada e saída de dados (I/O), sem lógica de negóci
 - **`views/index_view.py`**: Menu principal do sistema
 - **`views/cadastrar_pessoa_view.py`**: Interface para cadastro de pessoas
 - **`views/buscar_pessoa_view.py`**: Interface para busca de pessoa por e-mail
-- **`views/buscar_todas_pessoas_view.py`**: Interface para listar todas as pessoas
+- **`views/listar_todas_pessoas_view.py`**: Interface para listar todas as pessoas
 - **`views/atualizar_pessoa.py`**: Interface para atualização de pessoas
 - **`views/apagar_pessoa.py`**: Interface para exclusão de pessoas
 
@@ -60,7 +60,7 @@ mvc/
 │   ├── apagar_pessoa.py
 │   ├── atualizar_pessoa.py
 │   ├── buscar_pessoa_view.py
-│   ├── buscar_todas_pessoas_view.py
+│   ├── listar_todas_pessoas_view.py
 │   ├── cadastrar_pessoa_view.py
 │   └── index_view.py
 ├── run.py
