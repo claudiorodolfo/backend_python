@@ -25,6 +25,18 @@ ou
 python3 -m pip install requests
 ```
 
+ou 
+
+```bash
+python3 -m pip install --user requests
+```
+
+ou 
+
+```bash
+python3 -m pip install --user --break-system-packages requests
+```
+
 #### Opção 2: Instalação apenas para o usuário atual (recomendado)
 
 ```bash
