@@ -1,220 +1,131 @@
-# WS2 - Web Service de Validação de CPF
+# Cliente REST para Consulta de CEP
 
-Este projeto implementa um Web Service para validação de CPF (Cadastro de Pessoa Física) com providers em múltiplas linguagens e um cliente em Python.
+Projeto de cliente REST que consome o serviço ViaCEP para buscar informações de endereço via requisições HTTP.
 
-## Estrutura do Projeto
+## Arquivos
 
-```
-WS2/
-├── ws provider/          # Servidores (providers) do Web Service
-│   ├── provider.py       # Provider em Python (porta 8000)
-│   ├── provider.js       # Provider em Node.js (porta 8081)
-│   ├── provider.php      # Provider em PHP (porta 8081)
-│   └── Provider.java     # Provider em Java (porta 8082)
-└── ws client/            # Cliente para testar o Web Service
-    └── client.py         # Cliente em Python
-```
+- `ws client/consulta_cep.py`: Cliente que consome o serviço REST do ViaCEP
+- `ws client/requirements.txt`: Dependências do projeto
 
-## Funcionalidades
+## Instalação
 
-O Web Service oferece dois endpoints para validação de CPF:
+### Instalar a biblioteca requests
 
-### GET /cpf?cpf=XXXXXXXXXXX
-Valida um CPF via parâmetro de query string.
+Para instalar a biblioteca `requests` sem usar ambiente virtual (venv), você pode usar uma das seguintes opções:
 
-**Exemplo:**
+#### Opção 1: Instalação global (requer permissões de administrador)
+
 ```bash
-curl "http://localhost:8000/cpf?cpf=11144477735"
+pip3 install requests
 ```
 
-**Resposta:**
+ou
+
+```bash
+python3 -m pip install requests
+```
+
+#### Opção 2: Instalação apenas para o usuário atual (recomendado)
+
+```bash
+pip3 install --user requests
+```
+
+ou
+
+```bash
+python3 -m pip install --user requests
+```
+
+Esta opção instala o pacote apenas para o usuário atual, sem precisar de permissões de administrador.
+
+#### Opção 3: Instalar a partir do requirements.txt
+
+```bash
+pip3 install --user -r "ws client/requirements.txt"
+```
+
+ou
+
+```bash
+python3 -m pip install --user -r "ws client/requirements.txt"
+```
+
+## Como Usar
+
+### Executar o Cliente
+
+```bash
+cd "ws client"
+python3 consulta_cep.py
+```
+
+O cliente irá testar automaticamente diferentes CEPs e exibir os resultados.
+
+## Exemplo de Uso Programático
+
+```python
+from consulta_cep import ConsultaCepCliente
+
+# Cria uma instância do cliente
+cliente = ConsultaCepCliente()
+
+# Consulta um CEP
+resposta, codigo = cliente.consultar("01001000")
+
+if codigo == 200:
+    print(f"CEP: {resposta['cep']}")
+    print(f"Logradouro: {resposta['logradouro']}")
+    print(f"Bairro: {resposta['bairro']}")
+    print(f"Cidade/UF: {resposta['localidade']} / {resposta['uf']}")
+else:
+    print(f"Erro: {resposta.get('erro', 'Erro desconhecido')}")
+```
+
+## API do ViaCEP
+
+O cliente consome a API pública do ViaCEP:
+
+**Endpoint:** `https://viacep.com.br/ws/{cep}/json/`
+
+**Método:** GET
+
+**Exemplo de Resposta de Sucesso (200):**
 ```json
 {
-  "cpf": "11144477735",
-  "valid": true
+  "cep": "01001-000",
+  "logradouro": "Praça da Sé",
+  "complemento": "lado ímpar",
+  "bairro": "Sé",
+  "localidade": "São Paulo",
+  "uf": "SP",
+  "ibge": "3550308",
+  "gia": "1004",
+  "ddd": "11",
+  "siafi": "7107"
 }
 ```
 
-### POST /cpf
-Valida um CPF enviado no corpo da requisição em formato JSON.
-
-**Exemplo:**
-```bash
-curl -X POST http://localhost:8000/cpf \
-  -H "Content-Type: application/json" \
-  -d '{"cpf": "11144477735"}'
-```
-
-**Resposta:**
+**Exemplo de Resposta de Erro (CEP não encontrado):**
 ```json
 {
-  "cpf": "11144477735",
-  "valid": true
+  "erro": true
 }
 ```
 
-## Como Executar
+## Testando com cURL
 
-### Provider Python (Recomendado)
-
-**Pré-requisitos:** Python 3.x instalado
-
-1. Abra um terminal e navegue até a pasta do provider:
 ```bash
-cd "Módulo5 - WebServices/WS2/ws provider"
+curl https://viacep.com.br/ws/01001000/json/
 ```
 
-2. Inicie o servidor:
-```bash
-python3 provider.py
-```
+## Requisitos
 
-Você verá a mensagem: `Servidor rodando em http://localhost:8000 ...`
+- Python 3.6 ou superior
+- Biblioteca `requests` (versão 2.32.0 ou superior)
 
-3. Em outro terminal, execute o cliente:
-```bash
-cd "Módulo5 - WebServices/WS2/ws client"
-python3 client.py
-```
+## Notas
 
-O cliente testará os endpoints GET e POST automaticamente.
-
-**Para parar o servidor:** Pressione `Ctrl+C` no terminal onde o servidor está rodando.
-
----
-
-### Provider Node.js
-
-**Pré-requisitos:** Node.js instalado
-
-1. Abra um terminal e navegue até a pasta do provider:
-```bash
-cd "Módulo5 - WebServices/WS2/ws provider"
-```
-
-2. Inicie o servidor:
-```bash
-node provider.js
-```
-
-Você verá a mensagem: `Servidor JS rodando em http://localhost:8081`
-
-3. Para testar, você pode:
-   - Usar o cliente Python (após atualizar a porta no código)
-   - Usar curl:
-     ```bash
-     curl "http://localhost:8081/cpf?cpf=11144477735"
-     curl -X POST http://localhost:8081/cpf -H "Content-Type: application/json" -d '{"cpf": "11144477735"}'
-     ```
-
-**Para parar o servidor:** Pressione `Ctrl+C` no terminal onde o servidor está rodando.
-
----
-
-### Provider PHP
-
-**Pré-requisitos:** PHP instalado (versão 7.0 ou superior)
-
-1. Abra um terminal e navegue até a pasta do provider:
-```bash
-cd "Módulo5 - WebServices/WS2/ws provider"
-```
-
-2. Inicie o servidor:
-```bash
-php -S localhost:8081 provider.php
-```
-
-Você verá a mensagem indicando que o servidor está rodando.
-
-3. Para testar, você pode:
-   - Usar o cliente Python (após atualizar a porta no código)
-   - Usar curl:
-     ```bash
-     curl "http://localhost:8081/cpf?cpf=11144477735"
-     curl -X POST http://localhost:8081/cpf -H "Content-Type: application/json" -d '{"cpf": "11144477735"}'
-     ```
-
-**Para parar o servidor:** Pressione `Ctrl+C` no terminal onde o servidor está rodando.
-
----
-
-### Provider Java
-
-**Pré-requisitos:** JDK instalado (Java 8 ou superior)
-
-1. Abra um terminal e navegue até a pasta do provider:
-```bash
-cd "Módulo5 - WebServices/WS2/ws provider"
-```
-
-2. Compile o código:
-```bash
-javac Provider.java
-```
-
-Isso criará o arquivo `Provider.class` na mesma pasta.
-
-3. Execute o servidor:
-```bash
-java Provider
-```
-
-Você verá a mensagem: `Java CPF Provider rodando em http://localhost:8082`
-
-4. Para testar, você pode:
-   - Usar o cliente Python (após atualizar a porta no código)
-   - Usar curl:
-     ```bash
-     curl "http://localhost:8082/cpf?cpf=11144477735"
-     curl -X POST http://localhost:8082/cpf -H "Content-Type: application/json" -d '{"cpf": "11144477735"}'
-     ```
-
-**Para parar o servidor:** Pressione `Ctrl+C` no terminal onde o servidor está rodando.
-
-**Nota:** Se você quiser limpar os arquivos compilados após usar:
-```bash
-rm Provider.class
-```
-
----
-
-### Testando com o Cliente Python
-
-O cliente padrão (`client.py`) está configurado para usar o provider Python na porta 8000. Para usar outros providers, você precisa editar o arquivo `client.py` e alterar a URL:
-
-- Para Node.js/PHP (porta 8081): `"http://localhost:8081/cpf"`
-- Para Java (porta 8082): `"http://localhost:8082/cpf"`
-
-## Algoritmo de Validação de CPF
-
-O algoritmo implementado segue o padrão oficial de validação de CPF brasileiro:
-
-1. Remove caracteres não numéricos
-2. Verifica se possui 11 dígitos
-3. Verifica se não são todos os dígitos iguais
-4. Calcula o primeiro dígito verificador
-5. Calcula o segundo dígito verificador
-6. Compara com os dígitos informados
-
-## Exemplos de CPF para Teste
-
-- **Válido:** `11144477735`
-- **Válido:** `12345678909`
-- **Inválido:** `11111111111` (todos os dígitos iguais)
-- **Inválido:** `12345678900` (dígitos verificadores incorretos)
-
-## Tecnologias Utilizadas
-
-- **Python:** `http.server` (BaseHTTPRequestHandler) - Porta 8000
-- **Node.js:** `http` (módulo nativo) - Porta 8081
-- **PHP:** Built-in server (`php -S`) - Porta 8081
-- **Java:** `com.sun.net.httpserver` - Porta 8082
-
-## Observações Importantes
-
-- ⚠️ **Portas:** Cada provider usa uma porta diferente. Certifique-se de que apenas um provider esteja rodando por vez em cada porta, ou altere as portas se necessário.
-- O cliente padrão (`client.py`) está configurado para usar o provider Python na porta 8000
-- Para usar outros providers, altere a URL no arquivo `client.py` (linhas 11 e 26)
-- Todos os providers implementam a mesma lógica de validação de CPF
-- Todos os providers suportam os mesmos endpoints: `GET /cpf?cpf=XXXXXXXXXXX` e `POST /cpf` com JSON no body
+- O CEP deve ter exatamente 8 dígitos (sem hífen)
+- O serviço ViaCEP é gratuito e público, não requer autenticação
+- A consulta tem timeout de 5 segundos
