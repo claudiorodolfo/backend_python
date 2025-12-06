@@ -102,7 +102,7 @@ class PessoaController:
                 "error": dados
             }
 
-    def buscarTodasPessoas(self) -> Dict:
+    def listarTodasPessoas(self) -> Dict:
         """
         Coordena a busca de todas as pessoas
         Retorna lista formatada de todas as pessoas cadastradas

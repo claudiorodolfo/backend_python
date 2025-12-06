@@ -2,7 +2,7 @@ import os
 from controllers.pessoa_controller import PessoaController
 from views.cadastrar_pessoa_view import CadastrarPessoaView
 from views.buscar_pessoa_view import BuscarPessoaView
-from views.listar_todas_pessoas_view import BuscarTodasPessoasView
+from views.listar_todas_pessoas_view import ListarTodasPessoasView
 from views.atualizar_pessoa import AtualizarPessoaView
 from views.apagar_pessoa import ApagarPessoaView
 
@@ -12,37 +12,39 @@ class PessoaRoutes:
     Router Sublayer - Gerencia as rotas da aplicação. 
     Subcamada do Controller Layer.
     """
-    def __init__(self, pessoaController: PessoaController):
-        self.pessoaController = pessoaController
+    def __init__(self, pessoa_controller: PessoaController):
+        self.pessoaController = pessoa_controller
+
         self.cadastrarView = CadastrarPessoaView()
         self.buscarView = BuscarPessoaView()
-        self.buscarTodasPessoasView = BuscarTodasPessoasView()
+        self.listarTodasPessoasView = ListarTodasPessoasView()
         self.atualizarView = AtualizarPessoaView()
         self.apagarView = ApagarPessoaView()
 
     def cadastrarPessoa(self):
         """Rota para cadastrar uma pessoa"""
-        informacoesPessoa = self.cadastrarView.show()
-        resposta = self.pessoaController.cadastrarPessoa(informacoesPessoa)
+        informacoes_pessoa  = self.cadastrarView.show()
+        resposta = self.pessoaController.cadastrarPessoa(informacoes_pessoa)
 
         if resposta["success"]:
             self.cadastrarView.showSuccess(resposta["data"])
         else:
             self.cadastrarView.showFailure(resposta["error"])
 
-    def buscarTodasPessoas(self):
+    def listarTodasPessoas(self):
         """Rota para buscar todas as pessoas"""
-        resposta = self.pessoaController.buscarTodasPessoas()
+        resposta = self.pessoaController.listarTodasPessoas()
 
         if resposta["success"]:
-            self.buscarTodasPessoasView.showSuccess(resposta["data"])
+            self.listarTodasPessoasView.showSuccess(resposta["data"])
         else:
-            self.buscarTodasPessoasView.showFailure(resposta["error"])
+            self.listarTodasPessoasView.showFailure(resposta["error"])
 
     def buscarPessoa(self):
         """Rota para buscar uma pessoa por email"""
-        informacoesPessoa = self.buscarView.show()
-        resposta = self.pessoaController.buscarPorEmail(informacoesPessoa["email"])
+        informacoes_pessoa = self.buscarView.show()
+        email = informacoes_pessoa.get("email", "").strip()
+        resposta = self.pessoaController.buscarPorEmail(email)
 
         if resposta["success"]:
             self.buscarView.showSuccess(resposta["data"])
@@ -67,14 +69,13 @@ class PessoaRoutes:
             pessoa_atual = resposta_busca["data"]["body"]
         else:
             # Se não encontrou, ainda permite continuar, mas sem mostrar valores atuais
-            print(f'\n⚠️  {resposta_busca["error"]["body"]["error"]}')
-            print('Você pode continuar, mas a pessoa deve existir para ser atualizada.\n')
+            print(f'\n  {resposta_busca["error"]["body"]["error"]}')
+            print('A pessoa deve existir para ser atualizada.\n')
             input('Pressione Enter para continuar...')
         
         # Mostrar view de atualização com dados atuais (se encontrados)
-        informacoesPessoa = self.atualizarView.show(pessoa_atual, email)
-        
-        resposta = self.pessoaController.atualizarPessoa(informacoesPessoa)
+        informacoes_pessoa = self.atualizarView.show(pessoa_atual, email)
+        resposta = self.pessoaController.atualizarPessoa(informacoes_pessoa)
 
         if resposta["success"]:
             self.atualizarView.showSuccess(resposta["data"])
@@ -83,8 +84,8 @@ class PessoaRoutes:
 
     def apagarPessoa(self):
         """Rota para apagar uma pessoa"""
-        informacoesPessoa = self.apagarView.show()
-        resposta = self.pessoaController.apagarPessoa(informacoesPessoa)
+        informacoes_pessoa = self.apagarView.show()
+        resposta = self.pessoaController.apagarPessoa(informacoes_pessoa)
 
         if resposta["success"]:
             self.apagarView.showSuccess(resposta["data"])

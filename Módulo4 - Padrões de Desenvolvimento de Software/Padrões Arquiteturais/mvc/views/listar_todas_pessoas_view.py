@@ -1,17 +1,11 @@
 import os
 from typing import Dict
 
-class BuscarTodasPessoasView:
+class ListarTodasPessoasView:
     """
     View Layer - Camada de apresentação
     Responsável apenas por entrada e saída de dados (I/O)
     """
-    def show(self) -> Dict:
-        """Solicita a listagem de todas as pessoas"""
-        os.system('cls||clear')
-
-        print('Buscar Todas Pessoas \n\n')
-        return {}
 
     def showSuccess(self, dados: Dict):
         """Exibe os dados das pessoas encontradas"""

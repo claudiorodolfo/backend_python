@@ -30,7 +30,7 @@ class ProcessHandle:
                 case 2:
                     self.pessoaRoutes.buscarPessoa()
                 case 3:
-                    self.pessoaRoutes.buscarTodasPessoas()
+                    self.pessoaRoutes.listarTodasPessoas()
                 case 4:
                     self.pessoaRoutes.atualizarPessoa()
                 case 5:

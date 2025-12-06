@@ -6,7 +6,7 @@ class AtualizarPessoaView:
     View Layer - Camada de apresentação
     Responsável apenas por entrada e saída de dados (I/O)
     """
-    def show(self, pessoa_atual: Optional[Dict] = None, email: str = "") -> Dict:
+    def show(self, pessoa_atual: Dict = None, email: str = "") -> Dict:
         """Solicita dados da pessoa para atualizar"""
         os.system('cls||clear')
 
