@@ -13,20 +13,23 @@ O projeto está organizado seguindo o padrão MVC com as seguintes camadas:
 ### **Model (Modelo)**
 Responsável pela representação dos dados e lógica de persistência.
 
-- **`models/entities/pessoa.py`**: Entidade `Pessoa` com propriedades encapsuladas (nome, idade, altura)
-- **`models/repository/repositorio_pessoa.py`**: Repositório que gerencia o acesso aos dados (CRUD)
+- **`models/entities/pessoa.py`**: Entidade `Pessoa` com propriedades encapsuladas (email, nome, idade, altura). O e-mail é o identificador único da entidade.
+- **`models/repository/repositorio_pessoa.py`**: Repositório que gerencia o acesso aos dados (CRUD completo: criar, buscar, listar, atualizar e apagar)
 
 ### **View (Visão)**
 Responsável apenas pela entrada e saída de dados (I/O), sem lógica de negócio.
 
 - **`views/index_view.py`**: Menu principal do sistema
-- **`views/cadastrar_pessoas_view.py`**: Interface para cadastro de pessoas
-- **`views/buscar_pessoas_view.py`**: Interface para busca de pessoas
+- **`views/cadastrar_pessoa_view.py`**: Interface para cadastro de pessoas
+- **`views/buscar_pessoa_view.py`**: Interface para busca de pessoa por e-mail
+- **`views/buscar_todas_pessoas_view.py`**: Interface para listar todas as pessoas
+- **`views/atualizar_pessoa.py`**: Interface para atualização de pessoas
+- **`views/apagar_pessoa.py`**: Interface para exclusão de pessoas
 
 ### **Controller (Controlador)**
 Coordena a comunicação entre View e Model, contendo a lógica de negócio e validações.
 
-- **`controllers/pessoa_controller.py`**: Controlador que gerencia as operações de cadastro e busca, incluindo validações e formatação de dados
+- **`controllers/pessoa_controller.py`**: Controlador que gerencia todas as operações CRUD (cadastrar, buscar, listar, atualizar e apagar), incluindo validações, conversão de tipos e formatação de dados no padrão de resposta da API
 
 ### **Routes (Rotas)**
 Subcamada do Controller que gerencia o roteamento das requisições.
@@ -54,8 +57,11 @@ mvc/
 ├── routes/
 │   └── pessoa_routes.py
 ├── views/
-│   ├── buscar_pessoas_view.py
-│   ├── cadastrar_pessoas_view.py
+│   ├── apagar_pessoa.py
+│   ├── atualizar_pessoa.py
+│   ├── buscar_pessoa_view.py
+│   ├── buscar_todas_pessoas_view.py
+│   ├── cadastrar_pessoa_view.py
 │   └── index_view.py
 ├── run.py
 └── README.md
@@ -82,27 +88,50 @@ python run.py
 3. Siga as instruções no menu:
    - **0** - Sair do sistema
    - **1** - Cadastrar Pessoa
-   - **2** - Buscar Pessoa Por Nome
+   - **2** - Buscar Pessoa Por E-mail
+   - **3** - Buscar Todas as Pessoas
+   - **4** - Atualizar Pessoa
+   - **5** - Apagar Pessoa
 
 ## ✨ Funcionalidades
 
 ### Cadastrar Pessoa
 - Permite cadastrar uma nova pessoa informando:
-  - Nome (obrigatório)
+  - E-mail (obrigatório) - usado como identificador único
+  - Nome (opcional)
   - Idade (opcional)
   - Altura (opcional)
 - Valida os dados antes de persistir
 - Exibe mensagem de sucesso ou erro
 
-### Buscar Pessoa
-- Busca uma pessoa pelo nome
+### Buscar Pessoa Por E-mail
+- Busca uma pessoa pelo e-mail
 - Exibe os dados completos da pessoa encontrada
 - Retorna erro se a pessoa não for encontrada
 
+### Buscar Todas as Pessoas
+- Lista todas as pessoas cadastradas no sistema
+- Exibe o total de registros encontrados
+- Retorna erro se não houver pessoas cadastradas
+
+### Atualizar Pessoa
+- Permite atualizar os dados de uma pessoa existente
+- Busca a pessoa pelo e-mail
+- Exibe os valores atuais para facilitar a edição
+- Permite atualizar nome, idade e altura
+- Valida os dados antes de atualizar
+- Exibe mensagem de sucesso ou erro
+
+### Apagar Pessoa
+- Permite excluir uma pessoa do sistema
+- Busca e remove a pessoa pelo e-mail
+- Exibe mensagem de sucesso ou erro
+
 ## 🔍 Validações Implementadas
 
-- **Nome**: Não pode ser vazio ou apenas espaços
-- **Idade**: Deve ser um número inteiro positivo (se informada)
+- **E-mail**: Campo obrigatório, não pode ser vazio ou apenas espaços
+- **Nome**: Não pode ser vazio ou apenas espaços (se informado)
+- **Idade**: Deve ser um número inteiro não negativo (se informada)
 - **Altura**: Deve ser um número maior que zero (se informada)
 
 ## 🎯 Características do Padrão MVC
@@ -117,6 +146,11 @@ python run.py
 - Controllers fazem a conversão entre dicionários e entidades
 - Repository abstrai o acesso aos dados
 
+### Padrão de Resposta
+- Todas as respostas seguem um padrão estruturado com `head` e `body`
+- Respostas de sucesso incluem metadados (tipo, contagem)
+- Respostas de erro seguem o mesmo padrão para consistência
+
 ### Manutenibilidade
 - Código organizado e fácil de entender
 - Fácil adicionar novas funcionalidades
@@ -129,21 +163,26 @@ Sistema Cadastral
 
 * 0 - Sair
 * 1 - Cadastrar Pessoa
-* 2 - Buscar Pessoa Por Nome
+* 2 - Buscar Pessoa Por E-mail
+* 3 - Buscar Todas as Pessoas
+* 4 - Atualizar Pessoa
+* 5 - Apagar Pessoa
 
 Comando: 1
 
 Cadastrar Nova Pessoa
 
-Informe o nome da pessoa: João Silva
-Informe a idade da pessoa: 30
-Informe a altura da pessoa: 1.75
+Informe o e-mail (obrigatório): joao.silva@email.com
+Informe o nome (opcional - pressione Enter para pular): João Silva
+Informe a idade (opcional - pressione Enter para pular): 30
+Informe a altura (opcional - pressione Enter para pular): 1.75
 
 Usuário cadastrado com sucesso!
 
 Tipo: Pessoa
 Registros: 1
 Informações:
+    Email: joao.silva@email.com
     Nome: João Silva
     Idade: 30
     Altura: 1.75

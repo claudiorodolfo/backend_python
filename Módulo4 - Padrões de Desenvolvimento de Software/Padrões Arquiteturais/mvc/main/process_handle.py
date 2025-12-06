@@ -30,8 +30,10 @@ class ProcessHandle:
                 case 2:
                     self.pessoaRoutes.buscarPessoa()
                 case 3:
-                    self.pessoaRoutes.atualizarPessoa()
+                    self.pessoaRoutes.buscarTodasPessoas()
                 case 4:
+                    self.pessoaRoutes.atualizarPessoa()
+                case 5:
                     self.pessoaRoutes.apagarPessoa()
                 case _:
                     print('\nComando não encontrado!!\n\n')

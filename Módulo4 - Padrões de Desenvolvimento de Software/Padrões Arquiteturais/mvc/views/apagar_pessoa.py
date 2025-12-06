@@ -10,7 +10,7 @@ class ApagarPessoaView:
         """Solicita o email da pessoa para apagar"""
         os.system('cls||clear')
 
-        email = input('Digite o email da pessoa: ')
+        email = input('Digite o e-mail da pessoa: ')
 
         return {
             "email": email

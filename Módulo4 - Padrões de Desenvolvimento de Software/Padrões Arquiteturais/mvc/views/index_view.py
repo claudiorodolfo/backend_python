@@ -12,8 +12,9 @@ class IndexView:
         * 0 - Sair
         * 1 - Cadastrar Pessoa
         * 2 - Buscar Pessoa Por E-mail
-        * 3 - Atualizar Pessoa
-        * 4 - Apagar Pessoa
+        * 3 - Buscar Todas as Pessoas
+        * 4 - Atualizar Pessoa
+        * 5 - Apagar Pessoa
         '''
 
         print(mensagem)

@@ -11,10 +11,18 @@ class CadastrarPessoaView:
         os.system('cls||clear')
 
         print('Cadastrar Nova Pessoa \n\n')
-        email = input('Informe o e-mail : ')
-        nome = input('Informe o nome: ')
-        idade = input('Informe a idade: ')
-        altura = input('Informe a altura: ')
+        
+        # Email é obrigatório
+        email = ""
+        while not email.strip():
+            email = input('Informe o e-mail (obrigatório): ')
+            if not email.strip():
+                print('E-mail é obrigatório! Por favor, informe um e-mail.\n')
+        
+        # Demais campos são opcionais
+        nome = input('Informe o nome (opcional - pressione Enter para pular): ')
+        idade = input('Informe a idade (opcional - pressione Enter para pular): ')
+        altura = input('Informe a altura (opcional - pressione Enter para pular): ')
 
         return {
             "email": email,

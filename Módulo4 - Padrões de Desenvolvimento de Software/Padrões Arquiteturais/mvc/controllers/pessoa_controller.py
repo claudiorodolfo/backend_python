@@ -102,6 +102,53 @@ class PessoaController:
                 "error": dados
             }
 
+    def buscarTodasPessoas(self) -> Dict:
+        """
+        Coordena a busca de todas as pessoas
+        Retorna lista formatada de todas as pessoas cadastradas
+        """
+        try:
+            pessoas = self.repository.listarTodas()
+            
+            if not pessoas:
+                raise ValueError('Nenhuma pessoa cadastrada!')
+            
+            # Formatação da resposta com lista de pessoas
+            pessoas_formatadas = []
+            for pessoa in pessoas:
+                pessoas_formatadas.append({
+                    "email": pessoa.email,
+                    "nome": pessoa.nome,
+                    "idade": pessoa.idade,
+                    "altura": pessoa.altura
+                })
+            
+            dados = {
+                "head": {
+                    "count": len(pessoas_formatadas),
+                    "type": "Pessoa"
+                },
+                "body": pessoas_formatadas
+            }
+            
+            return {
+                "success": True,
+                "data": dados
+            }
+        except Exception as excecao:
+            dados = {
+                "head": {
+                    "code": 0,
+                },
+                "body": {
+                    "error": str(excecao)
+                }
+            }
+            return {
+                "success": False,
+                "error": dados
+            }
+
     def buscarPorEmail(self, email: str) -> Dict:
         """
         Coordena a busca de uma pessoa por email
