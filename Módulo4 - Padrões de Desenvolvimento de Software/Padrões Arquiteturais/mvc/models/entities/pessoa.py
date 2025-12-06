@@ -1,3 +1,7 @@
+"""
+    Entity sublayer - Camada de entidades.
+    Subcamada do Model Layer.
+"""
 class Pessoa:
     def __init__(self, email: str, nome: str = None, idade: int = None, altura: float = None):
         self.__email = email

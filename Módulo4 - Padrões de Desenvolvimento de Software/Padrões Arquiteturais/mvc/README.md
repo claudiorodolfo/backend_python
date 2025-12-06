@@ -82,7 +82,7 @@ cd "Módulo4 - Padrões de Desenvolvimento de Software/Padrões Arquiteturais/mv
 
 2. Execute o arquivo principal:
 ```bash
-python run.py
+python3 run.py
 ```
 
 3. Siga as instruções no menu:
