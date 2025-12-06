@@ -89,7 +89,7 @@ python run.py
    - **0** - Sair do sistema
    - **1** - Cadastrar Pessoa
    - **2** - Buscar Pessoa Por E-mail
-   - **3** - Buscar Todas as Pessoas
+   - **3** - Listar Todas as Pessoas
    - **4** - Atualizar Pessoa
    - **5** - Apagar Pessoa
 
