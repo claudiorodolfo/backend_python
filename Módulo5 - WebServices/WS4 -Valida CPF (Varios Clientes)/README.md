@@ -1,6 +1,6 @@
 # WS4 - Valida CPF (Vários Clientes)
 
-Este projeto contém um web service que valida CPF e clientes em Python, Java, JavaScript, PHP e C++ para testá-lo.
+Este projeto contém um web service que valida CPF e múltiplos clientes em diferentes linguagens (Python, Java, JavaScript, PHP e C++) para demonstrar a integração com o serviço.
 
 ## 📁 Estrutura do Projeto
 
@@ -12,7 +12,7 @@ WS4 -Valida CPF (Varios Clientes)/
 └── ws client/
     ├── client.py            # Cliente Python
     ├── client.js            # Cliente JavaScript (Node.js)
-    ├── Client.java          # Cliente Java
+    ├── CPFCliente.java      # Cliente Java
     ├── client.php           # Cliente PHP
     └── client.cpp           # Cliente C++
 ```
@@ -61,6 +61,7 @@ pip3 show requests
 ### Java JDK
 - **Necessário para:** Cliente Java
 - **Versão mínima:** JDK 8 ou superior
+- **Biblioteca adicional:** `org.json` (JSONObject) - pode ser necessário adicionar ao classpath
 
 **Instalação do Java:**
 
@@ -92,6 +93,11 @@ javac -version
 ```
 
 **Nota:** Certifique-se de que tanto `java` quanto `javac` estão disponíveis. Se apenas `java` estiver instalado, você precisa instalar o JDK (Java Development Kit), não apenas o JRE (Java Runtime Environment).
+
+**Biblioteca JSON para Java:**
+O cliente Java usa `org.json.JSONObject`. Você pode baixar o JAR de:
+- https://mvnrepository.com/artifact/org.json/json
+- Ou incluir no classpath ao compilar: `javac -cp ".:json.jar" CPFCliente.java`
 
 ---
 
@@ -230,7 +236,7 @@ curl-config --version
 
 ### 1. Iniciar o Servidor (Provider)
 
-O servidor é um web service HTTP que valida CPF através de endpoints GET e POST.
+O servidor é um web service HTTP que valida CPF através do endpoint GET.
 
 **Passo a passo:**
 
@@ -290,7 +296,7 @@ Abra **outro terminal** (deixe o servidor rodando no primeiro terminal) e execut
    ```
 
 **O que o programa faz:**
-- Faz uma requisição GET com um CPF de exemplo
+- Faz uma requisição GET com um CPF de exemplo (`11144477735`)
 - Exibe o resultado da validação formatado
 
 **Exemplo de saída:**
@@ -307,6 +313,7 @@ RESULTADO VALIDAR CPF: True
 **Pré-requisitos:**
 - Java JDK 8 ou superior
 - Compilador `javac` e runtime `java` no PATH
+- Biblioteca `org.json` (JSONObject) - pode precisar adicionar ao classpath
 
 **Passo a passo:**
 
@@ -317,26 +324,35 @@ RESULTADO VALIDAR CPF: True
 
 2. Compile o arquivo Java:
    ```bash
-   javac Client.java
+   javac CPFCliente.java
    ```
-   Isso gerará o arquivo `Client.class` (bytecode Java).
+   Se precisar da biblioteca JSON:
+   ```bash
+   javac -cp ".:json.jar" CPFCliente.java
+   ```
+   Isso gerará o arquivo `CPFCliente.class` (bytecode Java).
 
 3. Execute o programa compilado:
    ```bash
-   java Client
+   java CPFCliente
+   ```
+   Se precisar da biblioteca JSON:
+   ```bash
+   java -cp ".:json.jar" CPFCliente
    ```
 
 **O que o programa faz:**
 - Conecta ao servidor via HTTP
-- Executa requisição GET
-- Exibe a resposta JSON em uma linha
+- Executa requisição GET com CPF `11144477735`
+- Exibe a resposta JSON e o resultado da validação
 
 **Exemplo de saída:**
 ```
-GET => {"cpf": "11144477735", "valido": true}
+GET => {"cpf":"11144477735","valido":true}
+RESULTADO VALIDAR CPF: true
 ```
 
-**Nota:** Se você já compilou anteriormente e o arquivo `Client.class` existe, pode executar diretamente com `java Client` sem precisar recompilar.
+**Nota:** Se você já compilou anteriormente e o arquivo `CPFCliente.class` existe, pode executar diretamente com `java CPFCliente` sem precisar recompilar.
 
 ---
 
@@ -361,6 +377,7 @@ GET => {"cpf": "11144477735", "valido": true}
 **O que o programa faz:**
 - Usa `async/await` para fazer requisições assíncronas
 - Faz requisição GET usando a API `fetch`
+- Valida o CPF `11144477735`
 - Exibe mensagens de progresso e resultados formatados
 
 **Exemplo de saída:**
@@ -392,13 +409,15 @@ CPF: 11144477735 | válido: true
 
 **O que o programa faz:**
 - Usa `file_get_contents()` para fazer requisições HTTP
-- Executa GET
-- Exibe a resposta JSON bruta
+- Executa GET com CPF `11144477735`
+- Exibe o resultado formatado
 
 **Exemplo de saída:**
 ```
 GET:
-{"cpf":"11144477735","valido":true}
+==============================
+RESULTADO VALIDAR CPF: true
+==============================
 ```
 
 ---
@@ -441,15 +460,14 @@ GET:
    ```
 
 **O que o programa faz:**
-- Solicita um CPF ao usuário via entrada padrão
+- Valida o CPF `11144477735` (hardcoded no código)
 - Faz requisição GET usando libcurl
 - Parseia a resposta JSON usando nlohmann/json
 - Exibe se o CPF é válido ou não
 
 **Exemplo de saída:**
 ```
-Digite um CPF (somente dígitos): 11144477735
-[GET] CPF 11144477735 válido
+CPF 11144477735 válido
 ```
 
 ---
@@ -462,7 +480,7 @@ Valida CPF via query parameter:
 http://localhost:8080/validar?cpf=11144477735
 ```
 
-### Resposta
+**Resposta:**
 ```json
 {
   "cpf": "11144477735",
@@ -470,7 +488,7 @@ http://localhost:8080/validar?cpf=11144477735
 }
 ```
 
-**Nota:** O endpoint POST não está implementado no servidor atual.
+**Nota:** O servidor implementa apenas o método GET. Requisições POST retornam erro 405 (Method Not Allowed).
 
 ---
 
@@ -492,7 +510,7 @@ http://localhost:8080/validar?cpf=11144477735
 - Ou manualmente:
   - Verifique processos usando a porta: `lsof -ti:8080`
   - Encerre o processo: `kill -9 $(lsof -ti:8080)`
-- Ou altere a porta no `provider.py` (linha 63) e atualize os clientes
+- Ou altere a porta no `provider.py` (linha 69) e atualize os clientes
 
 **Comportamento inesperado:**
 - Limpe o cache do Python: `find . -name "__pycache__" -type d -exec rm -rf {} +`
@@ -509,8 +527,8 @@ http://localhost:8080/validar?cpf=11144477735
 **Java:**
 - `javac: command not found`: Instale o JDK (não apenas JRE)
 - `java: command not found`: Adicione Java ao PATH ou instale o JDK
-- Aviso de deprecação: É apenas informativo e não afeta a funcionalidade
-- Erro de compilação: Verifique se está no diretório correto com `Client.java`
+- `package org.json does not exist`: Baixe o JAR de https://mvnrepository.com/artifact/org.json/json e inclua no classpath
+- Erro de compilação: Verifique se está no diretório correto com `CPFCliente.java`
 
 **JavaScript (Node.js):**
 - `node: command not found`: Instale Node.js (https://nodejs.org/)
@@ -548,6 +566,11 @@ Você também pode testar o web service diretamente com cURL:
 curl "http://localhost:8080/validar?cpf=11144477735"
 ```
 
+**Resposta esperada:**
+```json
+{"cpf": "11144477735", "valido": true}
+```
+
 ---
 
 ## 🛠️ Utilitários
@@ -564,7 +587,7 @@ python3 matar_servidor.py <porta>
 
 **Exemplo:**
 ```bash
-python3 matar_servidor.py 8000
+python3 matar_servidor.py 8080
 ```
 
 **O que o script faz:**
@@ -575,9 +598,9 @@ python3 matar_servidor.py 8000
 
 **Exemplo de saída:**
 ```
-Processos encontrados na porta 8000: 12345
+Processos encontrados na porta 8080: 12345
 Processo 12345 encerrado com sucesso.
-Porta 8000 liberada.
+Porta 8080 liberada.
 ```
 
 **Nota:** Este script funciona no macOS e Linux. No Windows, pode ser necessário usar comandos diferentes.
@@ -607,7 +630,7 @@ cd "ws client" && python3 client.py
 
 **Java:**
 ```bash
-cd "ws client" && javac Client.java && java Client
+cd "ws client" && javac CPFCliente.java && java CPFCliente
 ```
 
 **JavaScript:**
@@ -633,6 +656,30 @@ cd "ws client" && g++ -o client client.cpp -lcurl && ./client
 
 - O servidor valida CPF usando o algoritmo oficial brasileiro
 - CPFs com todos os dígitos iguais são considerados inválidos
-- O CPF deve ter exatamente 11 dígitos (após remover caracteres não numéricos)
+- O CPF deve ter exatamente 11 dígitos (após remover caracteres não numéricos como pontos e traços)
+- O servidor aceita CPF com ou sem formatação (pontos e traços são removidos automaticamente)
 - O cliente Python usa a biblioteca `requests` para facilitar as requisições HTTP
-- Todos os clientes fazem requisições tanto GET quanto POST para demonstrar ambos os métodos
+- Todos os clientes fazem requisições GET para demonstrar a integração com o web service
+- O servidor retorna erro 405 (Method Not Allowed) para requisições POST
+
+---
+
+## 🔍 Algoritmo de Validação de CPF
+
+O servidor implementa o algoritmo oficial de validação de CPF brasileiro:
+
+1. Remove caracteres não numéricos (pontos e traços)
+2. Verifica se o CPF tem exatamente 11 dígitos
+3. Verifica se todos os dígitos são iguais (CPFs como 111.111.111-11 são inválidos)
+4. Calcula o primeiro dígito verificador
+5. Calcula o segundo dígito verificador
+6. Compara os dígitos calculados com os dois últimos dígitos do CPF
+
+**Exemplos de CPFs válidos:**
+- `11144477735`
+- `123.456.789-09`
+
+**Exemplos de CPFs inválidos:**
+- `11111111111` (todos os dígitos iguais)
+- `12345678901` (dígitos verificadores incorretos)
+- `123` (menos de 11 dígitos)
