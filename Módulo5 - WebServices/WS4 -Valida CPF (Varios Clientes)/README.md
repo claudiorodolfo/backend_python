@@ -1,11 +1,11 @@
-# Web Service de Validação de CPF
+# WS4 - Valida CPF (Vários Clientes)
 
 Este projeto contém um web service que valida CPF e clientes em Python, Java, JavaScript, PHP e C++ para testá-lo.
 
 ## 📁 Estrutura do Projeto
 
 ```
-WS1/
+WS4 -Valida CPF (Varios Clientes)/
 ├── ws provider/
 │   ├── provider.py          # Servidor HTTP (web service)
 │   └── matar_servidor.py    # Script utilitário para encerrar processos em uma porta específica
@@ -19,11 +19,212 @@ WS1/
 
 ## 📋 Pré-requisitos
 
-- **Python 3** (para o servidor e cliente Python)
-- **Java JDK** (para o cliente Java)
-- **Node.js** (opcional, para o cliente JavaScript)
-- **PHP** (opcional, para o cliente PHP)
-- **C++** com libcurl e nlohmann/json (opcional, para o cliente C++)
+### Python 3
+- **Necessário para:** Servidor e cliente Python
+- **Biblioteca adicional:** `requests` (para o cliente Python)
+
+**Instalação do Python:**
+
+**No macOS:**
+```bash
+# Python geralmente já vem instalado. Verifique com:
+python3 --version
+
+# Se não estiver instalado, instale via Homebrew:
+brew install python3
+```
+
+**No Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get update
+sudo apt-get install python3 python3-pip
+```
+
+**No Linux (CentOS/RHEL):**
+```bash
+sudo yum install python3 python3-pip
+```
+
+**Instalação da biblioteca requests:**
+```bash
+pip3 install requests
+```
+
+**Verificar instalação:**
+```bash
+python3 --version
+pip3 show requests
+```
+
+---
+
+### Java JDK
+- **Necessário para:** Cliente Java
+- **Versão mínima:** JDK 8 ou superior
+
+**Instalação do Java:**
+
+**No macOS:**
+```bash
+# Instale via Homebrew:
+brew install openjdk
+
+# Ou baixe do site oficial:
+# https://www.oracle.com/java/technologies/downloads/
+# https://adoptium.net/
+```
+
+**No Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get update
+sudo apt-get install default-jdk
+```
+
+**No Linux (CentOS/RHEL):**
+```bash
+sudo yum install java-1.8.0-openjdk-devel
+```
+
+**Verificar instalação:**
+```bash
+java -version
+javac -version
+```
+
+**Nota:** Certifique-se de que tanto `java` quanto `javac` estão disponíveis. Se apenas `java` estiver instalado, você precisa instalar o JDK (Java Development Kit), não apenas o JRE (Java Runtime Environment).
+
+---
+
+### Node.js
+- **Necessário para:** Cliente JavaScript
+- **Versão mínima:** Node.js 18.0 ou superior (para suporte nativo ao `fetch`)
+
+**Instalação do Node.js:**
+
+**No macOS:**
+```bash
+# Instale via Homebrew:
+brew install node
+
+# Ou baixe do site oficial:
+# https://nodejs.org/
+```
+
+**No Linux (Ubuntu/Debian):**
+```bash
+# Usando NodeSource (recomendado):
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Ou via apt:
+sudo apt-get update
+sudo apt-get install nodejs npm
+```
+
+**No Linux (CentOS/RHEL):**
+```bash
+curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+sudo yum install -y nodejs
+```
+
+**Verificar instalação:**
+```bash
+node --version
+```
+
+**Nota:** Se você estiver usando Node.js versão anterior à 18, pode precisar instalar um pacote como `node-fetch` ou atualizar o Node.js.
+
+---
+
+### PHP
+- **Necessário para:** Cliente PHP
+- **Versão mínima:** PHP 7.0 ou superior
+- **Extensão necessária:** `php-json` (geralmente já incluída)
+
+**Instalação do PHP:**
+
+**No macOS:**
+```bash
+# Instale via Homebrew:
+brew install php
+```
+
+**No Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get update
+sudo apt-get install php php-json
+```
+
+**No Linux (CentOS/RHEL):**
+```bash
+sudo yum install php php-json
+```
+
+**Verificar instalação:**
+```bash
+php --version
+```
+
+**Nota:** O PHP não vem pré-instalado no macOS. Se o comando retornar "command not found", siga as instruções de instalação acima.
+
+---
+
+### C++ (g++ ou clang++)
+- **Necessário para:** Cliente C++
+- **Bibliotecas necessárias:**
+  - `libcurl` (para requisições HTTP)
+  - `nlohmann/json` (header-only, para parsing JSON)
+
+**Instalação do Compilador C++:**
+
+**No macOS:**
+```bash
+# Instale as ferramentas de linha de comando do Xcode:
+xcode-select --install
+
+# Ou instale via Homebrew:
+brew install gcc
+
+# Instale libcurl (geralmente já vem instalado, mas pode precisar):
+brew install curl
+
+# Para nlohmann/json:
+brew install nlohmann-json
+```
+
+**No Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get update
+sudo apt-get install build-essential libcurl4-openssl-dev
+
+# Para nlohmann/json, baixe o header de:
+# https://github.com/nlohmann/json/releases
+# E coloque json.hpp na mesma pasta do client.cpp
+```
+
+**No Linux (CentOS/RHEL):**
+```bash
+sudo yum groupinstall "Development Tools"
+sudo yum install libcurl-devel
+
+# Para nlohmann/json, baixe o header de:
+# https://github.com/nlohmann/json/releases
+```
+
+**Verificar instalação:**
+```bash
+g++ --version
+# ou
+clang++ --version
+curl-config --version
+```
+
+**Nota sobre nlohmann/json:**
+- No macOS com Homebrew, você pode usar `brew install nlohmann-json` e incluir com `#include <nlohmann/json.hpp>`
+- No Linux, baixe `json.hpp` de https://github.com/nlohmann/json/releases e coloque na mesma pasta do `client.cpp`
+- Ou ajuste o `#include` no código para apontar para o caminho correto
+
+---
 
 ## 🚀 Como Executar
 
@@ -35,7 +236,7 @@ O servidor é um web service HTTP que valida CPF através de endpoints GET e POS
 
 1. Abra um terminal e navegue até a pasta do provider:
    ```bash
-   cd "Módulo5 - WebServices/WS1/ws provider"
+   cd "Módulo5 - WebServices/WS4 -Valida CPF (Varios Clientes)/ws provider"
    ```
 
 2. Execute o servidor:
@@ -74,13 +275,13 @@ Abra **outro terminal** (deixe o servidor rodando no primeiro terminal) e execut
 
 **Pré-requisitos:**
 - Python 3.6 ou superior
-- Bibliotecas padrão (urllib, json) - já incluídas no Python
+- Biblioteca `requests` instalada
 
 **Passo a passo:**
 
 1. Navegue até a pasta do cliente:
    ```bash
-   cd "Módulo5 - WebServices/WS1/ws client"
+   cd "Módulo5 - WebServices/WS4 -Valida CPF (Varios Clientes)/ws client"
    ```
 
 2. Execute o cliente:
@@ -93,9 +294,19 @@ Abra **outro terminal** (deixe o servidor rodando no primeiro terminal) e execut
 - Faz uma requisição GET com o mesmo CPF
 - Exibe as respostas formatadas em JSON
 
-**Verificar instalação do Python:**
-```bash
-python3 --version
+**Exemplo de saída:**
+```
+POST:
+{
+  "cpf": "11144477735",
+  "valido": true
+}
+
+GET:
+{
+  "cpf": "11144477735",
+  "valido": true
+}
 ```
 
 ---
@@ -110,7 +321,7 @@ python3 --version
 
 1. Navegue até a pasta do cliente:
    ```bash
-   cd "Módulo5 - WebServices/WS1/ws client"
+   cd "Módulo5 - WebServices/WS4 -Valida CPF (Varios Clientes)/ws client"
    ```
 
 2. Compile o arquivo Java:
@@ -129,10 +340,10 @@ python3 --version
 - Executa requisições GET e POST
 - Exibe as respostas JSON em uma linha
 
-**Verificar instalação do Java:**
-```bash
-java -version
-javac -version
+**Exemplo de saída:**
+```
+GET => {"cpf": "11144477735", "valido": true}
+POST => {"cpf": "11144477735", "valido": true}
 ```
 
 **Nota:** Se você já compilou anteriormente e o arquivo `Client.class` existe, pode executar diretamente com `java Client` sem precisar recompilar.
@@ -149,7 +360,7 @@ javac -version
 
 1. Navegue até a pasta do cliente:
    ```bash
-   cd "Módulo5 - WebServices/WS1/ws client"
+   cd "Módulo5 - WebServices/WS4 -Valida CPF (Varios Clientes)/ws client"
    ```
 
 2. Execute o script:
@@ -162,12 +373,15 @@ javac -version
 - Faz requisições GET e POST usando a API `fetch`
 - Exibe mensagens de progresso e resultados formatados
 
-**Verificar instalação do Node.js:**
-```bash
-node --version
+**Exemplo de saída:**
 ```
-
-**Nota:** Se você estiver usando Node.js versão anterior à 18, pode precisar instalar um pacote como `node-fetch` ou atualizar o Node.js.
+Validando via GET...
+[GET] Resposta: { cpf: '11144477735', valido: true }
+CPF: 11144477735 | válido: true
+Validando via POST...
+[POST] Resposta: { cpf: '11144477735', valido: true }
+CPF: 11144477735 | válido: true
+```
 
 ---
 
@@ -177,36 +391,11 @@ node --version
 - PHP 7.0 ou superior
 - Extensão `php-json` (geralmente já incluída)
 
-**Instalação do PHP:**
-
-**No macOS:**
-O PHP não vem pré-instalado no macOS. Instale via Homebrew:
-```bash
-brew install php
-```
-
-**No Linux (Ubuntu/Debian):**
-```bash
-sudo apt-get install php
-```
-
-**No Linux (CentOS/RHEL):**
-```bash
-sudo yum install php
-```
-
-**Verificar instalação do PHP:**
-```bash
-php --version
-```
-
-Se o comando retornar "command not found", o PHP não está instalado. Siga as instruções de instalação acima.
-
 **Passo a passo:**
 
 1. Navegue até a pasta do cliente:
    ```bash
-   cd "Módulo5 - WebServices/WS1/ws client"
+   cd "Módulo5 - WebServices/WS4 -Valida CPF (Varios Clientes)/ws client"
    ```
 
 2. Execute o script:
@@ -219,6 +408,15 @@ Se o comando retornar "command not found", o PHP não está instalado. Siga as i
 - Executa GET e POST sequencialmente
 - Exibe as respostas JSON brutas
 
+**Exemplo de saída:**
+```
+GET:
+{"cpf":"11144477735","valido":true}
+
+POST:
+{"cpf":"11144477735","valido":true}
+```
+
 ---
 
 #### ⚙️ Cliente C++
@@ -228,29 +426,16 @@ Se o comando retornar "command not found", o PHP não está instalado. Siga as i
 - Biblioteca libcurl (para requisições HTTP)
 - Biblioteca nlohmann/json (header-only, para parsing JSON)
 
-**Instalação das dependências:**
-
-**No macOS (via Homebrew):**
-```bash
-brew install curl
-# Para nlohmann/json, baixe o header de: https://github.com/nlohmann/json/releases
-# Ou use: brew install nlohmann-json
-```
-
-**No Linux (Ubuntu/Debian):**
-```bash
-sudo apt-get install libcurl4-openssl-dev
-# Baixe json.hpp de: https://github.com/nlohmann/json/releases
-```
-
 **Passo a passo:**
 
 1. Navegue até a pasta do cliente:
    ```bash
-   cd "Módulo5 - WebServices/WS1/ws client"
+   cd "Módulo5 - WebServices/WS4 -Valida CPF (Varios Clientes)/ws client"
    ```
 
-2. **Importante:** Certifique-se de que o arquivo `json.hpp` está no mesmo diretório ou ajuste o `#include` no código.
+2. **Importante:** Certifique-se de que o arquivo `json.hpp` está disponível:
+   - **macOS (Homebrew):** Se instalou via `brew install nlohmann-json`, o header estará em `/opt/homebrew/include/nlohmann/json.hpp` ou similar. Ajuste o `#include` no código se necessário.
+   - **Linux:** Baixe `json.hpp` de https://github.com/nlohmann/json/releases e coloque na mesma pasta do `client.cpp`
 
 3. Compile o programa:
    ```bash
@@ -259,6 +444,11 @@ sudo apt-get install libcurl4-openssl-dev
    Ou com clang++:
    ```bash
    clang++ -o client client.cpp -lcurl
+   ```
+   
+   **No macOS com nlohmann/json via Homebrew:**
+   ```bash
+   g++ -o client client.cpp -lcurl -I/opt/homebrew/include
    ```
 
 4. Execute o programa compilado:
@@ -272,64 +462,7 @@ sudo apt-get install libcurl4-openssl-dev
 - Parseia a resposta JSON usando nlohmann/json
 - Exibe se o CPF é válido ou não
 
-**Verificar instalação:**
-```bash
-g++ --version
-curl-config --version
-```
-
-**Nota:** Se você encontrar erros de compilação relacionados ao `json.hpp`, baixe o arquivo de https://github.com/nlohmann/json/releases e coloque-o na mesma pasta do `client.cpp`.
-
----
-
-## 📝 Exemplo de Saída
-
-### Servidor (Provider)
-```
-Servidor rodando em http://localhost:8000 ...
-```
-
-### Cliente Python
-```
-POST:
-{
-  "cpf": "11144477735",
-  "valido": true
-}
-
-GET:
-{
-  "cpf": "11144477735",
-  "valido": true
-}
-```
-
-### Cliente Java
-```
-GET => {"cpf": "11144477735", "valido": true}
-POST => {"cpf": "11144477735", "valido": true}
-```
-
-### Cliente JavaScript (Node.js)
-```
-Validando via GET...
-[GET] Resposta: { cpf: '11144477735', valido: true }
-CPF: 11144477735 | válido: true
-Validando via POST...
-[POST] Resposta: { cpf: '11144477735', valido: true }
-CPF: 11144477735 | válido: true
-```
-
-### Cliente PHP
-```
-GET:
-{"cpf":"11144477735","valido":true}
-
-POST:
-{"cpf":"11144477735","valido":true}
-```
-
-### Cliente C++
+**Exemplo de saída:**
 ```
 Digite um CPF (somente dígitos): 11144477735
 [GET] CPF 11144477735 válido
@@ -382,7 +515,7 @@ Valida CPF via JSON no body:
 - Ou manualmente:
   - Verifique processos usando a porta: `lsof -ti:8000`
   - Encerre o processo: `kill -9 $(lsof -ti:8000)`
-- Ou altere a porta no `provider.py` (linha 77) e atualize os clientes
+- Ou altere a porta no `provider.py` (linha 131) e atualize os clientes
 
 **Comportamento inesperado:**
 - Limpe o cache do Python: `find . -name "__pycache__" -type d -exec rm -rf {} +`
@@ -393,6 +526,7 @@ Valida CPF via JSON no body:
 
 **Python:**
 - `python3: command not found`: Instale Python 3 ou use `python` em vez de `python3`
+- `ModuleNotFoundError: No module named 'requests'`: Instale com `pip3 install requests`
 - Erro de módulo: Certifique-se de estar usando Python 3.6+
 
 **Java:**
@@ -419,12 +553,14 @@ Valida CPF via JSON no body:
   - macOS: `xcode-select --install` ou `brew install gcc`
   - Linux: `sudo apt-get install build-essential`
 - Erro `json.hpp: No such file`:
-  - Baixe de: https://github.com/nlohmann/json/releases
-  - Coloque `json.hpp` na mesma pasta do `client.cpp`
+  - macOS: `brew install nlohmann-json` e ajuste o `#include` ou use `-I/opt/homebrew/include`
+  - Linux: Baixe de https://github.com/nlohmann/json/releases e coloque na mesma pasta
 - Erro `undefined reference to 'curl_*'`:
   - Instale libcurl: `brew install curl` (macOS) ou `sudo apt-get install libcurl4-openssl-dev` (Linux)
   - Certifique-se de usar `-lcurl` na compilação
 - Erro de compilação: Verifique se todas as dependências estão instaladas
+
+---
 
 ## 🧪 Testando com cURL
 
@@ -518,3 +654,13 @@ cd "ws client" && g++ -o client client.cpp -lcurl && ./client
 ```
 
 **Nota:** Todos os clientes devem ser executados enquanto o servidor está rodando.
+
+---
+
+## 📝 Notas Adicionais
+
+- O servidor valida CPF usando o algoritmo oficial brasileiro
+- CPFs com todos os dígitos iguais são considerados inválidos
+- O CPF deve ter exatamente 11 dígitos (após remover caracteres não numéricos)
+- O cliente Python usa a biblioteca `requests` para facilitar as requisições HTTP
+- Todos os clientes fazem requisições tanto GET quanto POST para demonstrar ambos os métodos

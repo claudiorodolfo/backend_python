@@ -5,7 +5,6 @@ Projeto de cliente REST que consome o serviço ViaCEP para buscar informações 
 ## Arquivos
 
 - `ws client/consulta_cep.py`: Cliente que consome o serviço REST do ViaCEP
-- `ws client/requirements.txt`: Dependências do projeto
 
 ## Instalação
 
@@ -51,18 +50,6 @@ python3 -m pip install --user requests
 
 Esta opção instala o pacote apenas para o usuário atual, sem precisar de permissões de administrador.
 
-#### Opção 3: Instalar a partir do requirements.txt
-
-```bash
-pip3 install --user -r "ws client/requirements.txt"
-```
-
-ou
-
-```bash
-python3 -m pip install --user -r "ws client/requirements.txt"
-```
-
 ## Como Usar
 
 ### Executar o Cliente
@@ -72,7 +59,7 @@ cd "ws client"
 python3 consulta_cep.py
 ```
 
-O cliente irá testar automaticamente diferentes CEPs e exibir os resultados.
+O cliente irá consultar o CEP do IFBA (45078900) e exibir os resultados.
 
 ## Exemplo de Uso Programático
 
@@ -82,16 +69,22 @@ from consulta_cep import ConsultaCepCliente
 # Cria uma instância do cliente
 cliente = ConsultaCepCliente()
 
-# Consulta um CEP
-resposta, codigo = cliente.consultar("01001000")
+# Consulta um CEP (aceita com ou sem hífen)
+resposta = cliente.consultar("01001000")
+# ou
+resposta = cliente.consultar("01001-000")
 
-if codigo == 200:
+# Verifica se houve erro
+if "erro" in resposta and resposta["erro"] is not False:
+    if isinstance(resposta["erro"], bool):
+        print("Erro: CEP não encontrado")
+    else:
+        print(f"Erro: {resposta['erro']}")
+else:
     print(f"CEP: {resposta['cep']}")
     print(f"Logradouro: {resposta['logradouro']}")
     print(f"Bairro: {resposta['bairro']}")
     print(f"Cidade/UF: {resposta['localidade']} / {resposta['uf']}")
-else:
-    print(f"Erro: {resposta.get('erro', 'Erro desconhecido')}")
 ```
 
 ## API do ViaCEP
@@ -131,6 +124,13 @@ O cliente consome a API pública do ViaCEP:
 curl https://viacep.com.br/ws/01001000/json/
 ```
 
+## Funcionalidades
+
+- **Validação de CEP**: Remove automaticamente hífens e espaços antes de validar
+- **Tratamento de Erros**: Verifica erros de requisição e CEPs não encontrados
+- **Timeout**: Configurado para 5 segundos para evitar requisições travadas
+- **Formato Flexível**: Aceita CEPs com ou sem hífen (ex: "01001-000" ou "01001000")
+
 ## Requisitos
 
 - Python 3.6 ou superior
@@ -138,6 +138,7 @@ curl https://viacep.com.br/ws/01001000/json/
 
 ## Notas
 
-- O CEP deve ter exatamente 8 dígitos (sem hífen)
+- O CEP deve ter exatamente 8 dígitos (hífens e espaços são removidos automaticamente)
 - O serviço ViaCEP é gratuito e público, não requer autenticação
 - A consulta tem timeout de 5 segundos
+- O método `consultar()` retorna um dicionário com os dados do CEP ou um dicionário com a chave "erro" em caso de falha
