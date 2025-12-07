@@ -1,8 +1,9 @@
 import requests
+import sys
 
 class CPFCliente:
-    def __init__(self):
-        self.base_url = "http://localhost:8080"
+    def __init__(self, port: int):
+        self.base_url = f"http://localhost:{port}"
 
     def validar(self, cpf: str):
         #endpoint para a operação de validar CPF
@@ -21,5 +22,10 @@ class CPFCliente:
         print("=" * 30)
 
 if __name__ == "__main__":
-    cliente = CPFCliente()
+    if len(sys.argv) < 2:
+        print("Uso: python ws_client.py <porta>")
+        sys.exit(1)
+    
+    porta = int(sys.argv[1])  
+    cliente = CPFCliente(porta)
     cliente.validar("11144477735")
