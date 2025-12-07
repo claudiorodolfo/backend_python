@@ -5,8 +5,8 @@
 echo "GET:\n";
 // Faz requisição HTTP GET usando file_get_contents
 // @ suprime avisos de erro (será tratado manualmente)
-// A URL inclui o parâmetro CPF na query string (?numero=11144477735)
-$get_result = @file_get_contents("http://localhost:8000/cpf?numero=11144477735");
+// A URL inclui o parâmetro CPF na query string (?cpf=11144477735)
+$get_result = @file_get_contents("http://localhost:8080/validar?cpf=11144477735");
 // Verifica se a requisição falhou (retornou false)
 if ($get_result === false) {
     // Imprime mensagem de erro caso não consiga conectar ao servidor
@@ -39,7 +39,7 @@ $context = stream_context_create($opts);
 // @ suprime avisos de erro (será tratado manualmente)
 // false indica que não deve usar include_path
 // $context passa as opções HTTP (método POST, headers, body)
-$post_result = @file_get_contents("http://localhost:8000/cpf", false, $context);
+$post_result = @file_get_contents("http://localhost:8080/validar", false, $context);
 // Verifica se a requisição falhou (retornou false)
 if ($post_result === false) {
     // Imprime mensagem de erro caso não consiga conectar ao servidor

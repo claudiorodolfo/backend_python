@@ -4,7 +4,7 @@
 async function validaCpfGet(cpf) {
     // Monta a URL com o parâmetro CPF na query string
     // encodeURIComponent: codifica o CPF para ser seguro em URLs (trata caracteres especiais)
-    const url = `http://localhost:8000/cpf?numero=${encodeURIComponent(cpf)}`;
+    const url = `http://localhost:8080/validar?cpf=${encodeURIComponent(cpf)}`;
   
     // Tenta executar a requisição HTTP
     try {
@@ -37,7 +37,7 @@ async function validaCpfGet(cpf) {
   // Retorna uma Promise que resolve com os dados da resposta ou null em caso de erro
   async function validaCpfPost(cpf) {
     // Define a URL do endpoint (sem parâmetros na query string)
-    const url = 'http://localhost:8000/cpf';
+    const url = 'http://localhost:8080/validar';
   
     // Tenta executar a requisição HTTP
     try {

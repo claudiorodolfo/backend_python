@@ -246,23 +246,23 @@ O servidor é um web service HTTP que valida CPF através de endpoints GET e POS
 
 3. Você verá a mensagem:
    ```
-   Servidor rodando em http://localhost:8000 ...
+   Servidor iniciado em http://127.0.0.1:8080
    ```
 
 **Importante:** 
 - Mantenha este terminal aberto enquanto testa os clientes
 - O servidor ficará rodando até você pressionar `Ctrl+C`
-- Certifique-se de que a porta 8000 não está em uso por outro processo
+- Certifique-se de que a porta 8080 não está em uso por outro processo
 
 **Verificar se o servidor está rodando:**
 ```bash
-curl http://localhost:8000/cpf?numero=11144477735
+curl http://localhost:8080/validar?cpf=11144477735
 ```
 
-**Se a porta 8000 estiver em uso:**
-Use o script `matar_servidor.py` para encerrar processos na porta 8000:
+**Se a porta 8080 estiver em uso:**
+Use o script `matar_servidor.py` para encerrar processos na porta 8080:
 ```bash
-python3 matar_servidor.py 8000
+python3 matar_servidor.py 8080
 ```
 
 ---
@@ -290,23 +290,14 @@ Abra **outro terminal** (deixe o servidor rodando no primeiro terminal) e execut
    ```
 
 **O que o programa faz:**
-- Faz uma requisição POST com um CPF de exemplo
-- Faz uma requisição GET com o mesmo CPF
-- Exibe as respostas formatadas em JSON
+- Faz uma requisição GET com um CPF de exemplo
+- Exibe o resultado da validação formatado
 
 **Exemplo de saída:**
 ```
-POST:
-{
-  "cpf": "11144477735",
-  "valido": true
-}
-
-GET:
-{
-  "cpf": "11144477735",
-  "valido": true
-}
+==============================
+RESULTADO VALIDAR CPF: True
+==============================
 ```
 
 ---
@@ -337,13 +328,12 @@ GET:
 
 **O que o programa faz:**
 - Conecta ao servidor via HTTP
-- Executa requisições GET e POST
-- Exibe as respostas JSON em uma linha
+- Executa requisição GET
+- Exibe a resposta JSON em uma linha
 
 **Exemplo de saída:**
 ```
 GET => {"cpf": "11144477735", "valido": true}
-POST => {"cpf": "11144477735", "valido": true}
 ```
 
 **Nota:** Se você já compilou anteriormente e o arquivo `Client.class` existe, pode executar diretamente com `java Client` sem precisar recompilar.
@@ -370,16 +360,13 @@ POST => {"cpf": "11144477735", "valido": true}
 
 **O que o programa faz:**
 - Usa `async/await` para fazer requisições assíncronas
-- Faz requisições GET e POST usando a API `fetch`
+- Faz requisição GET usando a API `fetch`
 - Exibe mensagens de progresso e resultados formatados
 
 **Exemplo de saída:**
 ```
 Validando via GET...
 [GET] Resposta: { cpf: '11144477735', valido: true }
-CPF: 11144477735 | válido: true
-Validando via POST...
-[POST] Resposta: { cpf: '11144477735', valido: true }
 CPF: 11144477735 | válido: true
 ```
 
@@ -405,15 +392,12 @@ CPF: 11144477735 | válido: true
 
 **O que o programa faz:**
 - Usa `file_get_contents()` para fazer requisições HTTP
-- Executa GET e POST sequencialmente
-- Exibe as respostas JSON brutas
+- Executa GET
+- Exibe a resposta JSON bruta
 
 **Exemplo de saída:**
 ```
 GET:
-{"cpf":"11144477735","valido":true}
-
-POST:
 {"cpf":"11144477735","valido":true}
 ```
 
@@ -458,7 +442,7 @@ POST:
 
 **O que o programa faz:**
 - Solicita um CPF ao usuário via entrada padrão
-- Faz requisições GET e POST usando libcurl
+- Faz requisição GET usando libcurl
 - Parseia a resposta JSON usando nlohmann/json
 - Exibe se o CPF é válido ou não
 
@@ -466,25 +450,16 @@ POST:
 ```
 Digite um CPF (somente dígitos): 11144477735
 [GET] CPF 11144477735 válido
-[POST] CPF 11144477735 válido
 ```
 
 ---
 
 ## 🔧 Endpoints do Web Service
 
-### GET /cpf
+### GET /validar
 Valida CPF via query parameter:
 ```
-http://localhost:8000/cpf?numero=11144477735
-```
-
-### POST /cpf
-Valida CPF via JSON no body:
-```json
-{
-  "cpf": "11144477735"
-}
+http://localhost:8080/validar?cpf=11144477735
 ```
 
 ### Resposta
@@ -495,6 +470,8 @@ Valida CPF via JSON no body:
 }
 ```
 
+**Nota:** O endpoint POST não está implementado no servidor atual.
+
 ---
 
 ## ⚠️ Troubleshooting
@@ -503,19 +480,19 @@ Valida CPF via JSON no body:
 
 **Erro de conexão:**
 - Certifique-se de que o servidor está rodando antes de executar os clientes
-- Verifique se o servidor está em `http://localhost:8000`
-- Teste com: `curl http://localhost:8000/cpf?numero=11144477735`
+- Verifique se o servidor está em `http://localhost:8080`
+- Teste com: `curl http://localhost:8080/validar?cpf=11144477735`
 
-**Porta 8000 em uso:**
+**Porta 8080 em uso:**
 - Use o script utilitário `matar_servidor.py`:
   ```bash
   cd "ws provider"
-  python3 matar_servidor.py 8000
+  python3 matar_servidor.py 8080
   ```
 - Ou manualmente:
-  - Verifique processos usando a porta: `lsof -ti:8000`
-  - Encerre o processo: `kill -9 $(lsof -ti:8000)`
-- Ou altere a porta no `provider.py` (linha 131) e atualize os clientes
+  - Verifique processos usando a porta: `lsof -ti:8080`
+  - Encerre o processo: `kill -9 $(lsof -ti:8080)`
+- Ou altere a porta no `provider.py` (linha 63) e atualize os clientes
 
 **Comportamento inesperado:**
 - Limpe o cache do Python: `find . -name "__pycache__" -type d -exec rm -rf {} +`
@@ -568,12 +545,7 @@ Você também pode testar o web service diretamente com cURL:
 
 ```bash
 # GET
-curl "http://localhost:8000/cpf?numero=11144477735"
-
-# POST
-curl -X POST "http://localhost:8000/cpf" \
-  -H "Content-Type: application/json" \
-  -d '{"cpf":"11144477735"}'
+curl "http://localhost:8080/validar?cpf=11144477735"
 ```
 
 ---
@@ -620,10 +592,10 @@ cd "ws provider"
 python3 provider.py
 ```
 
-### Liberar Porta 8000 (se necessário)
+### Liberar Porta 8080 (se necessário)
 ```bash
 cd "ws provider"
-python3 matar_servidor.py 8000
+python3 matar_servidor.py 8080
 ```
 
 ### Executar Clientes (em outro terminal)
@@ -653,7 +625,7 @@ cd "ws client" && php client.php
 cd "ws client" && g++ -o client client.cpp -lcurl && ./client
 ```
 
-**Nota:** Todos os clientes devem ser executados enquanto o servidor está rodando.
+**Nota:** Todos os clientes devem ser executados enquanto o servidor está rodando. O servidor atual implementa apenas o método GET no endpoint `/validar`.
 
 ---
 

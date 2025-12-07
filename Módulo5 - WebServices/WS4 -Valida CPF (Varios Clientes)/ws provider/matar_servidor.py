@@ -5,7 +5,6 @@ import sys
 
 # Define a função para encerrar processos que estão usando uma porta específica
 def kill_process_on_port(port):
-    # Tenta executar o código dentro do bloco try
     try:
         # Encontra o PID do processo usando a porta
         # Comando: lsof lista processos, -i :{port} filtra pela porta
@@ -45,7 +44,6 @@ def kill_process_on_port(port):
         # Imprime a mensagem de erro
         print(f"Ocorreu um erro: {e}")
 
-# Verifica se o script está sendo executado diretamente (não importado como módulo)
 if __name__ == "__main__":
     # Verifica se o número de argumentos da linha de comando é menor que 2
     # (o primeiro argumento é sempre o nome do script)

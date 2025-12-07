@@ -5,7 +5,7 @@ class CalculadoraCliente:
         self.base_url = "http://localhost:8081"
 
     def somar(self, numero1, numero2):
-        #endpoint para a operações de somar
+        #endpoint para a operação de somar
         endpoint_somar = f"{self.base_url}/somar"
 
         #dados vão na URL como parâmetros da requisição GET

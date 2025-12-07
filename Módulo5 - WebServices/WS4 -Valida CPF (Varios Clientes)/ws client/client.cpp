@@ -35,7 +35,7 @@ bool validarCPF_GET(const string& cpf) {
     if (!curl) return false;
 
     // Monta a URL com o parâmetro CPF na query string
-    string url = "http://localhost:8000/cpf?numero=" + cpf;
+    string url = "http://localhost:8080/validar?cpf=" + cpf;
     // Buffer para armazenar a resposta do servidor
     string readBuffer;
 
