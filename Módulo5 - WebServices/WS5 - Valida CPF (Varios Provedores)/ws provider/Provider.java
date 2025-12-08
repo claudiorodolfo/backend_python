@@ -1,5 +1,6 @@
-//javac -cp ".:json-20250517.jar" Provider.java
-//java -cp ".:json-20250517.jar" Provider
+//curl -L -o json.jar https://repo1.maven.org/maven2/org/json/json/20250517/json-20250517.jar
+//javac -cp ".:json.jar" Provider.java
+//java -cp ".:json.jar" Provider
 import com.sun.net.httpserver.*;
 import java.io.*;
 import java.net.InetSocketAddress;

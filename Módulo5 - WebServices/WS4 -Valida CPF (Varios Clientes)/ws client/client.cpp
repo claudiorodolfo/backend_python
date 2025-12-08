@@ -6,7 +6,6 @@
 #include <string>
 #include <curl/curl.h>
 // Inclui a biblioteca json.hpp para manipulação de JSON
-// nlohmann::json — instalado via: brew install nlohmann-json
 #include "json.hpp"
 
 // Define um alias para facilitar o uso da biblioteca JSON

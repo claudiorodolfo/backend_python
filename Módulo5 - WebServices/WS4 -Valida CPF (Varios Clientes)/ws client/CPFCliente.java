@@ -1,7 +1,9 @@
-//javac -cp ".:json-20250517.jar" CPFCliente.java
-//java -cp ".:json-20250517.jar" CPFCliente
+//curl -L -o json.jar https://repo1.maven.org/maven2/org/json/json/20250517/json-20250517.jar
+//javac -cp ".:json.jar" CPFCliente.java
+//java -cp ".:json.jar" CPFCliente
 import java.io.*;
 import java.net.*;
+// Inclui a biblioteca json.jar para manipulação de JSON
 import org.json.JSONObject;
 
 public class CPFCliente {
