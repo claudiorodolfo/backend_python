@@ -6,24 +6,43 @@ from urllib.parse import urlparse, parse_qs
 class WSProvider(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        parsed_path = urlparse(self.path)
+        parsed_path = urlparse(self.path)    
         # Obtém os parâmetros da requisição GET
         query_params = parse_qs(parsed_path.query)
-        cpf = query_params["cpf"][0]
+        
+        # Verifica se o parâmetro cpf está presente
+        if query_params["cpf"]:
+            cpf = query_params["cpf"][0]
+        else:
+            self.send_response(400)  # Bad Request
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            resposta = json.dumps({"error": "Parâmetro 'cpf' não fornecido"}).encode('utf-8')
+            self.wfile.write(resposta)
+            return
+        
 
         if self.path.startswith("/validar"):           
             print("Requisição GET recebida - Validar CPF")
             # Realiza a operação de validação
             valida = CPFService()
             resultado = valida.validarCpf(cpf)
-
-            # Envia a resposta para o cliente
-            self.send_response(200)
+        else:
+            # Retorna erro 404 quando o endpoint não é /validar
+            self.send_response(404)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            msg_retorno = {"cpf": cpf, "valido": resultado}
-            resposta = json.dumps(msg_retorno).encode('utf-8')
+            resposta = json.dumps({"error": "Endpoint não encontrado"}).encode('utf-8')
             self.wfile.write(resposta)
+            return
+
+        # Envia a resposta para o cliente
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        msg_retorno = {"cpf": cpf, "valido": resultado}
+        resposta = json.dumps(msg_retorno).encode('utf-8')
+        self.wfile.write(resposta)
 
     def do_POST(self):
         # Este provider só aceita requisições GET
@@ -31,7 +50,7 @@ class WSProvider(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'application/json')
         self.send_header('Allow', 'GET')  # Informa que apenas GET é permitido
         self.end_headers()
-        resposta = json.dumps({"error": "Método POST não permitido. Use GET /validar?cpf=..."}).encode('utf-8')
+        resposta = json.dumps({"error": "Método HTTP 'POST' não é permitido. Apenas o método GET é suportado para este endpoint."}).encode('utf-8')
         self.wfile.write(resposta)
     
 # Serviço fornecido pelo Web Service Provider

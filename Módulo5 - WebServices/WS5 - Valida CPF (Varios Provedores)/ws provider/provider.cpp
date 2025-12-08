@@ -105,7 +105,24 @@ int main() {
         // Este provider só aceita requisições GET
         res.status = 405;  // 405 Method Not Allowed
         res.set_header("Allow", "GET");  // Informa que apenas GET é permitido
-        res.set_content(criarJsonErro("Método POST não permitido. Use GET /validar?cpf=..."), "application/json");
+        res.set_content(criarJsonErro("Método HTTP 'POST' não é permitido. Apenas o método GET é suportado para este endpoint."), "application/json");
+    });
+
+    // Handler catch-all para retornar 404 quando o endpoint não é /validar
+    // Este handler só será chamado se nenhum handler anterior corresponder
+    svr.Get(".*", [](const httplib::Request& req, httplib::Response& res) {
+        // Verifica se o path não começa com /validar (para evitar conflito com o handler específico)
+        if (req.path.find("/validar") != 0) {
+            res.status = 404;
+            res.set_content(criarJsonErro("Endpoint não encontrado"), "application/json");
+        }
+    });
+
+    // Handler genérico para retornar 404 em caso de erro
+    svr.set_error_handler([](const httplib::Request& req, httplib::Response& res) {
+        if (res.status == 404) {
+            res.set_content(criarJsonErro("Endpoint não encontrado"), "application/json");
+        }
     });
 
     // Inicia o servidor HTTP na porta 8084

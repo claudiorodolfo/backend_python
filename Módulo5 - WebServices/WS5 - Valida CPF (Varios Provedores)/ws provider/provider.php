@@ -53,7 +53,7 @@ $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
 // Verifica se o caminho da requisição é /validar
 if (strpos($path, "/validar") === 0) {
-    
+        
     // Verifica se o método é GET
     if ($method === "GET") {
         // Verifica se o parâmetro "cpf" existe na query string
@@ -70,6 +70,34 @@ if (strpos($path, "/validar") === 0) {
             $msg_retorno = ["cpf" => $_GET["cpf"], "valido" => $resultado];
             echo json_encode($msg_retorno, JSON_UNESCAPED_UNICODE);
             exit;
+        } else {
+            // Retorna erro 400 quando o parâmetro cpf não é fornecido
+            header('Content-type: application/json');
+            http_response_code(400);
+            $msg_erro = [
+                "error" => "Parâmetro 'cpf' não fornecido"
+            ];
+            echo json_encode($msg_erro, JSON_UNESCAPED_UNICODE);
+            exit;
         }
+    } else {
+        header('Content-type: application/json');
+        http_response_code(405);
+        $msg_erro = [
+            "erro" => "Method Not Allowed",
+            "mensagem" => "Método HTTP '" . $method . "' não é permitido. Apenas o método GET é suportado para este endpoint.",
+            "metodo_permitido" => "GET"
+        ];
+        echo json_encode($msg_erro, JSON_UNESCAPED_UNICODE);
+        exit;
     }
+} else {
+    // Retorna erro 404 quando o endpoint não é /validar
+    header('Content-type: application/json');
+    http_response_code(404);
+    $msg_erro = [
+        "error" => "Endpoint não encontrado"
+    ];
+    echo json_encode($msg_erro, JSON_UNESCAPED_UNICODE);
+    exit;
 }

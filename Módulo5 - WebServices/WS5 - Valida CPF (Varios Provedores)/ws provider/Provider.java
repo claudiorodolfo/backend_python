@@ -21,7 +21,7 @@ class WSProvider implements HttpHandler {
             handlePOST(exchange);
         } else {
             JSONObject errorJson = new JSONObject();
-            errorJson.put("error", "method not allowed");
+            errorJson.put("error", "Método HTTP 'POST' não é permitido. Apenas o método GET é suportado para este endpoint.");
             sendErrorResponse(exchange, 405, errorJson.toString());
         }
     }
@@ -33,15 +33,16 @@ class WSProvider implements HttpHandler {
             URI uri = exchange.getRequestURI();
             String query = uri.getQuery();
             
-            if (query == null || !query.contains("cpf=")) {
+            String cpf = null;
+            if (query != null && query.contains("cpf=")) {
+                // Extrai o CPF da query string
+                cpf = extractCPF(query);
+            } else {
                 JSONObject errorJson = new JSONObject();
-                errorJson.put("error", "parâmetro cpf não encontrado");
+                errorJson.put("error", "Parâmetro 'cpf' não fornecido");
                 sendErrorResponse(exchange, 400, errorJson.toString());
                 return;
             }
-            
-            // Extrai o CPF da query string
-            String cpf = extractCPF(query);
             
             // Realiza a operação de validação
             CPFService valida = new CPFService();
@@ -53,24 +54,13 @@ class WSProvider implements HttpHandler {
             responseJson.put("valido", resultado);
             sendResponse(exchange, 200, responseJson.toString());
         } else {
+            // Retorna erro 404 quando o endpoint não é /validar
             JSONObject errorJson = new JSONObject();
-            errorJson.put("error", "endpoint não encontrado");
+            errorJson.put("error", "Endpoint não encontrado");
             sendErrorResponse(exchange, 404, errorJson.toString());
         }
     }
     
-    public void handlePOST(HttpExchange exchange) throws IOException {
-        // Este provider só aceita requisições GET
-        JSONObject errorJson = new JSONObject();
-        errorJson.put("error", "Método POST não permitido. Use GET /validar?cpf=...");
-        String resposta = errorJson.toString();
-        exchange.getResponseHeaders().add("Content-Type", "application/json");
-        exchange.getResponseHeaders().add("Allow", "GET");
-        exchange.sendResponseHeaders(405, resposta.length());
-        OutputStream os = exchange.getResponseBody();
-        os.write(resposta.getBytes());
-        os.close();
-    }
     
     private String extractCPF(String query) {
         int cpfIndex = query.indexOf("cpf=");
@@ -149,8 +139,8 @@ class CPFService {
 // Classe principal do provider
 public class Provider {
     public static void main(String[] args) throws IOException {
-        // Inicia o servidor HTTP na porta 8080
-        HttpServer servidor = HttpServer.create(new InetSocketAddress("127.0.0.1", 8080), 0);
+        // Inicia o servidor HTTP na porta 8082
+        HttpServer servidor = HttpServer.create(new InetSocketAddress("127.0.0.1", 8082), 0);
         servidor.createContext("/", new WSProvider());
         servidor.start();
         System.out.println("Servidor iniciado em http://127.0.0.1:8082");

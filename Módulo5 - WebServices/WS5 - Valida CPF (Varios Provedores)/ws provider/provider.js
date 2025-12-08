@@ -45,12 +45,39 @@ const server = http.createServer((req, res) => {
     if (method === 'GET') {
       const query = parsed.query;  
       const cpf = query.cpf;
+      
+      // Verifica se o parâmetro cpf está ausente
+      if (!cpf || cpf === '') {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ 
+          error: "Parâmetro 'cpf' não fornecido"
+        }));
+        return;
+      }
+      
       const valido = validaCPF(cpf);
       // Define o código de status HTTP como 200 (OK)
       res.statusCode = 200;
       res.end(JSON.stringify({ cpf: cpf, valido: valido }));
       return;
+    } else {
+      // Retorna erro 405 para métodos HTTP não permitidos
+      res.statusCode = 405;
+      res.end(JSON.stringify({ 
+        erro: 'Method Not Allowed',
+        mensagem: `Método HTTP '${method}' não é permitido. Apenas o método GET é suportado para este endpoint.`,
+        metodo_solicitado: method,
+        metodo_permitido: 'GET'
+      }));
+      return;
     }
+  } else {
+    // Retorna erro 404 quando o endpoint não é /validar
+    res.statusCode = 404;
+    res.end(JSON.stringify({ 
+      error: 'Endpoint não encontrado'
+    }));
+    return;
   }
 });
 

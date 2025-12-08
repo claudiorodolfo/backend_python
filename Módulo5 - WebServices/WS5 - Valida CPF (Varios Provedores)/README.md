@@ -29,7 +29,7 @@ Valida um CPF via parâmetro de query string.
 curl "http://localhost:8080/validar?cpf=11144477735"
 ```
 
-**Resposta (Python, Java, PHP, C++):**
+**Resposta (todos os providers):**
 ```json
 {
   "cpf": "11144477735",
@@ -37,17 +37,60 @@ curl "http://localhost:8080/validar?cpf=11144477735"
 }
 ```
 
-**Resposta (Node.js):**
+**Resposta de erro (quando parâmetro cpf não é fornecido):**
+Todos os providers retornam erro 400 (Bad Request) com mensagem JSON. A estrutura da mensagem pode variar ligeiramente entre providers:
+
+**Python, Node.js, Java, PHP e C++:**
 ```json
 {
-  "cpf": "11144477735",
-  "valid": true
+  "error": "Parâmetro 'cpf' não fornecido"
 }
 ```
 
-**Nota:** Este Web Service aceita apenas requisições GET. Requisições POST retornarão erro 405 (Method Not Allowed).
+**Nota:** Todos os providers usam o campo `"error"` (em inglês) para este tipo de erro, mantendo consistência entre as linguagens.
 
-**⚠️ Importante:** O provider Node.js retorna o campo `"valid"` (em inglês), enquanto os demais providers retornam `"valido"` (em português).
+**Resposta de erro (quando método HTTP não é permitido):**
+Este Web Service aceita apenas requisições GET. Todos os providers retornam erro 405 (Method Not Allowed) para métodos não permitidos (POST, PUT, DELETE, etc.) com mensagem JSON. A estrutura da mensagem pode variar ligeiramente entre providers:
+
+**Python, Java e C++:**
+```json
+{
+  "error": "Método HTTP 'POST' não é permitido. Apenas o método GET é suportado para este endpoint."
+}
+```
+
+**Node.js:**
+```json
+{
+  "erro": "Method Not Allowed",
+  "mensagem": "Método HTTP 'POST' não é permitido. Apenas o método GET é suportado para este endpoint.",
+  "metodo_solicitado": "POST",
+  "metodo_permitido": "GET"
+}
+```
+
+**PHP:**
+```json
+{
+  "erro": "Method Not Allowed",
+  "mensagem": "Método HTTP 'POST' não é permitido. Apenas o método GET é suportado para este endpoint.",
+  "metodo_permitido": "GET"
+}
+```
+
+**Nota:** Python, Java e C++ usam o campo `"error"` com mensagem descritiva, enquanto Node.js e PHP usam os campos `"erro"`, `"mensagem"` e `"metodo_permitido"` (Node.js também inclui `"metodo_solicitado"`).
+
+**Resposta de erro (quando endpoint não é encontrado):**
+Todos os providers retornam erro 404 (Not Found) com mensagem JSON. Todos os providers usam o campo `"error"` de forma consistente:
+
+**Todos os providers (Python, Node.js, Java, PHP e C++):**
+```json
+{
+  "error": "Endpoint não encontrado"
+}
+```
+
+**⚠️ Importante:** Todos os providers retornam o campo `"valido"` (em português) de forma consistente.
 
 ## Como Executar
 
@@ -167,17 +210,17 @@ Isso criará o arquivo `Provider.class` na mesma pasta.
 java -cp ".:json.jar" Provider
 ```
 
-Você verá a mensagem: `Servidor iniciado em http://127.0.0.1:8080`
+Você verá a mensagem: `Servidor iniciado em http://127.0.0.1:8082`
 
 5. Para testar, você pode:
    - Usar o cliente Python:
      ```bash
      cd "Módulo5 - WebServices/WS5 - Valida CPF (Varios Provedores)/ws client"
-     python3 ws_client.py 8080
+     python3 ws_client.py 8082
      ```
    - Usar curl:
      ```bash
-     curl "http://localhost:8080/validar?cpf=11144477735"
+     curl "http://localhost:8082/validar?cpf=11144477735"
      ```
 
 **Para parar o servidor:** Pressione `Ctrl+C` no terminal onde o servidor está rodando.
@@ -285,7 +328,7 @@ O algoritmo implementado segue o padrão oficial de validação de CPF brasileir
 
 Cada provider usa uma porta específica:
 
-| Provider | Porta | Endpoint | Campo de Resposta |
+| Provider | Porta |  Endpoint  | Resposta   |
 |----------|-------|------------|------------|
 | Python   | 8080  | `/validar` | `"valido"` |
 | Node.js  | 8081  | `/validar` | `"valido"` |
@@ -293,7 +336,7 @@ Cada provider usa uma porta específica:
 | PHP      | 8083  | `/validar` | `"valido"` |
 | C++      | 8084  | `/validar` | `"valido"` |
 
-**⚠️ Atenção:** Os providers Python e Java usam a mesma porta (8080). Certifique-se de executar apenas um por vez, ou altere a porta de um deles se necessário.
+**⚠️ Atenção:** Cada provider usa uma porta única, permitindo que todos sejam executados simultaneamente para testes comparativos.
 
 ## Tecnologias Utilizadas
 
@@ -305,10 +348,22 @@ Cada provider usa uma porta específica:
 
 ## Observações Importantes
 
-- ⚠️ **Portas:** Cada provider usa uma porta diferente (exceto Python e Java que compartilham a porta 8080). Certifique-se de que apenas um provider esteja rodando por vez em cada porta, ou altere as portas se necessário.
-- ⚠️ **Método HTTP:** Este Web Service aceita apenas requisições GET. Requisições POST retornarão erro 405 (Method Not Allowed).
-- ⚠️ **Formato de Resposta:** O provider Node.js retorna o campo `"valid"` (em inglês), enquanto todos os outros providers retornam `"valido"` (em português). Isso deve ser considerado ao desenvolver clientes que precisem trabalhar com múltiplos providers.
-- O cliente Python (`ws_client.py`) aceita a porta como argumento de linha de comando e testa automaticamente dois CPFs: um válido e um inválido.
-- Todos os providers implementam a mesma lógica de validação de CPF.
+- ⚠️ **Portas:** Cada provider usa uma porta única (8080, 8081, 8082, 8083, 8084), permitindo que todos sejam executados simultaneamente para testes comparativos.
+- ⚠️ **Método HTTP:** Este Web Service aceita apenas requisições GET. Todos os providers retornam erro 405 (Method Not Allowed) com mensagem JSON explicativa para métodos não permitidos (POST, PUT, DELETE, etc.).
+- ⚠️ **Tratamento de Erros:** 
+  - **Métodos HTTP não permitidos (POST, PUT, DELETE, etc.):**
+    - Todos os providers (Python, Node.js, Java, PHP e C++) retornam erro 405 (Method Not Allowed) com mensagem JSON explicativa
+    - A estrutura da mensagem de erro pode variar ligeiramente entre providers, mas todos incluem informações sobre o método permitido
+    - Python, Java e C++ usam o campo `"error"` com mensagem descritiva: "Método HTTP 'POST' não é permitido. Apenas o método GET é suportado para este endpoint."
+    - Node.js e PHP usam os campos `"erro"`, `"mensagem"` e `"metodo_permitido"` (Node.js também inclui `"metodo_solicitado"`)
+  - **Parâmetro `cpf` ausente:**
+    - Todos os providers retornam erro 400 (Bad Request) com mensagem JSON quando o parâmetro `cpf` não é fornecido
+    - Todos os providers (Python, Node.js, Java, PHP e C++) usam o campo `"error"` com mensagem: "Parâmetro 'cpf' não fornecido"
+  - **Endpoints não encontrados:**
+    - Todos os providers retornam erro 404 (Not Found) para endpoints não encontrados
+    - Todos os providers (Python, Node.js, Java, PHP e C++) usam o campo `"error"` com mensagem: "Endpoint não encontrado"
+- ⚠️ **Formato de Resposta:** Todos os providers retornam o campo `"valido"` (em português) de forma consistente, facilitando a integração com múltiplos providers.
+- O cliente Python (`ws_client.py`) aceita a porta como argumento de linha de comando e testa automaticamente dois CPFs: um válido (`11144477735`) e um inválido (`11111111111`).
+- Todos os providers implementam a mesma lógica de validação de CPF, seguindo o algoritmo oficial brasileiro.
 - Todos os providers suportam o mesmo endpoint: `GET /validar?cpf=XXXXXXXXXXX`
-- A resposta JSON usa um campo boolean para indicar se o CPF é válido ou não (veja a tabela acima para o nome exato do campo por provider).
+- A resposta JSON usa o campo `"valido"` (boolean) para indicar se o CPF é válido ou não, de forma consistente em todos os providers.
