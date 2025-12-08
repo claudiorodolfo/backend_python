@@ -45,10 +45,10 @@ const server = http.createServer((req, res) => {
     if (method === 'GET') {
       const query = parsed.query;  
       const cpf = query.cpf;
-      const valid = validaCPF(cpf);
+      const valido = validaCPF(cpf);
       // Define o código de status HTTP como 200 (OK)
       res.statusCode = 200;
-      res.end(JSON.stringify({ cpf: cpf, valid: valid }));
+      res.end(JSON.stringify({ cpf: cpf, valido: valido }));
       return;
     }
   }

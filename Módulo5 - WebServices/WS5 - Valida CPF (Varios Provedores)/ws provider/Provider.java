@@ -153,6 +153,6 @@ public class Provider {
         HttpServer servidor = HttpServer.create(new InetSocketAddress("127.0.0.1", 8080), 0);
         servidor.createContext("/", new WSProvider());
         servidor.start();
-        System.out.println("Servidor iniciado em http://127.0.0.1:8080");
+        System.out.println("Servidor iniciado em http://127.0.0.1:8082");
     }
 }

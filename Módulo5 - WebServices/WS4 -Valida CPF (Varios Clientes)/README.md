@@ -7,14 +7,15 @@ Este projeto contém um web service que valida CPF e múltiplos clientes em dife
 ```
 WS4 -Valida CPF (Varios Clientes)/
 ├── ws provider/
-│   ├── provider.py          # Servidor HTTP (web service)
+│   ├── ws_provider.py       # Servidor HTTP (web service)
 │   └── matar_servidor.py    # Script utilitário para encerrar processos em uma porta específica
 └── ws client/
     ├── client.py            # Cliente Python
     ├── client.js            # Cliente JavaScript (Node.js)
     ├── CPFCliente.java      # Cliente Java
     ├── client.php           # Cliente PHP
-    └── client.cpp           # Cliente C++
+    ├── client.cpp           # Cliente C++
+    └── json.hpp             # Biblioteca JSON header-only para C++ (nlohmann/json)
 ```
 
 ## 📋 Pré-requisitos
@@ -97,7 +98,9 @@ javac -version
 **Biblioteca JSON para Java:**
 O cliente Java usa `org.json.JSONObject`. Você pode baixar o JAR de:
 - https://mvnrepository.com/artifact/org.json/json
-- Ou incluir no classpath ao compilar: `javac -cp ".:json.jar" CPFCliente.java`
+- Ou baixar diretamente: `curl -L -o json.jar https://repo1.maven.org/maven2/org/json/json/20250517/json-20250517.jar`
+- Incluir no classpath ao compilar: `javac -cp ".:json.jar" CPFCliente.java`
+- Incluir no classpath ao executar: `java -cp ".:json.jar" CPFCliente`
 
 ---
 
@@ -249,7 +252,7 @@ O servidor é um web service HTTP que valida CPF através do endpoint GET.
 
 2. Execute o servidor:
    ```bash
-   python3 provider.py
+   python3 ws_provider.py
    ```
 
 3. Você verá a mensagem:
@@ -298,13 +301,16 @@ Abra **outro terminal** (deixe o servidor rodando no primeiro terminal) e execut
    ```
 
 **O que o programa faz:**
-- Faz uma requisição GET com um CPF de exemplo (`11144477735`)
-- Exibe o resultado da validação formatado
+- Faz requisições GET para validar dois CPFs de exemplo (`11144477735` e `11111111111`)
+- Exibe o resultado da validação formatado para cada CPF
 
 **Exemplo de saída:**
 ```
 ==============================
 RESULTADO VALIDAR CPF: True
+==============================
+==============================
+RESULTADO VALIDAR CPF: False
 ==============================
 ```
 
@@ -345,13 +351,19 @@ RESULTADO VALIDAR CPF: True
 
 **O que o programa faz:**
 - Conecta ao servidor via HTTP
-- Executa requisição GET com CPF `11144477735`
-- Exibe a resposta JSON e o resultado da validação
+- Executa requisições GET para validar dois CPFs (`11144477735` e `11111111111`)
+- Exibe a resposta JSON e o resultado da validação para cada CPF
 
 **Exemplo de saída:**
 ```
 GET => {"cpf":"11144477735","valido":true}
+==============================
 RESULTADO VALIDAR CPF: true
+==============================
+GET => {"cpf":"11111111111","valido":false}
+==============================
+RESULTADO VALIDAR CPF: false
+==============================
 ```
 
 **Nota:** Se você já compilou anteriormente e o arquivo `CPFCliente.class` existe, pode executar diretamente com `java CPFCliente` sem precisar recompilar.
@@ -378,15 +390,15 @@ RESULTADO VALIDAR CPF: true
 
 **O que o programa faz:**
 - Usa `async/await` para fazer requisições assíncronas
-- Faz requisição GET usando a API `fetch`
-- Valida o CPF `11144477735`
+- Faz requisições GET usando a API `fetch`
+- Valida dois CPFs (`11144477735` e `11111111111`)
 - Exibe mensagens de progresso e resultados formatados
 
 **Exemplo de saída:**
 ```
 Validando via GET...
-[GET] Resposta: { cpf: '11144477735', valido: true }
 CPF: 11144477735 | válido: true
+CPF: 11111111111 | válido: false
 ```
 
 ---
@@ -411,14 +423,17 @@ CPF: 11144477735 | válido: true
 
 **O que o programa faz:**
 - Usa `file_get_contents()` para fazer requisições HTTP
-- Executa GET com CPF `11144477735`
-- Exibe o resultado formatado
+- Executa requisições GET para validar dois CPFs (`11144477735` e `11111111111`)
+- Exibe o resultado formatado para cada CPF
 
 **Exemplo de saída:**
 ```
 GET:
 ==============================
 RESULTADO VALIDAR CPF: true
+==============================
+==============================
+RESULTADO VALIDAR CPF: false
 ==============================
 ```
 
@@ -488,8 +503,8 @@ vcpkg install curl nlohmann-json
 
 **O que o programa faz:**
 - Valida os CPFs `11144477735` e `11111111111` (hardcoded no código)
-- Faz requisição GET usando libcurl
-- Parseia a resposta JSON usando nlohmann/json
+- Faz requisições GET usando libcurl
+- Parseia a resposta JSON usando nlohmann/json (biblioteca `json.hpp` incluída no projeto)
 - Exibe se cada CPF é válido ou não
 
 **Exemplo de saída:**
@@ -497,6 +512,10 @@ vcpkg install curl nlohmann-json
 CPF 11144477735 válido
 CPF 11111111111 inválido
 ```
+
+**Nota sobre json.hpp:**
+- O arquivo `json.hpp` já está incluído na pasta `ws client`
+- Se precisar baixar novamente: `curl -L -o json.hpp https://raw.githubusercontent.com/nlohmann/json/develop/single_include/nlohmann/json.hpp`
 
 **Nota:** O código inclui comentários detalhados no início do arquivo `client.cpp` com todas as instruções de instalação e compilação para diferentes sistemas operacionais.
 
@@ -540,7 +559,7 @@ http://localhost:8080/validar?cpf=11144477735
 - Ou manualmente:
   - Verifique processos usando a porta: `lsof -ti:8080`
   - Encerre o processo: `kill -9 $(lsof -ti:8080)`
-- Ou altere a porta no `provider.py` (linha 69) e atualize os clientes
+- Ou altere a porta no `ws_provider.py` (linha 69) e atualize os clientes
 
 **Comportamento inesperado:**
 - Limpe o cache do Python: `find . -name "__pycache__" -type d -exec rm -rf {} +`
@@ -647,7 +666,7 @@ Porta 8080 liberada.
 ### Iniciar Servidor
 ```bash
 cd "ws provider"
-python3 provider.py
+python3 ws_provider.py
 ```
 
 ### Liberar Porta 8080 (se necessário)
@@ -683,7 +702,7 @@ cd "ws client" && php client.php
 cd "ws client" && g++ -std=c++11 -o client client.cpp -lcurl && ./client
 ```
 
-**Nota:** Todos os clientes devem ser executados enquanto o servidor está rodando. O servidor atual implementa apenas o método GET no endpoint `/validar`.
+**Nota:** Todos os clientes devem ser executados enquanto o servidor está rodando. O servidor atual implementa apenas o método GET no endpoint `/validar`. Todos os clientes validam dois CPFs de exemplo: `11144477735` (válido) e `11111111111` (inválido).
 
 ---
 
@@ -695,7 +714,10 @@ cd "ws client" && g++ -std=c++11 -o client client.cpp -lcurl && ./client
 - O servidor aceita CPF com ou sem formatação (pontos e traços são removidos automaticamente)
 - O cliente Python usa a biblioteca `requests` para facilitar as requisições HTTP
 - Todos os clientes fazem requisições GET para demonstrar a integração com o web service
+- Todos os clientes validam dois CPFs de exemplo: `11144477735` (válido) e `11111111111` (inválido)
 - O servidor retorna erro 405 (Method Not Allowed) para requisições POST
+- O cliente C++ usa a biblioteca `json.hpp` (nlohmann/json) que está incluída no projeto
+- O cliente Java requer a biblioteca `org.json` (JSONObject) - veja instruções de download no README
 
 ---
 
