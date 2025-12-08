@@ -1,12 +1,11 @@
 //curl -L -o json.hpp https://raw.githubusercontent.com/nlohmann/json/develop/single_include/nlohmann/json.hpp
 //g++ -std=c++11 -o client client.cpp -lcurl
 //./client
-
 #include <iostream>
 #include <string>
 #include <curl/curl.h>
 // Inclui a biblioteca json.hpp para manipulação de JSON
-// nlohmann::json — instalado via: brew install nlohmann-json
+// Baixada automaticamente via: curl -L -o json.hpp https://github.com/nlohmann/json/releases/download/v3.11.3/json.hpp
 #include "json.hpp"
 
 // Define um alias para facilitar o uso da biblioteca JSON
@@ -26,7 +25,7 @@ private:
     }
 
 public:
-    CPFCliente() : base_url("http://localhost:8080") {}
+    CPFCliente() : base_url("http://localhost:8084") {}
     
     // Método para validar CPF usando requisição HTTP GET
     void validar(const string& cpf) {

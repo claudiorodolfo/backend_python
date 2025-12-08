@@ -26,4 +26,5 @@
     echo "GET:\n";
     $cliente = new CPFCliente();
     $cliente->validar("11144477735");
+    $cliente->validar("11111111111");
 ?>

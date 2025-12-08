@@ -177,44 +177,45 @@ php --version
 
 ### C++ (g++ ou clang++)
 - **Necessário para:** Cliente C++
+- **Versão mínima:** C++11
 - **Bibliotecas necessárias:**
   - `libcurl` (para requisições HTTP)
-  - `nlohmann/json` (header-only, para parsing JSON)
+  - `nlohmann-json` (biblioteca JSON para C++)
 
-**Instalação do Compilador C++:**
+**Instalação das dependências:**
 
-**No macOS:**
+**No macOS (usando Homebrew):**
 ```bash
-# Instale as ferramentas de linha de comando do Xcode:
+# Instale as ferramentas de linha de comando do Xcode (se necessário):
 xcode-select --install
 
-# Ou instale via Homebrew:
-brew install gcc
+# Instale as dependências:
+brew install nlohmann-json curl
 
-# Instale libcurl (geralmente já vem instalado, mas pode precisar):
-brew install curl
-
-# Para nlohmann/json:
-brew install nlohmann-json
+# Verifique se o compilador está instalado:
+g++ --version
+# ou
+clang++ --version
 ```
 
 **No Linux (Ubuntu/Debian):**
 ```bash
 sudo apt-get update
-sudo apt-get install build-essential libcurl4-openssl-dev
-
-# Para nlohmann/json, baixe o header de:
-# https://github.com/nlohmann/json/releases
-# E coloque json.hpp na mesma pasta do client.cpp
+sudo apt-get install libcurl4-openssl-dev nlohmann-json3-dev g++
 ```
 
-**No Linux (CentOS/RHEL):**
+**No Linux (Fedora/RHEL):**
 ```bash
-sudo yum groupinstall "Development Tools"
-sudo yum install libcurl-devel
+sudo dnf install libcurl-devel json-devel gcc-c++
+```
 
-# Para nlohmann/json, baixe o header de:
-# https://github.com/nlohmann/json/releases
+**No Windows (usando vcpkg ou MSYS2/MinGW):**
+```bash
+# Com vcpkg:
+vcpkg install curl nlohmann-json
+
+# Ou com MSYS2/MinGW:
+pacman -S mingw-w64-x86_64-curl mingw-w64-x86_64-nlohmann-json
 ```
 
 **Verificar instalação:**
@@ -226,9 +227,10 @@ curl-config --version
 ```
 
 **Nota sobre nlohmann/json:**
-- No macOS com Homebrew, você pode usar `brew install nlohmann-json` e incluir com `#include <nlohmann/json.hpp>`
-- No Linux, baixe `json.hpp` de https://github.com/nlohmann/json/releases e coloque na mesma pasta do `client.cpp`
-- Ou ajuste o `#include` no código para apontar para o caminho correto
+- No macOS com Homebrew: `brew install nlohmann-json` e use `#include <nlohmann/json.hpp>`
+- No Linux (Ubuntu/Debian): `sudo apt-get install nlohmann-json3-dev` (instalação via pacote)
+- No Linux (Fedora/RHEL): `sudo dnf install json-devel` (instalação via pacote)
+- O código usa C++11 (`-std=c++11` na compilação)
 
 ---
 
@@ -425,9 +427,32 @@ RESULTADO VALIDAR CPF: true
 #### ⚙️ Cliente C++
 
 **Pré-requisitos:**
-- Compilador C++ (g++ ou clang++)
+- Compilador C++11 (g++ ou clang++)
 - Biblioteca libcurl (para requisições HTTP)
-- Biblioteca nlohmann/json (header-only, para parsing JSON)
+- Biblioteca nlohmann-json (header-only, para parsing JSON)
+
+**Instalação das dependências:**
+
+**No macOS (usando Homebrew):**
+```bash
+brew install nlohmann-json curl
+```
+
+**No Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get update
+sudo apt-get install libcurl4-openssl-dev nlohmann-json3-dev g++
+```
+
+**No Linux (Fedora/RHEL):**
+```bash
+sudo dnf install libcurl-devel json-devel gcc-c++
+```
+
+**No Windows (usando vcpkg ou MSYS2/MinGW):**
+```bash
+vcpkg install curl nlohmann-json
+```
 
 **Passo a passo:**
 
@@ -436,39 +461,44 @@ RESULTADO VALIDAR CPF: true
    cd "Módulo5 - WebServices/WS4 -Valida CPF (Varios Clientes)/ws client"
    ```
 
-2. **Importante:** Certifique-se de que o arquivo `json.hpp` está disponível:
-   - **macOS (Homebrew):** Se instalou via `brew install nlohmann-json`, o header estará em `/opt/homebrew/include/nlohmann/json.hpp` ou similar. Ajuste o `#include` no código se necessário.
-   - **Linux:** Baixe `json.hpp` de https://github.com/nlohmann/json/releases e coloque na mesma pasta do `client.cpp`
-
-3. Compile o programa:
+2. Compile o programa:
    ```bash
-   g++ -o client client.cpp -lcurl
-   ```
-   Ou com clang++:
-   ```bash
-   clang++ -o client client.cpp -lcurl
+   g++ -std=c++11 -o client client.cpp -lcurl
    ```
    
-   **No macOS com nlohmann/json via Homebrew:**
+   Ou com clang++:
    ```bash
-   g++ -o client client.cpp -lcurl -I/opt/homebrew/include
+   clang++ -std=c++11 -o client client.cpp -lcurl
+   ```
+   
+   **No Windows:**
+   ```bash
+   g++ -std=c++11 -o client.exe client.cpp -lcurl
    ```
 
-4. Execute o programa compilado:
+3. Execute o programa compilado:
    ```bash
    ./client
    ```
+   
+   **No Windows:**
+   ```bash
+   client.exe
+   ```
 
 **O que o programa faz:**
-- Valida o CPF `11144477735` (hardcoded no código)
+- Valida os CPFs `11144477735` e `11111111111` (hardcoded no código)
 - Faz requisição GET usando libcurl
 - Parseia a resposta JSON usando nlohmann/json
-- Exibe se o CPF é válido ou não
+- Exibe se cada CPF é válido ou não
 
 **Exemplo de saída:**
 ```
 CPF 11144477735 válido
+CPF 11111111111 inválido
 ```
+
+**Nota:** O código inclui comentários detalhados no início do arquivo `client.cpp` com todas as instruções de instalação e compilação para diferentes sistemas operacionais.
 
 ---
 
@@ -546,14 +576,19 @@ http://localhost:8080/validar?cpf=11144477735
 **C++:**
 - `g++: command not found`: Instale um compilador C++
   - macOS: `xcode-select --install` ou `brew install gcc`
-  - Linux: `sudo apt-get install build-essential`
-- Erro `json.hpp: No such file`:
-  - macOS: `brew install nlohmann-json` e ajuste o `#include` ou use `-I/opt/homebrew/include`
-  - Linux: Baixe de https://github.com/nlohmann/json/releases e coloque na mesma pasta
+  - Linux (Ubuntu/Debian): `sudo apt-get install g++`
+  - Linux (Fedora/RHEL): `sudo dnf install gcc-c++`
+- Erro `json.hpp: No such file` ou `nlohmann/json.hpp: No such file`:
+  - macOS: `brew install nlohmann-json`
+  - Linux (Ubuntu/Debian): `sudo apt-get install nlohmann-json3-dev`
+  - Linux (Fedora/RHEL): `sudo dnf install json-devel`
+  - Certifique-se de usar `-std=c++11` na compilação
 - Erro `undefined reference to 'curl_*'`:
-  - Instale libcurl: `brew install curl` (macOS) ou `sudo apt-get install libcurl4-openssl-dev` (Linux)
-  - Certifique-se de usar `-lcurl` na compilação
-- Erro de compilação: Verifique se todas as dependências estão instaladas
+  - macOS: `brew install curl` e use `-lcurl` na compilação
+  - Linux (Ubuntu/Debian): `sudo apt-get install libcurl4-openssl-dev` e use `-lcurl` na compilação
+  - Linux (Fedora/RHEL): `sudo dnf install libcurl-devel` e use `-lcurl` na compilação
+- Erro de compilação: Verifique se todas as dependências estão instaladas e use `-std=c++11`
+- Comando de compilação completo: `g++ -std=c++11 -o client client.cpp -lcurl`
 
 ---
 
@@ -645,7 +680,7 @@ cd "ws client" && php client.php
 
 **C++:**
 ```bash
-cd "ws client" && g++ -o client client.cpp -lcurl && ./client
+cd "ws client" && g++ -std=c++11 -o client client.cpp -lcurl && ./client
 ```
 
 **Nota:** Todos os clientes devem ser executados enquanto o servidor está rodando. O servidor atual implementa apenas o método GET no endpoint `/validar`.

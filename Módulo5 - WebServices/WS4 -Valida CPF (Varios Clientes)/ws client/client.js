@@ -11,8 +11,6 @@ async function validaCpf(cpf) {
     // Converte a resposta de JSON para objeto JavaScript
     const dados = await resp.json();
 
-    console.log("[GET] Resposta:", dados);
-
     // Imprime o CPF e o resultado da validação
     console.log("CPF:", dados.cpf, "| válido:", dados.valido);
   }
@@ -22,5 +20,6 @@ async function validaCpf(cpf) {
     console.log("Validando via GET...");
     // Chama a função de validação GET
     await validaCpf("11144477735");
+    await validaCpf("11111111111");
   })();
   

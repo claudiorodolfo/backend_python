@@ -28,9 +28,11 @@ class CalculadoraCliente:
 
         print("=" * 30)
         print(f"SOMAR: {response_get_somar.json()["resultado"]}")
+        print("=" * 30)
         print(f"SUBTRAIR: {response_get_subtrair.json()["resultado"]}")
         print("=" * 30)
         print(f"MULTIPLICAR: {response_post_multiplicar.json()["resultado"]}")
+        print("=" * 30)
         print(f"DIVIDIR: {response_post_dividir.json()["resultado"]}")
         print("=" * 30)
 
