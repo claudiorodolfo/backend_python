@@ -24,7 +24,7 @@ O projeto deve seguir a seguinte estrutura:
 
 ```
 WS11 - CRUD Produtos/
-├── provider/               # Servidor Web Service
+├── provider/                # Servidor Web Service
 │   ├── ws_provider.py       # Servidor HTTP e handlers das requisições
 │   ├── produto_service.py   # Lógica de negócio e gerenciamento de produtos
 │   └── produto.py           # Entidade Produto
@@ -179,57 +179,57 @@ Criar documentação completa incluindo:
 - Arquitetura do projeto
 - Exemplos de teste com cURL
 
-## ✅ Critérios de Avaliação
+## ✅ Critérios de Análise de Sucesso
 
-### Funcionalidade (40 pontos)
+### Funcionalidade
 - [ ] Todos os endpoints CRUD funcionando corretamente
 - [ ] Validações implementadas (código obrigatório)
 - [ ] Tratamento de erros adequado (404, 400)
 - [ ] Cliente HTTP funcionando corretamente
 - [ ] Interface CLI completa e funcional
 
-### Código (30 pontos)
+### Código
 - [ ] Arquitetura em camadas bem definida
 - [ ] Código limpo e organizado
 - [ ] Uso adequado de propriedades e encapsulamento
 - [ ] Comentários e documentação no código
 - [ ] Tratamento de exceções
 
-### Estrutura e Organização (15 pontos)
+### Estrutura e Organização
 - [ ] Estrutura de diretórios correta
 - [ ] Nomenclatura consistente
 - [ ] Separação adequada de responsabilidades
 
-### Documentação (15 pontos)
+### Documentação
 - [ ] README.md completo e bem formatado
 - [ ] Exemplos de uso claros
 - [ ] Documentação dos endpoints detalhada
 
 ## 📝 Tarefas Detalhadas
 
-### Fase 1: Entidade e Serviço (2-3 horas)
+### Fase 1: Entidade e Serviço
 1. Criar a classe `Produto` com todos os atributos e propriedades
 2. Implementar `ProdutoService` com todos os métodos CRUD
 3. Testar manualmente a lógica de negócio
 
-### Fase 2: Provider/API (3-4 horas)
+### Fase 2: Provider/API
 1. Implementar o servidor HTTP (`ws_provider.py`)
 2. Implementar todos os métodos HTTP (GET, POST, PUT, DELETE)
 3. Implementar tratamento de erros e validações
 4. Testar endpoints com cURL ou Postman
 
-### Fase 3: Cliente (2-3 horas)
+### Fase 3: Cliente
 1. Implementar `ProdutoCliente` com todos os métodos
 2. Testar comunicação com a API
 3. Implementar tratamento de erros no cliente
 
-### Fase 4: Interface CLI (2-3 horas)
+### Fase 4: Interface CLI
 1. Criar menu interativo
 2. Implementar todas as funções do menu
 3. Adicionar validações e tratamento de erros
 4. Melhorar formatação e UX
 
-### Fase 5: Documentação (1-2 horas)
+### Fase 5: Documentação
 1. Criar README.md completo
 2. Documentar todos os endpoints
 3. Adicionar exemplos de uso
@@ -298,18 +298,6 @@ sucesso = cliente.apagar("PROD001")
 6. **Case-insensitive**: A busca por código deve ignorar maiúsculas/minúsculas
 7. **Porta diferente**: Use porta 8081
 8. **Documentação**: Documente bem seu código, isso facilita a manutenção
-
-## 🚀 Entrega
-
-O projeto deve ser entregue com:
-
-1. Todos os arquivos do projeto organizados na estrutura correta
-2. README.md completo e bem formatado
-3. Código funcionando e testado
-4. Comentários adequados no código
-5. Tratamento de erros implementado
-
-**Formato de entrega**: Pasta compactada (ZIP) ou repositório Git com todos os arquivos.
 
 ## 📚 Referências
 
