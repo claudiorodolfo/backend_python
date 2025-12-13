@@ -24,14 +24,14 @@ O projeto deve seguir a seguinte estrutura:
 
 ```
 WS11 - CRUD Produtos/
-├── provider/              # Servidor Web Service
-│   ├── ws_provider.py    # Servidor HTTP e handlers das requisições
-│   ├── produto_service.py # Lógica de negócio e gerenciamento de produtos
-│   └── produto.py         # Entidade Produto
-├── client/               # Cliente Web Service
+├── provider/               # Servidor Web Service
+│   ├── ws_provider.py       # Servidor HTTP e handlers das requisições
+│   ├── produto_service.py   # Lógica de negócio e gerenciamento de produtos
+│   └── produto.py           # Entidade Produto
+├── client/                  # Cliente Web Service
 │   ├── ws_client_produto.py # Cliente HTTP para comunicação com a API
-│   └── run.py           # Interface de linha de comando (CLI)
-└── README.md            # Documentação do projeto
+│   └── run.py               # Interface de linha de comando (CLI)
+└── README.md                # Documentação do projeto
 ```
 
 ### Modelo de Dados - Produto
