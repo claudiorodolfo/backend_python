@@ -1,4 +1,4 @@
-# ATIVIDADE - CRUD Produtos
+# ATIVIDADE - CRUD Produtos com Web Services
 
 ## 📋 Objetivo da Atividade
 
@@ -113,7 +113,7 @@ Implementar o servidor HTTP usando `HTTPServer` e `BaseHTTPRequestHandler`:
 - Resposta 400 Bad Request se código não fornecido: `{"erro": "Código é obrigatório"}`
 
 **Configuração do Servidor:**
-- Porta: 8081 (diferente da porta 8080 usada no projeto Pessoa)
+- Porta: 8081
 - Host: 127.0.0.1
 - Content-Type: application/json em todas as respostas
 
@@ -296,7 +296,7 @@ sucesso = cliente.apagar("PROD001")
 4. **Tratamento de erros**: Implemente tratamento adequado para todos os casos
 5. **Conversão de tipos**: Lembre-se de converter strings para int/float quando necessário
 6. **Case-insensitive**: A busca por código deve ignorar maiúsculas/minúsculas
-7. **Porta diferente**: Use porta 8081 para não conflitar com o projeto Pessoa
+7. **Porta diferente**: Use porta 8081
 8. **Documentação**: Documente bem seu código, isso facilita a manutenção
 
 ## 🚀 Entrega
