@@ -223,7 +223,7 @@ class WSProvider(BaseHTTPRequestHandler):
                 self.wfile.write(resposta)
 
 def main():
-    # Inicia o servidor HTTP na porta 8081
+    # Inicia o servidor HTTP na porta 8080
     servidor = HTTPServer(('127.0.0.1', 8080), WSProvider)
     print("Servidor iniciado em http://127.0.0.1:8080")
     servidor.serve_forever()
