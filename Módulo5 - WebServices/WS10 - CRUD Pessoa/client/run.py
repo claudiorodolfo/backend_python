@@ -49,10 +49,10 @@ def buscar_por_email(cliente: PessoaCliente):
         pessoa = cliente.buscarPorEmail(email)
         
         if pessoa:
-            print(f"\n✓ Pessoa encontrada:")
+            print(f"\n Pessoa encontrada:")
             exibir_pessoa(pessoa)
         else:
-            print(f"\n✗ Pessoa com email '{email}' não encontrada.")
+            print(f"\n Pessoa com email '{email}' não encontrada.")
     except Exception as e:
         print(f"Erro ao buscar pessoa: {e}")
 
@@ -179,7 +179,7 @@ def main():
             print("\nSaindo... Até logo!")
             break
         else:
-            print("\n✗ Opção inválida! Tente novamente.")
+            print("\n Opção inválida! Tente novamente.")
         
         input("\nPressione ENTER para continuar...")
 
