@@ -309,15 +309,15 @@ api_flask/
 │   ├── __init__.py
 │   ├── models.py          # Modelos de dados
 │   ├── routes.py          # Definição de rotas
-│   ├── services.py       # Lógica de negócio
-│   ├── auth.py           # Autenticação
-│   └── serializers.py   # Serialização
+│   ├── services.py        # Lógica de negócio
+│   ├── auth.py            # Autenticação
+│   └── serializers.py     # Serialização
 ├── config/
 │   └── settings.py        # Configurações
 ├── tests/
-│   └── test_api.py       # Testes
+│   └── test_api.py        # Testes
 ├── requirements.txt
-└── run.py                # Ponto de entrada
+└── run.py                 # Ponto de entrada
 ```
 
 ### Estrutura com FastAPI
