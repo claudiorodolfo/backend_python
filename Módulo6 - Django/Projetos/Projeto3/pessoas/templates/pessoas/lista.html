@@ -1,0 +1,131 @@
+{% extends 'pessoas/base.html' %}
+
+{% block title %}Lista de Pessoas{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">
+            <i class="bi bi-list-ul"></i> Lista de Pessoas
+        </h4>
+    </div>
+    <div class="card-body">
+        <!-- Formulário de Busca e Filtro -->
+        <form method="get" class="mb-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" name="busca" class="form-control" 
+                           placeholder="Buscar por nome, email ou CPF..." 
+                           value="{{ busca }}">
+                </div>
+                <div class="col-md-3">
+                    <select name="ativo" class="form-select">
+                        <option value="">Todos os status</option>
+                        <option value="1" {% if filtro_ativo == '1' %}selected{% endif %}>Ativos</option>
+                        <option value="0" {% if filtro_ativo == '0' %}selected{% endif %}>Inativos</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Buscar
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Botão Nova Pessoa -->
+        <div class="mb-3">
+            <a href="{% url 'pessoas:criar' %}" class="btn btn-success">
+                <i class="bi bi-person-plus"></i> Nova Pessoa
+            </a>
+        </div>
+
+        <!-- Tabela de Pessoas -->
+        {% if pessoas %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Telefone</th>
+                            <th>CPF</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pessoa in pessoas %}
+                        <tr>
+                            <td>{{ pessoa.nome }}</td>
+                            <td>{{ pessoa.email }}</td>
+                            <td>{{ pessoa.telefone|default:"-" }}</td>
+                            <td>{{ pessoa.cpf|default:"-" }}</td>
+                            <td>
+                                {% if pessoa.ativo %}
+                                    <span class="badge bg-success">Ativo</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Inativo</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'pessoas:detalhe' pessoa.pk %}" 
+                                   class="btn btn-sm btn-info btn-action" 
+                                   title="Ver detalhes">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="{% url 'pessoas:editar' pessoa.pk %}" 
+                                   class="btn btn-sm btn-warning btn-action" 
+                                   title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'pessoas:deletar' pessoa.pk %}" 
+                                   class="btn btn-sm btn-danger btn-action" 
+                                   title="Deletar">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginação -->
+            {% if pessoas.has_other_pages %}
+                <nav aria-label="Paginação">
+                    <ul class="pagination justify-content-center">
+                        {% if pessoas.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1{% if busca %}&busca={{ busca }}{% endif %}{% if filtro_ativo %}&ativo={{ filtro_ativo }}{% endif %}">Primeira</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ pessoas.previous_page_number }}{% if busca %}&busca={{ busca }}{% endif %}{% if filtro_ativo %}&ativo={{ filtro_ativo }}{% endif %}">Anterior</a>
+                            </li>
+                        {% endif %}
+
+                        <li class="page-item active">
+                            <span class="page-link">
+                                Página {{ pessoas.number }} de {{ pessoas.paginator.num_pages }}
+                            </span>
+                        </li>
+
+                        {% if pessoas.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ pessoas.next_page_number }}{% if busca %}&busca={{ busca }}{% endif %}{% if filtro_ativo %}&ativo={{ filtro_ativo }}{% endif %}">Próxima</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ pessoas.paginator.num_pages }}{% if busca %}&busca={{ busca }}{% endif %}{% if filtro_ativo %}&ativo={{ filtro_ativo }}{% endif %}">Última</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        {% else %}
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i> Nenhuma pessoa encontrada.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'pessoas/base.html' %}
+
+{% block title %}Deletar Pessoa{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0">
+            <i class="bi bi-exclamation-triangle"></i> Confirmar Exclusão
+        </h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <strong>Atenção!</strong> Esta ação não pode ser desfeita.
+        </div>
+
+        <p>Você tem certeza que deseja deletar a pessoa:</p>
+        
+        <div class="card bg-light mb-3">
+            <div class="card-body">
+                <h5>{{ pessoa.nome }}</h5>
+                <p class="mb-1"><strong>E-mail:</strong> {{ pessoa.email }}</p>
+                {% if pessoa.telefone %}
+                    <p class="mb-1"><strong>Telefone:</strong> {{ pessoa.telefone }}</p>
+                {% endif %}
+                {% if pessoa.cpf %}
+                    <p class="mb-0"><strong>CPF:</strong> {{ pessoa.cpf }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Sim, Deletar
+            </button>
+            <a href="{% url 'pessoas:lista' %}" class="btn btn-secondary">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

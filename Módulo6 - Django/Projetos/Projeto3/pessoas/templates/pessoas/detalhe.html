@@ -1,0 +1,66 @@
+{% extends 'pessoas/base.html' %}
+
+{% block title %}Detalhes - {{ pessoa.nome }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">
+            <i class="bi bi-person"></i> Detalhes da Pessoa
+        </h4>
+        <div>
+            <a href="{% url 'pessoas:editar' pessoa.pk %}" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+            <a href="{% url 'pessoas:deletar' pessoa.pk %}" class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i> Deletar
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="text-primary">Informações Básicas</h5>
+                <hr>
+                <p><strong>Nome:</strong> {{ pessoa.nome }}</p>
+                <p><strong>E-mail:</strong> {{ pessoa.email }}</p>
+                <p><strong>Telefone:</strong> {{ pessoa.telefone|default:"-" }}</p>
+                <p><strong>Status:</strong> 
+                    {% if pessoa.ativo %}
+                        <span class="badge bg-success">Ativo</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Inativo</span>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h5 class="text-primary">Documentos e Endereço</h5>
+                <hr>
+                <p><strong>CPF:</strong> {{ pessoa.cpf|default:"-" }}</p>
+                <p><strong>Data de Nascimento:</strong> 
+                    {% if pessoa.data_nascimento %}
+                        {{ pessoa.data_nascimento|date:"d/m/Y" }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </p>
+                <p><strong>Endereço:</strong> {{ pessoa.endereco|default:"-"|linebreaks }}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Data de Criação:</strong> {{ pessoa.data_criacao|date:"d/m/Y H:i" }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Última Atualização:</strong> {{ pessoa.data_atualizacao|date:"d/m/Y H:i" }}</p>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'pessoas:lista' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar para Lista
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

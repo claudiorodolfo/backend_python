@@ -1,0 +1,48 @@
+{% extends 'pessoas/base.html' %}
+
+{% block title %}Lista de Pessoas{% endblock %}
+
+{% block content %}
+<h2>Lista de Pessoas</h2>
+
+<div>
+    <a href="{% url 'pessoas:criar' %}">Nova Pessoa</a>
+</div>
+
+{% if pessoas %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas %}
+            <tr>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.email }}</td>
+                <td>{{ pessoa.telefone|default:"-" }}</td>
+                <td>
+                    {% if pessoa.ativo %}
+                        Ativo
+                    {% else %}
+                        Inativo
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'pessoas:detalhe' pessoa.pk %}">Ver</a> |
+                    <a href="{% url 'pessoas:editar' pessoa.pk %}">Editar</a> |
+                    <a href="{% url 'pessoas:deletar' pessoa.pk %}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nenhuma pessoa cadastrada.</p>
+{% endif %}
+{% endblock %}

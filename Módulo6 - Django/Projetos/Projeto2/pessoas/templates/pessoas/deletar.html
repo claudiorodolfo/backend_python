@@ -1,0 +1,21 @@
+{% extends 'pessoas/base.html' %}
+
+{% block title %}Deletar Pessoa{% endblock %}
+
+{% block content %}
+<h2>Confirmar Exclusão</h2>
+
+<div>
+    <strong>Atenção!</strong> Esta ação não pode ser desfeita.
+</div>
+
+<p>Você tem certeza que deseja deletar a pessoa:</p>
+<p><strong>{{ pessoa.nome }}</strong></p>
+<p><strong>E-mail:</strong> {{ pessoa.email }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, Deletar</button>
+    <a href="{% url 'pessoas:lista' %}">Cancelar</a>
+</form>
+{% endblock %}

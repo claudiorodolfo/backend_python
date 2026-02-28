@@ -1,0 +1,66 @@
+{% extends 'pessoas/base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4>{{ titulo }}</h4>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome *</label>
+                <input type="text" class="form-control" id="nome" name="nome" 
+                       value="{% if pessoa %}{{ pessoa.nome }}{% endif %}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail *</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                       value="{% if pessoa %}{{ pessoa.email }}{% endif %}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="telefone" name="telefone" 
+                       value="{% if pessoa %}{{ pessoa.telefone }}{% endif %}">
+            </div>
+
+            <div class="mb-3">
+                <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+                <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" 
+                       value="{% if pessoa and pessoa.data_nascimento %}{{ pessoa.data_nascimento|date:'Y-m-d' }}{% endif %}">
+            </div>
+
+            <div class="mb-3">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" 
+                       value="{% if pessoa %}{{ pessoa.cpf }}{% endif %}">
+            </div>
+
+            <div class="mb-3">
+                <label for="endereco" class="form-label">Endereço</label>
+                <textarea class="form-control" id="endereco" name="endereco" rows="3">{% if pessoa %}{{ pessoa.endereco }}{% endif %}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="ativo" name="ativo" 
+                           {% if pessoa and pessoa.ativo or not pessoa %}checked{% endif %}>
+                    <label class="form-check-label" for="ativo">
+                        Ativo
+                    </label>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{% url 'pessoas:lista' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

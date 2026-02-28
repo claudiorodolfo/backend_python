@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Controle de Pessoas{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'pessoas:lista' %}">Controle de Pessoas</a> |
+        <a href="{% url 'pessoas:lista' %}">Lista</a> |
+        <a href="{% url 'pessoas:criar' %}">Nova Pessoa</a>
+    </nav>
+
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
