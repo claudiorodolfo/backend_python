@@ -10,18 +10,18 @@ Este arquivo demonstra como instalar e configurar o Django em um ambiente Python
 # ============================================================================
 
 # 1. Criar ambiente virtual (recomendado)
-# python -m venv venv
-# source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate      # Windows
+# python -m venv .venv
+# source .venv/bin/activate  # Linux/Mac
+# .venv\Scripts\activate      # Windows
 
 # 2. Instalar Django
-# pip install django
+# pip3 install django
 
 # 3. Verificar instalação
-# python -m django --version
+# django-admin --version
 
 # 4. Criar projeto Django
-# django-admin startproject meu_projeto
+# django-admin startproject meu_projeto .
 
 # 5. Criar app dentro do projeto
 # cd meu_projeto
