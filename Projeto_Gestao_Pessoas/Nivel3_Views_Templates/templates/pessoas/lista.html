@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Pessoas - {{ block.super }}{% endblock %}
+
+{% block content %}
+<h2>Lista de Pessoas Cadastradas</h2>
+
+<form method="get" style="margin-bottom: 20px;">
+    <input type="text" name="busca" placeholder="Buscar por nome ou CPF..." value="{{ busca }}" style="padding: 10px; width: 300px; border: 1px solid #ddd; border-radius: 5px;">
+    <button type="submit" class="btn">Buscar</button>
+    {% if busca %}
+    <a href="{% url 'pessoas:lista' %}" class="btn" style="background-color: #95a5a6;">Limpar</a>
+    {% endif %}
+</form>
+
+{% if pessoas %}
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #34495e; color: white;">
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Nome</th>
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">CPF</th>
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">E-mail</th>
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Telefone</th>
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Idade</th>
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pessoa in pessoas %}
+        <tr style="border-bottom: 1px solid #ddd;">
+            <td style="padding: 12px; border: 1px solid #ddd;">{{ pessoa.nome }}</td>
+            <td style="padding: 12px; border: 1px solid #ddd;">{{ pessoa.cpf }}</td>
+            <td style="padding: 12px; border: 1px solid #ddd;">{{ pessoa.email }}</td>
+            <td style="padding: 12px; border: 1px solid #ddd;">{{ pessoa.telefone }}</td>
+            <td style="padding: 12px; border: 1px solid #ddd;">{{ pessoa.idade }} anos</td>
+            <td style="padding: 12px; border: 1px solid #ddd;">
+                <a href="{% url 'pessoas:detalhe' pessoa.id %}" class="btn" style="padding: 5px 10px; font-size: 14px;">Ver Detalhes</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p style="margin-top: 20px; color: #666;">
+    Total de pessoas cadastradas: <strong>{{ pessoas|length }}</strong>
+</p>
+{% else %}
+<div style="padding: 20px; text-align: center; color: #666;">
+    <p>Nenhuma pessoa cadastrada ainda.</p>
+    <p style="margin-top: 10px;">
+        <a href="/admin/pessoas/pessoa/add/" class="btn btn-success">Cadastrar Primeira Pessoa</a>
+    </p>
+</div>
+{% endif %}
+{% endblock %}

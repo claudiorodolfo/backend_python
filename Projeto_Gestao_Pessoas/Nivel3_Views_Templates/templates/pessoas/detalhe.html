@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ pessoa.nome }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'pessoas:lista' %}" class="btn" style="background-color: #95a5a6;">← Voltar para Lista</a>
+</div>
+
+<h2>Detalhes da Pessoa</h2>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px;">
+    <h3 style="color: #2c3e50; margin-bottom: 20px;">Informações Básicas</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 10px; font-weight: bold; width: 200px;">Nome:</td>
+            <td style="padding: 10px;">{{ pessoa.nome }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">CPF:</td>
+            <td style="padding: 10px;">{{ pessoa.cpf }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">E-mail:</td>
+            <td style="padding: 10px;">{{ pessoa.email }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Telefone:</td>
+            <td style="padding: 10px;">{{ pessoa.telefone }}</td>
+        </tr>
+    </table>
+</div>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px;">
+    <h3 style="color: #2c3e50; margin-bottom: 20px;">Dados Pessoais</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 10px; font-weight: bold; width: 200px;">Data de Nascimento:</td>
+            <td style="padding: 10px;">{{ pessoa.data_nascimento|date:"d/m/Y" }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Idade:</td>
+            <td style="padding: 10px;">{{ pessoa.idade }} anos</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Sexo:</td>
+            <td style="padding: 10px;">{{ pessoa.get_sexo_display }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Estado Civil:</td>
+            <td style="padding: 10px;">{{ pessoa.get_estado_civil_display }}</td>
+        </tr>
+    </table>
+</div>
+
+{% if pessoa.endereco or pessoa.cidade or pessoa.estado or pessoa.cep %}
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px;">
+    <h3 style="color: #2c3e50; margin-bottom: 20px;">Endereço</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+        {% if pessoa.endereco %}
+        <tr>
+            <td style="padding: 10px; font-weight: bold; width: 200px;">Endereço:</td>
+            <td style="padding: 10px;">{{ pessoa.endereco }}</td>
+        </tr>
+        {% endif %}
+        {% if pessoa.cidade %}
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Cidade:</td>
+            <td style="padding: 10px;">{{ pessoa.cidade }}</td>
+        </tr>
+        {% endif %}
+        {% if pessoa.estado %}
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Estado:</td>
+            <td style="padding: 10px;">{{ pessoa.estado }}</td>
+        </tr>
+        {% endif %}
+        {% if pessoa.cep %}
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">CEP:</td>
+            <td style="padding: 10px;">{{ pessoa.cep }}</td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+{% endif %}
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px;">
+    <h3 style="color: #2c3e50; margin-bottom: 20px;">Informações do Sistema</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 10px; font-weight: bold; width: 200px;">Data de Cadastro:</td>
+            <td style="padding: 10px;">{{ pessoa.data_cadastro|date:"d/m/Y H:i" }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Última Atualização:</td>
+            <td style="padding: 10px;">{{ pessoa.data_atualizacao|date:"d/m/Y H:i" }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; font-weight: bold;">Status:</td>
+            <td style="padding: 10px;">
+                {% if pessoa.ativo %}
+                <span style="color: #27ae60; font-weight: bold;">✓ Ativo</span>
+                {% else %}
+                <span style="color: #e74c3c; font-weight: bold;">✗ Inativo</span>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+{% if pessoa.observacoes %}
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px;">
+    <h3 style="color: #2c3e50; margin-bottom: 20px;">Observações</h3>
+    <p style="padding: 10px;">{{ pessoa.observacoes }}</p>
+</div>
+{% endif %}
+
+<div style="margin-top: 30px;">
+    <a href="/admin/pessoas/pessoa/{{ pessoa.id }}/change/" class="btn btn-success">Editar no Admin</a>
+</div>
+{% endblock %}

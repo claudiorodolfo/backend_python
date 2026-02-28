@@ -1,6 +1,6 @@
 # Módulo 8 - Git
 
-Este módulo apresenta o Git, sistema de controle de versão distribuído essencial para o desenvolvimento de software profissional, especialmente no contexto de desenvolvimento backend. Git é a ferramenta padrão da indústria para gerenciamento de código e colaboração em equipe, e seu domínio é fundamental para qualquer desenvolvedor.
+Este módulo apresenta o Git, sistema de controle de versão distribuído essencial para o desenvolvimento de software profissional. Git é a ferramenta padrão da indústria para gerenciamento de código e colaboração em equipe, e seu domínio é fundamental para qualquer desenvolvedor.
 
 ## 📚 Conteúdo do Módulo
 
@@ -31,7 +31,7 @@ Conceitos base necessários para entender e usar Git efetivamente.
 
 **Conceitos Fundamentais**: Repository, commit, branch, merge
 - **Repository (repositório)**: Diretório versionado por Git
-- **Commit**: Snapshot das mudanças em um ponto no tempo
+- **Commit**: Mudanças em tempo real
 - **Branch**: Linha de desenvolvimento independente
 - **Merge**: Combinação de branches
 - **Remote**: Repositório remoto (GitHub, GitLab, etc.)
