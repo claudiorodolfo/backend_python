@@ -1,8 +1,8 @@
 from django.urls import path
-from . import views
+from .views import home
 
 app_name = 'pessoas'
 
 urlpatterns = [
-    # URLs serão adicionadas quando o CRUD for implementado
+    path("", home),
 ]
