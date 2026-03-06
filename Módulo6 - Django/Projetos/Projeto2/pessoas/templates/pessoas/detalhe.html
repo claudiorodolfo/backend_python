@@ -28,8 +28,8 @@
 <p><strong>Última Atualização:</strong> {{ pessoa.data_atualizacao|date:"d/m/Y H:i" }}</p>
 
 <div>
-    <a href="{% url 'pessoas:editar' pessoa.pk %}">Editar</a> |
-    <a href="{% url 'pessoas:deletar' pessoa.pk %}">Deletar</a> |
+    <a href="{% url 'pessoas:editar' pessoa.id %}">Editar</a> |
+    <a href="{% url 'pessoas:deletar' pessoa.id %}">Deletar</a> |
     <a href="{% url 'pessoas:lista' %}">Voltar</a>
 </div>
 {% endblock %}

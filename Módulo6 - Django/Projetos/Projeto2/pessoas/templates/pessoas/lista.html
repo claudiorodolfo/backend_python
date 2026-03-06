@@ -34,9 +34,9 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{% url 'pessoas:detalhe' pessoa.pk %}">Ver</a> |
-                    <a href="{% url 'pessoas:editar' pessoa.pk %}">Editar</a> |
-                    <a href="{% url 'pessoas:deletar' pessoa.pk %}">Deletar</a>
+                    <a href="{% url 'pessoas:detalhe' pessoa.id %}">Ver</a> |
+                    <a href="{% url 'pessoas:editar' pessoa.id %}">Editar</a> |
+                    <a href="{% url 'pessoas:deletar' pessoa.id %}">Deletar</a>
                 </td>
             </tr>
             {% endfor %}
