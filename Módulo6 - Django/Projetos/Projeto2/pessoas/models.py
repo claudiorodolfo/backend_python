@@ -13,7 +13,7 @@ class Pessoa(models.Model):
     endereco = models.TextField(blank=True, null=True, verbose_name='Endereço')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de Criação')
     data_atualizacao = models.DateTimeField(auto_now=True, verbose_name='Data de Atualização')
-    ativo = models.BooleanField(default=True, verbose_name='Ativo')
+    ativo = models.BooleanField(default=True, verbose_name='Status')
 
     class Meta:
         verbose_name = 'Pessoa'

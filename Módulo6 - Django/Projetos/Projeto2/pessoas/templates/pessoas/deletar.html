@@ -10,8 +10,8 @@
 </div>
 
 <p>Você tem certeza que deseja deletar a pessoa:</p>
-<p><strong>{{ pessoa.nome }}</strong></p>
-<p><strong>E-mail:</strong> {{ pessoa.email }}</p>
+<p><strong>{{ label_nome }}:</strong> {{ pessoa.nome }}</p>
+<p><strong>{{ label_email }}:</strong> {{ pessoa.email }}</p>
 
 <form method="post">
     {% csrf_token %}

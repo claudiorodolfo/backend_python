@@ -3,14 +3,33 @@ from django.contrib import messages
 from .models import Pessoa
 
 
+def _get_pessoa_form_labels():
+    """Retorna os verbose_name dos campos do formul?rio de Pessoa."""
+    meta = Pessoa._meta
+    return {
+        'label_nome': meta.get_field('nome').verbose_name,
+        'label_email': meta.get_field('email').verbose_name,
+        'label_telefone': meta.get_field('telefone').verbose_name,
+        'label_data_nascimento': meta.get_field('data_nascimento').verbose_name,
+        'label_cpf': meta.get_field('cpf').verbose_name,
+        'label_endereco': meta.get_field('endereco').verbose_name,
+        'label_ativo': meta.get_field('ativo').verbose_name,
+    }
+
+
 def lista_pessoas(request):
     """
     View para listar todas as pessoas.
     """
     pessoas = Pessoa.objects.all()
+    meta = Pessoa._meta
     
     context = {
         'pessoas': pessoas,
+        'label_nome': meta.get_field('nome').verbose_name,
+        'label_email': meta.get_field('email').verbose_name,
+        'label_telefone': meta.get_field('telefone').verbose_name,
+        'label_ativo': meta.get_field('ativo').verbose_name,
     }
     
     return render(request, 'pessoas/lista.html', context)
@@ -18,11 +37,21 @@ def lista_pessoas(request):
 
 def detalhe_pessoa(request, pessoa_id):
     """
-    View para exibir detalhes de uma pessoa específica.
+    View para exibir detalhes de uma pessoa espec?fica.
     """
     pessoa = Pessoa.objects.get(id=pessoa_id)
+    meta = Pessoa._meta
     context = {
         'pessoa': pessoa,
+        'label_nome': meta.get_field('nome').verbose_name,
+        'label_email': meta.get_field('email').verbose_name,
+        'label_telefone': meta.get_field('telefone').verbose_name,
+        'label_data_nascimento': meta.get_field('data_nascimento').verbose_name,
+        'label_cpf': meta.get_field('cpf').verbose_name,
+        'label_endereco': meta.get_field('endereco').verbose_name,
+        'label_ativo': meta.get_field('ativo').verbose_name,
+        'label_data_criacao': meta.get_field('data_criacao').verbose_name,
+        'label_data_atualizacao': meta.get_field('data_atualizacao').verbose_name,
     }
     return render(request, 'pessoas/detalhe.html', context)
 
@@ -40,15 +69,15 @@ def criar_pessoa(request):
         endereco = request.POST.get('endereco', '').strip() or None
         ativo = request.POST.get('ativo') == 'on'
         
-        # Verificar se email já existe
+        # Verificar se email j? existe
         if Pessoa.objects.filter(email=email).exists():
-            messages.error(request, 'Este e-mail já está cadastrado.')
-            return render(request, 'pessoas/form.html', {'titulo': 'Nova Pessoa'})
+            messages.error(request, 'Este e-mail j? est? cadastrado.')
+            return render(request, 'pessoas/form.html', {'titulo': 'Nova Pessoa', **_get_pessoa_form_labels()})
         
-        # Verificar se CPF já existe (se fornecido)
+        # Verificar se CPF j? existe (se fornecido)
         if cpf and Pessoa.objects.filter(cpf=cpf).exists():
-            messages.error(request, 'Este CPF já está cadastrado.')
-            return render(request, 'pessoas/form.html', {'titulo': 'Nova Pessoa'})
+            messages.error(request, 'Este CPF j? est? cadastrado.')
+            return render(request, 'pessoas/form.html', {'titulo': 'Nova Pessoa', **_get_pessoa_form_labels()})
         
         try:
             pessoa = Pessoa.objects.create(
@@ -64,10 +93,11 @@ def criar_pessoa(request):
             return redirect('pessoas:detalhe', id=pessoa.id)
         except Exception as e:
             messages.error(request, f'Erro ao criar pessoa: {str(e)}')
-            return render(request, 'pessoas/form.html', {'titulo': 'Nova Pessoa'})
+            return render(request, 'pessoas/form.html', {'titulo': 'Nova Pessoa', **_get_pessoa_form_labels()})
     
     context = {
         'titulo': 'Nova Pessoa',
+        **_get_pessoa_form_labels(),
     }
     return render(request, 'pessoas/form.html', context)
 
@@ -87,20 +117,22 @@ def editar_pessoa(request, pessoa_id):
         endereco = request.POST.get('endereco', '').strip() or None
         ativo = request.POST.get('ativo') == 'on'
         
-        # Verificar se email já existe (exceto o atual)
+        # Verificar se email j? existe (exceto o atual)
         if Pessoa.objects.filter(email=email).exclude(id=pessoa.id).exists():
-            messages.error(request, 'Este e-mail já está cadastrado.')
+            messages.error(request, 'Este e-mail j? est? cadastrado.')
             return render(request, 'pessoas/form.html', {
                 'pessoa': pessoa,
-                'titulo': f'Editar Pessoa: {pessoa.nome}'
+                'titulo': f'Editar Pessoa: {pessoa.nome}',
+                **_get_pessoa_form_labels(),
             })
         
-        # Verificar se CPF já existe (se fornecido, exceto o atual)
+        # Verificar se CPF j? existe (se fornecido, exceto o atual)
         if cpf and Pessoa.objects.filter(cpf=cpf).exclude(id=pessoa.id).exists():
-            messages.error(request, 'Este CPF já está cadastrado.')
+            messages.error(request, 'Este CPF j? est? cadastrado.')
             return render(request, 'pessoas/form.html', {
                 'pessoa': pessoa,
-                'titulo': f'Editar Pessoa: {pessoa.nome}'
+                'titulo': f'Editar Pessoa: {pessoa.nome}',
+                **_get_pessoa_form_labels(),
             })
         
         try:
@@ -118,12 +150,14 @@ def editar_pessoa(request, pessoa_id):
             messages.error(request, f'Erro ao atualizar pessoa: {str(e)}')
             return render(request, 'pessoas/form.html', {
                 'pessoa': pessoa,
-                'titulo': f'Editar Pessoa: {pessoa.nome}'
+                'titulo': f'Editar Pessoa: {pessoa.nome}',
+                **_get_pessoa_form_labels(),
             })
     
     context = {
         'pessoa': pessoa,
         'titulo': f'Editar Pessoa: {pessoa.nome}',
+        **_get_pessoa_form_labels(),
     }
     return render(request, 'pessoas/form.html', context)
 
@@ -140,7 +174,10 @@ def deletar_pessoa(request, pessoa_id):
         messages.success(request, f'Pessoa "{nome}" deletada com sucesso!')
         return redirect('pessoas:lista')
     
+    meta = Pessoa._meta
     context = {
         'pessoa': pessoa,
+        'label_nome': meta.get_field('nome').verbose_name,
+        'label_email': meta.get_field('email').verbose_name,
     }
     return render(request, 'pessoas/deletar.html', context)
