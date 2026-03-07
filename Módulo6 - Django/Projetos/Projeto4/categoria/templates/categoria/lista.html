@@ -1,0 +1,40 @@
+{% extends 'categoria/base.html' %}
+
+{% block title %}Lista de Categorias{% endblock %}
+
+{% block content %}
+<h2>Lista de Categorias</h2>
+
+<div>
+    <a href="{% url 'categoria:criar' %}">Nova Categoria</a>
+</div>
+
+{% if categorias %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>{{ label_nome }}</th>
+                <th>{{ label_descricao }}</th>
+                <th>{{ label_ativa }}</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in categorias %}
+            <tr>
+                <td>{{ cat.nome }}</td>
+                <td>{{ cat.descricao|default:"-"|truncatewords:10 }}</td>
+                <td>{% if cat.ativa %}Ativa{% else %}Inativa{% endif %}</td>
+                <td>
+                    <a href="{% url 'categoria:detalhe' cat.id %}">Ver</a> |
+                    <a href="{% url 'categoria:editar' cat.id %}">Editar</a> |
+                    <a href="{% url 'categoria:deletar' cat.id %}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nenhuma categoria cadastrada.</p>
+{% endif %}
+{% endblock %}

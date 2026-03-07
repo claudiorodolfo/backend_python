@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Catálogo{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">Início</a> |
+        <a href="{% url 'categoria:lista' %}">Categorias</a> |
+        <a href="{% url 'produto:lista' %}">Produtos</a> |
+        <a href="{% url 'categoria:criar' %}">Nova Categoria</a> |
+        <a href="{% url 'produto:criar' %}">Novo Produto</a>
+    </nav>
+
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        Conteúdo da página
+        {% endblock %}
+    </div>
+</body>
+</html>

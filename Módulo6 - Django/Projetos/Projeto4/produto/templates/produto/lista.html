@@ -1,0 +1,44 @@
+{% extends 'produto/base.html' %}
+
+{% block title %}Lista de Produtos{% endblock %}
+
+{% block content %}
+<h2>Lista de Produtos</h2>
+
+<div>
+    <a href="{% url 'produto:criar' %}">Novo Produto</a>
+</div>
+
+{% if produtos %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>{{ label_nome }}</th>
+                <th>{{ label_categoria }}</th>
+                <th>{{ label_preco }}</th>
+                <th>{{ label_estoque }}</th>
+                <th>{{ label_ativo }}</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in produtos %}
+            <tr>
+                <td>{{ p.nome }}</td>
+                <td>{{ p.categoria.nome }}</td>
+                <td>R$ {{ p.preco }}</td>
+                <td>{{ p.estoque }}</td>
+                <td>{% if p.ativo %}Ativo{% else %}Inativo{% endif %}</td>
+                <td>
+                    <a href="{% url 'produto:detalhe' p.id %}">Ver</a> |
+                    <a href="{% url 'produto:editar' p.id %}">Editar</a> |
+                    <a href="{% url 'produto:deletar' p.id %}">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nenhum produto cadastrado.</p>
+{% endif %}
+{% endblock %}

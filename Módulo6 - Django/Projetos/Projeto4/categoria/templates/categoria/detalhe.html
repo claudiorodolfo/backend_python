@@ -1,0 +1,18 @@
+{% extends 'categoria/base.html' %}
+
+{% block title %}{{ categoria.nome }}{% endblock %}
+
+{% block content %}
+<h2>Detalhes da Categoria</h2>
+
+<p><strong>{{ label_nome }}:</strong> {{ categoria.nome }}</p>
+<p><strong>{{ label_descricao }}:</strong> {{ categoria.descricao|default:"-"|linebreaks }}</p>
+<p><strong>{{ label_ativa }}:</strong> {% if categoria.ativa %}Ativa{% else %}Inativa{% endif %}</p>
+
+<div>
+    <a href="{% url 'categoria:editar' categoria.id %}">Editar</a> |
+    <a href="{% url 'categoria:deletar' categoria.id %}">Deletar</a> |
+    <a href="{% url 'categoria:lista' %}">Voltar</a> |
+    <a href="{% url 'produto:lista' %}?categoria={{ categoria.id }}">Ver produtos desta categoria</a>
+</div>
+{% endblock %}

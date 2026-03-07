@@ -1,0 +1,21 @@
+{% extends 'produto/base.html' %}
+
+{% block title %}{{ produto.nome }}{% endblock %}
+
+{% block content %}
+<h2>Detalhes do Produto</h2>
+
+<p><strong>{{ label_nome }}:</strong> {{ produto.nome }}</p>
+<p><strong>{{ label_descricao }}:</strong> {{ produto.descricao|default:"-"|linebreaks }}</p>
+<p><strong>{{ label_preco }}:</strong> R$ {{ produto.preco }}</p>
+<p><strong>{{ label_estoque }}:</strong> {{ produto.estoque }}</p>
+<p><strong>{{ label_categoria }}:</strong> <a href="{% url 'categoria:detalhe' produto.categoria.id %}">{{ produto.categoria.nome }}</a></p>
+<p><strong>{{ label_ativo }}:</strong> {% if produto.ativo %}Ativo{% else %}Inativo{% endif %}</p>
+<p><strong>{{ label_data_criacao }}:</strong> {{ produto.data_criacao|date:"d/m/Y H:i" }}</p>
+
+<div>
+    <a href="{% url 'produto:editar' produto.id %}">Editar</a> |
+    <a href="{% url 'produto:deletar' produto.id %}">Deletar</a> |
+    <a href="{% url 'produto:lista' %}">Voltar</a>
+</div>
+{% endblock %}

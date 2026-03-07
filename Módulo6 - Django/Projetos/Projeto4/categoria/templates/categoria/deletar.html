@@ -1,0 +1,18 @@
+{% extends 'categoria/base.html' %}
+
+{% block title %}Deletar Categoria{% endblock %}
+
+{% block content %}
+<h2>Confirmar Exclusão</h2>
+
+<div><strong>Atenção!</strong> Esta ação não pode ser desfeita. Produtos desta categoria também podem ser afetados.</div>
+
+<p>Deseja realmente deletar a categoria:</p>
+<p><strong>{{ label_nome }}:</strong> {{ categoria.nome }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, Deletar</button>
+    <a href="{% url 'categoria:lista' %}">Cancelar</a>
+</form>
+{% endblock %}

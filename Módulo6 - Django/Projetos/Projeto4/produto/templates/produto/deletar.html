@@ -1,0 +1,19 @@
+{% extends 'produto/base.html' %}
+
+{% block title %}Deletar Produto{% endblock %}
+
+{% block content %}
+<h2>Confirmar Exclusão</h2>
+
+<div><strong>Atenção!</strong> Esta ação não pode ser desfeita.</div>
+
+<p>Deseja realmente deletar o produto:</p>
+<p><strong>{{ label_nome }}:</strong> {{ produto.nome }}</p>
+<p><strong>{{ label_categoria }}:</strong> {{ produto.categoria.nome }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, Deletar</button>
+    <a href="{% url 'produto:lista' %}">Cancelar</a>
+</form>
+{% endblock %}
