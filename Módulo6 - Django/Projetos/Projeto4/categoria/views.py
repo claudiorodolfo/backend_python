@@ -32,15 +32,30 @@ def criar_categoria(request):
         ativa = request.POST.get('ativa') == 'on'
         if Categoria.objects.filter(nome=nome).exists():
             messages.error(request, 'Já existe uma categoria com este nome.')
-            return render(request, 'categoria/form.html', {'titulo': 'Nova Categoria'})
+            return render(request, 'categoria/form.html', {
+                'titulo': 'Nova Categoria',
+                'label_nome': Categoria._meta.get_field('nome').verbose_name,
+                'label_descricao': Categoria._meta.get_field('descricao').verbose_name,
+                'label_ativa': Categoria._meta.get_field('ativa').verbose_name,
+            })
         try:
             cat = Categoria.objects.create(nome=nome, descricao=descricao, ativa=ativa)
             messages.success(request, f'Categoria "{cat.nome}" criada com sucesso!')
             return redirect('categoria:detalhe', id=cat.id)
         except Exception as e:
             messages.error(request, f'Erro ao criar categoria: {str(e)}')
-            return render(request, 'categoria/form.html', {'titulo': 'Nova Categoria'})
-    return render(request, 'categoria/form.html', {'titulo': 'Nova Categoria'})
+            return render(request, 'categoria/form.html', {
+                'titulo': 'Nova Categoria',
+                'label_nome': Categoria._meta.get_field('nome').verbose_name,
+                'label_descricao': Categoria._meta.get_field('descricao').verbose_name,
+                'label_ativa': Categoria._meta.get_field('ativa').verbose_name,
+            })
+    return render(request, 'categoria/form.html', {
+        'titulo': 'Nova Categoria',
+        'label_nome': Categoria._meta.get_field('nome').verbose_name,
+        'label_descricao': Categoria._meta.get_field('descricao').verbose_name,
+        'label_ativa': Categoria._meta.get_field('ativa').verbose_name,
+    })
 
 
 def editar_categoria(request, id):
@@ -51,7 +66,12 @@ def editar_categoria(request, id):
         ativa = request.POST.get('ativa') == 'on'
         if Categoria.objects.filter(nome=nome).exclude(id=id).exists():
             messages.error(request, 'Já existe outra categoria com este nome.')
-            return render(request, 'categoria/form.html', {'categoria': categoria, 'titulo': f'Editar Categoria: {categoria.nome}'})
+            return render(request, 'categoria/form.html', {
+                'categoria': categoria, 'titulo': f'Editar Categoria: {categoria.nome}',
+                'label_nome': Categoria._meta.get_field('nome').verbose_name,
+                'label_descricao': Categoria._meta.get_field('descricao').verbose_name,
+                'label_ativa': Categoria._meta.get_field('ativa').verbose_name,
+            })
         try:
             categoria.nome = nome
             categoria.descricao = descricao
@@ -61,8 +81,18 @@ def editar_categoria(request, id):
             return redirect('categoria:detalhe', id=categoria.id)
         except Exception as e:
             messages.error(request, f'Erro ao atualizar: {str(e)}')
-            return render(request, 'categoria/form.html', {'categoria': categoria, 'titulo': f'Editar Categoria: {categoria.nome}'})
-    return render(request, 'categoria/form.html', {'categoria': categoria, 'titulo': f'Editar Categoria: {categoria.nome}'})
+            return render(request, 'categoria/form.html', {
+                'categoria': categoria, 'titulo': f'Editar Categoria: {categoria.nome}',
+                'label_nome': Categoria._meta.get_field('nome').verbose_name,
+                'label_descricao': Categoria._meta.get_field('descricao').verbose_name,
+                'label_ativa': Categoria._meta.get_field('ativa').verbose_name,
+            })
+    return render(request, 'categoria/form.html', {
+        'categoria': categoria, 'titulo': f'Editar Categoria: {categoria.nome}',
+        'label_nome': Categoria._meta.get_field('nome').verbose_name,
+        'label_descricao': Categoria._meta.get_field('descricao').verbose_name,
+        'label_ativa': Categoria._meta.get_field('ativa').verbose_name,
+    })
 
 
 def deletar_categoria(request, id):

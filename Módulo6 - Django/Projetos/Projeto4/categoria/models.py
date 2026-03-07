@@ -8,7 +8,7 @@ class Categoria(models.Model):
     """
     nome = models.CharField(max_length=100, unique=True, verbose_name='Nome')
     descricao = models.TextField(blank=True, null=True, verbose_name='Descrição')
-    ativa = models.BooleanField(default=True, verbose_name='Ativa')
+    ativa = models.BooleanField(default=True, verbose_name='Status')
 
     class Meta:
         verbose_name = 'Categoria'
