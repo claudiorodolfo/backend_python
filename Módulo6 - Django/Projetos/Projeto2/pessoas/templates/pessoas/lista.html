@@ -5,6 +5,19 @@
 {% block content %}
 <h2>Lista de Pessoas</h2>
 
+<form method="get">
+    <input
+        type="text"
+        name="busca"
+        placeholder="Buscar por nome, email ou CPF"
+        value="{{ busca }}"
+    >
+    <button type="submit">Buscar</button>
+    {% if busca %}
+        <a href="{% url 'pessoas:lista' %}">Limpar</a>
+    {% endif %}
+</form>
+
 <div>
     <a href="{% url 'pessoas:criar' %}">Nova Pessoa</a>
 </div>
@@ -43,6 +56,6 @@
         </tbody>
     </table>
 {% else %}
-    <p>Nenhuma pessoa cadastrada.</p>
+    <p>Nenhuma pessoa encontrada.</p>
 {% endif %}
 {% endblock %}

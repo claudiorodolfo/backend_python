@@ -6,9 +6,8 @@ Esta pasta reune os projetos práticos do modulo de Django.
 
 - `Projeto1`: CRUD básico de pessoas.
 - `Projeto2`: CRUD de pessoas com evoluções em modelagem e organizacao.
-- `Projeto3`: Mesmo CRUD do `Projeto2`, com foco em front-end usando Bootstrap.
+- `Projeto3`: CRUD de pessoas com foco no front-end.
 - `Projeto4`: Catalogo com `Categoria` e `Produto` (relacionamento 1:N).
-- `Projeto5`: Continuidade do CRUD de pessoas com a estrutura `controle_pessoas`/`pessoas`.
 
 ## URLs por projeto
 
@@ -31,9 +30,18 @@ Esta pasta reune os projetos práticos do modulo de Django.
   - `/admin/`
 - `Projeto4`
   - `/`
-  - `/categoria/`, `/categoria/criar/`, `/categoria/<id>/`, `/categoria/<id>/editar/`, `/categoria/<id>/deletar/`
-  - `/produto/`, `/produto/criar/`, `/produto/<id>/`, `/produto/<id>/editar/`, `/produto/<id>/deletar/`
+  - `/categoria/`, 
+  `/categoria/criar/`, 
+  `/categoria/<id>/`, 
+  `/categoria/<id>/editar/`, 
+  `/categoria/<id>/deletar/`
+  - `/produto/`, 
+  `/produto/criar/`, 
+  `/produto/<id>/`, 
+  `/produto/<id>/editar/`, 
+  `/produto/<id>/deletar/`
   - `/admin/`
+
 
 ## Como executar qualquer projeto
 
@@ -47,7 +55,3 @@ Esta pasta reune os projetos práticos do modulo de Django.
 5. Inicie o servidor:
    - `python manage.py runserver`
 
-## Observacoes
-
-- Cada projeto possui seu proprio `README.md` com detalhes especificos.
-- Alguns projetos podem conter `db.sqlite3` para uso local em desenvolvimento.

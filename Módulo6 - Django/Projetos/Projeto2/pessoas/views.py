@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.db.models import Q
 from .models import Pessoa
 
 
@@ -22,10 +23,18 @@ def lista_pessoas(request):
     View para listar todas as pessoas.
     """
     pessoas = Pessoa.objects.all()
+    busca = request.GET.get('busca', '').strip()
+    if busca:
+        pessoas = pessoas.filter(
+            Q(nome__icontains=busca) |
+            Q(email__icontains=busca) |
+            Q(cpf__icontains=busca)
+        )
     meta = Pessoa._meta
     
     context = {
         'pessoas': pessoas,
+        'busca': busca,
         'label_nome': meta.get_field('nome').verbose_name,
         'label_email': meta.get_field('email').verbose_name,
         'label_telefone': meta.get_field('telefone').verbose_name,

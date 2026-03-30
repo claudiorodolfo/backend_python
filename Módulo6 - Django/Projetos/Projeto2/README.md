@@ -24,6 +24,7 @@ python manage.py runserver
 
 - Cadastro de pessoas com campos como nome, email, telefone, CPF e status.
 - Consulta e manutencao dos registros.
+- Busca de pessoas por nome, email ou CPF na listagem.
 
 ## URLs disponiveis
 
