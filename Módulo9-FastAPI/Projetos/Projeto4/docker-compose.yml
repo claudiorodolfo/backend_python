@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: fastapi_db
+      POSTGRES_USER: fastapi_user
+      POSTGRES_PASSWORD: fastapi_pass
+    ports:
+      - "5432:5432"
+
+  api:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      DATABASE_URL: postgresql+psycopg2://fastapi_user:fastapi_pass@db:5432/fastapi_db
+    command: bash -c "pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
