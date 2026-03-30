@@ -1,5 +1,5 @@
 """
-Django settings for catalogo project.
+Django settings for setup project.
 """
 
 from pathlib import Path
@@ -10,16 +10,20 @@ SECRET_KEY = 'django-insecure-change-this-in-production'
 DEBUG = True
 ALLOWED_HOSTS = []
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'categoria',
-    'produto',
+    'django.contrib.staticfiles',    
 ]
+THIRD_PARTY_APPS = []
+MY_APPS = [
+    'categoria.apps.CategoriaConfig',
+    'produto.apps.ProdutoConfig',
+]
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -31,11 +35,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'catalogo.urls'
+ROOT_URLCONF = 'setup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'catalogo' / 'templates'],
+        'DIRS': [BASE_DIR / 'setup' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -48,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'catalogo.wsgi.application'
+WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {

@@ -90,7 +90,7 @@ def criar_pessoa(request):
                 ativo=ativo
             )
             messages.success(request, f'Pessoa "{pessoa.nome}" criada com sucesso!')
-            return redirect('pessoas:detalhe', id=pessoa.id)
+            return redirect('pessoas:detalhe', pessoa_id=pessoa.id)
         except Exception as e:
             messages.error(request, f'Erro ao criar pessoa: {str(e)}')
             return render(request, 'pessoas/form.html', {'titulo': 'Nova Pessoa', **_get_pessoa_form_labels()})
@@ -145,7 +145,7 @@ def editar_pessoa(request, pessoa_id):
             pessoa.ativo = ativo
             pessoa.save()
             messages.success(request, f'Pessoa "{pessoa.nome}" atualizada com sucesso!')
-            return redirect('pessoas:detalhe', id=pessoa.id)
+            return redirect('pessoas:detalhe', pessoa_id=pessoa.id)
         except Exception as e:
             messages.error(request, f'Erro ao atualizar pessoa: {str(e)}')
             return render(request, 'pessoas/form.html', {
