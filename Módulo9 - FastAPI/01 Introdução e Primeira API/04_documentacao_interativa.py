@@ -21,7 +21,7 @@ app = FastAPI(
     title="API com documentação automática",
     description="Acesse /docs após subir o Uvicorn.",
     version="1.0.0",
-    contact={"name": "Curso", "email": "curso@example.com"},
+    contact={"name": "Professor", "email": "claudiorodolfo@ifba.edu.br"},
 )
 
 

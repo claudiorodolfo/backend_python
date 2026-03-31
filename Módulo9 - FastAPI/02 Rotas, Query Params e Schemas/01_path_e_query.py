@@ -3,7 +3,7 @@
 ===============================
 
 - Path: parte fixa da URL (/itens/{id})
-- Query: após ? (/busca?q=mouse&limite=10)
+- Query: após ? (busca=mouse&limite=10)
 """
 
 from typing import Annotated
